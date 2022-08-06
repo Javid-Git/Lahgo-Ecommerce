@@ -15,6 +15,7 @@
 
 a {
   text-decoration: none;
+  color: white;
 }
 
 ul {
@@ -50,24 +51,26 @@ ul li a {
 
 .top-header {
   height: 30px;
-  background-color: gray;
+  background-color: #323232;
 }
 
 .logo-font {
   color: white;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 .svg-search {
   height: 20px;
 }
 
-header {
-  position: relative;
-}
-
 .center-header {
   -webkit-transition: .3s;
   transition: .3s;
+  height: 130px;
+  width: 100%;
+  position: fixed;
+  z-index: 111111;
 }
 
 .center-header:hover {
@@ -82,9 +85,26 @@ header {
   color: #323232;
 }
 
+.center-header-sticky {
+  height: 80px !important;
+  background-color: white;
+  position: fixed;
+}
+
+.center-header-sticky .navbar-font {
+  color: #323232;
+  line-height: 50px;
+}
+
+.center-header-sticky .logo-font {
+  color: #323232;
+}
+
+.center-header-sticky .logo-font .svg-logo {
+  height: 40px !important;
+}
+
 .introduction {
-  position: absolute;
-  top: 0;
   overflow-x: hidden;
   z-index: -1;
 }
@@ -132,6 +152,7 @@ header {
   position: absolute;
   bottom: -100px;
   right: 550px;
+  z-index: 111;
 }
 
 .intro-button {
@@ -164,5 +185,81 @@ header {
 .intro-button:hover::after {
   width: 0;
   background: gray;
+}
+
+.navbar-lists {
+  width: 99%;
+  background-color: white;
+  border-top: 1px solid #d7d7d7;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  gap: 2rem;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: .5s;
+  transition: .5s;
+  padding: 2rem 0 3rem 6rem;
+}
+
+.navbar-item-hover:hover {
+  background-color: #ededed;
+}
+
+#bestseller-navbar:hover {
+  background-color: #ededed;
+}
+
+#bestseller-navbar:hover .bestseller-list {
+  visibility: visible;
+  opacity: 1;
+}
+
+#shop-navbar:hover {
+  background-color: #ededed;
+}
+
+#shop-navbar:hover .shop-list {
+  visibility: visible;
+  opacity: 1;
+}
+
+#about-navbar:hover {
+  background-color: #ededed;
+}
+
+#about-navbar:hover .about-list {
+  visibility: visible;
+  opacity: 1;
+}
+
+.category-list-items {
+  font-family: 'Regulars';
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: black;
+  letter-spacing: -0.1px;
+}
+
+.category-list-items:hover {
+  color: #323232;
+}
+
+.subcategory-list-items {
+  font-family: 'Regulars';
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 100;
+  color: #757575;
+  letter-spacing: -0.1px;
+}
+
+.subcategory-list-items:hover {
+  color: #323232;
+}
+
+.categories {
+  overflow: hidden;
 }
 /*# sourceMappingURL=style.css.map */

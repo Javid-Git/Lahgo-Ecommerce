@@ -11,27 +11,102 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
         integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="/Front/Assets/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="/Front/Assets/slick/slick-theme.css" />
 </head>
 
 <body>
     <header>
-        <div class="top-header">
-
-        </div>
-        <div class="ccontainer row align-items-center m-auto center-header">
-            <div class="custom-navbar col-lg-5">
+        <div id="center-header" class=" row align-items-center m-auto center-header">
+            <div class="top-header">
+            </div>
+            <div class="ccontainer custom-navbar col-lg-5">
                 <ul class="d-flex">
-                    <li>
-                        <a class="navbar-font" href="#">shop</a>
+                    <li id="shop-navbar" class="navbar-item-hover">
+                        <a id="shop-navbar" class=" navbar-font" href="#">shop</a>
+                        <ul class="shop-list navbar-lists d-flex">
+                            <li>
+                                <ul class="featured-list">
+                                    <li><a href="" class="category-list-items">featured</a></li>
+                                    <li><a href="" class="subcategory-list-items">best sellers</a></li>
+                                    <li><a href="" class="subcategory-list-items">new arrivals</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="category-list">
+                                    <li><a href="" class="category-list-items">Category</a></li>
+                                    <li><a href="" class="subcategory-list-items">All</a></li>
+                                    <li><a href="" class="subcategory-list-items">Tops + Sweaters</a></li>
+                                    <li><a href="" class="subcategory-list-items">Bottoms</a></li>
+                                    <li><a href="" class="subcategory-list-items">Sleep Sets</a></li>
+                                    <li><a href="" class="subcategory-list-items">Underwear</a></li>
+                                    <li><a href="" class="subcategory-list-items">Accessories</a></li>
+                                    <li><a href="" class="subcategory-list-items">Robes + Cardigans</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="fabrics-list">
+                                    <li><a href="" class="category-list-items">Fabrics</a></li>
+                                    <li><a href="" class="subcategory-list-items">The Linen Shop</a></li>
+                                    <li><a href="" class="subcategory-list-items">Washable Silk</a></li>
+                                    <li><a href="" class="subcategory-list-items">Restore Pima</a></li>
+                                    <li><a href="" class="subcategory-list-items">Soft Modal</a></li>
+                                    <li><a href="" class="subcategory-list-items">Cool Pima</a></li>
+                                    <li><a href="" class="subcategory-list-items">Organic Pima</a></li>
+                                    <li><a href="" class="subcategory-list-items">Warm Layers</a></li>
+                                    <li><a href="" class="subcategory-list-items">Brushed Flannel</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
                     </li>
-                    <li>
+                    <li id="bestseller-navbar" class="navbar-item-hover">
                         <a class="navbar-font" href="#">best sellers</a>
+                        <ul class="bestseller-list navbar-lists d-flex">
+                            <li>
+                                <ul class="bestsellers-list-s">
+                                    <li><a href="" class="category-list-items">best sellers</a></li>
+                                    <li><a href="" class="subcategory-list-items">all best sellers</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="goodfor-list">
+                                    <li><a href="" class="category-list-items">good for you</a></li>
+                                    <li><a href="" class="subcategory-list-items">Doubling your ZZZ's</a></li>
+                                    <li><a href="" class="subcategory-list-items">Working From Home</a></li>
+                                    <li><a href="" class="subcategory-list-items">Travel</a></li>
+                                    <li><a href="" class="subcategory-list-items">Self-Care</a></li>
+                                    <li><a href="" class="subcategory-list-items">Spring</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
+                    <li id="about-navbar" class="navbar-item-hover">
                         <a class="navbar-font" href="#">about</a>
+                        <ul class="about-list navbar-lists d-flex">
+                            <li>
+                                <ul class="about-list-s">
+                                    <li><a href="" class="category-list-items">about</a></li>
+                                    <li><a href="" class="subcategory-list-items">our story</a></li>
+                                    <li><a href="" class="subcategory-list-items">our fabrics</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="shopinperson-list">
+                                    <li><a href="" class="category-list-items">shop in-person</a></li>
+                                    <li><a href="" class="subcategory-list-items">Our Bedrooms</a></li>
+                                    <li><a href="" class="subcategory-list-items">New York City</a></li>
+                                    <li><a href="" class="subcategory-list-items">Atlanta</a></li>
+                                    <li><a href="" class="subcategory-list-items">Los Angeles</a></li>
+                                    <li><a href="" class="subcategory-list-items">San Francisco</a></li>
+                                    <li><a href="" class="subcategory-list-items">Houston</a></li>
+                                    <li><a href="" class="subcategory-list-items">Virtual Styling</a> </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <a class="navbar-font" href="#">lahgo stories</a>
+                    <li class="navbar-item-hover">
+                        <a class=" navbar-font" href="#">lahgo stories</a>
                     </li>
                 </ul>
             </div>
@@ -71,10 +146,10 @@
                         </a>
                     </li>
                     <li>
-                        <a class="navbar-font" href="#">login</a>
+                        <a class=" navbar-font" href="#">login</a>
                     </li>
                     <li>
-                        <a class="navbar-font" href="">
+                        <a class=" navbar-font" href="">
                             <svg class="svg-heart svg-search" width="20" viewBox="0 0 20 17.74"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill="none" stroke="currentColor"
@@ -85,7 +160,7 @@
 
                     </li>
                     <li>
-                        <a class="navbar-font" href="">
+                        <a class=" navbar-font" href="">
                             <svg class="svg-bag svg-search" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20.08 20.69">
                                 <g>
@@ -109,8 +184,10 @@
             <div class="ccontainer">
                 <div class="intro-text">
                     <h2 class="intro-title">Considered Restwear</h2>
-                    <p class="intro-desc col-lg-5">Our sleepwear is designed to perform, in bed and in life. Innovative fabrics and functional
-                        silhouettes keep you cool, comfortable and confident as you move about your day — and back into bed.
+                    <p class="intro-desc col-lg-5">Our sleepwear is designed to perform, in bed and in life. Innovative
+                        fabrics and functional
+                        silhouettes keep you cool, comfortable and confident as you move about your day — and back into
+                        bed.
                     </p>
                 </div>
             </div>
@@ -121,7 +198,49 @@
 
         </div>
 
+
     </header>
+    <section id="section3">
+        <div class="categories">
+            <div>
+                <div class="category-slider-top">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/Lahgo-Homepage-CollectionSlider-Desktop-03_large.jpg?v=1633148422"
+                        alt="">
+                </div>
+            </div>
+            <div>
+                <div class="category-slider-top">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/Lahgo-Homepage-CollectionSlider-Desktop-02_large.jpg?v=1633148422"
+                        alt="">
+                </div>
+            </div>
+            <div>
+                <div class="category-slider-top">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/Lahgo-Homepage-CollectionSlider-Desktop-05_large.jpg?v=1633148422"
+                        alt="">
+                </div>
+            </div>
+            <div>
+                <div class="category-slider-top">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/Lahgo-Homepage-CollectionSlider-Desktop-01_large.jpg?v=1633148422"
+                        alt="">
+                </div>
+            </div>
+            <div>
+                <div class="category-slider-top">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/Lahgo-Homepage-CollectionSlider-Desktop-04_753ec872-c90f-4046-97ac-3a655f0bbecf_large.jpg?v=1633408150"
+                        alt="">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="/Front/Assets/slick/slick.min.js"></script>
+    <script src="/Front/script.js"></script>
 </body>
 
 </html>

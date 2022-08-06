@@ -15,7 +15,9 @@
 
 a {
     text-decoration: none;
+    color: white;
 }
+
 
 ul {
     list-style: none;
@@ -28,7 +30,7 @@ ul {
         margin: 0;
 
         a {
-            text-decoration: none ;
+            text-decoration: none;
         }
     }
 }
@@ -36,7 +38,9 @@ ul {
 .ccontainer {
     padding: 0 3.5rem;
 }
-
+// .custom-navbar{
+//     position: relative;
+// }
 .navbar-font {
     font-family: 'Regulars';
     font-size: 14px;
@@ -50,24 +54,24 @@ ul {
 
 .top-header {
     height: 30px;
-    background-color: gray;
+    background-color: #323232;
 }
 
 .logo-font {
     color: white;
+    transition: .5s;
 }
 
 .svg-search {
     height: 20px;
 }
 
-header {
-    position: relative;
-}
-
 .center-header {
     transition: .3s;
-
+    height: 130px;
+    width: 100%;
+    position: fixed;
+    z-index: 111111;
     &:hover {
         background-color: white;
 
@@ -81,9 +85,24 @@ header {
     }
 }
 
+.center-header-sticky {
+    height: 80px !important;
+    background-color: white;
+    position: fixed;
+    .navbar-font {
+        color: #323232;
+        line-height: 50px;
+    }
+    .logo-font {
+        color: #323232;
+        .svg-logo{
+            height: 40px !important;
+        }
+    }
+}
+
 .introduction {
-    position: absolute;
-    top: 0;
+    
     overflow-x: hidden;
     z-index: -1;
 }
@@ -109,6 +128,7 @@ header {
             visibility: hidden;
             opacity: 0;
         }
+
         .intro-desc {
             visibility: visible;
             opacity: 1;
@@ -126,14 +146,17 @@ header {
     bottom: 55px;
     visibility: hidden;
 }
-.button-container{
+
+.button-container {
     padding: 2rem 3rem 7rem 3rem;
     background-color: #323232;
     position: absolute;
     bottom: -100px;
     right: 550px;
+    z-index: 111;
 }
-.intro-button{
+
+.intro-button {
     font-family: 'Regulars';
     font-size: 14px;
     font-weight: 600;
@@ -141,10 +164,12 @@ header {
     text-transform: uppercase;
     color: white;
     position: relative;
-    &:hover{
+
+    &:hover {
         color: gray;
     }
 }
+
 .intro-button::after {
     background: none repeat scroll 0 0 transparent;
     bottom: -5px;
@@ -155,11 +180,84 @@ header {
     background: #ddd;
     transition: width 0.5s ease 0s, left 0.5s ease 0s;
     width: 100%;
-  }
-  
-  .intro-button:hover::after {
+}
+
+.intro-button:hover::after {
     width: 0;
     background: gray;
 
-  }
-  
+}
+.navbar-lists{
+    width: 99%;
+    background-color: white;
+    border-top: 1px solid rgb(215, 215, 215);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    gap: 2rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+    padding: 2rem 0 3rem 6rem ;
+
+}
+.navbar-item-hover{
+    &:hover{
+        background-color: #ededed;
+    }
+}
+#bestseller-navbar{
+    &:hover{
+        background-color: #ededed;
+        .bestseller-list{
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+#shop-navbar{
+    &:hover{
+        background-color: #ededed;
+        .shop-list{
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+#about-navbar{
+    &:hover{
+        background-color: #ededed;
+        .about-list{
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+.category-list-items{
+    font-family: 'Regulars';
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    letter-spacing: -0.1px;
+    &:hover{
+        color: #323232;
+    }
+}
+.subcategory-list-items{
+    font-family: 'Regulars';
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 100;
+    color: #757575;
+    letter-spacing: -0.1px;
+    &:hover{
+        color: #323232;
+    }
+}
+.categories{
+    overflow: hidden;
+}
+
+
+

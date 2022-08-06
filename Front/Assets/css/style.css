@@ -1,0 +1,168 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: "Titles";
+  src: url(/Assets/fonts/Fontspring-DEMO-wayfindercf-regular.otf);
+}
+
+@font-face {
+  font-family: "Regulars";
+  src: url(/Assets/fonts/GraphikRegular.otf);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li a {
+  text-decoration: none;
+}
+
+.ccontainer {
+  padding: 0 3.5rem;
+}
+
+.navbar-font {
+  font-family: 'Regulars';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 100px;
+  font-style: normal;
+  text-transform: uppercase;
+  color: white;
+  padding: 0 1rem;
+}
+
+.top-header {
+  height: 30px;
+  background-color: gray;
+}
+
+.logo-font {
+  color: white;
+}
+
+.svg-search {
+  height: 20px;
+}
+
+header {
+  position: relative;
+}
+
+.center-header {
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.center-header:hover {
+  background-color: white;
+}
+
+.center-header:hover .navbar-font {
+  color: #323232;
+}
+
+.center-header:hover .logo-font {
+  color: #323232;
+}
+
+.introduction {
+  position: absolute;
+  top: 0;
+  overflow-x: hidden;
+  z-index: -1;
+}
+
+.intro-img {
+  width: 120%;
+  height: 100vh;
+}
+
+.intro-title {
+  -webkit-transition: .5s;
+  transition: .5s;
+  font-family: 'Titles';
+  font-size: 90px;
+  color: white;
+  position: absolute;
+  bottom: 55px;
+}
+
+.intro-text:hover .intro-title {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.intro-text:hover .intro-desc {
+  visibility: visible;
+  opacity: 1;
+}
+
+.intro-desc {
+  -webkit-transition: .1s;
+  transition: .1s;
+  font-family: 'Titles';
+  font-size: 30px;
+  color: white;
+  position: absolute;
+  letter-spacing: -0.1px;
+  bottom: 55px;
+  visibility: hidden;
+}
+
+.button-container {
+  padding: 2rem 3rem 7rem 3rem;
+  background-color: #323232;
+  position: absolute;
+  bottom: -100px;
+  right: 550px;
+}
+
+.intro-button {
+  font-family: 'Regulars';
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  text-transform: uppercase;
+  color: white;
+  position: relative;
+}
+
+.intro-button:hover {
+  color: gray;
+}
+
+.intro-button::after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: -5px;
+  content: "";
+  display: block;
+  height: 2px;
+  position: absolute;
+  background: #ddd;
+  -webkit-transition: width 0.5s ease 0s, left 0.5s ease 0s;
+  transition: width 0.5s ease 0s, left 0.5s ease 0s;
+  width: 100%;
+}
+
+.intro-button:hover::after {
+  width: 0;
+  background: gray;
+}
+/*# sourceMappingURL=style.css.map */

@@ -17,7 +17,10 @@ a {
     text-decoration: none;
     color: white;
 }
-
+.col-lg-3-5{
+    flex: 0 0 auto;
+    width: 30%;
+}
 
 ul {
     list-style: none;
@@ -38,6 +41,7 @@ ul {
 .ccontainer {
     padding: 0 3.5rem;
 }
+
 // .custom-navbar{
 //     position: relative;
 // }
@@ -72,6 +76,7 @@ ul {
     width: 100%;
     position: fixed;
     z-index: 111111;
+
     &:hover {
         background-color: white;
 
@@ -89,20 +94,23 @@ ul {
     height: 80px !important;
     background-color: white;
     position: fixed;
+
     .navbar-font {
         color: #323232;
         line-height: 50px;
     }
+
     .logo-font {
         color: #323232;
-        .svg-logo{
+
+        .svg-logo {
             height: 40px !important;
         }
     }
 }
 
 .introduction {
-    
+
     overflow-x: hidden;
     z-index: -1;
 }
@@ -154,6 +162,17 @@ ul {
     bottom: -100px;
     right: 550px;
     z-index: 111;
+    transition: .6s;
+}
+
+.button-container-scroll {
+    padding: 2rem 3rem 2rem 3rem;
+    background-color: #323232;
+    position: absolute;
+    bottom: 20px;
+    right: 550px;
+    z-index: 111;
+    transition: .6s;
 }
 
 .intro-button {
@@ -187,8 +206,9 @@ ul {
     background: gray;
 
 }
-.navbar-lists{
-    width: 99%;
+
+.navbar-lists {
+    width: 100%;
     background-color: white;
     border-top: 1px solid rgb(215, 215, 215);
     position: absolute;
@@ -198,66 +218,390 @@ ul {
     visibility: hidden;
     opacity: 0;
     transition: .5s;
-    padding: 2rem 0 3rem 6rem ;
+    padding: 2rem 0 3rem 6rem;
 
 }
-.navbar-item-hover{
-    &:hover{
+
+.navbar-item-hover {
+    &:hover {
         background-color: #ededed;
     }
 }
-#bestseller-navbar{
-    &:hover{
+
+#bestseller-navbar {
+    &:hover {
         background-color: #ededed;
-        .bestseller-list{
+
+        .bestseller-list {
             visibility: visible;
             opacity: 1;
         }
     }
 }
-#shop-navbar{
-    &:hover{
+
+#shop-navbar {
+    &:hover {
         background-color: #ededed;
-        .shop-list{
+
+        .shop-list {
             visibility: visible;
             opacity: 1;
         }
     }
 }
-#about-navbar{
-    &:hover{
+
+#about-navbar {
+    &:hover {
         background-color: #ededed;
-        .about-list{
+
+        .about-list {
             visibility: visible;
             opacity: 1;
         }
     }
 }
-.category-list-items{
+
+.category-list-items {
     font-family: 'Regulars';
     font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;
     color: black;
     letter-spacing: -0.1px;
-    &:hover{
+
+    &:hover {
         color: #323232;
     }
 }
-.subcategory-list-items{
+
+.subcategory-list-items {
     font-family: 'Regulars';
     font-size: 11px;
     text-transform: uppercase;
     font-weight: 100;
     color: #757575;
     letter-spacing: -0.1px;
-    &:hover{
+
+    &:hover {
         color: #323232;
     }
 }
-.categories{
+
+
+
+
+
+#section3 {
+    padding-top: 4rem;
+    overflow-x: hidden;
+}
+
+.categories {
     overflow: hidden;
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Titles';
+    font-size: 42px;
+    color: #323232;
+    font-weight: 400;
+    line-height: 40px;
+    padding-bottom: 2rem;
+}
+
+.section-describtion {
+    font-family: 'Regulars';
+    font-size: 18px;
+    color: #323232;
+    font-weight: 400;
+    line-height: 25px;
+    padding-bottom: 2rem;
+
+}
+
+.category-slider-bottom {
+    font-family: 'Regulars';
+    font-size: 18px;
+    color: #323232;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+.category-slider-top {
+    padding-bottom: 1.5rem;
+
+    img {
+        width: 100% !important;
+    }
+}
+.categories{
+    .slick-list{
+        margin: 0 0 !important;
+    }
+}
+.slider-button-prev{
+    width: 70px;
+    height: 70px;
+    background-color: #ffffff;
+    border: 1px solid gray;
+    border-radius: 8px;
+    position: absolute;
+    left: -1%;
+    top: 40%;
+    z-index: 1111;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+}
+.favorites-button-prev{
+    width: 70px;
+    height: 70px;
+    background-color: #ffffff;
+    border: 1px solid gray;
+    border-radius: 8px;
+    position: absolute;
+    left: -1%;
+    top: 40%;
+    z-index: 11111111;
+    transition: .5s;
+}
+.slider-button-next{
+    width: 70px;
+    height: 70px;
+    background-color: #ffffff;
+    border: 1px solid gray;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 1111;
+    right: -1%;
+    top: 40%;
+    transition: .5s;
+}
+.favorites-button-next{
+    width: 70px;
+    height: 70px;
+    background-color: #ffffff;
+    border: 1px solid gray;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 1111;
+    right: -1%;
+    top: 40%;
+    transition: .5s;
+}
+.hide-slider-button{
+    visibility: hidden;
+    opacity: 0;
+}
+.show-slider-button{
+    visibility: visible;
+    opacity: 1;
+}
+#section1{
+    overflow: hidden;
+    padding-top: 5rem;
+}
+.section1-introduction{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.favorites-banner-left{
+    position: relative;
+    width: 560px;
+    img{
+        height: 513px !important;
+
+    }
+}
+.favorites-banner{
+    width: 480px !important;
+    .favorites-banner-left{
+        position: relative;
+        img{
+            height: 513px !important;
+            width: 494px !important;
+    
+        }
+    }
+}
+.favorites-banner-text{
+    font-family: 'Titles';
+    font-size: 42px;
+    color: white;
+    font-weight: 400;
+    line-height: 40px;
+    padding-bottom: 2rem;
+    position: absolute;
+    bottom: 25%;
+    right: 20%;
+}
+.favorites-banner-button{
+    font-family: 'Regulars';
+    font-size: 14px;
+    color: #323232;
+    font-weight: 400;
+    padding: 15px 30px;
+    background-color: white;
+    text-transform: uppercase;
+    border: none;
+    font-weight: bold;
+    position: absolute;
+    bottom: 15%;
+    right: 30%;
+    
+    &:hover{
+        border: 1px solid gray;
+    }
+}
+.favorite-banner-top{
+    img{
+        width: 100% !important;
+        height: 50% !important;
+    }
+    padding-bottom: 1rem;
+}
+.favorite-banner-bottom{
+    img{
+        width: 100% !important;
+        height: 50% !important;
+
+    }
+}
+.favorites-slider-top{
+    padding-bottom: 1.5rem;
+
+    img {
+        width: 100%;
+    }
+}
+.favorites-slider-bottom{
+    font-family: 'Regulars';
+    font-size: 13px;
+    color: #323232;
+    font-weight: 400;
+    line-height: 18px;
+    padding: 0 .5rem;
+}
+.favorite-banner-right{
+    width: 249px !important;
+    img{
+        width: 100%;
+    }
+}
+.price{
+    font-family: 'Regulars';
+    font-size: 10px;
+    color: #757575;
+    font-weight: 400;
+    line-height: 14px; 
+}
+.font-for-footer{
+    color: #e0e1e2;
+    &:hover{
+        color: #acacac;
+    }
 }
 
 
 
+
+
+
+#section5{
+    img{
+        width: 100%;
+    }
+    position: relative;
+}
+.section5-text{
+    position: absolute;
+    bottom: 10%;
+    right: 2%;
+}
+.section5-title{
+    font-family: 'Titles';
+    font-size: 42px;
+    color: white;
+    line-height: 46px;
+    padding-bottom: 1.5rem;
+}
+.section5-describtion{
+    font-family: 'Regulars';
+    font-size: 14px;
+    color: white;
+    line-height: 20px;
+    padding-bottom: 1.5rem;
+}
+.gender-labels{
+    font-family: 'Regulars';
+    font-size: 10px;
+    color: white;
+    line-height: 14px;
+    text-transform: uppercase;
+    padding-right: 1rem;
+}
+.gender-input{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 5px 5px 5px 0;
+    vertical-align: middle;
+    background-color: white;
+    border: 1px solid #757575;
+    accent-color: gray;
+
+}
+
+
+
+
+
+.footer-right-list{
+    gap: 1.5rem;
+}
+footer{
+    background-color: #323232;
+    padding: 4rem 1rem 5rem 1rem;
+}
+.footer-logo{
+    color: white;
+}
+.footer-socials{
+    li{
+        padding-right: 1.5rem;
+    }
+}
+.footer-email-title{
+    font-family: 'Regulars';
+    color: #e0e1e2;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+}
+.email-container{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: white;
+    border-bottom: 1px white solid;
+    float: right;
+    width: 100%;
+}
+.email-container::placeholder{
+    color: #acacac;
+    font-family: 'Regulars';
+    font-weight: lighter;
+    font-size: 13px;
+    display: flex;
+}
+.email-buttons{
+    padding-right: 1rem;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    color: #acacac ;
+}

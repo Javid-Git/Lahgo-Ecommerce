@@ -1,0 +1,122 @@
+.center-header-optional{
+    background-color: white !important;
+    border-bottom: 1px solid #cecece;
+    .navbar-font {
+        color: #323232;
+    }
+
+    .logo-font {
+        color: #323232;
+    }
+}
+
+
+
+
+#section1-shop{
+    padding-top: 10rem;
+    border-bottom: 1px solid #8b8b8b;
+}
+.navigation-options{
+    font-size: 11px;
+    font-family: 'Regulars';
+    text-transform: uppercase;
+    a{
+        color: #9d9d9d;
+    }
+}
+.navigation-options-active{
+    color: #323232;
+}
+
+.shop-describtion{
+    color: #8b8b8b !important;
+    font-size: 13px !important;
+}
+.product-size{
+    font-family: 'Regulars';
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.svg-caret-down{
+    height: 6px;
+    width: 10px;
+    margin-left: .3rem;
+}
+.size-dropdown{
+    position: relative;
+}
+.size-list{
+    position: absolute;
+    top: 30px;
+    left: -15px;
+    width: 50px;
+}
+.adds-list{
+    position: absolute;
+    top: 30px;
+    left: -25px;
+    width: 135px;
+    li{
+        padding: 1rem !important;
+        transition: .5s;
+    }
+}
+.type-list{
+    position: absolute;
+    top: 30px;
+    left: -25px;
+    width: 120px;
+    li{
+        padding: 1rem !important;
+        transition: .5s;
+    }
+}
+.color-list{
+    position: absolute;
+    top: 30px;
+    left: -25px;
+    width: 110px;
+    li{
+        padding: 1rem !important;
+        transition: .5s;
+        &:hover{
+            .small-colors{
+                border: 2px solid #323232;
+            }
+        }
+    }
+}
+.dropdowns{
+    padding-right: 3rem;
+    cursor: pointer;
+}
+.lists{
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    z-index: 1111;
+    background-color: white;
+    border: 1px solid #bbbbbb;
+    box-shadow: 0 0 3px #e3e3e3;
+    li{
+        padding: .8rem;
+        cursor: pointer;
+        &:hover{
+            background-color: #ebebeb;
+        }
+    }
+}
+.dropdowns-visible{
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: .3s;
+}
+.small-colors{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: .5rem;
+
+}

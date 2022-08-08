@@ -90,6 +90,42 @@ $(document).ready(function () {
             // instead of a settings object
         ]
     });
+    $('.section4-slider').slick({
+        dots: true,
+        infinite: true,
+        arrows: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
     $(document).on('click', '.slider-button-next', function(){
         $('.slider-button-prev').addClass('show-slider-button');
         $('.slider-button-next').addClass('hide-slider-button');
@@ -98,6 +134,9 @@ $(document).ready(function () {
         $('.slider-button-next').removeClass('hide-slider-button');
         $('.slider-button-prev').removeClass('show-slider-button');
 
+    })
+    $(document).on('click', '.dropdowns', function(e){
+        console.log($(this).children('.lists').toggleClass('dropdowns-visible'))
     })
     
 })

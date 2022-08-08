@@ -1,3 +1,5 @@
+@import 'shop';
+
 * {
     padding: 0;
     margin: 0;
@@ -16,6 +18,11 @@
 a {
     text-decoration: none;
     color: white;
+}
+p{
+    padding: 0;
+    margin: 0;
+ 
 }
 .col-lg-3-5{
     flex: 0 0 auto;
@@ -319,6 +326,17 @@ ul {
     padding-bottom: 2rem;
 
 }
+.section-describtion-wide {
+    font-family: 'Regulars';
+    font-size: 14px;
+    color: #323232;
+    font-weight: 400;
+    line-height: 25px;
+    padding-bottom: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
 .category-slider-bottom {
     font-family: 'Regulars';
@@ -509,8 +527,37 @@ ul {
 
 
 
+#section4{
+padding-top: 5rem;
+margin-top: 3rem;
+background-color: #f4f5f6;
+}
+.section4-slider{
+    width: 100%;
+    .slick-list{
+        width: 100%;
+        margin: auto;
+    }
+    
+}
+.section4-compliment{
+   margin: 0 150px !important;
+}
+.section4-compliment-top{
+    font-family: 'Regulars';
+    font-size: 42px;
+    line-height: 46px;
+    color: #323232;
+    padding-bottom: 3rem;
+}
+.section4-intro{
+    padding-bottom: 4rem;
+}
+
+
 
 #section5{
+    padding-top: 5rem;
     img{
         width: 100%;
     }
@@ -518,7 +565,7 @@ ul {
 }
 .section5-text{
     position: absolute;
-    bottom: 10%;
+    bottom: 25%;
     right: 2%;
 }
 .section5-title{
@@ -553,6 +600,20 @@ ul {
     border: 1px solid #757575;
     accent-color: gray;
 
+}
+.section5-genders{
+    padding-bottom: 1.5rem;
+}
+.section5-email-container{
+    background-color: white;
+}
+.section5-input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 90%;
+    padding: 0 1.5rem;
+    height: 70px;
 }
 
 

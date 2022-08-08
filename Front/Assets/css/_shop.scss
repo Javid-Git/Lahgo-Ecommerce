@@ -1,6 +1,7 @@
-.center-header-optional{
+.center-header-optional {
     background-color: white !important;
     border-bottom: 1px solid #cecece;
+
     .navbar-font {
         color: #323232;
     }
@@ -13,86 +14,101 @@
 
 
 
-#section1-shop{
+#section1-shop {
     padding-top: 10rem;
-    border-bottom: 1px solid #8b8b8b;
 }
-.navigation-options{
+
+.navigation-options {
     font-size: 11px;
     font-family: 'Regulars';
     text-transform: uppercase;
-    a{
+
+    a {
         color: #9d9d9d;
     }
 }
-.navigation-options-active{
+
+.navigation-options-active {
     color: #323232;
 }
 
-.shop-describtion{
+.shop-describtion {
     color: #8b8b8b !important;
     font-size: 13px !important;
 }
-.product-size{
+
+.product-size {
     font-family: 'Regulars';
     font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;
 }
-.svg-caret-down{
+
+.svg-caret-down {
     height: 6px;
     width: 10px;
     margin-left: .3rem;
 }
-.size-dropdown{
+
+.size-dropdown {
     position: relative;
 }
-.size-list{
+
+.size-list {
     position: absolute;
     top: 30px;
     left: -15px;
     width: 50px;
 }
-.adds-list{
+
+.adds-list {
     position: absolute;
     top: 30px;
     left: -25px;
     width: 135px;
-    li{
+
+    li {
         padding: 1rem !important;
         transition: .5s;
     }
 }
-.type-list{
+
+.type-list {
     position: absolute;
     top: 30px;
     left: -25px;
     width: 120px;
-    li{
+
+    li {
         padding: 1rem !important;
         transition: .5s;
     }
 }
-.color-list{
+
+.color-list {
     position: absolute;
     top: 30px;
     left: -25px;
     width: 110px;
-    li{
+
+    li {
         padding: 1rem !important;
         transition: .5s;
-        &:hover{
-            .small-colors{
+
+        &:hover {
+            .small-colors {
                 border: 2px solid #323232;
             }
         }
     }
 }
-.dropdowns{
+
+.dropdowns {
     padding-right: 3rem;
     cursor: pointer;
 }
-.lists{
+
+.lists {
     opacity: 0;
     visibility: hidden;
     transition: .3s;
@@ -100,50 +116,90 @@
     background-color: white;
     border: 1px solid #bbbbbb;
     box-shadow: 0 0 3px #e3e3e3;
-    li{
+
+    li {
         padding: .8rem;
         cursor: pointer;
-        &:hover{
+
+        &:hover {
             background-color: #ebebeb;
         }
     }
 }
-.dropdowns-visible{
+
+.dropdowns-visible {
     opacity: 1 !important;
     visibility: visible !important;
     transition: .3s;
 }
-.small-colors{
-    width: 20px;
-    height: 20px;
+
+.small-colors {
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     margin-right: .5rem;
+    border: 1.5px solid white;
+    cursor: pointer;
+    &::after{
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
+    }
+    &:hover{
+        border: 1px solid #323232;
+    }
+    
 
 }
 
 
+.shop-sorting{
+    padding-top: 3rem;
+    border-top: 1px solid #9d9d9d  ;
+}
 
 
-.product-top{
+
+#section3-shop{
     position: relative;
-    img{
+    margin-bottom: 5rem;
+}
+.product {
+    &:hover {
+        .quick-add {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    padding: 2rem 1rem;
+}
+
+.product-top {
+    position: relative;
+
+    img {
         width: 100%;
     }
 }
-.add-to-favorites{
+
+.add-to-favorites {
     position: absolute;
     top: 10px;
     right: 10px;
     z-index: 1111;
     border: none;
     background-color: transparent;
-    ion-icon{
+
+    ion-icon {
         color: white;
         height: 30px;
         width: 30px;
     }
 }
-.new-arrival{
+
+.new-arrival {
     font-family: 'Regulars';
     font-size: 10px;
     color: #323232;
@@ -155,16 +211,91 @@
     top: 10px;
     left: 10px;
 }
-.product-bottom{
+
+.quick-add {
+    height: 73.5px;
+    background-color: white;
+    border: 1px solid #d8d8d8;
+    width: 90%;
+    position: absolute;
+    bottom: 100px;
+    left: 4%;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+    font-size: 15px;
+    letter-spacing: 1px;
+    font-family: 'Regulars';
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 10px 10px;
+    padding: 3px 10px;
+    &:hover{
+        .sizes{
+            opacity: 1;
+            visibility: visible;
+        }
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+.load-more{
+    font-size: 14px;
+    font-family: 'Regulars';
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 20px 35px;
+    background-color: white;
+    border: 1px solid #d8d8d8;
+    position: absolute;
+    bottom: -40px;
+    left: 45%;
+    transition: .5s;
+    &:hover{
+        background-color: #323232;
+        border: 1px solid #323232;
+        color: white;
+    }
+}
+.product-bottom {
     position: relative;
 }
-.sizes{
+.product-name{
+    font-family: 'Regulars';
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 18px;
+    color: #323232;
+    font-weight: bold;
+    padding: 1rem 0 .5rem 0;
+}
+.product-price{
+    font-family: 'Regulars';
+    text-transform: uppercase;
+    font-size: 11px;
+    line-height: 15px;
+    color: #8b8b8b;
+    padding-bottom: 1rem;
+}
+.size-selection{
+    font-family: 'Regulars';
+    text-transform: uppercase;
+    font-size: 13px;
+}
+.sizes {
     background-color: white;
-    border: 1px solid #8b8b8b;
+    border: 1px solid #d8d8d8;
+    width: 100%;
     position: absolute;
-    ul{
-        li{
-            border: 1px solid #8b8b8b;
+    bottom: 80px;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+
+    ul {
+        li {
+            border: 1px solid #bfbfbf;
             border-radius: 30%;
             font-size: 13px;
             font-family: 'Regulars';
@@ -174,4 +305,43 @@
             padding: 3px 10px;
         }
     }
+}
+
+.active-color{
+    border: 1px solid #323232;
+    box-shadow: 0 1px 0 white;
+}
+
+
+
+
+.bestseller-top{
+    img{
+        width: 100%;
+    }
+}
+
+
+
+
+#section5-shop{
+    padding-bottom: 6rem;
+    padding-top: 4rem;
+}
+.section5-shop-content{
+    padding-top: 3rem;
+}
+.s5-shop-title{
+    font-family: 'Titles';
+    font-size: 28px;
+    line-height: 35px;
+    color: #323232;
+    padding-bottom: 1rem;
+}
+.s5-shop-describtion{
+    font-family: 'Regulars';
+    font-size: 14px;
+    line-height: 20px;
+    color: #323232;
+
 }

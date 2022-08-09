@@ -1,6 +1,7 @@
 @import 'shop';
 @import 'about';
 @import 'login';
+@import 'cart';
 
 * {
     padding: 0;
@@ -102,8 +103,8 @@ ul {
 }
 .minicart-product-count{
     border: 1px solid #acacac;
-    width: 42%;
-    padding: 10px 2px;
+    width: 52%;
+    padding: 10px 8px;
 }
 .minicart-products{
     padding: 0 1rem;
@@ -123,6 +124,8 @@ ul {
     left: 0;
 }
 .item-quantity-current{
+    outline: none;
+    touch-action: none;
     font-family: 'Regulars';
     font-size: 14px;
     font-style: normal;
@@ -142,7 +145,7 @@ ul {
     padding: 1rem 0;
 }
 .minicart-product-details{
-    padding: 0 .5rem 0 3.5rem;
+    padding: 0 0 0 4.5rem;
 }
 .minicart-product-price{
     font-family: 'Regulars';
@@ -851,3 +854,8 @@ footer{
     border: none;
     color: #acacac ;
 }
+
+
+
+
+

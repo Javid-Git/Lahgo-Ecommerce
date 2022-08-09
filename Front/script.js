@@ -138,6 +138,13 @@ $(document).ready(function () {
     $(document).on('click', '.dropdowns', function(e){
         console.log($(this).children('.lists').toggleClass('dropdowns-visible'))
     })
-    
+    $(document).on('click', '.minicart-button', function(e){
+        e.preventDefault();
+        $('#minicart').toggleClass('minicart-visible')
+    })
+    $(document).on('click', '#minicart-close', function(){
+        $('#minicart').toggleClass('minicart-visible')
+    })
+
 })
 

@@ -16,6 +16,90 @@
 </head>
 
 <body>
+    <div id="minicart" class="minicart">
+        <div class="minicart-intro section-title d-flex justify-content-between">
+            <h2>
+                Your bag <span class="minicart-number section-describtion">(0)</span>
+            </h2>
+            <button type="button" id="minicart-close" class="comp-close" aria-label="Close minicart">
+                <svg class="svg-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85"><g><path d="M6.72 7.42L0 14.14l.71.71 6.71-6.72 6.72 6.72.71-.71-6.72-6.72L14.85.71 14.14 0 7.42 6.72.71 0 0 .71z" fill="currentColor" fill-rule="evenodd"></path></g></svg>
+            </button>
+        </div>
+        <div class="minicart-describtion text-center col-lg-12">CONGRATULATIONS! YOUR ORDER QUALIFIES FOR FREE SHIPPING</div>
+        <div class="minicart-products col-lg-12">
+            <div class="minicart-product row">
+                <div class="minicart-product-pic col-lg-3">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/WSSetinDeepBlue_compact.png?v=1659543085"
+                        alt="">
+                </div>
+                <div class="minicart-product-details col-lg-7 d-flex flex-column align-items-center text-start">
+                    <div class="minicart-product-name">
+                        WASHABLE SILK SET
+                    </div>
+                    <div class="minicart-product-colorandsize">
+                        <div class="minicart-product-color text-start">
+                            DEEP BLUE | <span class="minicart-product-size">M</span>
+                        </div>
+                    </div>
+                    <div class="minicart-product-count d-flex justify-content-around align-items-center">
+                        <button id="qty-minus" type="button" class="item-quantity-decrease">
+                            <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                        <span class="item-quantity-current">6</span>
+                        <button id="qty-plus" type="button" class="item-quantity-increase">
+                            <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.98828 2.17038e-06L5.98828 10" stroke="currentColor"></path>
+                                <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="minicart-product-price text-end col-lg-2">
+                    $278
+                </div>
+            </div>
+            <div class="minicart-product row">
+                <div class="minicart-product-pic col-lg-3">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/WSSetinDeepBlue_compact.png?v=1659543085"
+                        alt="">
+                </div>
+                <div class="minicart-product-details col-lg-7 d-flex flex-column align-items-center text-start">
+                    <div class="minicart-product-name">
+                        WASHABLE SILK SET
+                    </div>
+                    <div class="minicart-product-colorandsize">
+                        <div class="minicart-product-color text-start">
+                            DEEP BLUE | <span class="minicart-product-size">M</span>
+                        </div>
+                    </div>
+                    <div class="minicart-product-count d-flex justify-content-around align-items-center">
+                        <button id="qty-minus" type="button" class="item-quantity-decrease">
+                            <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                        <span class="item-quantity-current">6</span>
+                        <button id="qty-plus" type="button" class="item-quantity-increase">
+                            <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.98828 2.17038e-06L5.98828 10" stroke="currentColor"></path>
+                                <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="minicart-product-price text-end col-lg-2">
+                    $278
+                </div>
+            </div>
+        </div>
+
+    </div>
     <header>
         <div id="center-header" class=" row align-items-center m-auto center-header">
             <div class="top-header">
@@ -65,7 +149,8 @@
                         <ul class="bestseller-list navbar-lists d-flex">
                             <li>
                                 <ul class="bestsellers-list-s">
-                                    <li><a href="/Front/Assets/html/bestsellers.html" class="category-list-items">best sellers</a></li>
+                                    <li><a href="/Front/Assets/html/bestsellers.html" class="category-list-items">best
+                                            sellers</a></li>
                                     <li><a href="" class="subcategory-list-items">all best sellers</a></li>
                                 </ul>
                             </li>
@@ -159,8 +244,8 @@
                         </a>
 
                     </li>
-                    <li>
-                        <a class=" navbar-font" href="">
+                    <li class="">
+                        <a class="navbar-font minicart-button" href="">
                             <svg class="svg-bag svg-search" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20.08 20.69">
                                 <g>
@@ -172,7 +257,6 @@
                                 </g>
                             </svg>
                         </a>
-
                     </li>
                 </ul>
             </div>
@@ -197,7 +281,7 @@
 
 
         </div>
-
+       
 
     </header>
     <section id="section1">
@@ -378,21 +462,25 @@
         </div>
         <div class="section4-slider col-lg-12">
             <div class="section4-compliment text-center col-lg-5">
-                <p class="section4-compliment-top">“Lahgo offers the antithesis to those sweatpants you’ve kept just because you have nothing else to wear on Sunday mornings.”</p>
+                <p class="section4-compliment-top">“Lahgo offers the antithesis to those sweatpants you’ve kept just
+                    because you have nothing else to wear on Sunday mornings.”</p>
                 <p class="section-describtion-wide">The Daily Beast</p>
             </div>
             <div class="section4-compliment text-center">
-                <p class="section4-compliment-top">“Lahgo has created a line of the softest, most luxury loungewear options we have found yet.”</p>
+                <p class="section4-compliment-top">“Lahgo has created a line of the softest, most luxury loungewear
+                    options we have found yet.”</p>
                 <p class="section-describtion-wide">The Verticale</p>
             </div>
             <div class="section4-compliment text-center">
-                <p class="section4-compliment-top">“Lahgo’s modern take on pjs is the softest and most luxurious sleepwear you’ll ever own.”</p>
+                <p class="section4-compliment-top">“Lahgo’s modern take on pjs is the softest and most luxurious
+                    sleepwear you’ll ever own.”</p>
                 <p class="section-describtion-wide">GQ</p>
             </div>
         </div>
     </section>
     <section id="section5">
-        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/Lahgo-Homepage-Newsletter-Desktop_2048x2048.jpg?v=1633149194" alt="">
+        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/Lahgo-Homepage-Newsletter-Desktop_2048x2048.jpg?v=1633149194"
+            alt="">
         <div class="section5-text col-lg-3-5">
             <div class="section5-title">
                 The key to an aesthetic inbox
@@ -414,9 +502,16 @@
             <div class="section5-email-container">
                 <input class="section5-input" type="text" class="section5-email" placeholder="Enter you email">
                 <button class="email-buttons" type="submit" aria-label="Submit">
-					
-                    <svg class="svg-arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39.5 19.64"><g><path fill="none" stroke="currentColor" stroke-width="2px" d="M27.86,18.9,38,9.82,27.86.74"></path><line fill="none" stroke="currentColor" stroke-width="2px" x1="37.29" y1="9.85" y2="9.85"></line></g></svg>
-            
+
+                    <svg class="svg-arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39.5 19.64">
+                        <g>
+                            <path fill="none" stroke="currentColor" stroke-width="2px" d="M27.86,18.9,38,9.82,27.86.74">
+                            </path>
+                            <line fill="none" stroke="currentColor" stroke-width="2px" x1="37.29" y1="9.85" y2="9.85">
+                            </line>
+                        </g>
+                    </svg>
+
                 </button>
             </div>
         </div>
@@ -472,7 +567,8 @@
                     <form method="post">
                         <h2 class="footer-email-title">Get $20 Off Your First Order</h2>
                         <div class="email-field d-flex">
-                            <input class="email-container" id="" type="email" placeholder="Enter your email to subscribe">
+                            <input class="email-container" id="" type="email"
+                                placeholder="Enter your email to subscribe">
                             <button class="email-buttons" type="submit" aria-label="submit">
                                 <svg class="svg-arrow-right" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 39.5 19.64">

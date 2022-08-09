@@ -6,7 +6,9 @@
     padding: 0;
     margin: 0;
 }
-
+body{
+    overflow-x: hidden;
+}
 @font-face {
     font-family: "Titles";
     src: url(/Front/Assets/fonts/Fontspring-DEMO-wayfindercf-regular.otf);
@@ -54,6 +56,112 @@ ul {
 // .custom-navbar{
 //     position: relative;
 // }
+
+//minicart
+.minicart{
+    height: 100vh;
+    width: 30%;
+    background-color: white;
+    position: absolute;
+    z-index: 1111111;
+    top: 0;
+    right: -500px;
+    transition: .5s;
+}
+.minicart-visible{
+    visibility: visible !important; 
+    opacity: 1 !important;
+    right: 0 !important;
+    transition: .5s;
+
+}
+#qty-minus{
+    height: 13px;
+    width: 13px;
+    border: none;
+    background-color: transparent;
+    position: relative;
+}
+#qty-plus{
+    height: 13px;
+    width: 13px;
+    border: none;
+    background-color: transparent;
+    position: relative;
+
+}
+.minicart-product-count{
+    border: 1px solid #acacac;
+    width: 34%;
+    padding: 2px 2px;
+}
+.minicart-products{
+    padding: 0 1rem;
+
+}
+#minicart-close{
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: transparent;
+}
+.svg-plus{
+    color: #757575;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.item-quantity-current{
+    font-family: 'Regulars';
+    font-size: 14px;
+    font-style: normal;
+    text-transform: uppercase;
+    color: #757575;
+    padding: 0 1rem;
+}
+.minicart-product-colorandsize{
+    font-family: 'Regulars';
+    font-size: 12px;
+    font-style: normal;
+    text-transform: uppercase;
+    color: #757575;
+    padding: 1rem 0;
+}
+.minicart-product-details{
+    padding: 0 .5rem 0 3.5rem;
+}
+.minicart-product-price{
+    font-family: 'Regulars';
+    font-size: 15px;
+    font-style: normal;
+    text-transform: uppercase;
+    color: #323232;
+}
+.minicart-describtion{
+    font-family: 'Regulars';
+    font-size: 11px;
+    font-style: normal;
+    text-transform: uppercase;
+    color: #323232  ;
+    background-color: rgb(239, 239, 239);
+    padding: 10px 0;
+    width: 95%;
+    margin: auto;
+}
+.minicart-product{
+    padding: 1rem 0;
+}
+.minicart-intro{
+    padding: 1rem 1rem 0 1rem;
+}
+
+
+
+
+
+
+
 .navbar-font {
     font-family: 'Regulars';
     font-size: 14px;

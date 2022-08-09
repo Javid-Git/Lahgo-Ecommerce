@@ -141,10 +141,37 @@ $(document).ready(function () {
     $(document).on('click', '.minicart-button', function(e){
         e.preventDefault();
         $('#minicart').toggleClass('minicart-visible')
+        $('.minicart-wraper').toggleClass('minicart-visible')
+
+    })
+    $(document).on('click', ('#minicart-close', '.minicart-wraper'), function(){
+        $('#minicart').toggleClass('minicart-visible')
+        $('.minicart-wraper').toggleClass('minicart-visible')
     })
     $(document).on('click', '#minicart-close', function(){
         $('#minicart').toggleClass('minicart-visible')
+        $('.minicart-wraper').toggleClass('minicart-visible')
+    })
+    $(document).on('click', '.item-quantity-decrease', function (e) {
+        e.preventDefault();
+        let inputCount = $(this).next().val();
+
+        if (inputCount >= 2) {
+            inputCount--;
+            $(this).next().val(inputCount);
+        }
     })
 
+    $(document).on('click', '.item-quantity-increase', function (e) {
+        e.preventDefault();
+        let inputCount = $(this).prev().val();
+
+        if (inputCount > 0) {
+            inputCount++;
+        } else {
+            inputCount = 1;
+        }
+        $(this).prev().val(inputCount);
+    })
 })
 

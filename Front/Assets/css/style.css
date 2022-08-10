@@ -1475,6 +1475,10 @@ footer {
   display: block;
 }
 
+.sidebar {
+  display: none;
+}
+
 @media (max-width: 576px) {
   .ccontainer {
     padding: 0 1.5rem;
@@ -1766,6 +1770,7 @@ footer {
     left: -300px;
     opacity: 0;
     z-index: 11111;
+    display: flex;
   }
   .sidebar-long {
     height: 90%;

@@ -995,8 +995,9 @@ footer {
 .footer-logo {
     display: block;
 }
-
-
+.sidebar{
+    display: none;
+}
 
 
 @media (max-width: 576px) {
@@ -1370,6 +1371,7 @@ footer {
         left: -300px;
         opacity: 0;
         z-index: 11111;
+        display: flex;
     }
     .sidebar-long{
         height: 90%;

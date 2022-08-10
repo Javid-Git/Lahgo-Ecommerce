@@ -185,5 +185,16 @@ $(document).ready(function () {
         }
         $(this).prev().val(inputCount);
     })
+    $(document).on('click','#mobile-sort', function(){
+        $('.mobile-sort-list').toggleClass('show-mobile-sort')
+    })
+    $(document).on('click','#mobile-filter', function(){
+        $('.mobile-filter-big').toggleClass('show-mobile-filter')
+        $('.mobile-sorting').toggleClass('mobile-sorting-top')
+    })
+    $(document).on('click','#cancel-filtering', function(){
+        $('.mobile-filter-big').toggleClass('show-mobile-filter')
+        $('.mobile-sorting').toggleClass('mobile-sorting-top')
+    })
 })
 

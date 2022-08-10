@@ -304,6 +304,7 @@
 
 .section5-shop-content {
   padding-top: 3rem;
+  justify-content: space-between;
 }
 
 .s5-shop-title {
@@ -321,6 +322,195 @@
   color: #323232;
 }
 
+.mobile-product-name {
+  display: none;
+}
+
+.product-name {
+  display: block;
+}
+
+.product-settings {
+  display: flex;
+}
+
+.mobile-sorting {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .center-header-optional {
+    height: 80px !important;
+    background-color: white;
+    position: fixed;
+  }
+  .center-header-optional .navbar-font {
+    color: #323232;
+    line-height: 50px;
+  }
+  .center-header-optional .logo-font {
+    color: #323232;
+  }
+  .center-header-optional .logo-font .svg-logo {
+    height: 40px !important;
+  }
+  .center-header-optional #mobile-menu-trigger::after {
+    background-color: #323232;
+  }
+  .center-header-optional #mobile-menu-trigger::before {
+    background-color: #323232;
+  }
+  .center-header-optional #mobile-menu-trigger hr {
+    background-color: #323232;
+  }
+  .center-header-optional .header-search-pane-trigger svg {
+    color: #323232;
+  }
+  .sidebar-optional {
+    height: 90% !important;
+  }
+  .section5-shop-content {
+    justify-content: center;
+  }
+  .new-arrival {
+    padding: 2px 2px;
+    bottom: 10px;
+    left: 10px;
+    top: unset;
+  }
+  .product:hover .quick-add {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .mobile-product-name {
+    display: block;
+    font-family: "Regulars";
+    text-transform: uppercase;
+    font-size: 10px;
+    line-height: 15px;
+    color: #323232;
+    padding: 0.3rem 0;
+  }
+  .mobile-product-name a {
+    font-family: "Regulars";
+    text-transform: uppercase;
+    font-size: 10px;
+    line-height: 15px;
+    color: #323232;
+  }
+  .mobile-sorting-top {
+    position: fixed;
+    width: 100%;
+    z-index: 111111111;
+    background-color: white;
+    top: 79px;
+    left: 0;
+  }
+  .mobile-sorting-wraper {
+    position: relative;
+    width: 100%;
+  }
+  .shop-sorting {
+    border-top: none;
+  }
+  .mobile-sorting {
+    display: flex;
+    border-bottom: #bfbfbf 1px solid;
+    border-top: #bfbfbf 1px solid;
+    padding: 1rem 0;
+    transition: 0.5s;
+  }
+  .mobile-filter {
+    border-right: #bfbfbf 1px solid;
+  }
+  .product-name {
+    display: none;
+  }
+  .bestseller-name {
+    padding: 0.5rem 0;
+  }
+  .bestseller-name a {
+    font-family: "Regulars";
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 15px;
+    color: #323232;
+    letter-spacing: -0.1px;
+  }
+  .product-settings {
+    display: none;
+  }
+  .load-more {
+    left: 36%;
+    bottom: -60px;
+  }
+  .mobile-sort {
+    position: relative;
+  }
+  .mobile-sort-list {
+    border: 1px solid #bfbfbf;
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    top: 30px;
+    z-index: 111111;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+  }
+  .mobile-sort-list li {
+    padding: 0.5rem 0.5rem;
+    border-bottom: red;
+  }
+  .show-mobile-sort {
+    visibility: visible;
+    opacity: 1;
+  }
+  .sp-container {
+    padding: 0 0 !important;
+  }
+  .mobile-filter-big {
+    padding: 2rem;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    left: 0;
+    top: 134px;
+    z-index: 11111;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+    height: 82vh;
+    background-color: #f3f3f3;
+  }
+  .mobile-settings {
+    height: 60vh;
+    overflow-y: scroll;
+  }
+  .show-mobile-filter {
+    visibility: visible;
+    opacity: 1;
+  }
+  .mobile-filter-list {
+    padding: 1.5rem 0;
+  }
+  .mobile-filter-list li {
+    font-family: "Regulars";
+    font-size: 14px;
+    line-height: 15px;
+    color: #323232;
+    padding: 0.3rem 0;
+    text-shadow: 0 0 1px rgb(230, 230, 230);
+  }
+  .mobile-filtes p {
+    font-weight: bold;
+    font-family: "Regulars";
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 15px;
+    color: #323232;
+  }
+}
 .intro-about {
   position: relative;
 }

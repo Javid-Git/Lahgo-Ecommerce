@@ -323,5 +323,9 @@ $(document).ready(function () {
             // instead of a settings object
         ]
     });
+
+    $(document).on('click', '.mobile-product-list', function () {
+        $('.checkout1-right-mobile').slideToggle();
+    })
 })
 

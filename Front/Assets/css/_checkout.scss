@@ -1,0 +1,269 @@
+.site-navigation-checkout {
+    padding: 1rem 0;
+}
+
+.express-checkout {
+    width: 100%;
+    padding-bottom: 1rem;
+    margin: .4rem 0;
+}
+
+
+.express-checkout-container {
+    border-right: 1px solid #aaaaaa;
+    border-left: 1px solid #aaaaaa;
+    border-bottom: 1px solid #aaaaaa;
+    border-radius: 8px;
+    padding-bottom: 1rem;
+}
+
+.express-button {
+    margin: 0 .3rem;
+    border-radius: 6px;
+    width: 22%;
+    background-color: black;
+    .button-text{
+        padding: 1rem 0;
+    }
+}
+
+
+
+.col-lg-2-5 {
+    width: 22%;
+}
+
+.button-text {
+    display: flex;
+    justify-content: center;
+    padding: .3rem 0;
+    color: white;
+
+    &:hover {
+        color: white;
+    }
+}
+
+.left-separator {
+    margin: 2rem 0;
+}
+
+.left-separator-text {
+    margin: 0 .4rem;
+}
+
+.left-separator::after {
+    padding: 0 9.2rem;
+    content: "";
+    border-top: 1px solid #aaaaaa;
+}
+
+.left-separator::before {
+    padding: 0 9.2rem;
+    content: "";
+    border-top: 1px solid #aaaaaa;
+}
+
+.section-title-small {
+    font-family: 'Titles';
+    font-size: 30px;
+    color: #323232;
+    font-weight: 400;
+    line-height: 40px;
+    padding-bottom: 1rem;
+}
+
+.section-describtion-small {
+    font-family: 'Regulars';
+    font-size: 14px;
+    color: #323232;
+    line-height: 25px;
+    padding-bottom: 2rem;
+
+}
+
+.inputs-checkout {
+    padding: 1rem 0;
+    padding-right: 1rem;
+
+}
+
+.tooltip-content-checkout {
+    right: 0;
+    left: unset !important;
+    background-color: #323232 !important;
+    top: -115px !important;
+
+    p {
+        color: white !important;
+    }
+}
+
+.svg-tootlip-checkout {
+    left: unset !important;
+    right: 0;
+
+}
+
+.return-button {
+    a {
+        .previous-link__icon {
+            width: 10px;
+            height: 10px;
+            margin-right: 10px;
+        }
+    }
+}
+
+.section-describtion-optional {
+    padding: 0 0 !important;
+}
+
+.checkout-buttons {
+    padding: 1rem 0;
+}
+
+.subscribtion-input-optional {
+    padding: 1rem;
+    background-color: #efefef;
+    margin: 0 0 2rem 0;
+}
+
+.subscribtion-text {
+    font-size: 14px;
+}
+
+.policies{
+    border-top: .5px solid #7c7c7c;
+}
+.policy-list {
+    li {
+        padding: .4rem 2rem 0 .4rem;
+
+        a {
+            font-family: 'Regulars';
+            font-size: 10px;
+            line-height: 15px;
+            color: #7c7c7c;
+            text-transform: uppercase;
+        }
+    }
+}
+.express-checkout-container{
+    width: 99%;
+}
+
+.checkout1-left{
+    padding: 3rem 3rem 2rem 14rem;
+}
+
+.checkout1-right{
+    background-color: #f4f5f6;
+    padding: 4rem 4rem 1rem 2rem;
+
+}
+.product-checkout-list{
+    height: 60vh;
+    overflow-y: scroll;
+}
+.product-checkout{
+    position: relative;
+    padding-bottom: 1rem;
+}
+.product-checkout-pic{
+    img{
+        width: 100%;
+    }
+}
+.product-checkout-count{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #323232;
+    color: white;
+    font-size: 10px;
+    left: 15%;
+    top: 0;
+}
+.product-checkout-describtion{
+    padding-left: 2rem;
+    padding-right: 1rem;
+}
+
+.checkout-calculation{
+    padding: 2rem 0;
+}
+
+.expense-optional{
+    border-bottom: none !important;
+    padding: 1rem 0;
+    div{
+        font-size: 16px;
+        span{
+            font-weight: bold;
+        }
+    }
+}
+.express-checkout-container{
+    border: 1px solid #323232;
+    border-radius: 6px;
+}
+.checkout1-right-mobile{
+    display: none;
+}
+.checkout1-right{
+    display: block;
+}
+
+
+@media (max-width: 576px) {
+    .checkout1-left{
+        padding: 2rem 2rem;
+    }
+    
+    .checkout1-logo{
+        padding-bottom: 2rem;
+    }
+    .left-separator::after {
+        padding: 0 7.2rem;
+        content: "";
+        border-top: 1px solid #aaaaaa;
+    }
+    
+    .left-separator::before {
+        padding: 0 7.2rem;
+        content: "";
+        border-top: 1px solid #aaaaaa;
+    }
+    .order-summary-toggle__icon{
+        margin-right: 10px;
+    }
+    .mobile-product-list{
+        background-color: #f4f5f6;
+        padding: 1rem;
+        border-radius: 6px;
+        position: relative;
+    }
+    .checkout1-right-mobile{
+        display: none;
+        top: 0%;
+        border: 2px solid white;
+        padding: 4rem 4rem 1rem 2rem;
+        background-color: #f4f5f6;
+    }
+    .checkout1-right{
+        display: none;
+    }
+    .express-button{
+        width: 100%;
+        margin-bottom: .5rem;
+    }
+    .payment-buttons{
+        padding: 0 1rem;
+    }
+    .express-checkout-container{
+        margin-top: 2rem;
+    }
+    
+}

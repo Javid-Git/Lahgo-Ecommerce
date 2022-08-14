@@ -1,0 +1,174 @@
+.contact-hero {
+    position: relative;
+    padding-top: 8rem;
+
+    img {
+        width: 100%;
+    }
+}
+
+.contact-hero-text {
+    position: absolute;
+    width: 30%;
+    top: 40%;
+    left: 25%;
+
+    .contact-hero-title {
+        color: white;
+    }
+
+    .contact-hero-describtion {
+        font-size: 14px;
+        color: white;
+    }
+}
+
+.sectio1-contact-wraper {
+    position: relative;
+    margin-left: 35%;
+    position: absolute;
+    padding: 3rem 0;
+    top: 0;
+    height: 100%;
+    width: 65%;
+    overflow-y: scroll;
+}
+
+.contact1-left {
+    position: sticky;
+    top: 40%;
+    left: 15%;
+}
+
+.contact1-right {
+    padding: 0 7rem;
+
+    ul {
+        li {
+            font-family: 'Regulars';
+            font-size: 14px;
+            padding-bottom: 1rem;
+        }
+    }
+}
+
+.contact1-middle {
+    .section-title {
+        padding-bottom: 4rem;
+    }
+}
+
+.contact-button {
+    width: 30%;
+}
+
+#section1-contact {
+    margin: 2rem 0;
+    position: relative;
+    height: 100vh;
+
+}
+
+.faq-list {
+    li {
+        font-family: 'Regulars';
+        padding: .3rem 0;
+
+        a {
+            font-family: 'Regulars';
+            font-size: 14px;
+            color: #323232;
+        }
+    }
+}
+
+.faq-input {
+    border: 1px solid #323232;
+    padding: 1rem 2rem;
+    outline: none;
+    width: 100%;
+}
+
+.faq-slider-list {
+    display: none;
+    padding: 2rem 0;
+
+    li {
+        font-family: 'Regulars';
+        font-size: 14px;
+        color: #323232;
+    }
+}
+.contact1-ordering{
+    padding-bottom: 1rem;
+    cursor: pointer;
+}
+
+
+.contact-plus-button{
+    transition: .5s;
+}
+.contact-mult-button{
+    transform: rotate(45deg);
+}
+.ordering-faqs{
+    padding: 1rem 0;
+}
+
+.contact1-faqs{
+    display: none;
+    transition: .5s;
+    padding-right: 1rem;
+}
+.contact-buttons{
+    display: none;
+}
+
+@media (max-width:576px) {
+
+
+    .contact1-left{
+        display: none;
+    }
+    .contact1-right{
+        padding: 0 0;
+    }
+    .sectio1-contact-wraper{
+        position:unset;
+        width: 100%;
+        margin: 0 0;
+        padding: 1rem;
+        overflow-y: unset;
+    }
+    #section1-contact{
+        position: unset;
+        height: unset   ;
+    }
+    .contact-buttons{
+        display: flex;
+        padding: 0 1rem;
+        border-bottom: 1px solid #d2d2d2;
+        .contact-btns{
+            padding: 0.4rem 1rem;
+            font-family: 'Regulars';
+            font-size: 14px;
+            color: #323232;
+            border-left: #d2d2d2 .5px solid;
+            border-right: #d2d2d2 .5px solid;
+        }
+    }
+    .contact-hero-text{
+        width: 55%;
+    }
+    .contact-hero{
+        padding-top: 5rem;
+        img{
+            height: 50vh;
+
+        }
+    }
+    .contact1-middle{
+        padding-bottom: 3rem;
+    }
+    
+}

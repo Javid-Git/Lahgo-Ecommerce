@@ -327,5 +327,26 @@ $(document).ready(function () {
     $(document).on('click', '.mobile-product-list', function () {
         $('.checkout1-right-mobile').slideToggle();
     })
+
+    $(document).on('click', '.contact1-ordering', function (e) {
+        $(this).children('.faq-slider-list').slideToggle();
+        $(this).children('.slider-main-button').children('.contact-plus-button').toggleClass('contact-mult-button');
+    })
+    
+
+    $(document).on('click', '.help-faqs, .faq-btn', function () {
+        $('.contact1-middle').hide();
+        $('.contact1-right').hide();
+        $('.contact1-faqs').show();
+
+    })
+    
+    $(document).on('click', '.help-contact, .contact-btn', function () {
+        $('.contact1-middle').show();
+        $('.contact1-right').show();
+        $('.contact1-faqs').hide();
+
+    })
+
 })
 

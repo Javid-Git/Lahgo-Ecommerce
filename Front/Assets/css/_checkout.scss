@@ -215,7 +215,9 @@
 .checkout1-right{
     display: block;
 }
-
+.mobile-product-list{
+    display: none;
+}
 
 @media (max-width: 576px) {
     .checkout1-left{
@@ -244,6 +246,7 @@
         padding: 1rem;
         border-radius: 6px;
         position: relative;
+        display: flex;
     } 
     .checkout1-right-mobile{
         display: none;

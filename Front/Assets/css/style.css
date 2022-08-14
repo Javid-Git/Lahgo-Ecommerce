@@ -286,6 +286,7 @@
   text-transform: uppercase;
   margin: 10px 10px;
   padding: 3px 10px;
+  cursor: pointer;
 }
 
 .active-color {
@@ -1591,6 +1592,24 @@
   padding-bottom: 5rem;
 }
 
+.empty-wishlist {
+  display: none;
+}
+
+.full-wishlist-links a {
+  margin-right: 30px;
+}
+.full-wishlist-links a svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 576px) {
+  #section1-wishlist {
+    padding-top: 9rem;
+    padding-bottom: 2rem;
+  }
+}
 * {
   padding: 0;
   margin: 0;

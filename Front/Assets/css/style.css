@@ -1586,6 +1586,11 @@
     padding-bottom: 3rem;
   }
 }
+#section1-wishlist {
+  padding-top: 15rem;
+  padding-bottom: 5rem;
+}
+
 * {
   padding: 0;
   margin: 0;

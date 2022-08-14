@@ -348,5 +348,16 @@ $(document).ready(function () {
 
     })
 
+    $(document).on('click', '.account-option', function (e) {
+        $('.account-option').children('a').removeClass('active-link');
+
+        $(this).children('a').addClass('active-link');
+
+    })
+
+    $(document).on('click', '.account-option-button', function () {
+        $('.account-option-button').next().toggle();
+    })
+
 })
 

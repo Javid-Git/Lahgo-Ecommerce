@@ -1610,6 +1610,69 @@
     padding-bottom: 2rem;
   }
 }
+#section1-myaccount {
+  padding-top: 6rem;
+}
+
+.account1-left {
+  padding-top: 8rem;
+}
+.account1-left ul li {
+  padding-bottom: 1rem;
+}
+.account1-left ul li a {
+  color: #a0a0a0;
+}
+.account1-left ul li:hover a {
+  color: #323232;
+}
+
+.active-link {
+  color: #323232 !important;
+}
+
+.account1-middle .section-title {
+  letter-spacing: 1.3px;
+}
+
+.empty-order {
+  padding-top: 4rem;
+}
+
+@media (max-width: 576px) {
+  .account1-left {
+    display: none;
+  }
+  .account-options-mobile {
+    position: relative;
+  }
+  .account-options-mobile ul {
+    border: 1px solid #a0a0a0;
+    padding: 1rem;
+    margin-top: 1rem;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    display: none;
+  }
+  .account-options-mobile ul li {
+    border-bottom: 1px solid #a0a0a0;
+    padding: 0.3rem 0;
+  }
+  .account-options-mobile ul li:hover {
+    background-color: rgb(202, 255, 255);
+  }
+  .account-options-mobile ul li a {
+    color: #323232;
+    text-transform: uppercase;
+  }
+  .account-option-button {
+    text-transform: uppercase;
+    border: 1px solid #a0a0a0;
+    padding-bottom: 0 !important;
+    padding: 1rem !important;
+  }
+}
 * {
   padding: 0;
   margin: 0;

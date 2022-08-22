@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LAHGO.Core.Entities
 {
-    class ProductColorSize : BaseEntity
+    public class ProductColorSize : BaseEntity
     {
         public int ProductId { get; set; }
         public Product Product { get; set; }

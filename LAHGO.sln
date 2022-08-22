@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32510.428
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LAHGO.Mvc", "LAHGO.Mvc\LAHGO.Mvc.csproj", "{ADC6ACE9-A730-4AC0-BB50-72CE2A5AE4FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LAHGO.Core", "LAHGO.Core\LAHGO.Core.csproj", "{65E508BE-32E2-48F4-95F8-DE36EFE1F5FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LAHGO.Data", "LAHGO.Data\LAHGO.Data.csproj", "{020793BD-DA3C-446B-8E83-30DE2DA56B57}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADC6ACE9-A730-4AC0-BB50-72CE2A5AE4FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC6ACE9-A730-4AC0-BB50-72CE2A5AE4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC6ACE9-A730-4AC0-BB50-72CE2A5AE4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC6ACE9-A730-4AC0-BB50-72CE2A5AE4FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E508BE-32E2-48F4-95F8-DE36EFE1F5FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E508BE-32E2-48F4-95F8-DE36EFE1F5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E508BE-32E2-48F4-95F8-DE36EFE1F5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E508BE-32E2-48F4-95F8-DE36EFE1F5FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{020793BD-DA3C-446B-8E83-30DE2DA56B57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{020793BD-DA3C-446B-8E83-30DE2DA56B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{020793BD-DA3C-446B-8E83-30DE2DA56B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{020793BD-DA3C-446B-8E83-30DE2DA56B57}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D191F7DC-F70E-490D-8B56-A55E9730FFC4}
+	EndGlobalSection
+EndGlobal

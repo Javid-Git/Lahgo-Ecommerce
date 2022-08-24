@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAHGO</title>
+    <link rel="stylesheet" href="/Front/Assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/Front/Assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="/Front/Assets/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="/Front/Assets/slick/slick-theme.css" />
+</head>
+
+<body>
+    <div class="minicart-wraper">
+    </div>
+    <div id="minicart" class="minicart">
+        <div class="minicart-intro section-title d-flex justify-content-between">
+            <h2>
+                Your bag <span class="minicart-number section-describtion">(0)</span>
+            </h2>
+            <button type="button" id="minicart-close" class="comp-close" aria-label="Close minicart">
+                <svg class="svg-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85"><g><path d="M6.72 7.42L0 14.14l.71.71 6.71-6.72 6.72 6.72.71-.71-6.72-6.72L14.85.71 14.14 0 7.42 6.72.71 0 0 .71z" fill="currentColor" fill-rule="evenodd"></path></g></svg>
+            </button>
+        </div>
+        <div class="minicart-describtion text-center col-lg-12">CONGRATULATIONS! YOUR ORDER QUALIFIES FOR FREE SHIPPING</div>
+        <div class="minicart-products col-lg-12">
+            <div class="minicart-product row">
+                <div class="minicart-product-pic col-lg-3">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/WSSetinDeepBlue_compact.png?v=1659543085"
+                        alt="">
+                </div>
+                <div class="minicart-product-details col-lg-7 d-flex flex-column align-items-center text-start">
+                    <div class="minicart-product-name">
+                        WASHABLE SILK SET
+                    </div>
+                    <div class="minicart-product-colorandsize">
+                        <div class="minicart-product-color text-start">
+                            DEEP BLUE | <span class="minicart-product-size">M</span>
+                        </div>
+                    </div>
+                    <div class="minicart-product-count d-flex justify-content-around align-items-center">
+                        <button id="qty-minus" type="button" class="item-quantity-decrease">
+                            <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                        <input class="item-quantity-current" type="text" value="0">
+                        <button id="qty-plus" type="button" class="item-quantity-increase">
+                            <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.98828 2.17038e-06L5.98828 10" stroke="currentColor"></path>
+                                <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="minicart-product-price text-end col-lg-2">
+                    $278
+                </div>
+            </div>
+            <div class="minicart-product row">
+                <div class="minicart-product-pic col-lg-3">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/WSSetinDeepBlue_compact.png?v=1659543085"
+                        alt="">
+                </div>
+                <div class="minicart-product-details col-lg-7 d-flex flex-column align-items-center text-start">
+                    <div class="minicart-product-name">
+                        WASHABLE SILK SET
+                    </div>
+                    <div class="minicart-product-colorandsize">
+                        <div class="minicart-product-color text-start">
+                            DEEP BLUE | <span class="minicart-product-size">M</span>
+                        </div>
+                    </div>
+                    <div class="minicart-product-count d-flex justify-content-around align-items-center">
+                        <button id="qty-minus" type="button" class="item-quantity-decrease">
+                            <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                        <input class="item-quantity-current" type="text" value="0">
+                        <button id="qty-plus" type="button" class="item-quantity-increase">
+                            <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.98828 2.17038e-06L5.98828 10" stroke="currentColor"></path>
+                                <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="minicart-product-price text-end col-lg-2">
+                    $278
+                </div>
+            </div>
+            <div class="minicart-product row">
+                <div class="minicart-product-pic col-lg-3">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/WSSetinDeepBlue_compact.png?v=1659543085"
+                        alt="">
+                </div>
+                <div class="minicart-product-details col-lg-7 d-flex flex-column align-items-center text-start">
+                    <div class="minicart-product-name">
+                        WASHABLE SILK SET
+                    </div>
+                    <div class="minicart-product-colorandsize">
+                        <div class="minicart-product-color text-start">
+                            DEEP BLUE | <span class="minicart-product-size">M</span>
+                        </div>
+                    </div>
+                    <div class="minicart-product-count d-flex justify-content-around align-items-center">
+                        <button id="qty-minus" type="button" class="item-quantity-decrease">
+                            <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                        <input class="item-quantity-current" type="text" value="0">
+                        <button id="qty-plus" type="button" class="item-quantity-increase">
+                            <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.98828 2.17038e-06L5.98828 10" stroke="currentColor"></path>
+                                <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="minicart-product-price text-end col-lg-2">
+                    $278
+                </div>
+            </div>
+        </div>
+        <div class="minicart-bottom">
+            <div class="minicart-subtotal d-flex justify-content-between">
+                <div class="section-describtion">
+                    Subtotal
+                </div><span class="section-describtion">$862</span>
+            </div>
+            <div class="minicart-bottom-info">
+                SHIPPING & TAXES CALCULATED AT CHECKOUT
+            </div>
+            <div class="minicart-bottom-info">
+                OR 4 INTEREST-FREE PAYMENTS OF $159 WITH KLARNA <span><a href="" class="fw-bold minicart-product-colorandsize">learn more</a></span>
+            </div>
+            <button class="login-button register-button">
+                checkout
+            </button>
+            <div class="text-center ">
+                <a class="view-cart" href="/Front/Assets/html/cart.html">view cart</a>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div id="center-header" class=" row align-items-center m-auto center-header">
+            <div class="top-header">
+            </div>
+            <div class="ccontainer custom-navbar col-lg-5">
+                <ul class="d-flex">
+                    <li id="shop-navbar" class="navbar-item-hover">
+                        <a id="shop-navbar" class=" navbar-font" href="#">shop</a>
+                        <ul class="shop-list navbar-lists d-flex">
+                            <li>
+                                <ul class="featured-list">
+                                    <li><a href="" class="category-list-items">featured</a></li>
+                                    <li><a href="" class="subcategory-list-items">best sellers</a></li>
+                                    <li><a href="" class="subcategory-list-items">new arrivals</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="category-list">
+                                    <li><a href="" class="category-list-items">Category</a></li>
+                                    <li><a href="" class="subcategory-list-items">All</a></li>
+                                    <li><a href="" class="subcategory-list-items">Tops + Sweaters</a></li>
+                                    <li><a href="" class="subcategory-list-items">Bottoms</a></li>
+                                    <li><a href="" class="subcategory-list-items">Sleep Sets</a></li>
+                                    <li><a href="" class="subcategory-list-items">Underwear</a></li>
+                                    <li><a href="" class="subcategory-list-items">Accessories</a></li>
+                                    <li><a href="" class="subcategory-list-items">Robes + Cardigans</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="fabrics-list">
+                                    <li><a href="" class="category-list-items">Fabrics</a></li>
+                                    <li><a href="" class="subcategory-list-items">The Linen Shop</a></li>
+                                    <li><a href="" class="subcategory-list-items">Washable Silk</a></li>
+                                    <li><a href="" class="subcategory-list-items">Restore Pima</a></li>
+                                    <li><a href="" class="subcategory-list-items">Soft Modal</a></li>
+                                    <li><a href="" class="subcategory-list-items">Cool Pima</a></li>
+                                    <li><a href="" class="subcategory-list-items">Organic Pima</a></li>
+                                    <li><a href="" class="subcategory-list-items">Warm Layers</a></li>
+                                    <li><a href="" class="subcategory-list-items">Brushed Flannel</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li id="bestseller-navbar" class="navbar-item-hover">
+                        <a class="navbar-font" href="#">best sellers</a>
+                        <ul class="bestseller-list navbar-lists d-flex">
+                            <li>
+                                <ul class="bestsellers-list-s">
+                                    <li><a href="" class="category-list-items">best sellers</a></li>
+                                    <li><a href="" class="subcategory-list-items">all best sellers</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="goodfor-list">
+                                    <li><a href="" class="category-list-items">good for you</a></li>
+                                    <li><a href="" class="subcategory-list-items">Doubling your ZZZ's</a></li>
+                                    <li><a href="" class="subcategory-list-items">Working From Home</a></li>
+                                    <li><a href="" class="subcategory-list-items">Travel</a></li>
+                                    <li><a href="" class="subcategory-list-items">Self-Care</a></li>
+                                    <li><a href="" class="subcategory-list-items">Spring</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="about-navbar" class="navbar-item-hover">
+                        <a class="navbar-font" href="#">about</a>
+                        <ul class="about-list navbar-lists d-flex">
+                            <li>
+                                <ul class="about-list-s">
+                                    <li><a href="" class="category-list-items">about</a></li>
+                                    <li><a href="" class="subcategory-list-items">our story</a></li>
+                                    <li><a href="" class="subcategory-list-items">our fabrics</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="shopinperson-list">
+                                    <li><a href="" class="category-list-items">shop in-person</a></li>
+                                    <li><a href="" class="subcategory-list-items">Our Bedrooms</a></li>
+                                    <li><a href="" class="subcategory-list-items">New York City</a></li>
+                                    <li><a href="" class="subcategory-list-items">Atlanta</a></li>
+                                    <li><a href="" class="subcategory-list-items">Los Angeles</a></li>
+                                    <li><a href="" class="subcategory-list-items">San Francisco</a></li>
+                                    <li><a href="" class="subcategory-list-items">Houston</a></li>
+                                    <li><a href="" class="subcategory-list-items">Virtual Styling</a> </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="navbar-item-hover">
+                        <a class=" navbar-font" href="/Front/Assets/html/contactus.html">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="custom-logo col-lg-2 d-flex justify-content-center">
+                <a class="logo-font" href="/index.html">
+                    <svg class="svg-logo" viewBox="0 0 121 70" xmlns="http://www.w3.org/2000/svg" style="height: 70px;">
+                        <path
+                            d="M60.2018 0.731934H69.6118V69.0634H60.2608V38.0121H55.7514V69.0334H46.3856V0.776827H55.6923V30.0249H60.2018V0.731934Z"
+                            fill="currentColor"></path>
+                        <path
+                            d="M97.3623 35.0679C97.3623 27.5258 97.3254 19.9837 97.3881 12.4379C97.415 10.6915 97.6128 8.95204 97.9786 7.24521C98.6502 4.01289 100.82 2.00765 103.78 0.971366C107.623 -0.453397 111.866 -0.285383 115.588 1.43901C118.463 2.72595 119.991 5.03047 120.463 8.08696C120.676 9.44814 120.784 10.824 120.788 12.2022C120.81 27.3138 120.81 42.4266 120.788 57.5407C120.764 59.1335 120.601 60.721 120.301 62.2845C119.706 65.5804 117.669 67.7577 114.636 68.8651C110.651 70.3166 106.614 70.3241 102.676 68.5957C99.6982 67.2863 98.1335 64.8546 97.676 61.6634C97.4755 60.2183 97.3744 58.7607 97.3734 57.3013C97.3438 49.8902 97.3623 42.479 97.3623 35.0679ZM111.263 34.7424C111.263 27.2789 111.263 19.8154 111.263 12.3481C111.263 11.3424 111.16 10.3395 110.957 9.3552C110.884 8.91482 110.65 8.51871 110.301 8.24661C109.951 7.9745 109.513 7.84661 109.075 7.88868C108.64 7.86586 108.212 8.0056 107.872 8.28141C107.532 8.55723 107.303 8.94995 107.23 9.38513C107.06 10.0805 106.972 10.7938 106.968 11.5101C106.953 26.9434 106.953 42.3768 106.968 57.8101C106.975 58.5521 107.027 59.2929 107.123 60.0286C107.27 61.2183 107.938 61.8692 108.99 61.8991C109.482 61.9461 109.972 61.7939 110.354 61.4757C110.736 61.1575 110.978 60.6991 111.027 60.2007C111.192 59.1803 111.276 58.1482 111.278 57.1143C111.274 49.6732 111.263 42.2059 111.263 34.7424Z"
+                            fill="currentColor"></path>
+                        <path
+                            d="M25.3848 0.735672H39.7508C41.4138 23.5091 43.0781 46.2862 44.7436 69.0671H35.5181C35.1786 63.0813 34.8354 57.0955 34.4922 51.0686H29.8352C29.4957 57.0768 29.1525 63.0402 28.8093 69.0708H20.392C22.0501 46.2999 23.7144 23.5215 25.3848 0.735672ZM32.1047 7.38363C31.4847 19.7069 30.8758 31.8355 30.2596 44.0016H34.0199C33.3815 31.8281 32.7431 19.7031 32.1047 7.38363Z"
+                            fill="currentColor"></path>
+                        <path
+                            d="M94.9675 16.5344H85.7752C85.7752 15.0379 85.7973 13.5939 85.7752 12.1461C85.7798 11.2979 85.7156 10.4508 85.5833 9.61332C85.3877 8.52466 84.7013 8.00838 83.657 7.98594C82.5499 7.96349 81.8562 8.4461 81.6237 9.57217C81.4556 10.3767 81.3678 11.1964 81.3617 12.0189C81.3469 27.2153 81.3469 42.4129 81.3617 57.6118C81.3626 58.461 81.4454 59.308 81.6089 60.1408C81.8414 61.3043 82.6939 61.8729 83.9301 61.8205C85.1663 61.7682 85.6534 61.3043 85.8342 60.0323C85.9418 59.2151 85.9924 58.3913 85.9855 57.5669C85.9855 52.1498 85.9855 46.7177 85.9855 41.308C85.9855 41.0723 85.9597 40.8404 85.9375 40.5149H83.6865V33.3806H94.9121C94.9121 33.6387 94.9564 33.9193 94.9564 34.1999C94.9564 42.2209 94.9749 50.2455 94.9564 58.2702C94.9367 59.6755 94.8134 61.0774 94.5874 62.464C94.0818 65.7001 92.1961 67.8961 89.196 68.9399C85.1921 70.3353 81.1513 70.2792 77.2397 68.4947C74.2211 67.1142 72.6971 64.5665 72.2543 61.3529C72.0241 59.5619 71.9156 57.7569 71.9295 55.9507C71.9049 41.525 71.9049 27.098 71.9295 12.6698C71.9537 10.868 72.164 9.0737 72.5569 7.31628C73.21 4.28972 75.1769 2.23959 77.9593 1.12474C79.8232 0.359257 81.8186 -0.0227196 83.8294 0.00104445C85.8402 0.0248085 87.8263 0.453838 89.672 1.26316C92.2847 2.35931 93.7792 4.42066 94.4287 7.19657C95.152 10.2643 94.8863 13.3619 94.9675 16.5344Z"
+                            fill="currentColor"></path>
+                        <path d="M0.804321 0.750595H10.1295V61.2444H18.3549V69.0483H0.804321V0.750595Z"
+                            fill="currentColor">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <div class="custom-settings col-lg-5">
+                <ul class="d-flex align-items-center justify-content-end">
+                    <li>
+                        <a class="navbar-font" href="">
+                            <svg class="svg-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.58 19.76">
+                                <g>
+                                    <path fill-rule="evenodd" fill="currentColor"
+                                        d="M14,7.53A6.38,6.38,0,1,1,7.57,1.16h0A6.37,6.37,0,0,1,14,7.52Zm-2.22,6.1a7.48,7.48,0,1,1,.79-.63l6,6.05-.7.71Z">
+                                    </path>
+                                </g>
+                            </svg>
+                            search
+                        </a>
+                    </li>
+                    <li>
+                        <a class=" navbar-font" href="#">login</a>
+                    </li>
+                    <li>
+                        <a class=" navbar-font" href="">
+                            <svg class="svg-heart svg-search" width="20" viewBox="0 0 20 17.74"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" stroke="currentColor"
+                                    d="M11 1.68908L12.9661 7.73999L13.0783 8.08548L13.4416 8.08549H19.8039L14.6567 11.8252L14.3628 12.0387L14.475 12.3842L16.4411 18.4351L11.2939 14.6954L11 14.4819L10.7061 14.6954L5.55889 18.4351L7.52495 12.3842L7.63721 12.0387L7.34332 11.8252L2.1961 8.08549H8.55841L8.92168 8.08548L9.03394 7.73999L11 1.68908Z">
+                                </path>
+                            </svg>
+                        </a>
+
+                    </li>
+                    <li>
+                        <a class=" navbar-font minicart-button" href="">
+                            <svg class="svg-bag svg-search" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20.08 20.69">
+                                <g>
+                                    <path stroke="currentColor" fill="none"
+                                        d="M1.36,7.77a1.5,1.5,0,0,1,1.49-1.4H17.23a1.51,1.51,0,0,1,1.5,1.4l.82,12.42H.53Z">
+                                    </path>
+                                    <path stroke="currentColor" fill="none"
+                                        d="M6.65,10.08V3.89a3.4,3.4,0,0,1,6.79,0v6.19"></path>
+                                </g>
+                            </svg>
+                        </a>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="introduction">
+            <img class="intro-img"
+                src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/LAHGO_HPBanner_Desktop_June2022_2048x2048.jpg?v=1655225210"
+                alt="">
+            <div class="ccontainer">
+                <div class="intro-text">
+                    <h2 class="intro-title">Considered Restwear</h2>
+                    <p class="intro-desc col-lg-5">Our sleepwear is designed to perform, in bed and in life. Innovative
+                        fabrics and functional
+                        silhouettes keep you cool, comfortable and confident as you move about your day — and back into
+                        bed.
+                    </p>
+                </div>
+            </div>
+            <div class="button-container">
+                <a class="intro-button" href="">shop sleepwear</a>
+            </div>
+
+
+        </div>
+
+
+    </header>
+    
+    <footer>
+        <div class="ccontainer footer-wraper row justify-content-between g-0">
+            <div class="footer-left col-lg-3">
+                <ul class="d-flex footer-right-list">
+                    <li>
+                        <ul class="footer-about">
+                            <li class="category-list-items font-for-footer">About</li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">Our Story</a></li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">Locations</a></li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">Our Fabrics</a></li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">Press</a></li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">Careers</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="footer-support">
+                            <li class="category-list-items font-for-footer">Support</li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">Contact Us</a></li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">My Account</a></li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">FAQs</a></li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">Returns + Exchanges</a></li>
+                            <li><a href="" class="subcategory-list-items  font-for-footer">Fabric Care</a></li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">Ambassador Program</a></li>
+                            <li><a href="" class="subcategory-list-items font-for-footer">Give $20, Get $20</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-logo col-lg-2">
+                <svg class="svg-logo" viewBox="0 0 121 70" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M60.2018 0.731934H69.6118V69.0634H60.2608V38.0121H55.7514V69.0334H46.3856V0.776827H55.6923V30.0249H60.2018V0.731934Z"
+                        fill="currentColor"></path>
+                    <path
+                        d="M97.3623 35.0679C97.3623 27.5258 97.3254 19.9837 97.3881 12.4379C97.415 10.6915 97.6128 8.95204 97.9786 7.24521C98.6502 4.01289 100.82 2.00765 103.78 0.971366C107.623 -0.453397 111.866 -0.285383 115.588 1.43901C118.463 2.72595 119.991 5.03047 120.463 8.08696C120.676 9.44814 120.784 10.824 120.788 12.2022C120.81 27.3138 120.81 42.4266 120.788 57.5407C120.764 59.1335 120.601 60.721 120.301 62.2845C119.706 65.5804 117.669 67.7577 114.636 68.8651C110.651 70.3166 106.614 70.3241 102.676 68.5957C99.6982 67.2863 98.1335 64.8546 97.676 61.6634C97.4755 60.2183 97.3744 58.7607 97.3734 57.3013C97.3438 49.8902 97.3623 42.479 97.3623 35.0679ZM111.263 34.7424C111.263 27.2789 111.263 19.8154 111.263 12.3481C111.263 11.3424 111.16 10.3395 110.957 9.3552C110.884 8.91482 110.65 8.51871 110.301 8.24661C109.951 7.9745 109.513 7.84661 109.075 7.88868C108.64 7.86586 108.212 8.0056 107.872 8.28141C107.532 8.55723 107.303 8.94995 107.23 9.38513C107.06 10.0805 106.972 10.7938 106.968 11.5101C106.953 26.9434 106.953 42.3768 106.968 57.8101C106.975 58.5521 107.027 59.2929 107.123 60.0286C107.27 61.2183 107.938 61.8692 108.99 61.8991C109.482 61.9461 109.972 61.7939 110.354 61.4757C110.736 61.1575 110.978 60.6991 111.027 60.2007C111.192 59.1803 111.276 58.1482 111.278 57.1143C111.274 49.6732 111.263 42.2059 111.263 34.7424Z"
+                        fill="currentColor"></path>
+                    <path
+                        d="M25.3848 0.735672H39.7508C41.4138 23.5091 43.0781 46.2862 44.7436 69.0671H35.5181C35.1786 63.0813 34.8354 57.0955 34.4922 51.0686H29.8352C29.4957 57.0768 29.1525 63.0402 28.8093 69.0708H20.392C22.0501 46.2999 23.7144 23.5215 25.3848 0.735672ZM32.1047 7.38363C31.4847 19.7069 30.8758 31.8355 30.2596 44.0016H34.0199C33.3815 31.8281 32.7431 19.7031 32.1047 7.38363Z"
+                        fill="currentColor"></path>
+                    <path
+                        d="M94.9675 16.5344H85.7752C85.7752 15.0379 85.7973 13.5939 85.7752 12.1461C85.7798 11.2979 85.7156 10.4508 85.5833 9.61332C85.3877 8.52466 84.7013 8.00838 83.657 7.98594C82.5499 7.96349 81.8562 8.4461 81.6237 9.57217C81.4556 10.3767 81.3678 11.1964 81.3617 12.0189C81.3469 27.2153 81.3469 42.4129 81.3617 57.6118C81.3626 58.461 81.4454 59.308 81.6089 60.1408C81.8414 61.3043 82.6939 61.8729 83.9301 61.8205C85.1663 61.7682 85.6534 61.3043 85.8342 60.0323C85.9418 59.2151 85.9924 58.3913 85.9855 57.5669C85.9855 52.1498 85.9855 46.7177 85.9855 41.308C85.9855 41.0723 85.9597 40.8404 85.9375 40.5149H83.6865V33.3806H94.9121C94.9121 33.6387 94.9564 33.9193 94.9564 34.1999C94.9564 42.2209 94.9749 50.2455 94.9564 58.2702C94.9367 59.6755 94.8134 61.0774 94.5874 62.464C94.0818 65.7001 92.1961 67.8961 89.196 68.9399C85.1921 70.3353 81.1513 70.2792 77.2397 68.4947C74.2211 67.1142 72.6971 64.5665 72.2543 61.3529C72.0241 59.5619 71.9156 57.7569 71.9295 55.9507C71.9049 41.525 71.9049 27.098 71.9295 12.6698C71.9537 10.868 72.164 9.0737 72.5569 7.31628C73.21 4.28972 75.1769 2.23959 77.9593 1.12474C79.8232 0.359257 81.8186 -0.0227196 83.8294 0.00104445C85.8402 0.0248085 87.8263 0.453838 89.672 1.26316C92.2847 2.35931 93.7792 4.42066 94.4287 7.19657C95.152 10.2643 94.8863 13.3619 94.9675 16.5344Z"
+                        fill="currentColor"></path>
+                    <path d="M0.804321 0.750595H10.1295V61.2444H18.3549V69.0483H0.804321V0.750595Z" fill="currentColor">
+                    </path>
+                </svg>
+            </div>
+            <div class="footer-right col-lg-4">
+                <div class="footer-email">
+                    <form method="post">
+                        <h2 class="footer-email-title">Get $20 Off Your First Order</h2>
+                        <div class="email-field d-flex">
+                            <input class="email-container" id="" type="email" placeholder="Enter your email to subscribe">
+                            <button class="email-buttons" type="submit" aria-label="submit">
+                                <svg class="svg-arrow-right" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 39.5 19.64">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" stroke-width="2px"
+                                            d="M27.86,18.9,38,9.82,27.86.74"></path>
+                                        <line fill="none" stroke="currentColor" stroke-width="2px" x1="37.29" y1="9.85"
+                                            y2="9.85"></line>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <ul class="footer-socials d-flex">
+                    <li>
+                        <a href="">
+                            <svg width="11" height="20" viewBox="0 0 11 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.23371 19.9992C6.00599 19.9992 4.7911 19.9992 3.56831 19.9992C3.56831 16.9577 3.56831 13.9171 3.56831 10.8667C2.54192 10.8667 1.52343 10.8667 0.5 10.8667C0.500987 9.68198 0.500987 8.50521 0.500987 7.32151C1.52244 7.32151 2.53995 7.32151 3.56634 7.32151C3.56634 7.28781 3.56634 7.26005 3.56634 7.23229C3.56634 6.35691 3.56239 5.48053 3.56831 4.60515C3.57325 3.85269 3.69168 3.12007 3.99861 2.42809C4.51378 1.26818 5.39904 0.540512 6.60702 0.195514C7.18634 0.0299544 7.77947 -0.00970054 8.37952 -0.000778172C9.1276 0.0111183 9.87469 0.0388768 10.6208 0.105299C10.6958 0.112239 10.7698 0.122152 10.8468 0.131075C10.8468 1.19383 10.8468 2.25063 10.8468 3.31438C10.8172 3.31438 10.7915 3.31438 10.7659 3.31438C10.15 3.31438 9.53322 3.3124 8.91739 3.31537C8.66375 3.31636 8.41307 3.34313 8.16733 3.41352C7.67881 3.55429 7.38372 3.87748 7.29391 4.37614C7.25444 4.59722 7.23766 4.82424 7.2347 5.04928C7.22779 5.78191 7.23174 6.51354 7.23174 7.24617C7.23174 7.26699 7.23371 7.2888 7.23568 7.31755C8.39926 7.31755 9.55888 7.31755 10.7264 7.31755C10.7067 7.47319 10.6889 7.61893 10.6701 7.76466C10.5902 8.38922 10.5093 9.01379 10.4283 9.63836C10.379 10.024 10.3277 10.4096 10.2803 10.7953C10.2734 10.8508 10.2537 10.8647 10.1994 10.8647C9.24208 10.8627 8.28379 10.8637 7.32648 10.8637C7.29885 10.8637 7.27121 10.8637 7.2347 10.8637C7.23371 13.9122 7.23371 16.9527 7.23371 19.9992Z"
+                                    fill="#757575"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.28516 0C6.11182 0 5.84049 0.01 4.98716 0.048C4.13516 0.088 3.55516 0.222 3.04516 0.42C2.51916 0.624 2.07249 0.898 1.62782 1.34267C1.18316 1.78733 0.90849 2.23333 0.705156 2.76C0.507156 3.27 0.37249 3.85 0.333156 4.702C0.293156 5.55533 0.285156 5.82667 0.285156 8C0.285156 10.1733 0.295156 10.4447 0.333156 11.298C0.373156 12.1493 0.507156 12.73 0.705156 13.24C0.909156 13.7653 1.18316 14.2127 1.62782 14.6573C2.07249 15.1013 2.51849 15.3767 3.04516 15.58C3.55582 15.7773 4.13582 15.9127 4.98716 15.952C5.84049 15.992 6.11182 16 8.28516 16C10.4585 16 10.7298 15.99 11.5832 15.952C12.4345 15.912 13.0152 15.7773 13.5252 15.58C14.0505 15.376 14.4978 15.1013 14.9425 14.6573C15.3865 14.2127 15.6618 13.7673 15.8652 13.24C16.0625 12.73 16.1978 12.1493 16.2372 11.298C16.2772 10.4447 16.2852 10.1733 16.2852 8C16.2852 5.82667 16.2752 5.55533 16.2372 4.702C16.1972 3.85067 16.0625 3.26933 15.8652 2.76C15.6612 2.234 15.3865 1.78733 14.9425 1.34267C14.4978 0.898 14.0525 0.623333 13.5252 0.42C13.0152 0.222 12.4345 0.0873333 11.5832 0.048C10.7298 0.008 10.4585 0 8.28516 0ZM8.28516 1.44C10.4205 1.44 10.6752 1.45067 11.5185 1.48733C12.2985 1.524 12.7218 1.65333 13.0032 1.764C13.3778 1.90867 13.6432 2.082 13.9245 2.36133C14.2038 2.64133 14.3772 2.90733 14.5218 3.282C14.6312 3.56333 14.7618 3.98667 14.7972 4.76667C14.8352 5.61067 14.8438 5.864 14.8438 8C14.8438 10.136 14.8338 10.39 14.7945 11.2333C14.7538 12.0133 14.6238 12.4367 14.5138 12.718C14.3645 13.0927 14.1945 13.358 13.9145 13.6393C13.6352 13.9187 13.3652 14.092 12.9945 14.2367C12.7145 14.346 12.2845 14.4767 11.5045 14.512C10.6552 14.55 10.4052 14.5587 8.26516 14.5587C6.12449 14.5587 5.87449 14.5487 5.02582 14.5093C4.24516 14.4687 3.81516 14.3387 3.53516 14.2287C3.15582 14.0793 2.89516 13.9093 2.61582 13.6293C2.33516 13.35 2.15582 13.08 2.01582 12.7093C1.90582 12.4293 1.77649 11.9993 1.73582 11.2193C1.70582 10.3793 1.69516 10.12 1.69516 7.99C1.69516 5.85933 1.70582 5.59933 1.73582 4.74933C1.77649 3.96933 1.90582 3.54 2.01582 3.26C2.15582 2.88 2.33516 2.62 2.61582 2.33933C2.89516 2.06 3.15582 1.88 3.53516 1.74067C3.81516 1.63 4.23582 1.5 5.01582 1.46C5.86582 1.43 6.11582 1.42 8.25516 1.42L8.28516 1.44ZM8.28516 3.892C6.01516 3.892 4.17716 5.732 4.17716 8C4.17716 10.27 6.01716 12.108 8.28516 12.108C10.5552 12.108 12.3932 10.268 12.3932 8C12.3932 5.73 10.5532 3.892 8.28516 3.892ZM8.28516 10.6667C6.81182 10.6667 5.61849 9.47333 5.61849 8C5.61849 6.52667 6.81182 5.33333 8.28516 5.33333C9.75849 5.33333 10.9518 6.52667 10.9518 8C10.9518 9.47333 9.75849 10.6667 8.28516 10.6667ZM13.5158 3.73C13.5158 4.26 13.0852 4.69 12.5558 4.69C12.0258 4.69 11.5958 4.25933 11.5958 3.73C11.5958 3.20067 12.0265 2.77067 12.5558 2.77067C13.0845 2.77 13.5158 3.20067 13.5158 3.73Z"
+                                    fill="#E0E1E2"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <svg width="17" height="20" viewBox="0 0 17 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16.0811 7.65117C15.9564 8.68059 15.7963 9.70055 15.3784 10.6582C14.565 12.5198 13.3167 13.9042 11.3426 14.469C10.5569 14.6938 9.75803 14.7711 8.95303 14.544C8.24192 14.3428 7.62855 13.9918 7.1514 13.2937C6.98824 13.9224 6.83586 14.4935 6.69117 15.0662C6.39488 16.2336 6.14399 17.4216 5.47675 18.4439C5.12581 18.9819 4.72023 19.4828 4.33928 20.0003C4.28925 19.9814 4.23846 19.9624 4.18843 19.9435C4.12533 19.1523 4.05221 18.3619 3.99988 17.5707C3.90522 16.1421 4.3362 14.7948 4.63942 13.4293C4.90647 12.228 5.19815 11.0329 5.45904 9.8307C5.50291 9.62876 5.4829 9.3929 5.42826 9.19096C5.09887 7.97064 5.05347 6.78109 5.7538 5.66726C6.07242 5.16004 6.51801 4.80901 7.11522 4.73644C8.11724 4.61496 8.84913 5.22551 8.82912 6.26361C8.81604 6.93333 8.64365 7.60699 8.49127 8.26566C8.33273 8.95273 8.12879 9.63113 7.91561 10.3032C7.48771 11.6505 8.44509 12.9852 10.1544 12.6673C11.1333 12.4851 11.866 11.8927 12.3716 11.0431C13.4098 9.29745 13.7053 7.39795 13.1312 5.44481C12.5455 3.45143 11.0894 2.39913 9.11696 2.16643C7.23451 1.94477 5.56525 2.46618 4.25924 3.96259C2.77237 5.66647 2.60075 8.3122 3.85058 10.1699C3.94293 10.3079 3.96756 10.5343 3.94216 10.7071C3.88598 11.081 3.77747 11.4478 3.68819 11.8162C3.59122 12.2177 3.49272 12.2642 3.12792 12.0623C2.52456 11.7278 2.08742 11.2198 1.73957 10.6243C1.29397 9.85989 1.00921 9.03793 0.905318 8.15207C0.897622 8.08897 0.865299 8.0298 0.84375 7.96827C0.84375 7.54783 0.84375 7.12659 0.84375 6.70615C0.865299 6.61937 0.893774 6.53418 0.906088 6.44662C1.33783 3.37965 3.0171 1.38233 5.86847 0.428635C6.52879 0.207763 7.23682 0.138346 7.92331 -0.000488281C8.41046 -0.000488281 8.89839 -0.000488281 9.38555 -0.000488281C9.68723 0.0507857 9.99045 0.0902272 10.2891 0.154911C12.7687 0.688161 14.6173 2.05678 15.5854 4.50137C15.8494 5.16872 15.921 5.91574 16.0811 6.62647C16.0811 6.96725 16.0811 7.3096 16.0811 7.65117Z"
+                                    fill="#757575"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <svg width="15" height="16" viewBox="0 0 15 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.63849 0.0133333C8.51182 0 9.37849 0.00666667 10.2452 0C10.2985 1.02 10.6652 2.06 11.4118 2.78C12.1585 3.52 13.2118 3.86 14.2385 3.97333V6.66C13.2785 6.62667 12.3118 6.42667 11.4385 6.01333C11.0585 5.84 10.7052 5.62 10.3585 5.39333C10.3518 7.34 10.3652 9.28667 10.3452 11.2267C10.2918 12.16 9.98516 13.0867 9.44516 13.8533C8.57183 15.1333 7.05849 15.9667 5.50516 15.9933C4.55183 16.0467 3.59849 15.7867 2.78516 15.3067C1.43849 14.5133 0.491825 13.06 0.351825 11.5C0.338492 11.1667 0.331825 10.8333 0.345158 10.5067C0.465158 9.24 1.09183 8.02667 2.06516 7.2C3.17183 6.24 4.71849 5.78 6.16516 6.05333C6.17849 7.04 6.13849 8.02667 6.13849 9.01333C5.47849 8.8 4.70516 8.86 4.12516 9.26C3.70516 9.53333 3.38516 9.95333 3.21849 10.4267C3.07849 10.7667 3.11849 11.14 3.12516 11.5C3.28516 12.5933 4.33849 13.5133 5.45849 13.4133C6.20516 13.4067 6.91849 12.9733 7.30516 12.34C7.43182 12.12 7.57182 11.8933 7.57849 11.6333C7.64516 10.44 7.61849 9.25333 7.62516 8.06C7.63182 5.37333 7.61849 2.69333 7.63849 0.0133333Z"
+                                    fill="#E0E1E2"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <svg width="24" height="16" viewBox="0 0 24 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M22.7008 2.47058C22.5681 1.99513 22.315 1.56196 21.966 1.21292C21.6169 0.863881 21.1838 0.610785 20.7083 0.478095C18.9239 1.37076e-05 11.7421 1.35367e-05 11.7421 1.35367e-05C11.7421 1.35367e-05 4.57855 -0.00952883 2.77597 0.478095C2.30052 0.610785 1.86734 0.863881 1.51831 1.21292C1.16927 1.56196 0.916173 1.99513 0.783483 2.47058C0.44522 4.29751 0.278454 6.15206 0.285362 8.01003C0.27976 9.86099 0.44652 11.7084 0.783483 13.5285C0.916173 14.0039 1.16927 14.4371 1.51831 14.7861C1.86734 15.1352 2.30052 15.3883 2.77597 15.521C4.55851 16 11.7421 16 11.7421 16C11.7421 16 18.9048 16 20.7083 15.521C21.1838 15.3883 21.6169 15.1352 21.966 14.7861C22.315 14.4371 22.5681 14.0039 22.7008 13.5285C23.0307 11.7078 23.1905 9.86033 23.1779 8.01003C23.1918 6.15271 23.032 4.29817 22.7008 2.47058ZM9.45002 11.4368V4.5728L15.4275 8.01003L9.45002 11.4368Z"
+                                    fill="white"></path>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="/Front/Assets/slick/slick.min.js"></script>
+    <script src="/Front/script.js"></script>
+</body>
+
+</html>

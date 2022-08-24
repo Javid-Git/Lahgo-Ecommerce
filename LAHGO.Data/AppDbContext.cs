@@ -1,4 +1,5 @@
 ﻿using LAHGO.Core.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace LAHGO.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -19,7 +20,7 @@ namespace LAHGO.Data
         public DbSet<Size> Sizes{ get; set; }
 
         public DbSet<Photo> Photos { get; set; }
-        public DbSet<Setting> Settings { get; set; }
+        //public DbSet<Setting> Settings { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<ProductColorSize> ProductColorSizes { get; set; }
         public DbSet<Comment> Coments { get; set; }

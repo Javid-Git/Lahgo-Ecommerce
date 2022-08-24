@@ -1,0 +1,172 @@
+.intro-about {
+    position: relative;
+
+}
+
+#section1-about{
+    .ccontainer{
+        .section-title.text-center{
+            padding: 5rem 0 7rem 0;
+        }
+    }
+}
+.intro-img-about {
+    height: 70vh !important;
+}
+
+.intro-text-about {
+    position: absolute;
+    left: 30%;
+    top: 40%;
+}
+
+.intro-text-about {
+    h2 {
+        color: white;
+    }
+
+    p {
+        color: white;
+    }
+}
+
+.about-item {
+    padding: 0 6rem;
+}
+
+
+#section2-about {
+    padding: 4rem 0;
+    position: relative;
+
+    img {
+        width: 100%;
+    }
+}
+
+.about2-text {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+
+    h1 {
+        font-family: 'Regulars';
+        font-size: 42px;
+        line-height: 46px;
+        color: white;
+
+
+    }
+}
+
+.about3-items {
+    li {
+        padding-bottom: 4rem;
+    }
+}
+
+
+#section4-about{
+    padding: 0 3rem 5rem 0;
+}
+.navbar-lists-about{
+    width: 100%;
+    background-color: white;
+    border-top: 1px solid rgb(215, 215, 215);
+    position: absolute;
+    top: 76% !important;
+    left: 0;
+    gap: 2rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+    padding: 2rem 0 3rem 6rem;
+}
+.about4-item-bottom {
+    font-family: 'Regulars';
+    font-size: 18px;
+    line-height: 25px;
+    color: #323232;
+    padding: 1rem 0;
+}
+.about4-item-top {
+    img{
+        width: 100% !important;
+    }
+}
+
+.about-item-right{
+    img{
+        width: 100%;
+    }
+}
+
+
+
+//
+.about-item-right-mobile{
+    display: none;
+}
+
+@media (max-width: 576px) {
+    .about-item{
+        padding: 0;
+    }
+    .about2-text {
+        position: absolute;
+        top: 40%;
+        left: 20%;
+    
+        h1 {
+            font-family: 'Regulars';
+            font-size: 25px;
+            line-height: 30px;
+            color: white;
+    
+    
+        }
+    }
+    .slick-list{
+        margin: 0 0 !important;
+    }
+    .intro-img-about {
+        height: 70vh !important;
+        display: block !important;
+    }
+    .intro-text-about {
+        position: unset;
+        h2 {
+            color: #323232;
+        }
+    
+        p {
+            color: #323232;
+        }
+        
+    }
+    #section1-about{
+        .ccontainer{
+            .section-title.text-center{
+                padding: 2rem 0 3rem 0;
+            }
+        }
+    }
+    .about-item-right{
+        display: none;
+        
+    }
+
+    .about-item-right-mobile{
+        display: block;
+        img{
+            width: 100%;
+        }
+    }
+    #section2-about{
+        a{
+            img{
+                height: 50vh;
+            }
+        }
+    }
+}

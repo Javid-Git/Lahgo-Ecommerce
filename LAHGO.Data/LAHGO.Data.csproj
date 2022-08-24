@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220822203539_ManyManyTables.cs" />
+    <Compile Remove="Migrations\20220822203539_ManyManyTables.Designer.cs" />
+    <Compile Remove="Migrations\20220822205857_ManyManyTables.cs" />
+    <Compile Remove="Migrations\20220822205857_ManyManyTables.Designer.cs" />
+    <Compile Remove="Migrations\20220822210222_ProductColorSizeTable.cs" />
+    <Compile Remove="Migrations\20220822210222_ProductColorSizeTable.Designer.cs" />
+    <Compile Remove="Migrations\20220823095346_ProductColorSizeTable.cs" />
+    <Compile Remove="Migrations\20220823095346_ProductColorSizeTable.Designer.cs" />
+    <Compile Remove="Migrations\20220823200350_ProductColorSizeTable.cs" />
+    <Compile Remove="Migrations\20220823200350_ProductColorSizeTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.28">
       <PrivateAssets>all</PrivateAssets>

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LAHGO.Core.Entities
 {
-    public class AppUser
+    public class AppUser : IdentityUser
     {
         public string FullName { get; set; }
         public bool IsAdmin { get; set; }

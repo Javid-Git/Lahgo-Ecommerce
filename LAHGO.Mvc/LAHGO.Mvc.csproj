@@ -15,4 +15,9 @@
     <ProjectReference Include="..\LAHGO.Data\LAHGO.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Assets\img\" />
+    <Folder Include="wwwroot\Assets\js\" />
+  </ItemGroup>
+
 </Project>

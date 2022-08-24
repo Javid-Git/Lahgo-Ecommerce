@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32510.428
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LAHGO.Mvc", "LAHGO.Mvc\LAHGO.Mvc.csproj", "{ADC6ACE9-A730-4AC0-BB50-72CE2A5AE4FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LAHGO.Mvc", "LAHGO.Mvc\LAHGO.Mvc.csproj", "{ADC6ACE9-A730-4AC0-BB50-72CE2A5AE4FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LAHGO.Core", "LAHGO.Core\LAHGO.Core.csproj", "{65E508BE-32E2-48F4-95F8-DE36EFE1F5FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LAHGO.Core", "LAHGO.Core\LAHGO.Core.csproj", "{65E508BE-32E2-48F4-95F8-DE36EFE1F5FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LAHGO.Data", "LAHGO.Data\LAHGO.Data.csproj", "{020793BD-DA3C-446B-8E83-30DE2DA56B57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LAHGO.Data", "LAHGO.Data\LAHGO.Data.csproj", "{020793BD-DA3C-446B-8E83-30DE2DA56B57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LAHGO.Service", "LAHGO.Service\LAHGO.Service.csproj", "{DAD8DFF6-680E-4FE1-90FC-6DB74502AA4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{020793BD-DA3C-446B-8E83-30DE2DA56B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{020793BD-DA3C-446B-8E83-30DE2DA56B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{020793BD-DA3C-446B-8E83-30DE2DA56B57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD8DFF6-680E-4FE1-90FC-6DB74502AA4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD8DFF6-680E-4FE1-90FC-6DB74502AA4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD8DFF6-680E-4FE1-90FC-6DB74502AA4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD8DFF6-680E-4FE1-90FC-6DB74502AA4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LAHGO.Data\LAHGO.Data.csproj" />
+    <ProjectReference Include="..\LAHGO.Service\LAHGO.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

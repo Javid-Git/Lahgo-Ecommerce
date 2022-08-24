@@ -1,5 +1,7 @@
+using FluentValidation.AspNetCore;
 using LAHGO.Core.Entities;
 using LAHGO.Data;
+using LAHGO.Service.ViewModels.CategoryVMs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -26,6 +28,7 @@ namespace LAHGO.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers().AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<CategoryVMValidator>());
             services.AddRazorPages();
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));

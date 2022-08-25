@@ -13,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using LAHGO.Service.Mappings;
 
 namespace LAHGO.Mvc
 {
@@ -26,9 +28,14 @@ namespace LAHGO.Mvc
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<CategoryVMValidator>());
+            services.AddAutoMapper(options =>
+            {
+                options.AddProfile(new MappingProfile());
+            });
+            services.AddControllers().AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<CategoryPostVMValidator>());
             services.AddRazorPages();
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));

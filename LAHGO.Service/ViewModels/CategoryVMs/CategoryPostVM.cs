@@ -6,15 +6,15 @@ using System.Text;
 
 namespace LAHGO.Service.ViewModels.CategoryVMs
 {
-    public class CategoryVM
+    public class CategoryPostVM
     {
         public string Name { get; set; }
         public IFormFile File { get; set; }
     }
 
-    public class CategoryVMValidator : AbstractValidator<CategoryVM>
+    public class CategoryPostVMValidator : AbstractValidator<CategoryPostVM>
     {
-        public CategoryVMValidator()
+        public CategoryPostVMValidator()
         {
             RuleFor(r => r.Name)
                 .NotEmpty().WithMessage("Name is required!")

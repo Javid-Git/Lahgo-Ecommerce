@@ -6,41 +6,37 @@ using System.Text;
 
 namespace LAHGO.Service.ViewModels.CategoryVMs
 {
-    public class CategoryPutVM
+    public class CategoryCreateVM
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-        public IFormFile File { get; set; }
+        public IFormFile Image { get; set; }
     }
 
-    public class CategoryPutVMValidator : AbstractValidator<CategoryPutVM>
+    public class CategoryPostVMValidator : AbstractValidator<CategoryCreateVM>
     {
-        public CategoryPutVMValidator()
+        public CategoryPostVMValidator()
         {
-            RuleFor(r => r.Id).NotEmpty().WithMessage("Id Is Required");
-
             RuleFor(r => r.Name)
-                .NotEmpty().WithMessage("Name Is Required")
-                .MaximumLength(25).WithMessage("Name Must Be Maximum Length 25")
-                .MinimumLength(5).WithMessage("Name Must Be Minimum Length 25");
+                .NotEmpty().WithMessage("Name is required!")
+                .MaximumLength(25).WithMessage("Maximum length is 25")
+                .MinimumLength(5).WithMessage("Name is required!");
 
             RuleFor(r => r).Custom((r, context) =>
             {
-                if (r.File == null)
+                if (r.Image == null)
                 {
                     context.AddFailure("File", "File Is Reuired");
                 }
 
-                if ((r.File.Length / 1024) > 30)
+                if ((r.Image.Length / 1024) > 30)
                 {
                     context.AddFailure("File", "File Size Must Be Maximum 30kb");
                 }
 
-                if (r.File.ContentType != "image/jpeg")
+                if (r.Image.ContentType != "image/jpeg")
                 {
                     context.AddFailure("File", "File Type Must Be .jpg or .jpeg");
                 }
-                
             });
         }
     }

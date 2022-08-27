@@ -9,6 +9,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Manage\ViewModels\" />
     <Folder Include="wwwroot\Assets\img\" />
     <Folder Include="wwwroot\Assets\js\" />
   </ItemGroup>

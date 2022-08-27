@@ -15,6 +15,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using LAHGO.Service.Mappings;
+using LAHGO.Service.Interfaces;
+using LAHGO.Service.Implementations;
+using LAHGO.Core.Repositories;
+using LAHGO.Data.Repositories;
 
 namespace LAHGO.Mvc
 {
@@ -53,6 +57,11 @@ namespace LAHGO.Mvc
                 options.Lockout.AllowedForNewUsers = true;
                 options.Lockout.MaxFailedAccessAttempts = 3;
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            services.AddScoped<ICategoryService, CategoryService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +86,9 @@ namespace LAHGO.Mvc
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("areas", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=home}/{action=index}/{id?}");
+
             });
         }
     }

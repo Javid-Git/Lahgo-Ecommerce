@@ -1,0 +1,48 @@
+﻿@model PageNatedList<CategoryListVM>
+
+<table class="table align-items-center mb-0">
+    <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Picture</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>
+                    <div class="d-flex px-2 py-1">
+                        <div>
+                            <img src="@category.Image" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm"></h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <p class="text-xs font-weight-bold mb-0">@category.Name</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm bg-gradient-success">@(category.IsDeleted == false ? "Active" : "Deleted")</span>
+                </td>
+                <td class="align-middle text-center">
+                    <a href="javascript:;" class="text-white font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
+                        Delete
+                    </a>
+                    <a href="javascript:;" class="text-white font-weight-bold text-xs btn btn-primary" data-toggle="tooltip" data-original-title="Edit user">
+                        Restore
+                    </a>
+                    <a href="javascript:;" class="text-white font-weight-bold text-xs btn btn-secondary" data-toggle="tooltip" data-original-title="Edit user">
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

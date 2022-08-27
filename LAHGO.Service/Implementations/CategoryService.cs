@@ -6,6 +6,7 @@ using LAHGO.Service.Interfaces;
 using LAHGO.Service.ViewModels.CategoryVMs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static LAHGO.Service.Exceptions.ItemNotFoundException;
@@ -35,11 +36,24 @@ namespace LAHGO.Service.Implementations
             await _categoryRepository.CommitAsync();
         }
 
-        public async Task<List<CategoryListVM>> GetAllAysnc()
+        public IQueryable<CategoryListVM> GetAllAysnc(int? status)
         {
-            List<CategoryListVM> categoryListVMs = _mapper.Map<List<CategoryListVM>>(await _categoryRepository.GetAllAsync(c => !c.IsDeleted));
+            List<CategoryListVM> categoryListVMs = _mapper.Map<List<CategoryListVM>>( _categoryRepository.GetAllAsync(c => !c.IsDeleted).Result);
 
-            return categoryListVMs;
+            IQueryable<CategoryListVM> query = categoryListVMs.AsQueryable();
+
+            if (status != null && status > 0)
+            {
+                if (status == 1)
+                {
+                    query = query.Where(c => c.IsDeleted);
+                }
+                else if (status == 2)
+                {
+                    query = query.Where(b => !b.IsDeleted);
+                }
+            }
+            return query;
         }
 
         public async Task<CategoryGetVM> GetById(int id)
@@ -54,19 +68,18 @@ namespace LAHGO.Service.Implementations
             return categoryGetVM;
         }
 
-        public async Task PostAsync(CategoryPostVM categoryPostVM)
+        public async Task CreateAsync(CategoryCreateVM categoryCreateVM)
         {
-            if (await _categoryRepository.IsExistAsync(c => !c.IsDeleted && c.Name.ToLower() == categoryPostVM.Name.Trim().ToLower()))
-                throw new AlreadeExistException($"Category {categoryPostVM.Name} already Exists");
+            if (await _categoryRepository.IsExistAsync(c => !c.IsDeleted && c.Name.ToLower() == categoryCreateVM.Name.Trim().ToLower()))
+                throw new AlreadeExistException($"Category {categoryCreateVM.Name} already Exists");
 
-            Category category = _mapper.Map<Category>(categoryPostVM);
-            category.Image = "Test.jpg";
+            Category category = _mapper.Map<Category>(categoryCreateVM);
 
             await _categoryRepository.AddAsync(category);
             await _categoryRepository.CommitAsync();
         }
 
-        public async Task PutAsync(int id, CategoryPutVM categoryPutVM)
+        public async Task UpdateAsync(int id, CategoryUpdateVM categoryPutVM)
         {
             Category category = await _categoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 

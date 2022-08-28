@@ -19,6 +19,7 @@ using LAHGO.Service.Interfaces;
 using LAHGO.Service.Implementations;
 using LAHGO.Core.Repositories;
 using LAHGO.Data.Repositories;
+using Newtonsoft.Json;
 
 namespace LAHGO.Mvc
 {
@@ -39,7 +40,9 @@ namespace LAHGO.Mvc
             {
                 options.AddProfile(new MappingProfile());
             });
-            services.AddControllers().AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<CategoryPostVMValidator>());
+            services.AddControllers()
+                .AddNewtonsoftJson(options => {options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;})
+                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<CategoryCreateVMVMValidator>());
             services.AddRazorPages();
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));

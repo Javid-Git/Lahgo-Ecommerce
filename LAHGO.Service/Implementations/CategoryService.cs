@@ -2,13 +2,16 @@
 using LAHGO.Core.Entities;
 using LAHGO.Core.Repositories;
 using LAHGO.Service.Exceptions;
+using LAHGO.Service.Extensions;
 using LAHGO.Service.Interfaces;
 using LAHGO.Service.ViewModels.CategoryVMs;
+using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using static LAHGO.Service.Exceptions.ItemNotFoundException;
 
 namespace LAHGO.Service.Implementations
@@ -17,10 +20,12 @@ namespace LAHGO.Service.Implementations
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
-        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
+        private readonly IWebHostEnvironment _env;
+        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper, IWebHostEnvironment env)
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
+            _env = env;
         }
 
         public async Task DeleteAsync(int id)
@@ -38,7 +43,7 @@ namespace LAHGO.Service.Implementations
 
         public IQueryable<CategoryListVM> GetAllAysnc(int? status)
         {
-            List<CategoryListVM> categoryListVMs = _mapper.Map<List<CategoryListVM>>( _categoryRepository.GetAllAsync(c => !c.IsDeleted).Result);
+            List<CategoryListVM> categoryListVMs = _mapper.Map<List<CategoryListVM>>( _categoryRepository.GetAllAsync(r=>r.IsDeleted || !r.IsDeleted).Result);
 
             IQueryable<CategoryListVM> query = categoryListVMs.AsQueryable();
 
@@ -70,10 +75,11 @@ namespace LAHGO.Service.Implementations
 
         public async Task CreateAsync(CategoryCreateVM categoryCreateVM)
         {
-            if (await _categoryRepository.IsExistAsync(c => !c.IsDeleted && c.Name.ToLower() == categoryCreateVM.Name.Trim().ToLower()))
-                throw new AlreadeExistException($"Category {categoryCreateVM.Name} already Exists");
-
+            
             Category category = _mapper.Map<Category>(categoryCreateVM);
+
+            category.Name = categoryCreateVM.Name;
+            category.Image = await categoryCreateVM.FormImage.CreateAsync(_env, "Manage", "assets", "img", "categories");
 
             await _categoryRepository.AddAsync(category);
             await _categoryRepository.CommitAsync();
@@ -90,7 +96,6 @@ namespace LAHGO.Service.Implementations
                 throw new AlreadeExistException($"Category {categoryPutVM.Name} already Exists");
 
             category.Name = categoryPutVM.Name;
-            category.Image = "category-1.jpg";
             category.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
             await _categoryRepository.CommitAsync();

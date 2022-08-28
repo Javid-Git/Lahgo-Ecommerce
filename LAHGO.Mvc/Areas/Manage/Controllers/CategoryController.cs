@@ -27,18 +27,24 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             ViewBag.Status = status;
             return View(PageNatedList<CategoryListVM>.Create(page, query, 5));
         }
-        [HttpPost]
-        public async Task<IActionResult> Create(CategoryCreateVM categoryPostVM)
-        {
-            await _categoryService.CreateAsync(categoryPostVM);
-            return RedirectToAction("Index");
-        }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create(CategoryCreateVM categoryPostVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", $"{categoryPostVM.Name}");
+                return View();  
+            }
+            await _categoryService.CreateAsync(categoryPostVM);
+            return RedirectToAction("Index");
+        }
+        
         [HttpGet]
         public IActionResult Get(int? status)
         {

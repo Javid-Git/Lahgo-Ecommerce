@@ -11,8 +11,7 @@ namespace LAHGO.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.Property(b => b.Name).IsRequired(true).HasMaxLength(50);
-            builder.Property(b => b.Image).IsRequired(true).HasMaxLength(255);
+            
         }
     }
 }

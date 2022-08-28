@@ -25,8 +25,9 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
-                            <div class="row d-flex justify-content-center">
+                            <div class="row d-flex justify-content-center g-0">
                                 <div class="col-lg-8">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <form method="post" enctype="multipart/form-data">
                                         <div class="mb-3">
                                             <label asp-for="Name" class="form-label"></label>
@@ -34,9 +35,9 @@
                                             <span class="text-danger" asp-validation-for="Name"></span>
                                         </div>
                                         <div class="mb-3">
-                                            <label asp-for="Image" class="form-label ">Main Image</label>
-                                            <input asp-for="Image" class="form-control ">
-                                            <span class="text-danger" asp-validation-for="Image"></span>
+                                            <label asp-for="FormImage" class="form-label ">Main Image</label>
+                                            <input asp-for="FormImage" class="form-control ">
+                                            <span class="text-danger" asp-validation-for="FormImage"></span>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>

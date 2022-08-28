@@ -16,7 +16,7 @@
                 <td>
                     <div class="d-flex px-2 py-1">
                         <div>
-                            <img src="@category.Image" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                            <img src="~/Manage/assets/img/categories/@category.Image" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm"></h6>
@@ -27,7 +27,7 @@
                     <p class="text-xs font-weight-bold mb-0">@category.Name</p>
                 </td>
                 <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">@(category.IsDeleted == false ? "Active" : "Deleted")</span>
+                    <span class="badge badge-sm @(category.IsDeleted == false ? " bg-gradient-success" : " bg-gradient-secondary")">@(category.IsDeleted == false ? "Active" : "Deleted")</span>
                 </td>
                 <td class="align-middle text-center">
                     <a href="javascript:;" class="text-white font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">

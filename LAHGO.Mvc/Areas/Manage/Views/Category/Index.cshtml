@@ -13,6 +13,47 @@
             </nav>
             <a asp-area="manage" asp-controller="category" asp-action="create" class="btn btn-info">Create</a>
         </div>
+        <div class="col-lg-6">
+            <form>
+                <div class="row align-items-start">
+                    <div class="col">
+                        <label class="form-label">Brand Status</label>
+                        <select name="status" class="form-select" aria-label="Default select example">
+                            @if (ViewBag.Status == 0)
+                            {
+                                <option selected value="0">All</option>
+                            }
+                            else
+                            {
+                                <option value="0">All</option>
+                            }
+
+                            @if (ViewBag.Status == 1)
+                            {
+                                <option selected value="1">Deleted</option>
+                            }
+                            else
+                            {
+                                <option value="1">Deleted</option>
+                            }
+
+                            @if (ViewBag.Status == 2)
+                            {
+                                <option selected value="2">Active</option>
+                            }
+                            else
+                            {
+                                <option value="2">Active</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" type="submit">Filter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
@@ -31,6 +72,28 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row justify-content-center">
+            <ul class="pagination ">
+                @if (Model.HasPrev)
+                {
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="category" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="1">@("<<")</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="category" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page-1)">@("<")</a></li>
+
+                }
+
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="category" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@i">@i</a></li>
+
+                }
+                @if (Model.HasNext)
+                {
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="category" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page+1)">@(">")</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="category" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@Model.PageCount">@(">>")</a></li>
+                }
+
+            </ul>
         </div>
         <footer class="footer py-4  ">
             <div class="container-fluid">

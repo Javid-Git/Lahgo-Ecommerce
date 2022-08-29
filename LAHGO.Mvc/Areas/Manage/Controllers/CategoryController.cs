@@ -34,17 +34,35 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryCreateVM categoryPostVM)
+        public async Task<IActionResult> Create(CategoryCreateVM categoryCreateVM)
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", $"{categoryPostVM.Name}");
+                ModelState.AddModelError("", $"{categoryCreateVM.Name}{categoryCreateVM.FormImage}");
                 return View();  
             }
-            await _categoryService.CreateAsync(categoryPostVM);
+            await _categoryService.CreateAsync(categoryCreateVM);
             return RedirectToAction("Index");
         }
-        
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            CategoryGetVM category = await _categoryService.GetById(id);
+            return View(category);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(int id, CategoryUpdateVM categoryUpdateVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", $"{categoryUpdateVM.Name}{categoryUpdateVM.Id}{categoryUpdateVM.FormImage}");
+                return View();
+            }
+            await _categoryService.UpdateAsync(id, categoryUpdateVM);
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public IActionResult Get(int? status)
         {
@@ -56,13 +74,6 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
         {
             CategoryGetVM categoryGetVM = await _categoryService.GetById(id);
             return View(categoryGetVM);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Update(int id, CategoryUpdateVM categoryUpdateVm)
-        {
-            await _categoryService.UpdateAsync(id, categoryUpdateVm);
-            return View();
         }
     }
 }

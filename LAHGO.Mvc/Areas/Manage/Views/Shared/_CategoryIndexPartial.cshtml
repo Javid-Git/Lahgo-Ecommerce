@@ -30,13 +30,13 @@
                     <span class="badge badge-sm @(category.IsDeleted == false ? " bg-gradient-success" : " bg-gradient-secondary")">@(category.IsDeleted == false ? "Active" : "Deleted")</span>
                 </td>
                 <td class="align-middle text-center">
-                    <a href="javascript:;" class="text-white font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
+                    <a asp-area="manage" asp-controller="category" asp-action="delete" asp-route-id="@category.Id" class="text-white font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
                         Delete
                     </a>
-                    <a href="javascript:;" class="text-white font-weight-bold text-xs btn btn-primary" data-toggle="tooltip" data-original-title="Edit user">
+                    <a asp-area="manage" asp-controller="category" asp-action="restore" asp-route-id="@category.Id" class="text-white font-weight-bold text-xs btn btn-primary" data-toggle="tooltip" data-original-title="Edit user">
                         Restore
                     </a>
-                    <a href="javascript:;" class="text-white font-weight-bold text-xs btn btn-secondary" data-toggle="tooltip" data-original-title="Edit user">
+                    <a asp-area="manage" asp-controller="category" asp-action="update" asp-route-id="@category.Id" class="text-white font-weight-bold text-xs btn btn-secondary" data-toggle="tooltip" data-original-title="Edit user">
                         Edit
                     </a>
                 </td>

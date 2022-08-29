@@ -10,7 +10,7 @@ namespace LAHGO.Service.ViewModels.CategoryVMs
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IFormFile File { get; set; }
+        public IFormFile FormImage { get; set; }
     }
 
     public class CategoryPutVMValidator : AbstractValidator<CategoryUpdateVM>
@@ -19,28 +19,48 @@ namespace LAHGO.Service.ViewModels.CategoryVMs
         {
             RuleFor(r => r.Id).NotEmpty().WithMessage("Id Is Required");
 
-            RuleFor(r => r.Name)
-                .NotEmpty().WithMessage("Name Is Required")
-                .MaximumLength(25).WithMessage("Name Must Be Maximum Length 25")
-                .MinimumLength(5).WithMessage("Name Must Be Minimum Length 25");
+            //RuleFor(r => r.Name)
+            //    .NotEmpty().WithMessage("Name Is Required")
+            //    .MaximumLength(25).WithMessage("Name Must Be Maximum Length 25")
+            //    .MinimumLength(5).WithMessage("Name Must Be Minimum Length 25");
+
 
             RuleFor(r => r).Custom((r, context) =>
             {
-                if (r.File == null)
+                if (r.Name == null)
                 {
-                    context.AddFailure("File", "File Is Reuired");
+                    context.AddFailure("", "Name is required!");
                 }
+                else
+                {
+                    if (r.Name.Length > 25)
+                    {
+                        context.AddFailure("", "Maximum length of name is 25!");
+                    }
+                    if (r.Name.Length < 5)
+                    {
+                        context.AddFailure("", "Minimum length of name is 5!");
+                    }
+                }
+            });
+            RuleFor(r => r).Custom((r, context) =>
+            {
+                if (r.FormImage == null)
+                {
+                    context.AddFailure("", "File is required!");
+                }
+                else
+                {
+                    if ((r.FormImage.Length / 1024) > 150)
+                    {
+                        context.AddFailure("", "File size must be maximum 150kb");
+                    }
 
-                if ((r.File.Length / 1024) > 30)
-                {
-                    context.AddFailure("File", "File Size Must Be Maximum 30kb");
+                    if (r.FormImage.ContentType != "image/jpeg")
+                    {
+                        context.AddFailure("", "File type must be .jpg or .jpeg");
+                    }
                 }
-
-                if (r.File.ContentType != "image/jpeg")
-                {
-                    context.AddFailure("File", "File Type Must Be .jpg or .jpeg");
-                }
-                
             });
         }
     }

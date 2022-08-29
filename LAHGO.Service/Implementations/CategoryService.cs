@@ -3,6 +3,7 @@ using LAHGO.Core.Entities;
 using LAHGO.Core.Repositories;
 using LAHGO.Service.Exceptions;
 using LAHGO.Service.Extensions;
+using LAHGO.Service.Helpers;
 using LAHGO.Service.Interfaces;
 using LAHGO.Service.ViewModels.CategoryVMs;
 using Microsoft.AspNetCore.Hosting;
@@ -63,7 +64,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task<CategoryGetVM> GetById(int id)
         {
-            Category category = await _categoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id, "Parent", "Children");
+            Category category = await _categoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
             if (category == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -85,17 +86,21 @@ namespace LAHGO.Service.Implementations
             await _categoryRepository.CommitAsync();
         }
 
-        public async Task UpdateAsync(int id, CategoryUpdateVM categoryPutVM)
+        public async Task UpdateAsync(int id, CategoryUpdateVM categoryUpdateVM)
         {
-            Category category = await _categoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
+            Category category = await _categoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id || c.IsDeleted);
 
             if (category == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
 
-            if (await _categoryRepository.IsExistAsync(c => !c.IsDeleted && c.Name.ToLower() == categoryPutVM.Name.Trim().ToLower()))
-                throw new AlreadeExistException($"Category {categoryPutVM.Name} already Exists");
+            if (await _categoryRepository.IsExistAsync(c => !c.IsDeleted && c.Name.ToLower() == categoryUpdateVM.Name.Trim().ToLower()))
+                throw new AlreadeExistException($"Category {categoryUpdateVM.Name} already Exists");
 
-            category.Name = categoryPutVM.Name;
+            category.Name = categoryUpdateVM.Name;
+            FileHelper.DeleteFile(_env, "Manage", "assets", "img", "categories");
+
+            category.Image = await categoryUpdateVM.FormImage.CreateAsync(_env, "Manage", "assets", "img", "categories");
+
             category.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
             await _categoryRepository.CommitAsync();

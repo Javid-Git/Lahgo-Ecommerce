@@ -1,0 +1,43 @@
+﻿@model PageNatedList<SizeListVM>
+
+<table class="table align-items-center mb-0">
+    <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Size</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var size in Model)
+        {
+            <tr>
+                <td>
+                    <p class="text-xs font-weight-bold mb-0">@size.Name</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm @(size.IsDeleted == false ? " bg-gradient-success" : " bg-gradient-secondary")">@(size.IsDeleted == false ? "Active" : "Deleted")</span>
+                </td>
+                <td class="align-middle text-center">
+                    @if (size.IsDeleted)
+                    {
+                        <a asp-area="manage" asp-controller="size" asp-action="restore" asp-route-id="@size.Id" class="text-white font-weight-bold text-xs btn btn-primary" data-toggle="tooltip" data-original-title="Edit user">
+                            Restore
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="manage" asp-controller="size" asp-action="delete" asp-route-id="@size.Id" class="text-white font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
+                            Delete
+                        </a>
+                    }
+                    <a asp-area="manage" asp-controller="size" asp-action="update" asp-route-id="@size.Id" class="text-white font-weight-bold text-xs btn btn-secondary" data-toggle="tooltip" data-original-title="Edit user">
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

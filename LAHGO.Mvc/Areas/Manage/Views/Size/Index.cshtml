@@ -1,4 +1,4 @@
-﻿@model PageNatedList<ColorListVM>
+﻿@model PageNatedList<SizeListVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb">
                 <h6 class="font-weight-bolder mb-0">Color</h6>
             </nav>
-            <a asp-area="manage" asp-controller="color" asp-action="create" class="btn btn-info">Create</a>
+            <a asp-area="manage" asp-controller="size" asp-action="create" class="btn btn-info">Create</a>
         </div>
         <div class="col-lg-6">
             <form>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
-                            @await Html.PartialAsync("_ColorIndexPartial", Model)
+                            @await Html.PartialAsync("_SizeIndexPartial", Model)
                         </div>
                     </div>
                 </div>
@@ -77,20 +77,20 @@
             <ul class="pagination ">
                 @if (Model.HasPrev)
                 {
-                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="color" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="1">@("<<")</a></li>
-                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="color" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page-1)">@("<")</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="size" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="1">@("<<")</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="size" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page-1)">@("<")</a></li>
 
                 }
 
                 @for (int i = 1; i <= Model.PageCount; i++)
                 {
-                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="color" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@i">@i</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="size" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@i">@i</a></li>
 
                 }
                 @if (Model.HasNext)
                 {
-                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="color" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page+1)">@(">")</a></li>
-                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="color" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@Model.PageCount">@(">>")</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="size" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page+1)">@(">")</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="size" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@Model.PageCount">@(">>")</a></li>
                 }
 
             </ul>

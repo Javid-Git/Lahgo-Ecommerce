@@ -6,9 +6,9 @@ using System.Text;
 
 namespace LAHGO.Data.Repositories
 {
-    public class ProductRepository : Repository<Product>, IProductRepository
+    public class SizeRepository : Repository<Size>, ISizeRepository
     {
-        public ProductRepository(AppDbContext context) : base(context)
+        public SizeRepository(AppDbContext context) : base(context)
         {
 
         }

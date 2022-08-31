@@ -72,7 +72,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task<ColorGetVM> GetById(int id)
         {
-            Color color = await _colorRepository.GetAsync(c => !c.IsDeleted || c.IsDeleted && c.Id == id);
+            Color color = await _colorRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
 
             if (color == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");

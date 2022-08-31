@@ -25,7 +25,7 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
-                            <div class="row d-flex justify-content-center">
+                            <div class="row d-flex justify-content-center g-0">
                                 <div class="col-lg-8">
                                     <form method="post" enctype="multipart/form-data">
                                         <div class="mb-3">
@@ -66,6 +66,7 @@
                                         <div class="form-group parentfield">
                                             <label asp-for="Category">Category</label>
                                             <select asp-for="Category" class="form-control" asp-items="new SelectList(ViewBag.Categories, nameof(CategoryCreateVM.Id), nameof(CategoryCreateVM.Name))">
+                                                <option value="" disabled selected>- - Select - -</option>
                                             </select>
                                             <span class="text-danger" asp-validation-for="Category"></span>
                                         </div>
@@ -74,13 +75,15 @@
                                                 <div class="form-group col-lg-4">
                                                     <label>Color</label>
                                                     <select name="Color" class="form-control" asp-items="new SelectList(ViewBag.Colors, nameof(ColorCreateVM.Id),nameof(ColorCreateVM.Name))">
+                                                        <option value="" disabled selected>- - Select - -</option>
                                                     </select>
                                                 </div>
-                                                @*<div class="form-group  col-lg-4">
+                                                <div class="form-group  col-lg-4">
                                                     <label>Size</label>
-                                                    <select name="Color" class="form-control" asp-items="new SelectList(ViewBag.Sizes, nameof(Size.Id),nameof(Size.Number))">
+                                                    <select name="Color" class="form-control" asp-items="new SelectList(ViewBag.Sizes, nameof(SizeCreateVM.Id),nameof(SizeCreateVM.Name))">
+                                                        <option value="" disabled selected>- - Select - -</option>
                                                     </select>
-                                                </div>*@
+                                                </div>
                                                 <div class="form-group col-lg-4">
                                                     <label>Count</label>
                                                     <input name="Counts" class="form-control" placeholder="Count">

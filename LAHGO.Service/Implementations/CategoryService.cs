@@ -76,7 +76,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task<CategoryGetVM> GetById(int id)
         {
-            Category category = await _categoryRepository.GetAsync(c => !c.IsDeleted || c.IsDeleted && c.Id == id);
+            Category category = await _categoryRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
 
             if (category == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");

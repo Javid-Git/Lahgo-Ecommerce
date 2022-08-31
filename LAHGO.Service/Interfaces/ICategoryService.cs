@@ -14,5 +14,6 @@ namespace LAHGO.Service.Interfaces
         Task<CategoryGetVM> GetById(int id);
         Task UpdateAsync(int id, CategoryUpdateVM categoryPutVM);
         Task DeleteAsync(int id);
+        Task RestoreAsync(int id);
     }
 }

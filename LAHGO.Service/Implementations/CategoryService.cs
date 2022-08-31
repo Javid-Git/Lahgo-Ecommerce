@@ -41,10 +41,22 @@ namespace LAHGO.Service.Implementations
 
             await _categoryRepository.CommitAsync();
         }
+        public async Task RestoreAsync(int id)
+        {
+            Category category = await _categoryRepository.GetAsync(c => c.IsDeleted && c.Id == id);
+
+            if (category == null)
+                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+
+            category.IsDeleted = false;
+            category.DeletedAt = null;
+
+            await _categoryRepository.CommitAsync();
+        }
 
         public IQueryable<CategoryListVM> GetAllAysnc(int? status)
         {
-            List<CategoryListVM> categoryListVMs = _mapper.Map<List<CategoryListVM>>( _categoryRepository.GetAllAsync(r=>r.IsDeleted || !r.IsDeleted).Result);
+            List<CategoryListVM> categoryListVMs = _mapper.Map<List<CategoryListVM>>(_categoryRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
 
             IQueryable<CategoryListVM> query = categoryListVMs.AsQueryable();
 
@@ -64,7 +76,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task<CategoryGetVM> GetById(int id)
         {
-            Category category = await _categoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
+            Category category = await _categoryRepository.GetAsync(c => !c.IsDeleted || c.IsDeleted && c.Id == id);
 
             if (category == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -93,13 +105,33 @@ namespace LAHGO.Service.Implementations
             if (category == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
 
-            if (await _categoryRepository.IsExistAsync(c => !c.IsDeleted && c.Name.ToLower() == categoryUpdateVM.Name.Trim().ToLower()))
-                throw new AlreadeExistException($"Category {categoryUpdateVM.Name} already Exists");
+            
+            if (await _categoryRepository.IsExistAsync(c => c.Name.ToLower() == categoryUpdateVM.Name.Trim().ToLower()))
+            {
+                if (category.Name == categoryUpdateVM.Name)
+                {
+                    category.Name = categoryUpdateVM.Name;
+                    if (categoryUpdateVM.FormImage != null)
+                    {
+                        FileHelper.DeleteFile(_env, category.Image, "Manage", "assets", "img", "categories");
+                        category.Image = await categoryUpdateVM.FormImage.CreateAsync(_env, "Manage", "assets", "img", "categories");
+                    }
 
+                    category.UpdatedAt = DateTime.UtcNow.AddHours(4);
+
+                    await _categoryRepository.CommitAsync();
+                }
+                else
+                {
+                    throw new AlreadeExistException($"Category {categoryUpdateVM.Name} already Exists");
+                }
+            }
             category.Name = categoryUpdateVM.Name;
-            FileHelper.DeleteFile(_env, "Manage", "assets", "img", "categories");
-
-            category.Image = await categoryUpdateVM.FormImage.CreateAsync(_env, "Manage", "assets", "img", "categories");
+            if (categoryUpdateVM.FormImage != null)
+            {
+                FileHelper.DeleteFile(_env, category.Image, "Manage", "assets", "img", "categories");
+                category.Image = await categoryUpdateVM.FormImage.CreateAsync(_env, "Manage", "assets", "img", "categories");
+            }
 
             category.UpdatedAt = DateTime.UtcNow.AddHours(4);
 

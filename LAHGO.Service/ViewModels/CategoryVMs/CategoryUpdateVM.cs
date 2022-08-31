@@ -47,7 +47,7 @@ namespace LAHGO.Service.ViewModels.CategoryVMs
             {
                 if (r.FormImage == null)
                 {
-                    context.AddFailure("", "File is required!");
+
                 }
                 else
                 {

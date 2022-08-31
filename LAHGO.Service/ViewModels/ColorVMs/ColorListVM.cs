@@ -1,15 +1,13 @@
-﻿using LAHGO.Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAHGO.Service.ViewModels.CategoryVMs
+namespace LAHGO.Service.ViewModels.ColorVMs
 {
-    public class CategoryListVM 
+    public class ColorListVM
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Image { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

@@ -75,5 +75,16 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             CategoryGetVM categoryGetVM = await _categoryService.GetById(id);
             return View(categoryGetVM);
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _categoryService.DeleteAsync(id);
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Restore(int id)
+        {
+            await _categoryService.RestoreAsync(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }

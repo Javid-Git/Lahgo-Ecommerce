@@ -23,6 +23,7 @@
     <Folder Include="wwwroot\Assets\img\" />
     <Folder Include="wwwroot\Assets\js\" />
     <Folder Include="wwwroot\Manage\assets\img\categories\" />
+    <Folder Include="wwwroot\Manage\assets\img\productMainImg\" />
   </ItemGroup>
 
 </Project>

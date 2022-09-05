@@ -65,11 +65,14 @@ namespace LAHGO.Mvc
             services.AddScoped<IColorRepository, ColorRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ISizeRepository, SizeRepository>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
+            services.AddScoped<IProductColorSizeRepository, ProductColorSizeRepository>();
 
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IColorService, ColorService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ISizeService, SizeService>();
+            services.AddScoped<IProductColorSizeService, ProductColorSizeService>();
 
         }
 
@@ -82,7 +85,7 @@ namespace LAHGO.Mvc
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                //app.UseExceptionHandler("/Error");
             }
 
             app.UseStaticFiles();

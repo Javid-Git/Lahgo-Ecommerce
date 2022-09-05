@@ -1,0 +1,35 @@
+﻿@model ProductGetVM
+@{ 
+    var unitUpdate = Model.ProductColorSizes.FirstOrDefault(p=>p.ProductId == Model.Id);
+}
+
+<div class="row justify-content-center mb-2">
+    <div class="row col-lg-12">
+        <div class="row col-lg-12">
+            <div class="col-lg-3" style="background-color:@unitUpdate.Color.Name">
+                <label>Color</label>
+                <select name="ColorIds" class="form-control" asp-items="new SelectList(ViewBag.Colors, nameof(ColorCreateVM.Id),nameof(ColorCreateVM.Name))">
+                    <option value="" disabled selected>- - Select - -</option>
+                </select>
+            </div>
+            <div class="col-lg-1">
+                <label>Size</label>
+                <select name="SizeIds" class="form-control" asp-items="new SelectList(ViewBag.Sizes, nameof(SizeCreateVM.Id),nameof(SizeCreateVM.Name))">
+                    <option value="" disabled selected>- - Select - -</option>
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <label asp-for="CategoryId">Category</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="new SelectList(ViewBag.Categories, nameof(CategoryCreateVM.Id), nameof(CategoryCreateVM.Name))">
+                    <option value="" disabled selected>- - Select - -</option>
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <p class="text-xs font-weight-bold mb-0">@unitUpdate.Count</p>
+            </div>
+            <div class="col-lg-1">
+                <a asp-area="manage" asp-controller="product" asp-action="UpdateUnit" asp-route-id="@unitUpdate.Id" class="text-xs font-weight-bold mb-0">Update</a>
+            </div>
+        </div>
+    </div>
+</div>

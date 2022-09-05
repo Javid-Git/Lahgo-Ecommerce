@@ -153,17 +153,13 @@ namespace LAHGO.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -456,6 +452,9 @@ namespace LAHGO.Data.Migrations
                     b.Property<string>("Describtion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("DiscountedPrice")
+                        .HasColumnType("float");
+
                     b.Property<bool>("IsBestSeller")
                         .HasColumnType("bit");
 
@@ -476,6 +475,9 @@ namespace LAHGO.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<int?>("SizeId")
                         .HasColumnType("int");

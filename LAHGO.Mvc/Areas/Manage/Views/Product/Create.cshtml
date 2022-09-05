@@ -35,17 +35,13 @@
                                         </div>
                                         <div class="mb-3">
                                             <label asp-for="Price" class="form-label"></label>
-                                            <input asp-for="Price" class="form-control" id="surname">
+                                            <input asp-for="Price" type="number" class="form-control" id="surname">
                                             <span class="text-danger" asp-validation-for="Price"></span>
                                         </div>
                                         <div class="mb-3">
                                             <label asp-for="DiscountedPrice" class="form-label"></label>
-                                            <input multiple asp-for="DiscountedPrice" class="form-control" id="age">
+                                            <input multiple asp-for="DiscountedPrice" type="number" class="form-control" id="age">
                                             <span class="text-danger" asp-validation-for="DiscountedPrice"></span>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label asp-for="Count" class="form-label"></label>
-                                            <input asp-for="Count" class="form-control" id="age">
                                         </div>
                                         <div class="mb-3">
                                             <label asp-for="Describtion" class="form-label"></label>
@@ -54,39 +50,41 @@
                                         </div>
                                         <div class="mb-3">
                                             <label asp-for="MainFormImage" class="form-label ">Main Image</label>
-                                            <input asp-for="MainFormImage" class="form-control ">
+                                            <input asp-for="MainFormImage" class="form-control main-upload">
                                             <span class="text-danger" asp-validation-for="MainFormImage"></span>
                                         </div>
                                         <div class="mb-3">
                                             <label asp-for="DetailFormImages" class="form-label ">Detail Images</label>
-                                            <input multiple asp-for="DetailFormImages" class="form-control">
+                                            <input multiple asp-for="DetailFormImages" class="form-control detail-upload">
                                             <span class="text-danger" asp-validation-for="DetailFormImages"></span>
                                         </div>
 
                                         <div class="form-group parentfield">
-                                            <label asp-for="Category">Category</label>
-                                            <select asp-for="Category" class="form-control" asp-items="new SelectList(ViewBag.Categories, nameof(CategoryCreateVM.Id), nameof(CategoryCreateVM.Name))">
+                                            <label asp-for="CategoryId">Category</label>
+                                            <select asp-for="CategoryId" class="form-control" asp-items="new SelectList(ViewBag.Categories, nameof(CategoryCreateVM.Id), nameof(CategoryCreateVM.Name))">
                                                 <option value="" disabled selected>- - Select - -</option>
                                             </select>
-                                            <span class="text-danger" asp-validation-for="Category"></span>
+                                            <span class="text-danger" asp-validation-for="CategoryId"></span>
                                         </div>
                                         <div class="row justify-content-center">
-                                            <div class="inputsContainer row col-lg-12 ">
-                                                <div class="form-group col-lg-4">
-                                                    <label>Color</label>
-                                                    <select name="Color" class="form-control" asp-items="new SelectList(ViewBag.Colors, nameof(ColorCreateVM.Id),nameof(ColorCreateVM.Name))">
-                                                        <option value="" disabled selected>- - Select - -</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group  col-lg-4">
-                                                    <label>Size</label>
-                                                    <select name="Color" class="form-control" asp-items="new SelectList(ViewBag.Sizes, nameof(SizeCreateVM.Id),nameof(SizeCreateVM.Name))">
-                                                        <option value="" disabled selected>- - Select - -</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-lg-4">
-                                                    <label>Count</label>
-                                                    <input name="Counts" class="form-control" placeholder="Count">
+                                            <div class="inputsContainer row col-lg-12">
+                                                <div class="custom-input-container  row col-lg-12">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Color</label>
+                                                        <select name="ColorIds" class="form-control" asp-items="new SelectList(ViewBag.Colors, nameof(ColorCreateVM.Id),nameof(ColorCreateVM.Name))">
+                                                            <option value="" disabled selected>- - Select - -</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group  col-lg-4">
+                                                        <label>Size</label>
+                                                        <select name="SizeIds" class="form-control" asp-items="new SelectList(ViewBag.Sizes, nameof(SizeCreateVM.Id),nameof(SizeCreateVM.Name))">
+                                                            <option value="" disabled selected>- - Select - -</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Count</label>
+                                                        <input type="number" name="Counts" class="form-control" placeholder="Count">
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-1">

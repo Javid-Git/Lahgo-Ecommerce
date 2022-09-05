@@ -1,0 +1,197 @@
+﻿@model ProductGetVM
+@{
+    ViewData["Title"] = "Create";
+    int count = 1;
+}
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <h6 class="font-weight-bolder mb-0">Product</h6>
+            </nav>
+            <a href="#" class="btn btn-info">Create</a>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">Authors table</h6>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <div class="row d-flex justify-content-center g-0">
+                                <div class="col-lg-8">
+                                    <form method="post" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label asp-for="Name" class="form-label"></label>
+                                            <input asp-for="Name" class="form-control" id="name">
+                                            <span class="text-danger" asp-validation-for="Name"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label asp-for="Price" class="form-label"></label>
+                                            <input asp-for="Price" type="number" class="form-control" id="surname">
+                                            <span class="text-danger" asp-validation-for="Price"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label asp-for="DiscountedPrice" class="form-label"></label>
+                                            <input multiple asp-for="DiscountedPrice" type="number" class="form-control" id="age">
+                                            <span class="text-danger" asp-validation-for="DiscountedPrice"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label asp-for="Describtion" class="form-label"></label>
+                                            <input asp-for="Describtion" class="form-control" id="age">
+                                            <span class="text-danger" asp-validation-for="Describtion"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label asp-for="MainFormImage" class="form-label ">Main Image</label>
+                                            <input asp-for="MainFormImage" class="form-control main-upload">
+                                            <span class="text-danger" asp-validation-for="MainFormImage"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label asp-for="DetailFormImages" class="form-label ">Detail Images</label>
+                                            <input multiple asp-for="DetailFormImages" class="form-control detail-upload">
+                                            <span class="text-danger" asp-validation-for="DetailFormImages"></span>
+                                        </div>
+
+                                        <div class="form-group parentfield">
+                                            <label asp-for="CategoryId">Category</label>
+                                            <select asp-for="CategoryId" class="form-control" asp-items="new SelectList(ViewBag.Categories, nameof(CategoryCreateVM.Id), nameof(CategoryCreateVM.Name))">
+                                                <option value="" disabled selected>- - Select - -</option>
+                                            </select>
+                                            <span class="text-danger" asp-validation-for="CategoryId"></span>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <div class="inputsContainer row col-lg-12">
+                                                <div class="custom-input-container  row col-lg-12">
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Color</label>
+                                                        <select name="ColorIds" class="form-control" asp-items="new SelectList(ViewBag.Colors, nameof(ColorCreateVM.Id),nameof(ColorCreateVM.Name))">
+                                                            <option value="" disabled selected>- - Select - -</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group  col-lg-4">
+                                                        <label>Size</label>
+                                                        <select name="SizeIds" class="form-control" asp-items="new SelectList(ViewBag.Sizes, nameof(SizeCreateVM.Id),nameof(SizeCreateVM.Name))">
+                                                            <option value="" disabled selected>- - Select - -</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Count</label>
+                                                        <input type="number" name="Counts" class="form-control" placeholder="Count">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1">
+                                                <a asp-area="manage" asp-controller="product" asp-action="GetProductColorSizePartial" class="btn btn-primary addinputs">Add</a>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                    <div class="existing-product-list">
+                                        <div class="row justify-content-center mb-5">
+                                            <div class="row col-lg-12">
+                                                <div class="row col-lg-12">
+                                                    <div class="col-lg-1">
+                                                        <p class="text-xs font-weight-bold mb-0">No</p>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <p class="text-xs font-weight-bold mb-0">Color</p>
+                                                    </div>
+                                                    <div class="col-lg-1">
+                                                        <p class="text-xs font-weight-bold mb-0">Size</p>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <p class="text-xs font-weight-bold mb-0">Category</p>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <p class="text-xs font-weight-bold mb-0">Count</p>
+                                                    </div>
+                                                    <div class="col-lg-1">
+                                                        <p class="text-xs font-weight-bold mb-0">Setting</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @foreach (var item in Model.ProductColorSizes.Where(x => x.ProductId == Model.Id))
+                                        {
+
+                                            <div class="row justify-content-center mb-2">
+                                                <div class="row col-lg-12">
+                                                    <div class="row col-lg-12">
+                                                        <div class="col-lg-1">
+                                                            <p class="text-xs font-weight-bold mb-0">@(count++)</p>
+                                                        </div>
+                                                        <div class="col-lg-3" style="background-color:@item.Color.Name">
+                                                            <p class="text-xs text-primary font-weight-bold mb-0">            </p>
+                                                        </div>
+                                                        <div class="col-lg-1">
+                                                            <p class="text-xs font-weight-bold mb-0">@item.Size.Name</p>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <p class="text-xs font-weight-bold mb-0">@item.Product.Category.Name</p>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <p class="text-xs font-weight-bold mb-0">@item.Count</p>
+                                                        </div>
+                                                        <div class="col-lg-1">
+                                                            <a asp-area="manage" asp-controller="product" asp-action="UpdateUnit" asp-route-id="@item.Id" class="text-xs font-weight-bold mb-0">Update</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer py-4  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                        <div class="copyright text-center text-sm text-muted text-lg-start">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>,
+                            made with <i class="fa fa-heart"></i> by
+                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                            for a better web.
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</main>
+
+
+
+

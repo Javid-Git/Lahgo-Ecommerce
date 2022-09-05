@@ -1,18 +1,20 @@
 ﻿@model ProductCreateVM
 
-<div class="form-group col-lg-4">
-    <label>Color</label>
-    <select name="Color" class="form-control" asp-items="new SelectList(ViewBag.Colors, nameof(ColorCreateVM.Id),nameof(ColorCreateVM.Name))">
-        <option value="" disabled selected>- - Select - -</option>
-    </select>
-</div>
-<div class="form-group  col-lg-4">
-    <label>Size</label>
-    <select name="Color" class="form-control" asp-items="new SelectList(ViewBag.Sizes, nameof(SizeCreateVM.Id),nameof(SizeCreateVM.Name))">
-        <option value="" disabled selected>- - Select - -</option>
-    </select>
-</div>
-<div class="form-group col-lg-4">
-    <label>Count</label>
-    <input name="Counts" class="form-control" placeholder="Count">
+<div class="custom-input-container  row col-lg-12">
+    <div class="form-group col-lg-4">
+        <label>Color</label>
+        <select name="Color" class="form-control" asp-items="new SelectList(ViewBag.Colors, nameof(ColorCreateVM.Id),nameof(ColorCreateVM.Name))">
+            <option value="" disabled selected>- - Select - -</option>
+        </select>
+    </div>
+    <div class="form-group  col-lg-4">
+        <label>Size</label>
+        <select name="Color" class="form-control" asp-items="new SelectList(ViewBag.Sizes, nameof(SizeCreateVM.Id),nameof(SizeCreateVM.Name))">
+            <option value="" disabled selected>- - Select - -</option>
+        </select>
+    </div>
+    <div class="form-group col-lg-4">
+        <label>Count</label>
+        <input name="Counts" class="form-control" placeholder="Count">
+    </div>
 </div>

@@ -1,0 +1,10 @@
+﻿@model ProductGetVM
+
+
+@foreach (var image in Model.Photos.Where(p => p.ProductId == Model.Id && !p.IsDeleted))
+{
+<div class="det-img-container">
+    <img class="det-img" src="~/Manage/assets/img/productDetailImages/@image.Image" alt="Alternate Text" />
+    <a asp-area="manage" asp-controller="product" asp-action="DeleteImg" asp-route-id="@image.Id"><i class="fa-solid fa-xmark det-img-close"></i></a>
+</div>
+}

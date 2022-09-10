@@ -91,6 +91,29 @@
                                                 <a asp-area="manage" asp-controller="product" asp-action="GetProductColorSizePartial" class="btn btn-primary addinputs">Add</a>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="form-group parentfield col-lg-6">
+                                                <label asp-for="IsBestSeller">BestSeller</label>
+                                                <input type="checkbox" asp-for="IsBestSeller"/>
+                                            </div>
+                                            <div class="form-group parentfield col-lg-6">
+                                                <label asp-for="IsFavorite">Favorite</label>
+                                                <input type="checkbox"asp-for="IsFavorite"/>
+                                            </div>
+                                            <div class="form-group parentfield col-lg-6">
+                                                <label asp-for="IsLinenShop">LinenShop</label>
+                                                <input type="checkbox"asp-for="IsLinenShop"/>
+                                            </div>
+                                            <div class="form-group parentfield col-lg-6">
+                                                <label asp-for="IsNewArrival">NewArrival</label>
+                                                <input type="checkbox" asp-for="IsNewArrival"/>
+                                            </div>
+                                            <div class="form-group parentfield col-lg-6">
+                                                <label asp-for="IsWashableSilk">WashableSilk</label>
+                                                <input type="checkbox" asp-for="IsWashableSilk"/>
+                                            </div>
+                                        </div>
+                                        
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>

@@ -7,9 +7,9 @@
 
 
     $(document).on('click', '.addinputs', function (e) {
-        $('.custom-input-container').css('padding', '1rem 0');
-        $('.custom-input-container').css('margin', '1rem 0');
-        $('.custom-input-container').css('border', '1px dashed black');
+        $('.new-input-container').css('padding', '1rem 0');
+        $('.new-input-container').css('margin', '1rem 0');
+        $('.new-input-container').css('border', '1px dashed black');
 
         e.preventDefault();
 
@@ -18,5 +18,56 @@
             .then(data => {
                 $('.inputsContainer').append(data)
             })
+    });
+    
+    $(document).on('click', '.unit-update', function (e) {
+        e.preventDefault();
+
+        let No = $(this).attr('data-value');
+
+        let id = $('.unit-list-container.'+No).attr('data-value');
+
+        if (id == No) {
+
+            fetch($(this).attr('href'))
+                .then(res => res.text())
+                .then(data => {
+                    $('.unit-list-container.'+No).append(data)
+                })
+        }
+        
+    });
+
+    $(document).on('click', '.unit-submit', function (e) {
+        e.preventDefault();
+
+        $('.product-options-container').empty();
+
+        fetch('/Manage/Product/UpdateUnit')
+            .then(res => res.text())
+            .then(data => {
+                $('.product-options-container').append(data)
+            })
+
+    });
+    $(document).on('click', '.det-img-close', function (e) {
+        e.preventDefault();
+
+        $('.detail-images-container').empty();
+        fetch($(this).parent().attr('href'))
+            .then(res => res.text())
+            .then(data => {
+                $('.detail-images-container').append(data)
+            })
+
+    });
+
+
+    $(document).on('click', '.unit-update-close', function (e) {
+        e.preventDefault();
+
+        $(this).parent().parent().parent().parent().parent().parent().remove();
+       
+
     });
 })

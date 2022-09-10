@@ -1,0 +1,157 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Index";
+}
+@await Component.InvokeAsync("IndexHeader")
+
+<section id="section1">
+    <div class="section1-introduction">
+        <div class="section-describtion">
+            FOREVER FAVORITES
+        </div>
+        <div class="section-title">
+            The Essentials Lie Here
+        </div>
+    </div>
+    <div class="favorites">
+
+        <div class="favorites-banner">
+            <a href="" class="d-flex">
+                <div class="favorites-banner-left">
+                    <img src="@Model.Settings.FirstOrDefault(s=>s.Key == "IndexFavBaner1").Value"
+                         alt="">
+                    <div class="favorites-banner-text">
+                        Our all time favorites
+                    </div>
+                    <button class="favorites-banner-button">shop best sellers</button>
+                </div>
+            </a>
+        </div>
+        <div class="favorite-banner-right">
+            <a href="">
+                <div class="favorite-banner-top">
+                    <img src="@Model.Settings.FirstOrDefault(s=>s.Key == "IndexFavBaner2").Value"
+                         alt="">
+                </div>
+                <div class="favorite-banner-bottom">
+                    <img src="@Model.Settings.FirstOrDefault(s=>s.Key == "IndexFavBaner3").Value"
+                         alt="">
+                </div>
+            </a>
+        </div>
+        @foreach (var favorites in Model.Products)
+        {
+            <div>
+                <a href="">
+                    <div class="favorites-slider-top">
+                        <img src="~/Manage/assets/img/productMainImg/@favorites.MainImage"
+                             alt="">
+                    </div>
+                    <div class="favorites-slider-bottom">
+                        @favorites.Name
+                        <div class="price">$@favorites.Price</div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</section>
+<section id="section2">
+</section>
+<section id="section3">
+    <div class="ccontainer">
+        <div class="section-introduction">
+            <div class="section-title">
+                The Lounge Lineup
+            </div>
+            <div class="section-describtion">
+                A fabric for every mood, and a look for every occasion. Choosing it is as easy as wearing it.
+            </div>
+        </div>
+
+    </div>
+    <div class="categories">
+        @foreach (var category in Model.Categories)
+        {
+            <div>
+                <a href="">
+                    <div class="category-slider-top">
+                        <img src="~/Manage/assets/img/categories/@category.Image"
+                             alt="">
+                    </div>
+                    <div class="category-slider-bottom">
+                        @category.Name
+                    </div>
+                </a>
+            </div>
+        }
+
+    </div>
+
+</section>
+<section id="section4">
+    <div class="section4-intro section-describtion-wide text-center">
+        we love a good compliment
+    </div>
+    <div class="section4-slider col-lg-12">
+        <div class="section4-compliment text-center col-lg-5 col-12">
+            <p class="section4-compliment-top">
+                “Lahgo offers the antithesis to those sweatpants you’ve kept just
+                because you have nothing else to wear on Sunday mornings.”
+            </p>
+            <p class="section-describtion-wide">The Daily Beast</p>
+        </div>
+        <div class="section4-compliment text-center col-12">
+            <p class="section4-compliment-top">
+                “Lahgo has created a line of the softest, most luxury loungewear
+                options we have found yet.”
+            </p>
+            <p class="section-describtion-wide">The Verticale</p>
+        </div>
+        <div class="section4-compliment text-center col-12">
+            <p class="section4-compliment-top">
+                “Lahgo’s modern take on pjs is the softest and most luxurious
+                sleepwear you’ll ever own.”
+            </p>
+            <p class="section-describtion-wide">GQ</p>
+        </div>
+    </div>
+</section>
+<section id="section5">
+    <img class="col-12" src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/Lahgo-Homepage-Newsletter-Desktop_2048x2048.jpg?v=1633149194"
+         alt="">
+    <div class="section5-text col-lg-3-5">
+        <div class="section5-title">
+            The key to an aesthetic inbox
+        </div>
+        <div class="section5-describtion">
+            We only send emails that inspire you. Sign up to be invited into a state of rest & relaxation.
+        </div>
+        <div class="section5-genders">
+            <p class="section5-describtion">Select Gender</p>
+            <div class="gender-selections">
+                <input class="gender-input" type="radio" name="gender" id="male">
+                <label for="male" class="gender-labels">Male</label>
+                <input class="gender-input" type="radio" name="gender" id="female">
+                <label for="female" class="gender-labels">Female</label>
+                <input class="gender-input" type="radio" name="gender" id="prefer">
+                <label for="prefer" class="gender-labels">Prefer No to say</label>
+            </div>
+        </div>
+        <div class="section5-email-container">
+            <input class="section5-input" type="text" class="section5-email" placeholder="Enter you email">
+            <button class="email-buttons" type="submit" aria-label="Submit">
+
+                <svg class="svg-arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39.5 19.64">
+                    <g>
+                        <path fill="none" stroke="currentColor" stroke-width="2px" d="M27.86,18.9,38,9.82,27.86.74">
+                        </path>
+                        <line fill="none" stroke="currentColor" stroke-width="2px" x1="37.29" y1="9.85" y2="9.85">
+                        </line>
+                    </g>
+                </svg>
+            </button>
+        </div>
+    </div>
+</section>
+

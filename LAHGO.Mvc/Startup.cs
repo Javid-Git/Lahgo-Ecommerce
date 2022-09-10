@@ -20,6 +20,7 @@ using LAHGO.Service.Implementations;
 using LAHGO.Core.Repositories;
 using LAHGO.Data.Repositories;
 using Newtonsoft.Json;
+using LAHGO.Core;
 
 namespace LAHGO.Mvc
 {
@@ -61,18 +62,15 @@ namespace LAHGO.Mvc
                 options.Lockout.MaxFailedAccessAttempts = 3;
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IColorRepository, ColorRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<ISizeRepository, SizeRepository>();
-            services.AddScoped<IPhotoRepository, PhotoRepository>();
-            services.AddScoped<IProductColorSizeRepository, ProductColorSizeRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IColorService, ColorService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ISizeService, SizeService>();
             services.AddScoped<IProductColorSizeService, ProductColorSizeService>();
+            services.AddScoped<ILayoutService, LayoutService>();
 
         }
 

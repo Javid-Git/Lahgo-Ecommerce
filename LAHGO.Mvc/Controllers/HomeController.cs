@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LAHGO.Service.Interfaces;
+using LAHGO.Service.ViewModels.CartProductVMs;
+using LAHGO.Service.ViewModels.HomeVMs;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +12,16 @@ namespace LAHGO.Mvc.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ILayoutService _layoutService;
+        public HomeController(ILayoutService layoutService)
         {
-            return View();
+            _layoutService = layoutService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            HomeVM homeVM = await _layoutService.GetBasket();
+
+            return View(homeVM);
         }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using LAHGO.Core;
 using LAHGO.Core.Entities;
 using LAHGO.Core.Repositories;
+using LAHGO.Service.Exceptions;
 using LAHGO.Service.Extensions;
+using LAHGO.Service.Helpers;
 using LAHGO.Service.Interfaces;
 using LAHGO.Service.ViewModels.PCSVMs;
 using LAHGO.Service.ViewModels.ProductVMs;
@@ -19,18 +22,16 @@ namespace LAHGO.Service.Implementations
     public class ProductService : IProductService
     {
         private readonly IMapper _mapper;
-        private readonly IProductRepository _productRepository;
-        private readonly IProductColorSizeRepository _productColorSizeRepository;
-        private readonly IPhotoRepository _photoRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
         private readonly IWebHostEnvironment _env;
 
-        public ProductService(IProductColorSizeRepository productColorSizeRepository, IPhotoRepository photoRepository, IWebHostEnvironment env, IMapper mapper, IProductRepository productRepository )
+        public ProductService(IUnitOfWork unitOfWork, IWebHostEnvironment env, IMapper mapper )
         {
             _mapper = mapper;
             _env = env;
-            _productRepository = productRepository;
-            _photoRepository = photoRepository;
-            _productColorSizeRepository = productColorSizeRepository;
+            _unitOfWork = unitOfWork;
+
         }
         public async Task CreateAsync(ProductCreateVM productCreateVM)
         {
@@ -39,8 +40,28 @@ namespace LAHGO.Service.Implementations
             
             product.Count = productCreateVM.Counts.Sum();
 
-            await _productRepository.AddAsync(product);
-            await _productRepository.CommitAsync();
+            if (productCreateVM.IsFavorite)
+            {
+                product.IsFavorite = true;
+            }
+            if (productCreateVM.IsBestSeller)
+            {
+                product.IsBestSeller = true;
+            }
+            if (productCreateVM.IsLinenShop)
+            {
+                product.IsLinenShop = true;
+            }
+            if (productCreateVM.IsNewArrival)
+            {
+                product.IsNewArrival = true;
+            }
+            if (productCreateVM.IsWashableSilk)
+            {
+                product.IsWashableSilk = true;
+            }
+            await _unitOfWork.ProductRepository.AddAsync(product);
+            await _unitOfWork.CommitAsync();
 
 
             List<ProductColorSize> productColorSizes = new List<ProductColorSize>();
@@ -54,8 +75,8 @@ namespace LAHGO.Service.Implementations
                     Count = productCreateVM.Counts[i],
                     ProductId = product.Id
                 };
-                await _productColorSizeRepository.AddAsync(productColorSize);
-                await _productColorSizeRepository.CommitAsync();
+                await _unitOfWork.ProductColorSizeRepository.AddAsync(productColorSize);
+                await _unitOfWork.CommitAsync();
             }
 
 
@@ -64,12 +85,13 @@ namespace LAHGO.Service.Implementations
                 foreach (IFormFile image in productCreateVM.DetailFormImages)
                 {
                     Photo photo = new Photo();
-                    photo.Image = await FileManager.CreateAsync(image, _env, "Manage", "assets", "img", "productMainImg");
+                    photo.Image = await FileManager.CreateAsync(image, _env, "Manage", "assets", "img", "productDetailImages");
                     photo.ProductId = product.Id;
-                    await _photoRepository.AddAsync(photo);
-                    await _photoRepository.CommitAsync();
+                    await _unitOfWork.PhotoRepository.AddAsync(photo);
+                    await _unitOfWork.CommitAsync();
                 }
             }
+            
         }
 
         public Task DeleteAsync(int id)
@@ -79,7 +101,7 @@ namespace LAHGO.Service.Implementations
 
         public IQueryable<ProductListVM> GetAllAysnc(int? status)
         {
-            List<ProductListVM> productListVMs = _mapper.Map<List<ProductListVM>>(_productRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            List<ProductListVM> productListVMs = _mapper.Map<List<ProductListVM>>(_unitOfWork.ProductRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
 
             IQueryable<ProductListVM> query = productListVMs.AsQueryable();
 
@@ -99,10 +121,23 @@ namespace LAHGO.Service.Implementations
 
         public async Task<ProductGetVM> GetById(int id)
         {
-            Product product = await _productRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id, "ProductColorSizes", "ProductColorSizes.Color", "ProductColorSizes.Size");
+            Product product = await _unitOfWork.ProductRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id, "ProductColorSizes", "ProductColorSizes.Color", "ProductColorSizes.Size", "Photos");
 
             if (product == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+            {
+                Photo photo = await _unitOfWork.PhotoRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
+
+                Product productnew = await _unitOfWork.ProductRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == photo.ProductId, "ProductColorSizes", "ProductColorSizes.Color", "ProductColorSizes.Size", "Photos");
+               
+                if (productnew == null)
+                {
+                    throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                }
+
+                ProductGetVM newproductGetVM = _mapper.Map<ProductGetVM>(productnew);
+
+                return newproductGetVM;
+            }
 
             ProductGetVM productGetVM = _mapper.Map<ProductGetVM>(product);
 
@@ -114,9 +149,183 @@ namespace LAHGO.Service.Implementations
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(int id, ProductUpdateVM productUpdateVM)
+        public async Task UpdateAsync(int id, ProductGetVM productGetVM)
         {
-            throw new NotImplementedException();
+            Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id);
+
+            if (productGetVM.ColorIds != null)
+            {
+                for (int i = 0; i < productGetVM.ColorIds.Count(); i++)
+                {
+                    ProductColorSize productColorSize = new ProductColorSize
+                    {
+                        ColorId = productGetVM.ColorIds[i],
+                        SizeId = productGetVM.SizeIds[i],
+                        Count = productGetVM.Counts[i],
+                        ProductId = product.Id
+                    };
+                    await _unitOfWork.ProductColorSizeRepository.AddAsync(productColorSize);
+                    await _unitOfWork.CommitAsync();
+                }
+            }
+
+            if (productGetVM.MainFormImage != null)
+            {
+                FileHelper.DeleteFile(_env, product.MainImage, "Manage", "assets", "img", "productMainImg");
+                product.MainImage = await productGetVM.MainFormImage.CreateAsync(_env, "Manage", "assets", "img", "productMainImg");
+
+            };
+            if (productGetVM.DetailFormImages != null)
+            {
+                List<Photo> photos = await _unitOfWork.PhotoRepository.GetAllAsync(p => p.ProductId == product.Id);
+                foreach (Photo photo in photos)
+                {
+                    FileHelper.DeleteFile(_env, photo.Image, "Manage", "assets", "img", "productDetailImages");
+                    _unitOfWork.PhotoRepository.Remove(photo);
+                    await _unitOfWork.CommitAsync();
+                }
+                foreach (IFormFile image in productGetVM.DetailFormImages)
+                {
+                    Photo photo = new Photo();
+                    photo.Image = await FileManager.CreateAsync(image, _env, "Manage", "assets", "img", "productDetailImages"); ;
+                    photo.ProductId = product.Id;
+                    await _unitOfWork.PhotoRepository.AddAsync(photo);
+                    await _unitOfWork.CommitAsync();
+                }
+            }
+            if (productGetVM.Price != null)
+            {
+                product.Price = (double)productGetVM.Price;
+            }
+            if (productGetVM.DiscountedPrice != null)
+            {
+                product.DiscountedPrice = (double)productGetVM.DiscountedPrice;
+            }
+            if (productGetVM.Describtion != null)
+            {
+                product.Describtion = productGetVM.Describtion;
+            }
+
+            if (productGetVM.Name != null)
+            {
+                if (await _unitOfWork.ProductRepository.IsExistAsync(c => c.Name.ToLower() == productGetVM.Name.Trim().ToLower()))
+                {
+                    if (product.Name == productGetVM.Name)
+                    {
+                        product.Name = productGetVM.Name;
+                        product.UpdatedAt = DateTime.UtcNow.AddHours(4);
+
+                        if (productGetVM.IsFavorite != false)
+                        {
+                            product.IsFavorite = true;
+                        }
+                        else
+                        {
+                            product.IsFavorite = false;
+                        }
+                        if (productGetVM.IsBestSeller != false)
+                        {
+                            product.IsBestSeller = true;
+                        }
+                        else
+                        {
+                            product.IsBestSeller = false;
+                        }
+                        if (productGetVM.IsLinenShop != false)
+                        {
+                            product.IsLinenShop = true;
+                        }
+                        else
+                        {
+                            product.IsLinenShop = false;
+                        }
+                        if (productGetVM.IsNewArrival != false)
+                        {
+                            product.IsNewArrival = true;
+                        }
+                        else
+                        {
+                            product.IsNewArrival = false;
+                        }
+                        if (productGetVM.IsWashableSilk != false)
+                        {
+                            product.IsWashableSilk = true;
+                        }
+                        else
+                        {
+                            product.IsWashableSilk = false;
+                        }
+                        await _unitOfWork.CommitAsync();
+                    }
+                    else
+                    {
+
+                        await _unitOfWork.CommitAsync();
+                        throw new AlreadeExistException($"Category {productGetVM.Name} already Exists");
+                    }
+                }
+                else
+                {
+                    product.Name = productGetVM.Name;
+                    product.UpdatedAt = DateTime.UtcNow.AddHours(4);
+
+                    if (productGetVM.IsFavorite != false)
+                    {
+                        product.IsFavorite = true;
+                    }
+                    else
+                    {
+                        product.IsFavorite = false;
+                    }
+                    if (productGetVM.IsBestSeller != false)
+                    {
+                        product.IsBestSeller = true;
+                    }
+                    else
+                    {
+                        product.IsBestSeller = false;
+                    }
+                    if (productGetVM.IsLinenShop != false)
+                    {
+                        product.IsLinenShop = true;
+                    }
+                    else
+                    {
+                        product.IsLinenShop = false;
+                    }
+                    if (productGetVM.IsNewArrival != false)
+                    {
+                        product.IsNewArrival = true;
+                    }
+                    else
+                    {
+                        product.IsNewArrival = false;
+                    }
+                    if (productGetVM.IsWashableSilk != false)
+                    {
+                        product.IsWashableSilk = true;
+                    }
+                    else
+                    {
+                        product.IsWashableSilk = false;
+                    }
+                    await _unitOfWork.CommitAsync();
+                }
+
+            }
         }
+
+        public async Task DeleteImgAsync(int id)
+        {
+            Photo photo = await _unitOfWork.PhotoRepository.GetAsync(p => p.Id == id);
+
+            photo.IsDeleted = true;
+            photo.DeletedAt = DateTime.UtcNow.AddHours(4);
+
+            await _unitOfWork.CommitAsync();
+
+        }
+
+
     }
 }

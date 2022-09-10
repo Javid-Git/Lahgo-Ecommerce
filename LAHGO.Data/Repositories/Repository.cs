@@ -21,16 +21,6 @@ namespace LAHGO.Data.Repositories
         {
             await _context.Set<TEntity>().AddAsync(entity);
         }
-        
-        public int Commit()
-        {
-            return _context.SaveChanges();
-        }
-
-        public async Task<int> CommitAsync()
-        {
-            return await _context.SaveChangesAsync();
-        }
 
         public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression)
         {

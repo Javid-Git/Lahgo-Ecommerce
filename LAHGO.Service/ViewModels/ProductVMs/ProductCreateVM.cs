@@ -22,7 +22,11 @@ namespace LAHGO.Service.ViewModels.ProductVMs
         public List<int> Counts { get; set; }
         public int CategoryId { get; set; }
         public List<ProductColorSize> ProductColorSizes { get; set; }
-
+        public bool IsNewArrival { get; set; }
+        public bool IsBestSeller { get; set; }
+        public bool IsWashableSilk { get; set; }
+        public bool IsLinenShop { get; set; }
+        public bool IsFavorite { get; set; }
     }
 
     public class ProductCreateVMValidator : AbstractValidator<ProductCreateVM>
@@ -46,14 +50,14 @@ namespace LAHGO.Service.ViewModels.ProductVMs
                           y.AddFailure("MainFormImage", "File size sust be maximum 3 Mb");
                       }
 
-                      if (x.MainFormImage.ContentType != "image/jpeg")
+                      if (x.MainFormImage.ContentType != "image/jpeg" && x.MainFormImage.ContentType != "image/webp")
                       {
-                          y.AddFailure("MainFormImage", "File type must be .jpg or .jpeg");
+                          y.AddFailure("MainFormImage", "File type must be .jpg or .jpeg or webp");
                       }
                   }
                   if (x.DetailFormImages == null)
                   {
-                      y.AddFailure("DetailFormImages", "Image is Required!");
+                      
 
                   }
                   else
@@ -69,9 +73,9 @@ namespace LAHGO.Service.ViewModels.ProductVMs
                               y.AddFailure("DetailFormImages", "File size sust be maximum 3 Mb");
                           }
 
-                          if (file.ContentType != "image/jpeg")
+                          if (file.ContentType != "image/jpeg" && x.MainFormImage.ContentType != "image/webp")
                           {
-                              y.AddFailure("DetailFormImages", "File type must be .jpg or .jpeg");
+                              y.AddFailure("MainFormImage", "File type must be .jpg or .jpeg or webp"); 
                           }
                       }
                   }

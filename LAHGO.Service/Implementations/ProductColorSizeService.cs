@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LAHGO.Core;
 using LAHGO.Core.Entities;
 using LAHGO.Core.Repositories;
 using LAHGO.Service.Interfaces;
@@ -15,15 +16,17 @@ namespace LAHGO.Service.Implementations
 {
     public class ProductColorSizeService : IProductColorSizeService
     {
-        private readonly IProductColorSizeRepository _productColorSizeRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
+
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
 
-        public ProductColorSizeService(IProductColorSizeRepository productColorSizeRepository, IWebHostEnvironment env, IMapper mapper)
+        public ProductColorSizeService(IUnitOfWork unitOfWork, IWebHostEnvironment env, IMapper mapper)
         {
-            _productColorSizeRepository = productColorSizeRepository;
             _mapper = mapper;
             _env = env;
+            _unitOfWork = unitOfWork;
 
         }
         public Task CreateAsync(PCSCreateVM pcsCreateVM)
@@ -43,7 +46,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task<PCSGetVM> GetById(int id)
         {
-            ProductColorSize productColorSize = await _productColorSizeRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id, "Product", "Product.Category");
+            ProductColorSize productColorSize = await _unitOfWork.ProductColorSizeRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id, "Product", "Product.Category");
 
             if (productColorSize == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -58,9 +61,21 @@ namespace LAHGO.Service.Implementations
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(int id, PCSUpdateVM pcsUpdateVM)
+        public async Task UpdateAsync(int id, PCSGetVM pcsGetVM, int prodId)
         {
-            throw new NotImplementedException();
+            ProductColorSize productColorSize = await _unitOfWork.ProductColorSizeRepository.GetAsync(p => (!p.IsDeleted || p.IsDeleted) && p.Id == pcsGetVM.Id, "Product");
+            Product product = await _unitOfWork.ProductRepository.GetAsync(c => c.Id == prodId);
+
+            if (productColorSize == null)
+                throw new ItemtNoteFoundException($"Item Not Found By Id = {pcsGetVM.Id}");
+
+            productColorSize.ColorId = pcsGetVM.ColorId;
+            productColorSize.SizeId = pcsGetVM.SizeId;
+            productColorSize.Count = pcsGetVM.Count;
+            product.CategoryId = pcsGetVM.CategoryId;
+
+            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿@model ProductGetVM
 @{
     ViewData["Title"] = "Create";
-    int count = 1;
 }
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -58,6 +57,9 @@
                                             <label asp-for="DetailFormImages" class="form-label ">Detail Images</label>
                                             <input multiple asp-for="DetailFormImages" class="form-control detail-upload">
                                             <span class="text-danger" asp-validation-for="DetailFormImages"></span>
+                                            <div class="d-flex detail-images-container">
+                                                @await Html.PartialAsync("_DetailImgList", Model)
+                                            </div>
                                         </div>
 
                                         <div class="form-group parentfield">
@@ -92,7 +94,28 @@
                                                 <a asp-area="manage" asp-controller="product" asp-action="GetProductColorSizePartial" class="btn btn-primary addinputs">Add</a>
                                             </div>
                                         </div>
-
+                                        <div class="row">
+                                            <div class="form-group parentfield col-lg-6">
+                                                <label asp-for="IsBestSeller">BestSeller</label>
+                                                <input type="checkbox" asp-for="IsBestSeller" />
+                                            </div>
+                                            <div class="form-group parentfield col-lg-6">
+                                                <label asp-for="IsFavorite">Favorite</label>
+                                                <input type="checkbox" asp-for="IsFavorite" />
+                                            </div>
+                                            <div class="form-group parentfield col-lg-6">
+                                                <label asp-for="IsLinenShop">LinenShop</label>
+                                                <input type="checkbox" asp-for="IsLinenShop" />
+                                            </div>
+                                            <div class="form-group parentfield col-lg-6">
+                                                <label asp-for="IsNewArrival">NewArrival</label>
+                                                <input type="checkbox" asp-for="IsNewArrival" />
+                                            </div>
+                                            <div class="form-group parentfield col-lg-6">
+                                                <label asp-for="IsWashableSilk">WashableSilk</label>
+                                                <input type="checkbox" asp-for="IsWashableSilk" />
+                                            </div>
+                                        </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                     <div class="existing-product-list">
@@ -120,34 +143,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @foreach (var item in Model.ProductColorSizes.Where(x => x.ProductId == Model.Id))
-                                        {
-
-                                            <div class="row justify-content-center mb-2">
-                                                <div class="row col-lg-12">
-                                                    <div class="row col-lg-12">
-                                                        <div class="col-lg-1">
-                                                            <p class="text-xs font-weight-bold mb-0">@(count++)</p>
-                                                        </div>
-                                                        <div class="col-lg-3" style="background-color:@item.Color.Name">
-                                                            <p class="text-xs text-primary font-weight-bold mb-0">            </p>
-                                                        </div>
-                                                        <div class="col-lg-1">
-                                                            <p class="text-xs font-weight-bold mb-0">@item.Size.Name</p>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <p class="text-xs font-weight-bold mb-0">@item.Product.Category.Name</p>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <p class="text-xs font-weight-bold mb-0">@item.Count</p>
-                                                        </div>
-                                                        <div class="col-lg-1">
-                                                            <a asp-area="manage" asp-controller="product" asp-action="UpdateUnit" asp-route-id="@item.Id" class="text-xs font-weight-bold mb-0">Update</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
+                                        <div class="product-options-container">
+                                            @await Html.PartialAsync("_ProductOptionsList", Model)
+                                        </div>
                                     </div>
                                 </div>
                             </div>

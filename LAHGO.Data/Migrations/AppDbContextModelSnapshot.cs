@@ -461,10 +461,13 @@ namespace LAHGO.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsFavorite")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsLinenShop")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsNewArrivel")
+                    b.Property<bool>("IsNewArrival")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsWashableSilk")
@@ -536,6 +539,36 @@ namespace LAHGO.Data.Migrations
                     b.HasIndex("SizeId");
 
                     b.ToTable("ProductColorSizes");
+                });
+
+            modelBuilder.Entity("LAHGO.Core.Entities.Setting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("LAHGO.Core.Entities.Size", b =>

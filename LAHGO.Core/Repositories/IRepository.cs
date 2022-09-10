@@ -13,7 +13,5 @@ namespace LAHGO.Core.Repositories
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression, params string[] includes);
         Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> expression);
         void Remove(TEntity entity);
-        Task<int> CommitAsync();
-        int Commit();
     }
 }

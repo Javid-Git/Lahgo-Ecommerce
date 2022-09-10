@@ -80,28 +80,65 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             return View(productUpdateVM);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(ProductGetVM productGetVM, int status)
+        public async Task<IActionResult> Update(int id, ProductGetVM productGetVM, int status)
         {
             ViewBag.Categories = _categoryService.GetAllAysnc(status);
             ViewBag.Colors = _colorService.GetAllAysnc(status);
             ViewBag.Sizes = _sizeService.GetAllAysnc(status);
 
+            await _productService.UpdateAsync(id, productGetVM);
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public async Task<IActionResult> UpdateUnit(int id)
+        public async Task<IActionResult> UpdateUnit(int id, int status)
         {
+            ViewBag.Categories = _categoryService.GetAllAysnc(status);
+            ViewBag.Colors = _colorService.GetAllAysnc(status);
+            ViewBag.Sizes = _sizeService.GetAllAysnc(status);
+
             PCSGetVM productUpdateVM = await _productColorSizeService.GetById(id);
             return PartialView("_UnitUpdatePartial", productUpdateVM);
 
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateUnit(int id, ProductGetVM productGetVM)
+        public async Task<IActionResult> UpdateUnit(int id, PCSGetVM productGetVM, int status, int prodId)
         {
+            ViewBag.Categories = _categoryService.GetAllAysnc(status);
+            ViewBag.Colors = _colorService.GetAllAysnc(status);
+            ViewBag.Sizes = _sizeService.GetAllAysnc(status);
 
-           
+            PCSGetVM productUpdateVM = await _productColorSizeService.GetById(prodId);
+
+            await _productColorSizeService.UpdateAsync(id ,productGetVM, prodId);
+
+            return PartialView("_UnitUpdatePartial", productUpdateVM);
+
         }
+        [HttpGet]
+        public async Task<IActionResult> DeleteImg(int id, int status)
+        {
+            ViewBag.Categories = _categoryService.GetAllAysnc(status);
+            ViewBag.Colors = _colorService.GetAllAysnc(status);
+            ViewBag.Sizes = _sizeService.GetAllAysnc(status);
+
+            ProductGetVM productGetVM = await _productService.GetById(id);
+            await _productService.DeleteImgAsync(id);
+
+            return PartialView("_DetailImgList", productGetVM);
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _productService.DeleteAsync(id);
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Restore(int id)
+        {
+            await _productService.RestoreAsync(id);
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

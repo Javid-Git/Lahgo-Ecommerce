@@ -1,0 +1,57 @@
+﻿
+.custom-input-container {
+    border: 1px dashed black;
+    background-color: white;
+    width: 100%;
+}
+.unit-list-container{
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.new-input-container {
+    position: absolute;
+    border: 1px dashed black;
+    background-color: #ffd1d1;
+    width: 100%;
+    padding: 0;
+    z-index: 111;
+    top: -12px;
+    left: 0;
+}
+.pcs-input-container {
+    border: 1px dashed black;
+    background-color: white;
+    width: 100%;
+}
+
+.unit-submit{
+    padding: 5px 10px;
+    position: absolute;
+    top: 25%;
+    left: 0;
+}
+
+.det-img-container{
+    position: relative;
+}
+
+.det-img-close {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    z-index: 111;
+}
+
+.unit-img-close {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    z-index: 111;
+}
+
+.det-img {
+    width: 200px;
+    height: 200px;
+    padding: 1rem;
+}

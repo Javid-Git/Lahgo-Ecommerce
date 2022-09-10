@@ -1,0 +1,32 @@
+﻿@model ProductGetVM
+@{ 
+    int count = 1;
+}
+@foreach (var item in Model.ProductColorSizes.Where(x => x.ProductId == Model.Id))
+{
+
+    <div class="row justify-content-center mb-2">
+        <div class="row col-lg-12">
+            <div class="row col-lg-12 unit-list-container @item.Id" data-value="@item.Id">
+                <div class="col-lg-1">
+                    <p class="text-xs font-weight-bold mb-0">@(count++)</p>
+                </div>
+                <div class="col-lg-3" style="background-color:@item.Color.Name">
+                    <p class="text-xs text-primary font-weight-bold mb-0">            </p>
+                </div>
+                <div class="col-lg-1">
+                    <p class="text-xs font-weight-bold mb-0">@item.Size.Name</p>
+                </div>
+                <div class="col-lg-3">
+                    <p class="text-xs font-weight-bold mb-0">@item.Product.Category.Name</p>
+                </div>
+                <div class="col-lg-3">
+                    <p class="text-xs font-weight-bold mb-0">@item.Count</p>
+                </div>
+                <div class="col-lg-1">
+                    <a data-value="@item.Id" asp-area="manage" asp-controller="product" asp-action="UpdateUnit" asp-route-id="@item.Id" class="text-xs font-weight-bold mb-0 unit-update">Update</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

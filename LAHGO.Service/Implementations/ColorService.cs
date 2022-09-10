@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LAHGO.Core;
 using LAHGO.Core.Entities;
 using LAHGO.Core.Repositories;
 using LAHGO.Service.Exceptions;
@@ -16,13 +17,13 @@ namespace LAHGO.Service.Implementations
 {
     public class ColorService : IColorService
     {
-        private readonly IColorRepository _colorRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
-        public ColorService(IColorRepository colorRepository, IMapper mapper, IWebHostEnvironment env)
+        public ColorService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env)
         {
-            _colorRepository = colorRepository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
             _env = env;
         }
 
@@ -33,13 +34,13 @@ namespace LAHGO.Service.Implementations
 
             color.Name = colorCreateVM.Name;
 
-            await _colorRepository.AddAsync(color);
-            await _colorRepository.CommitAsync();
+            await _unitOfWork.ColorRepository.AddAsync(color);
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            Color color = await _colorRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
+            Color color = await _unitOfWork.ColorRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
             if (color == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -47,12 +48,12 @@ namespace LAHGO.Service.Implementations
             color.IsDeleted = true;
             color.DeletedAt = DateTime.UtcNow.AddHours(4);
 
-            await _colorRepository.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
 
         public IQueryable<ColorListVM> GetAllAysnc(int? status)
         {
-            List<ColorListVM> colorListVMs = _mapper.Map<List<ColorListVM>>(_colorRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            List<ColorListVM> colorListVMs = _mapper.Map<List<ColorListVM>>(_unitOfWork.ColorRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
 
             IQueryable<ColorListVM> query = colorListVMs.AsQueryable();
 
@@ -72,7 +73,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task<ColorGetVM> GetById(int id)
         {
-            Color color = await _colorRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
+            Color color = await _unitOfWork.ColorRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
 
             if (color == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -84,7 +85,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task RestoreAsync(int id)
         {
-            Color color = await _colorRepository.GetAsync(c => c.IsDeleted && c.Id == id);
+            Color color = await _unitOfWork.ColorRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
             if (color == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -92,18 +93,18 @@ namespace LAHGO.Service.Implementations
             color.IsDeleted = false;
             color.DeletedAt = null;
 
-            await _colorRepository.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task UpdateAsync(int id, ColorUpdateVM colorUpdateVM)
         {
-            Color color = await _colorRepository.GetAsync(c => !c.IsDeleted && c.Id == id || c.IsDeleted);
+            Color color = await _unitOfWork.ColorRepository.GetAsync(c => !c.IsDeleted && c.Id == id || c.IsDeleted);
 
             if (color == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
 
 
-            if (await _colorRepository.IsExistAsync(c => c.Name.ToLower() == colorUpdateVM.Name.Trim().ToLower()))
+            if (await _unitOfWork.ColorRepository.IsExistAsync(c => c.Name.ToLower() == colorUpdateVM.Name.Trim().ToLower()))
             {
                 if (color.Name == colorUpdateVM.Name)
                 {
@@ -111,7 +112,7 @@ namespace LAHGO.Service.Implementations
 
                     color.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
-                    await _colorRepository.CommitAsync();
+                    await _unitOfWork.CommitAsync();
                 }
                 else
                 {
@@ -123,7 +124,7 @@ namespace LAHGO.Service.Implementations
 
             color.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
-            await _colorRepository.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
     }
 }

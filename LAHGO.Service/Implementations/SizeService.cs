@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LAHGO.Core;
 using LAHGO.Core.Entities;
 using LAHGO.Core.Repositories;
 using LAHGO.Service.Exceptions;
@@ -16,12 +17,12 @@ namespace LAHGO.Service.Implementations
 {
     public class SizeService : ISizeService
     {
-        private readonly ISizeRepository _sizeRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
-        public SizeService(ISizeRepository sizeRepository, IMapper mapper, IWebHostEnvironment env)
+        public SizeService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env)
         {
-            _sizeRepository = sizeRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _env = env;
         }
@@ -31,13 +32,13 @@ namespace LAHGO.Service.Implementations
 
             size.Name = sizeCreateVM.Name;
 
-            await _sizeRepository.AddAsync(size);
-            await _sizeRepository.CommitAsync();
+            await _unitOfWork.SizeRepository.AddAsync(size);
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            Size size = await _sizeRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
+            Size size = await _unitOfWork.SizeRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
             if (size == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -45,12 +46,12 @@ namespace LAHGO.Service.Implementations
             size.IsDeleted = true;
             size.DeletedAt = DateTime.UtcNow.AddHours(4);
 
-            await _sizeRepository.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
 
         public IQueryable<SizeListVM> GetAllAysnc(int? status)
         {
-            List<SizeListVM> sizeListVMs = _mapper.Map<List<SizeListVM>>(_sizeRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            List<SizeListVM> sizeListVMs = _mapper.Map<List<SizeListVM>>(_unitOfWork.SizeRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
 
             IQueryable<SizeListVM> query = sizeListVMs.AsQueryable();
 
@@ -70,7 +71,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task<SizeGetVM> GetById(int id)
         {
-            Size size = await _sizeRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
+            Size size = await _unitOfWork.SizeRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
 
             if (size == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -82,7 +83,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task RestoreAsync(int id)
         {
-            Size size = await _sizeRepository.GetAsync(c => c.IsDeleted && c.Id == id);
+            Size size = await _unitOfWork.SizeRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
             if (size == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -90,18 +91,18 @@ namespace LAHGO.Service.Implementations
             size.IsDeleted = false;
             size.DeletedAt = null;
 
-            await _sizeRepository.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task UpdateAsync(int id, SizeUpdateVM sizeUpdateVM)
         {
-            Size size = await _sizeRepository.GetAsync(c => !c.IsDeleted && c.Id == id || c.IsDeleted);
+            Size size = await _unitOfWork.SizeRepository.GetAsync(c => !c.IsDeleted && c.Id == id || c.IsDeleted);
 
             if (size == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
 
 
-            if (await _sizeRepository.IsExistAsync(c => c.Name.ToLower() == sizeUpdateVM.Name.Trim().ToLower()))
+            if (await _unitOfWork.SizeRepository.IsExistAsync(c => c.Name.ToLower() == sizeUpdateVM.Name.Trim().ToLower()))
             {
                 if (size.Name == sizeUpdateVM.Name)
                 {
@@ -109,7 +110,7 @@ namespace LAHGO.Service.Implementations
 
                     size.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
-                    await _sizeRepository.CommitAsync();
+                    await _unitOfWork.CommitAsync();
                 }
                 else
                 {
@@ -121,7 +122,7 @@ namespace LAHGO.Service.Implementations
 
             size.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
-            await _sizeRepository.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
     }
 }

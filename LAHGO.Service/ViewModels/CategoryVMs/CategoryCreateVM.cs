@@ -34,9 +34,9 @@ namespace LAHGO.Service.ViewModels.CategoryVMs
                     {
                         context.AddFailure("", "Maximum length of name is 25!");
                     }
-                    if (r.Name.Length < 5)
+                    if (r.Name.Length < 3)
                     {
-                        context.AddFailure("", "Minimum length of name is 5!");
+                        context.AddFailure("", "Minimum length of name is 3!");
                     }
                 }
             });
@@ -53,9 +53,9 @@ namespace LAHGO.Service.ViewModels.CategoryVMs
                         context.AddFailure("", "File size must be maximum 150kb");
                     }
 
-                    if (r.FormImage.ContentType != "image/jpeg")
+                    if (r.FormImage.ContentType != "image/jpeg" && r.FormImage.ContentType != "image/webp")
                     {
-                        context.AddFailure("", "File type must be .jpg or .jpeg");
+                        context.AddFailure("", "File type must be .jpg or .jpeg or webp");
                     }
                 }
             });

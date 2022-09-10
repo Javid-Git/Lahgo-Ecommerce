@@ -25,7 +25,7 @@ namespace LAHGO.Service.Mappings
 
 
             CreateMap<ColorCreateVM, Color>()
-                 .ForMember(des => des.CreatedAt, src => src.MapFrom(s => DateTime.UtcNow.AddHours(4))); ;
+                 .ForMember(des => des.CreatedAt, src => src.MapFrom(s => DateTime.UtcNow.AddHours(4)));
             CreateMap<Color, ColorGetVM>();
             CreateMap<Color, ColorListVM>();
 
@@ -37,11 +37,22 @@ namespace LAHGO.Service.Mappings
 
 
             CreateMap<PCSCreateVM, ProductColorSize>();
-            CreateMap<ProductColorSize, PCSGetVM>();
+            CreateMap<ProductColorSize, PCSGetVM>()
+                .ForMember(des => des.SizeId, src => src.MapFrom(s => s.SizeId))
+                .ForMember(des => des.ColorId, src => src.MapFrom(s => s.ColorId));
+
+            CreateMap<Product, PCSGetVM>()
+               .ForMember(des => des.CategoryId, src => src.MapFrom(s => s.CategoryId));
+
             CreateMap<ProductColorSize, PCSListVM>();
 
             CreateMap<Product, ProductGetVM>()
-                .ForPath(des => des.ProductColorSizes, src => src.MapFrom(s => s.ProductColorSizes));
+                .ForPath(des => des.ProductColorSizes, src => src.MapFrom(s => s.ProductColorSizes))
+                .ForMember(des => des.IsBestSeller, src => src.MapFrom(x => x.IsBestSeller))
+                .ForMember(des => des.IsFavorite, src => src.MapFrom(x => x.IsFavorite))
+                .ForMember(des => des.IsLinenShop, src => src.MapFrom(x => x.IsLinenShop))
+                .ForMember(des => des.IsNewArrival, src => src.MapFrom(x => x.IsNewArrival))
+                .ForMember(des => des.IsWashableSilk, src => src.MapFrom(x => x.IsWashableSilk));
 
             CreateMap<Product, ProductListVM>()
                 .ForPath(des => des.ProductColorSizes, src => src.MapFrom(s => s.ProductColorSizes));
@@ -49,9 +60,12 @@ namespace LAHGO.Service.Mappings
             CreateMap<ProductCreateVM, Product>()
                 .ForMember(des => des.Name, src => src.MapFrom(x => x.Name.Trim()))
                 .ForMember(des => des.Describtion, src => src.MapFrom(x => x.Describtion.Trim()))
-                .ForMember(des => des.Count, src => src.MapFrom(x => x.Count));
-
-
+                .ForMember(des => des.Count, src => src.MapFrom(x => x.Count))
+                .ForMember(des => des.IsBestSeller, src => src.MapFrom(x => x.IsBestSeller))
+                .ForMember(des => des.IsFavorite, src => src.MapFrom(x => x.IsFavorite))
+                .ForMember(des => des.IsLinenShop, src => src.MapFrom(x => x.IsLinenShop))
+                .ForMember(des => des.IsNewArrival, src => src.MapFrom(x => x.IsNewArrival))
+                .ForMember(des => des.IsWashableSilk, src => src.MapFrom(x => x.IsWashableSilk));
         }
 
     }

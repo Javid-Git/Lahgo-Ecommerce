@@ -20,7 +20,7 @@ namespace LAHGO.Data
         public DbSet<Size> Sizes{ get; set; }
 
         public DbSet<Photo> Photos { get; set; }
-        //public DbSet<Setting> Settings { get; set; }
+        public DbSet<Setting> Settings { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<ProductColorSize> ProductColorSizes { get; set; }
         public DbSet<Comment> Coments { get; set; }

@@ -1,0 +1,216 @@
+﻿@model HeaderVM
+<header>
+    <div id="center-header" class="  m-auto center-header">
+        <div class="top-header ">
+        </div>
+        <div class="ccontainer header-content row align-items-center justify-content-center">
+            <div class=" custom-navbar col-lg-5">
+                <ul class="d-flex">
+                    <li id="shop-navbar" class="navbar-item-hover">
+                        <a id="shop-navbar" class=" navbar-font" asp-controller="">shop</a>
+                        <ul class="shop-list navbar-lists d-flex">
+                            <li>
+                                <ul class="featured-list">
+                                    <li><a href="" class="category-list-items">featured</a></li>
+                                    <li><a href="" class="subcategory-list-items">best sellers</a></li>
+                                    <li><a href="" class="subcategory-list-items">new arrivals</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="category-list">
+                                    <li><a href="" class="category-list-items">Category</a></li>
+                                    <li><a href="" class="subcategory-list-items">All</a></li>
+                                    <li><a href="" class="subcategory-list-items">Tops + Sweaters</a></li>
+                                    <li><a href="" class="subcategory-list-items">Bottoms</a></li>
+                                    <li><a href="" class="subcategory-list-items">Sleep Sets</a></li>
+                                    <li><a href="" class="subcategory-list-items">Underwear</a></li>
+                                    <li><a href="" class="subcategory-list-items">Accessories</a></li>
+                                    <li><a href="" class="subcategory-list-items">Robes + Cardigans</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="fabrics-list">
+                                    <li><a href="" class="category-list-items">Fabrics</a></li>
+                                    <li><a href="" class="subcategory-list-items">The Linen Shop</a></li>
+                                    <li><a href="" class="subcategory-list-items">Washable Silk</a></li>
+                                    <li><a href="" class="subcategory-list-items">Restore Pima</a></li>
+                                    <li><a href="" class="subcategory-list-items">Soft Modal</a></li>
+                                    <li><a href="" class="subcategory-list-items">Cool Pima</a></li>
+                                    <li><a href="" class="subcategory-list-items">Organic Pima</a></li>
+                                    <li><a href="" class="subcategory-list-items">Warm Layers</a></li>
+                                    <li><a href="" class="subcategory-list-items">Brushed Flannel</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li id="bestseller-navbar" class="navbar-item-hover">
+                        <a class="navbar-font" href="#">best sellers</a>
+                        <ul class="bestseller-list navbar-lists d-flex">
+                            <li>
+                                <ul class="bestsellers-list-s">
+                                    <li>
+                                        <a href="~/Assets/html/bestsellers.html" class="category-list-items">
+                                            best
+                                            sellers
+                                        </a>
+                                    </li>
+                                    <li><a href="" class="subcategory-list-items">all best sellers</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="goodfor-list">
+                                    <li><a href="" class="category-list-items">good for you</a></li>
+                                    <li><a href="" class="subcategory-list-items">Doubling your ZZZ's</a></li>
+                                    <li><a href="" class="subcategory-list-items">Working From Home</a></li>
+                                    <li><a href="" class="subcategory-list-items">Travel</a></li>
+                                    <li><a href="" class="subcategory-list-items">Self-Care</a></li>
+                                    <li><a href="" class="subcategory-list-items">Spring</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="about-navbar" class="navbar-item-hover">
+                        <a class="navbar-font" href="~/Assets/html/about.html">about</a>
+                        <ul class="about-list navbar-lists d-flex">
+                            <li>
+                                <ul class="about-list-s">
+                                    <li><a href="" class="category-list-items">about</a></li>
+                                    <li><a href="" class="subcategory-list-items">our story</a></li>
+                                    <li><a href="" class="subcategory-list-items">our fabrics</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="shopinperson-list">
+                                    <li><a href="" class="category-list-items">shop in-person</a></li>
+                                    <li><a href="" class="subcategory-list-items">Our Bedrooms</a></li>
+                                    <li><a href="" class="subcategory-list-items">New York City</a></li>
+                                    <li><a href="" class="subcategory-list-items">Atlanta</a></li>
+                                    <li><a href="" class="subcategory-list-items">Los Angeles</a></li>
+                                    <li><a href="" class="subcategory-list-items">San Francisco</a></li>
+                                    <li><a href="" class="subcategory-list-items">Houston</a></li>
+                                    <li><a href="" class="subcategory-list-items">Virtual Styling</a> </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="navbar-item-hover">
+                        <a class=" navbar-font" href="~/Assets/html/contactus.html">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-mobile col-5  align-items-center">
+                <button type="button" id="mobile-menu-trigger" aria-label="Open menu"><hr></button>
+                <button type="button" class="header-search-pane-trigger t-link" aria-label="Search">
+                    <svg class="svg-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.58 19.76"><g><path fill-rule="evenodd" fill="currentColor" d="M14,7.53A6.38,6.38,0,1,1,7.57,1.16h0A6.37,6.37,0,0,1,14,7.52Zm-2.22,6.1a7.48,7.48,0,1,1,.79-.63l6,6.05-.7.71Z"></path></g></svg>
+                    <svg class="svg-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85"><g><path d="M6.72 7.42L0 14.14l.71.71 6.71-6.72 6.72 6.72.71-.71-6.72-6.72L14.85.71 14.14 0 7.42 6.72.71 0 0 .71z" fill="currentColor" fill-rule="evenodd"></path></g></svg>
+                </button>
+            </div>
+            <div class="custom-logo col-lg-2 col-2 d-flex justify-content-center">
+                <a class="logo-font" href="/index.html">
+                    <svg class="svg-logo" viewBox="0 0 121 70" xmlns="http://www.w3.org/2000/svg" style="height: 70px;">
+                        <path d="M60.2018 0.731934H69.6118V69.0634H60.2608V38.0121H55.7514V69.0334H46.3856V0.776827H55.6923V30.0249H60.2018V0.731934Z"
+                              fill="currentColor"></path>
+                        <path d="M97.3623 35.0679C97.3623 27.5258 97.3254 19.9837 97.3881 12.4379C97.415 10.6915 97.6128 8.95204 97.9786 7.24521C98.6502 4.01289 100.82 2.00765 103.78 0.971366C107.623 -0.453397 111.866 -0.285383 115.588 1.43901C118.463 2.72595 119.991 5.03047 120.463 8.08696C120.676 9.44814 120.784 10.824 120.788 12.2022C120.81 27.3138 120.81 42.4266 120.788 57.5407C120.764 59.1335 120.601 60.721 120.301 62.2845C119.706 65.5804 117.669 67.7577 114.636 68.8651C110.651 70.3166 106.614 70.3241 102.676 68.5957C99.6982 67.2863 98.1335 64.8546 97.676 61.6634C97.4755 60.2183 97.3744 58.7607 97.3734 57.3013C97.3438 49.8902 97.3623 42.479 97.3623 35.0679ZM111.263 34.7424C111.263 27.2789 111.263 19.8154 111.263 12.3481C111.263 11.3424 111.16 10.3395 110.957 9.3552C110.884 8.91482 110.65 8.51871 110.301 8.24661C109.951 7.9745 109.513 7.84661 109.075 7.88868C108.64 7.86586 108.212 8.0056 107.872 8.28141C107.532 8.55723 107.303 8.94995 107.23 9.38513C107.06 10.0805 106.972 10.7938 106.968 11.5101C106.953 26.9434 106.953 42.3768 106.968 57.8101C106.975 58.5521 107.027 59.2929 107.123 60.0286C107.27 61.2183 107.938 61.8692 108.99 61.8991C109.482 61.9461 109.972 61.7939 110.354 61.4757C110.736 61.1575 110.978 60.6991 111.027 60.2007C111.192 59.1803 111.276 58.1482 111.278 57.1143C111.274 49.6732 111.263 42.2059 111.263 34.7424Z"
+                              fill="currentColor"></path>
+                        <path d="M25.3848 0.735672H39.7508C41.4138 23.5091 43.0781 46.2862 44.7436 69.0671H35.5181C35.1786 63.0813 34.8354 57.0955 34.4922 51.0686H29.8352C29.4957 57.0768 29.1525 63.0402 28.8093 69.0708H20.392C22.0501 46.2999 23.7144 23.5215 25.3848 0.735672ZM32.1047 7.38363C31.4847 19.7069 30.8758 31.8355 30.2596 44.0016H34.0199C33.3815 31.8281 32.7431 19.7031 32.1047 7.38363Z"
+                              fill="currentColor"></path>
+                        <path d="M94.9675 16.5344H85.7752C85.7752 15.0379 85.7973 13.5939 85.7752 12.1461C85.7798 11.2979 85.7156 10.4508 85.5833 9.61332C85.3877 8.52466 84.7013 8.00838 83.657 7.98594C82.5499 7.96349 81.8562 8.4461 81.6237 9.57217C81.4556 10.3767 81.3678 11.1964 81.3617 12.0189C81.3469 27.2153 81.3469 42.4129 81.3617 57.6118C81.3626 58.461 81.4454 59.308 81.6089 60.1408C81.8414 61.3043 82.6939 61.8729 83.9301 61.8205C85.1663 61.7682 85.6534 61.3043 85.8342 60.0323C85.9418 59.2151 85.9924 58.3913 85.9855 57.5669C85.9855 52.1498 85.9855 46.7177 85.9855 41.308C85.9855 41.0723 85.9597 40.8404 85.9375 40.5149H83.6865V33.3806H94.9121C94.9121 33.6387 94.9564 33.9193 94.9564 34.1999C94.9564 42.2209 94.9749 50.2455 94.9564 58.2702C94.9367 59.6755 94.8134 61.0774 94.5874 62.464C94.0818 65.7001 92.1961 67.8961 89.196 68.9399C85.1921 70.3353 81.1513 70.2792 77.2397 68.4947C74.2211 67.1142 72.6971 64.5665 72.2543 61.3529C72.0241 59.5619 71.9156 57.7569 71.9295 55.9507C71.9049 41.525 71.9049 27.098 71.9295 12.6698C71.9537 10.868 72.164 9.0737 72.5569 7.31628C73.21 4.28972 75.1769 2.23959 77.9593 1.12474C79.8232 0.359257 81.8186 -0.0227196 83.8294 0.00104445C85.8402 0.0248085 87.8263 0.453838 89.672 1.26316C92.2847 2.35931 93.7792 4.42066 94.4287 7.19657C95.152 10.2643 94.8863 13.3619 94.9675 16.5344Z"
+                              fill="currentColor"></path>
+                        <path d="M0.804321 0.750595H10.1295V61.2444H18.3549V69.0483H0.804321V0.750595Z"
+                              fill="currentColor">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <div class="custom-settings col-lg-5 col-5">
+                <ul class="d-flex align-items-center justify-content-end">
+                    <li class="navbar-search">
+                        <a class="navbar-font" href="">
+                            <svg class="svg-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.58 19.76">
+                                <g>
+                                    <path fill-rule="evenodd" fill="currentColor"
+                                          d="M14,7.53A6.38,6.38,0,1,1,7.57,1.16h0A6.37,6.37,0,0,1,14,7.52Zm-2.22,6.1a7.48,7.48,0,1,1,.79-.63l6,6.05-.7.71Z">
+                                    </path>
+                                </g>
+                            </svg>
+                            search
+                        </a>
+                    </li>
+                    <li class="navbar-login">
+                        <a class=" navbar-font" href="~/Assets/html/login.html">login</a>
+                    </li>
+                    <li>
+                        <a class=" navbar-font" href="">
+                            <svg class="svg-heart svg-search" width="20" viewBox="0 0 20 17.74"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" stroke="currentColor"
+                                      d="M11 1.68908L12.9661 7.73999L13.0783 8.08548L13.4416 8.08549H19.8039L14.6567 11.8252L14.3628 12.0387L14.475 12.3842L16.4411 18.4351L11.2939 14.6954L11 14.4819L10.7061 14.6954L5.55889 18.4351L7.52495 12.3842L7.63721 12.0387L7.34332 11.8252L2.1961 8.08549H8.55841L8.92168 8.08548L9.03394 7.73999L11 1.68908Z">
+                                </path>
+                            </svg>
+                        </a>
+
+                    </li>
+                    <li class="">
+                        <a class="navbar-font minicart-button" href="">
+                            <svg class="svg-bag svg-search" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20.08 20.69">
+                                <g>
+                                    <path stroke="currentColor" fill="none"
+                                          d="M1.36,7.77a1.5,1.5,0,0,1,1.49-1.4H17.23a1.51,1.51,0,0,1,1.5,1.4l.82,12.42H.53Z">
+                                    </path>
+                                    <path stroke="currentColor" fill="none"
+                                          d="M6.65,10.08V3.89a3.4,3.4,0,0,1,6.79,0v6.19"></path>
+                                </g>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sidebar flex-column justify-content-between">
+            <ul class="sidebar-options text-start">
+                <li class="sidebar-option"><a href="~/Assets/html/shop.html">shop</a></li>
+                <li class="sidebar-option"><a href="">best sellers</a></li>
+                <li class="sidebar-option"><a href="~/Assets/html/about.html">about</a></li>
+                <li class="sidebar-option"><a href="~/Assets/html/contactus.html">Contact Us</a></li>
+            </ul>
+            <div class="sales row justify-content-around g-0">
+                <span class="col-4 sidebar-add">shop for her</span><span class="col-4 sidebar-add">get $20 off</span>
+            </div>
+            <div class="login-button d-flex justify-content-center">
+                <a href="" class="text-center">Login</a>
+            </div>
+        </div>
+        <div class="sidebar-wraper">
+
+        </div>
+    </div>
+    <div class="introduction">
+        <img class="intro-img"
+             src="@Model.Settings.FirstOrDefault(s=>s.Key == "IndexHero").Value"
+             alt="">
+        <img class="mobile-intro-img" src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/LAHGO_HPBanner_Mobile_June2022_1024x1024.jpg?v=1655225233" alt="">
+        <div class="ccontainer">
+            <div class="intro-text">
+                <h2 class="intro-title">Considered Restwear</h2>
+                <p class="intro-desc col-lg-5">
+                    Our sleepwear is designed to perform, in bed and in life. Innovative
+                    fabrics and functional
+                    silhouettes keep you cool, comfortable and confident as you move about your day — and back into
+                    bed.
+                </p>
+            </div>
+        </div>
+        <div class="button-container">
+            <a class="intro-button" href="">shop sleepwear</a>
+        </div>
+        <div class="mobile-button-container d-flex justify-content-center align-items-center">
+            <a class="mobile-button" href="">shop sleepwear</a>
+        </div>
+
+    </div>
+
+
+</header>
+

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LAHGO.Core;
 using LAHGO.Core.Entities;
 using LAHGO.Core.Repositories;
 using LAHGO.Service.Exceptions;
@@ -19,19 +20,19 @@ namespace LAHGO.Service.Implementations
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
-        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper, IWebHostEnvironment env)
+        public CategoryService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env)
         {
-            _categoryRepository = categoryRepository;
             _mapper = mapper;
             _env = env;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task DeleteAsync(int id)
         {
-            Category category = await _categoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
+            Category category = await _unitOfWork.CategoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
             if (category == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -39,11 +40,11 @@ namespace LAHGO.Service.Implementations
             category.IsDeleted = true;
             category.DeletedAt = DateTime.UtcNow.AddHours(4);
 
-            await _categoryRepository.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
         public async Task RestoreAsync(int id)
         {
-            Category category = await _categoryRepository.GetAsync(c => c.IsDeleted && c.Id == id);
+            Category category = await _unitOfWork.CategoryRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
             if (category == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -51,12 +52,12 @@ namespace LAHGO.Service.Implementations
             category.IsDeleted = false;
             category.DeletedAt = null;
 
-            await _categoryRepository.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
 
         public IQueryable<CategoryListVM> GetAllAysnc(int? status)
         {
-            List<CategoryListVM> categoryListVMs = _mapper.Map<List<CategoryListVM>>(_categoryRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            List<CategoryListVM> categoryListVMs = _mapper.Map<List<CategoryListVM>>(_unitOfWork.CategoryRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
 
             IQueryable<CategoryListVM> query = categoryListVMs.AsQueryable();
 
@@ -76,7 +77,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task<CategoryGetVM> GetById(int id)
         {
-            Category category = await _categoryRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
+            Category category = await _unitOfWork.CategoryRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
 
             if (category == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
@@ -94,19 +95,19 @@ namespace LAHGO.Service.Implementations
             category.Name = categoryCreateVM.Name;
             category.Image = await categoryCreateVM.FormImage.CreateAsync(_env, "Manage", "assets", "img", "categories");
 
-            await _categoryRepository.AddAsync(category);
-            await _categoryRepository.CommitAsync();
+            await _unitOfWork.CategoryRepository.AddAsync(category);
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task UpdateAsync(int id, CategoryUpdateVM categoryUpdateVM)
         {
-            Category category = await _categoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id || c.IsDeleted);
+            Category category = await _unitOfWork.CategoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id || c.IsDeleted);
 
             if (category == null)
                 throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
 
             
-            if (await _categoryRepository.IsExistAsync(c => c.Name.ToLower() == categoryUpdateVM.Name.Trim().ToLower()))
+            if (await _unitOfWork.CategoryRepository.IsExistAsync(c => c.Name.ToLower() == categoryUpdateVM.Name.Trim().ToLower()))
             {
                 if (category.Name == categoryUpdateVM.Name)
                 {
@@ -119,7 +120,7 @@ namespace LAHGO.Service.Implementations
 
                     category.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
-                    await _categoryRepository.CommitAsync();
+                    await _unitOfWork.CommitAsync();
                 }
                 else
                 {
@@ -135,7 +136,7 @@ namespace LAHGO.Service.Implementations
 
             category.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
-            await _categoryRepository.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
     }
 }

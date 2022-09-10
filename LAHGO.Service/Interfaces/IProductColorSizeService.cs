@@ -12,7 +12,7 @@ namespace LAHGO.Service.Interfaces
         Task CreateAsync(PCSCreateVM pcsCreateVM);
         IQueryable<PCSListVM> GetAllAysnc(int? status);
         Task<PCSGetVM> GetById(int id);
-        Task UpdateAsync(int id, PCSUpdateVM pcsUpdateVM);
+        Task UpdateAsync(int id, PCSGetVM pcsUpdateVM, int prodId);
         Task DeleteAsync(int id);
         Task RestoreAsync(int id);
     }

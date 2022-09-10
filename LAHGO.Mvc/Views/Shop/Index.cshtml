@@ -1,0 +1,660 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+@await Component.InvokeAsync("ShopHeader")
+<section id="section1-shop">
+    <div class="ccontainer">
+        <div class="site-navigation">
+            <ul class="text-start d-flex">
+                <li class="navigation-options"><a href="/index.html">Home</a></li>
+                <li class="separator">/</li>
+                <li class="navigation-options navigation-options-active"> All</li>
+            </ul>
+        </div>
+        <div class="shop-introduction text-center">
+            <div class="shop-title section-title">
+                All
+            </div>
+            <div class="shop-describtion section-describtion">
+                Reinvent your R&R with Lahgo. Meet the key pieces responsible for looking and feeling your best,
+                even when no one’s watching.
+            </div>
+        </div>
+    </div>
+</section>
+<section id="section2-shop">
+    <div class="ccontainer sp-container">
+        <div class="shop-sorting">
+            <div class="mobile-sorting ">
+                <div class="mobile-sorting-wraper  row g-0">
+                    <div class="mobile-filter col-6 ">
+                        <div id="mobile-filter" class="product-size d-flex align-items-center justify-content-center">
+                            filter <svg class="svg-caret-down"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                <g>
+                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mobile-sort col-6">
+                        <div id="mobile-sort" class="product-size d-flex align-items-center justify-content-center">
+                            sort <svg class="svg-caret-down"
+                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                <g>
+                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <ul class="mobile-sort-list">
+                            <li class="mobile-product-name">Sort by featured</li>
+                            <li class="mobile-product-name">Sort by most popular</li>
+                            <li class="mobile-product-name">Sort by newest</li>
+                        </ul>
+                    </div>
+                    <div class="mobile-filter-big">
+                        <div class="mobile-settings">
+                            <div class="mobile-sizes mobile-filtes">
+                                <p>Size</p>
+                                <ul class="row g-0 mobile-sizes-list mobile-filter-list">
+                                    <li class="col-6">OS</li>
+                                    <li class="col-6">S</li>
+                                    <li class="col-6">M</li>
+                                    <li class="col-6">L</li>
+                                    <li class="col-6">XL</li>
+                                    <li class="col-6">XXL</li>
+                                </ul>
+                            </div>
+                            <div class="mobile-colors mobile-filtes">
+                                <p>Color</p>
+                                <ul class="row g-0 mobile-colors-list mobile-filter-list">
+                                    <li class="d-flex align-items-center col-6">
+                                        <div class="small-colors" style="background-color: black;">
+
+                                        </div>
+                                        <span>Black</span>
+                                    </li>
+                                    <li class="d-flex align-items-center col-6">
+                                        <div class="small-colors" style="background-color: red;">
+
+                                        </div>
+                                        <span>Red</span>
+                                    </li>
+                                    <li class="d-flex align-items-center col-6">
+                                        <div class="small-colors" style="background-color: grey;">
+
+                                        </div>
+                                        <span>Grey</span>
+                                    </li>
+                                    <li class="d-flex align-items-center col-6">
+                                        <div class="small-colors" style="background-color: blue;">
+
+                                        </div>
+                                        <span>Blue</span>
+                                    </li>
+                                    <li class="d-flex align-items-center col-6">
+                                        <div class="small-colors" style="background-color: wheat;">
+
+                                        </div>
+                                        <span>Wheat</span>
+                                    </li>
+                                    <li class="d-flex align-items-center col-6">
+                                        <div class="small-colors" style="background-color: green;">
+
+                                        </div>
+                                        <span>Green</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="mobile-types mobile-filtes">
+                                <p>Type</p>
+                                <ul class="row g-0 mobile-types-list mobile-filter-list">
+                                    <li class="col-6">Accessories</li>
+                                    <li class="col-6">Cardigan</li>
+                                    <li class="col-6">Pant</li>
+                                    <li class="col-6">Robe</li>
+                                    <li class="col-6">Sets</li>
+                                    <li class="col-6">Short</li>
+                                    <li class="col-6">Sweater</li>
+                                    <li class="col-6">Sweatshirt</li>
+                                    <li class="col-6">Tank</li>
+                                    <li class="col-6">Tee</li>
+                                    <li class="col-6">Top</li>
+                                    <li class="col-6">Underwear</li>
+                                </ul>
+                            </div>
+                            <div class="mobile-fit mobile-filtes">
+                                <p>Fit</p>
+                                <ul class="row g-0 mobile-fits-list mobile-filter-list">
+                                    <li class="col-6">Easy</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <button class="login-button register-button">
+                            Apply
+                        </button>
+                        <button id="cancel-filtering" class="login-button">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="product-settings  justify-content-between">
+                <ul class="d-flex">
+                    <li class="size-dropdown dropdowns">
+                        <div class="product-size d-flex align-items-center ">
+                            size <svg class="svg-caret-down"
+                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                <g>
+                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <ul class="size-list lists">
+                            <li>OS</li>
+                            <li>S</li>
+                            <li>M</li>
+                            <li>L</li>
+                            <li>XL</li>
+                            <li>XXL</li>
+                        </ul>
+                    </li>
+                    <li class="size-dropdown dropdowns">
+                        <div class="product-size d-flex align-items-center ">
+                            color <svg class="svg-caret-down"
+                                       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                <g>
+                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <ul class="color-list lists">
+                            <li class="d-flex align-items-center">
+                                <div class="small-colors" style="background-color: black;">
+
+                                </div>
+                                <span>Black</span>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="small-colors" style="background-color: red;">
+
+                                </div>
+                                <span>Red</span>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="small-colors" style="background-color: grey;">
+
+                                </div>
+                                <span>Grey</span>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="small-colors" style="background-color: blue;">
+
+                                </div>
+                                <span>Blue</span>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="small-colors" style="background-color: wheat;">
+
+                                </div>
+                                <span>Wheat</span>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="small-colors" style="background-color: green;">
+
+                                </div>
+                                <span>Green</span>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="size-dropdown dropdowns">
+                        <div class="product-size d-flex align-items-center ">
+                            type <svg class="svg-caret-down"
+                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                <g>
+                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <ul class="type-list lists">
+                            <li>Accessories</li>
+                            <li>Cardigan</li>
+                            <li>Pant</li>
+                            <li>Robe</li>
+                            <li>Sets</li>
+                            <li>Short</li>
+                            <li>Sweater</li>
+                            <li>Sweatshirt</li>
+                            <li>Tank</li>
+                            <li>Tee</li>
+                            <li>Top</li>
+                            <li>Underwear</li>
+                        </ul>
+                    </li>
+                    <li class="size-dropdown dropdowns">
+                        <div class="product-size d-flex align-items-center ">
+                            fit <svg class="svg-caret-down"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                <g>
+                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <ul class="type-list lists">
+                            <li>Easy</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="size-dropdown dropdowns">
+                        <div class="product-size d-flex align-items-center ">
+                            sort <svg class="svg-caret-down"
+                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                <g>
+                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <ul class="adds-list lists">
+                            <li>Featured</li>
+                            <li>Most popular</li>
+                            <li>Newest</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="section3-shop">
+    <div class="ccontainer">
+        <div class="products row ">
+            <div class="product col-lg-4 col-6">
+                <a href="">
+                    <div class="product-top">
+                        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/2_WashableSilkButtonUpShortSet_MeditativeGrey_0035_1024x1024.jpg?v=1658950643"
+                             alt="">
+                        <button type="button" class="add-to-favorites" title="Add to Wishlist">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </button>
+                        <div class="new-arrival">
+                            new arrival
+                        </div>
+                    </div>
+                </a>
+
+                <div class="product-bottom">
+                    <div class="mobile-product-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="product-name">
+                        WASHABLE SILK BUTTON UP SHORT SET
+                    </div>
+                    <div class="product-price">
+                        $248
+                    </div>
+                    <form method="post" action="">
+                        <div class="quick-add d-flex align-items-center justify-content-center">
+                            + quick add
+                            <div class="sizes text-center">
+                                <ul class="d-flex justify-content-center">
+                                    <li>S</li>
+                                    <li>M</li>
+                                    <li>L</li>
+                                    <li>XL</li>
+                                    <li>XXL</li>
+                                </ul>
+                                <div class="size-selection">Select a size</div>
+
+                            </div>
+                        </div>
+
+                        <div class="colors">
+                            <ul class=" d-flex ">
+                                <li class="d-flex align-items-center small-colors" style="background-color: black;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: red;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: grey;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: blue;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: wheat;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: green;">
+
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="product col-lg-4 col-6">
+                <div class="product-top">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/2_WashableSilkButtonUpShortSet_MeditativeGrey_0035_1024x1024.jpg?v=1658950643"
+                         alt="">
+                    <button type="button" class="add-to-favorites" title="Add to Wishlist">
+                        <ion-icon name="star-outline"></ion-icon>
+                    </button>
+                    <div class="new-arrival">
+                        new arrival
+                    </div>
+                </div>
+                <div class="product-bottom">
+                    <div class="mobile-product-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="product-name">
+                        WASHABLE SILK BUTTON UP SHORT SET
+                    </div>
+                    <div class="product-price">
+                        $248
+                    </div>
+                    <form method="post" action="">
+                        <div class="quick-add d-flex align-items-center justify-content-center">
+                            + quick add
+                            <div class="sizes text-center">
+                                <ul class="d-flex justify-content-center">
+                                    <li>S</li>
+                                    <li>M</li>
+                                    <li>L</li>
+                                    <li>XL</li>
+                                    <li>XXL</li>
+                                </ul>
+                                <div class="size-selection">Select a size</div>
+
+                            </div>
+                        </div>
+
+                        <div class="colors">
+                            <ul class=" d-flex ">
+                                <li class="d-flex align-items-center small-colors" style="background-color: black;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: red;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: grey;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: blue;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: wheat;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: green;">
+
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="product col-lg-4 col-6">
+                <div class="product-top">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/2_WashableSilkButtonUpShortSet_MeditativeGrey_0035_1024x1024.jpg?v=1658950643"
+                         alt="">
+                    <button type="button" class="add-to-favorites" title="Add to Wishlist">
+                        <ion-icon name="star-outline"></ion-icon>
+                    </button>
+                    <div class="new-arrival">
+                        new arrival
+                    </div>
+                </div>
+                <div class="product-bottom">
+                    <div class="mobile-product-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="product-name">
+                        WASHABLE SILK BUTTON UP SHORT SET
+                    </div>
+                    <div class="product-price">
+                        $248
+                    </div>
+                    <form method="post" action="">
+                        <div class="quick-add d-flex align-items-center justify-content-center">
+                            + quick add
+                            <div class="sizes text-center">
+                                <ul class="d-flex justify-content-center">
+                                    <li>S</li>
+                                    <li>M</li>
+                                    <li>L</li>
+                                    <li>XL</li>
+                                    <li>XXL</li>
+                                </ul>
+                                <div class="size-selection">Select a size</div>
+
+                            </div>
+                        </div>
+
+                        <div class="colors">
+                            <ul class=" d-flex ">
+                                <li class="d-flex align-items-center small-colors" style="background-color: black;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: red;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: grey;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: blue;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: wheat;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: green;">
+
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="product col-lg-4 col-6">
+                <div class="product-top">
+                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/2_WashableSilkButtonUpShortSet_MeditativeGrey_0035_1024x1024.jpg?v=1658950643"
+                         alt="">
+                    <button type="button" class="add-to-favorites" title="Add to Wishlist">
+                        <ion-icon name="star-outline"></ion-icon>
+                    </button>
+                    <div class="new-arrival">
+                        new arrival
+                    </div>
+                </div>
+                <div class="product-bottom">
+                    <div class="mobile-product-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="product-name">
+                        WASHABLE SILK BUTTON UP SHORT SET
+                    </div>
+                    <div class="product-price">
+                        $248
+                    </div>
+                    <form method="post" action="">
+                        <div class="quick-add d-flex align-items-center justify-content-center">
+                            + quick add
+                            <div class="sizes text-center">
+                                <ul class="d-flex justify-content-center">
+                                    <li>S</li>
+                                    <li>M</li>
+                                    <li>L</li>
+                                    <li>XL</li>
+                                    <li>XXL</li>
+                                </ul>
+                                <div class="size-selection">Select a size</div>
+
+                            </div>
+                        </div>
+
+                        <div class="colors">
+                            <ul class=" d-flex ">
+                                <li class="d-flex align-items-center small-colors" style="background-color: black;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: red;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: grey;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: blue;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: wheat;">
+
+                                </li>
+                                <li class="d-flex align-items-center small-colors" style="background-color: green;">
+
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <button class="load-more">
+            + Load More
+        </button>
+    </div>
+</section>
+<section id="section4-shop">
+    <div class="ccontainer">
+        <div class="section-title text-center">
+            OUR BEST SELLERS
+        </div>
+        <div class="bestsellers row">
+            <div class="bestseller col-lg-3 col-6">
+                <a href="">
+                    <div class="bestseller-top">
+                        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/DSC08571-min.jpg?v=1634004364"
+                             alt="">
+                    </div>
+                </a>
+                <div class="bestseller-bottom">
+                    <div class="mobile-product-name bestseller-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="bestseller-name product-name">
+                        Washable Silk Short Set
+                    </div>
+                    <div class="bestseller-price product-price">
+                        $248
+                    </div>
+                </div>
+            </div>
+            <div class="bestseller col-lg-3 col-6">
+                <a href="">
+                    <div class="bestseller-top">
+                        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/DSC08571-min.jpg?v=1634004364"
+                             alt="">
+                    </div>
+                </a>
+                <div class="bestseller-bottom">
+                    <div class="mobile-product-name bestseller-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="bestseller-name product-name">
+                        Washable Silk Short Set
+                    </div>
+                    <div class="bestseller-price product-price">
+                        $248
+                    </div>
+                </div>
+            </div>
+            <div class="bestseller col-lg-3 col-6">
+                <a href="">
+                    <div class="bestseller-top">
+                        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/DSC08571-min.jpg?v=1634004364"
+                             alt="">
+                    </div>
+                </a>
+                <div class="bestseller-bottom">
+                    <div class="mobile-product-name bestseller-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="bestseller-name product-name">
+                        Washable Silk Short Set
+                    </div>
+                    <div class="bestseller-price product-price">
+                        $248
+                    </div>
+                </div>
+            </div>
+            <div class="bestseller col-lg-3 col-6">
+                <a href="">
+                    <div class="bestseller-top">
+                        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/DSC08571-min.jpg?v=1634004364"
+                             alt="">
+                    </div>
+                </a>
+                <div class="bestseller-bottom">
+                    <div class="mobile-product-name bestseller-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="bestseller-name product-name">
+                        Washable Silk Short Set
+                    </div>
+                    <div class="bestseller-price product-price">
+                        $248
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="section5-shop">
+    <div class="ccontainer">
+        <div class="section-title text-center">
+            WHY LAHGO?
+        </div>
+        <div class="section5-shop-content row">
+            <div class="section5-shop-text text-center col-lg-3 col-7">
+                <div class="s5-shop-title">
+                    Free Ground Shipping on U.S. Orders 150 USD or more
+                </div>
+                <div class="s5-shop-describtion">
+                    We take the hassle out of shopping with free Ground Shipping on U.S. orders of $150 or more.
+                </div>
+            </div>
+            <div class="section5-shop-text text-center col-lg-3 col-7">
+                <div class="s5-shop-title">
+                    Free Ground Shipping on U.S. Orders 150 USD or more
+                </div>
+                <div class="s5-shop-describtion">
+                    We take the hassle out of shopping with free Ground Shipping on U.S. orders of $150 or more.
+                </div>
+            </div>
+            <div class="section5-shop-text text-center col-lg-3 col-7">
+                <div class="s5-shop-title">
+                    Free Ground Shipping on U.S. Orders 150 USD or more
+                </div>
+                <div class="s5-shop-describtion">
+                    We take the hassle out of shopping with free Ground Shipping on U.S. orders of $150 or more.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

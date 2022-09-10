@@ -16,14 +16,16 @@ namespace LAHGO.Service.ViewModels.PCSVMs
         public string Describtion { get; set; }
         public int CategoryId { get; set; }
         public IFormFile MainFormImage { get; set; }
+        public int ProductId { get; set; }
         public Product Product { get; set; }
         public Category Category { get; set; }
         public List<IFormFile> DetailFormImages { get; set; }
         public List<Color> Colors { get; set; }
+        public int ColorId { get; set; }
         public Color Color { get; set; }
+        public int SizeId { get; set; }
         public Size Size { get; set; }
         public List<Size> Sizes { get; set; }
-        public List<ProductColorSize> ProductColorSizes { get; set; }
 
     }
 }

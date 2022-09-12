@@ -1,0 +1,266 @@
+﻿@model DetailVM
+@{ 
+    List<Photo> photos = Model.Product.Photos.Where(p=>p.ProductId == Model.Product.Id && !p.IsDeleted).ToList();
+    Product product = Model.Product;
+}
+@{
+    ViewData["Title"] = "Detail";
+}
+
+@await Component.InvokeAsync("DetailHeader") 
+<section id="section1-detail">
+    <div class="ccontainer row g-o">
+        <div class="detail1-left col-lg-8">
+            <div class="all-pics row g-3">
+                <div class="main-pic add-pic col-lg-12">
+                    <img src="~/Manage/assets/img/productMainImg/@Model.Product.MainImage"
+                         alt="">
+                </div>
+                @if (photos[0] != null)
+                {
+                    <div class="pic1 add-pic col-lg-6">
+                        <img src="~/Manage/assets/img/productDetailImages/@photos[0].Image"
+                             alt="">
+                    </div>
+                }
+                @if (photos[1] != null)
+                {
+                    <div class="pic1 add-pic col-lg-6">
+                        <img src="~/Manage/assets/img/productDetailImages/@photos[1].Image"
+                             alt="">
+                    </div>
+                }
+                @if (photos[2] != null)
+                {
+                    <div class="pic1 add-pic col-lg-12">
+                        <img src="~/Manage/assets/img/productDetailImages/@photos[3].Image"
+                             alt="">
+                    </div>
+                }
+                @if (photos[3] != null)
+                {
+                    <div class="pic1 add-pic col-lg-6">
+                        <img src="~/Manage/assets/img/productDetailImages/@photos[3].Image"
+                             alt="">
+                    </div>
+                }
+                @if (photos[4] != null)
+                {
+                    <div class="pic1 add-pic col-lg-6">
+                        <img src="~/Manage/assets/img/productDetailImages/@photos[4].Image"
+                             alt="">
+                    </div>
+                }
+               
+            </div>
+        </div>
+        <div class="detail1-left-mobile">
+            <div class="mobile-pic1 mobile-detail-pic">
+                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/01_LUNYA-LAHGO-RUSH-2022-05-1911480-min_2048x2048.jpg?v=1654708308"
+                     alt="">
+            </div>
+            <div class="mobile-pic2 mobile-detail-pic">
+                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/02_32_WOVEN_LINEN_PANTS_SINCEREWHITE_0003_2048x2048.jpg?v=1654708308"
+                     alt="">
+            </div>
+            <div class="mobile-pic3 mobile-detail-pic">
+                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/05_32_WOVEN_LINEN_PANTS_SINCEREWHITE_0040_2048x2048.jpg?v=1654708308"
+                     alt="">
+            </div>
+            <div class="mobile-pic4 mobile-detail-pic">
+                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/04_32_WOVEN_LINEN_PANTS_SINCEREWHITE_0086_2048x2048.jpg?v=1654708308"
+                     alt="">
+            </div>
+            <div class="mobile-pic5 mobile-detail-pic">
+                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/03_32_WOVEN_LINEN_PANTS_SINCEREWHITE_0054_2048x2048.jpg?v=1654708308"
+                     alt="">
+            </div>
+            <div class="mobile-pic6 mobile-detail-pic">
+                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/06_32_WOVEN_LINEN_PANTS_SINCEREWHITE_0058_2048x2048.jpg?v=1654708308"
+                     alt="">
+            </div>
+        </div>
+        <div class="detail1-right col-lg-4">
+            <div class="site-navigation">
+                <ul class="text-start align-items-center">
+                    <li class="navigation-options"><a href="/index.html">Home </a></li>
+                    <li class="separator">/</li>
+                    <li class="navigation-options navigation-options-active"> WOVEN LINEN PANT</li>
+                </ul>
+            </div>
+            <form action="" method="post">
+                <div class="detail-product-info">
+                    <div class="detail-name">
+                        @Model.Product.Name
+                    </div>
+                    <div class="detail-price">
+                        $@(product.DiscountedPrice< product.Price? product.DiscountedPrice : product.Price)
+                    </div>
+                    <div class="detail-describtion detail-price">
+                        @product.Describtion
+                    </div>
+                    <div class="detail-colors">
+                        <div class="detail-color-title navigation-options navigation-options-active">
+                            colors: <span class="selected-color"></span>
+                        </div>
+                        <ul class="d-flex">
+                            @foreach (var pcs in product.ProductColorSizes.Where(x => x.ProductId == product.Id))
+                            {
+                                <li class="d-flex align-items-center small-colors-optional small-colors"
+                                    style="background-color: @Model.Colors.FirstOrDefault(s => s.Id == pcs.ColorId).Name;" value="@Model.Colors.FirstOrDefault(s => s.Id == pcs.ColorId).Name">
+
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="detail-sizes">
+                        <div class="selected-size detail-color-title navigation-options navigation-options-active">
+
+                        </div>
+                        <ul class="d-flex">
+                            @foreach (var pcs in product.ProductColorSizes.Where(x => x.ProductId == product.Id))
+                            {
+                                <li class="detail-size-container" value="@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Definition">@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Name</li>
+                            }
+                        </ul>
+                    </div>
+                    <button formmethod="post" class="login-button register-button">
+                        add to cart
+                    </button>
+                    <div class="details-shipping">
+                        <ul>
+                            <li>
+                                <svg class="svg-shipping" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                              d="M.5,5,9.5.5l9,4.5-9,4.5Z"></path>
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                              d="M.5,14V5l9,4.5v9Z"></path>
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                              d="M18.5,14V5l-9,4.5v9Z"></path>
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                              d="M5,7.25l9-4.5"></path>
+                                    </g>
+                                </svg>
+                                Free Ground Shipping on U.S. Orders $150+
+                            </li>
+                            <li>
+                                <svg class="svg-returns" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 18.06 17.98">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" stroke-miterlimit="4"
+                                              d="M.75 11.23A8.68 8.68 0 013 3a8.86 8.86 0 0112.52.17l1.24 1.37">
+                                        </path>
+                                        <path fill="none" stroke="currentColor" d="M12.77 4.82l4.14-.07-.16-4.2">
+                                        </path>
+                                        <path fill="none" stroke="currentColor" stroke-miterlimit="4"
+                                              d="M17.4 7.45A8.3 8.3 0 0115.08 15a8 8 0 01-11.36.26L2.63 14"></path>
+                                        <path fill="none" stroke="currentColor" d="M6.27 13.67l-3.76.2v3.8"></path>
+                                    </g>
+                                </svg>
+                                Free returns on all U.S. Orders
+                            </li>
+                            <li>
+
+                                <svg class="svg-gifts" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 19.3">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" d="M1.5 10.8h15v8h-15z"></path>
+                                        <path fill="none" stroke="currentColor" d="M7.51 6.8h3v12h-3v-12z"></path>
+                                        <path fill="none" stroke="currentColor"
+                                              d="M.51 6.8h17v4H.5v-4zM8.71 6.16h-4.9a2 2 0 01-1.32-3.51 2 2 0 012.69-2 2.05 2.05 0 011 .79c.14.22.91 1.67 1.67 3.11zM9.29 6.16h4.9a2 2 0 001.32-1.72 2 2 0 00-2.69-2 2.05 2.05 0 00-1 .79c-.14.22-.91 1.67-1.67 3.11z">
+                                        </path>
+                                    </g>
+                                </svg>
+                                Gift packaging available
+                                <div class="tooltip">
+                                    <svg class="svg-tooltip" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <g>
+                                            <circle id="circle" fill="none" stroke="currentColor" cx="10" cy="10"
+                                                    r="9.5"></circle>
+                                            <path id="question" fill="currentColor"
+                                                  d="M9.12,12.59h1.1v-.71a3.58,3.58,0,0,1,1.32-2.4A4,4,0,0,0,13,6.73,2.59,2.59,0,0,0,10.16,4,3.16,3.16,0,0,0,7,7.28H8.16a2.05,2.05,0,0,1,2-2.14,1.47,1.47,0,0,1,1.6,1.64,3.17,3.17,0,0,1-1.09,2,4.25,4.25,0,0,0-1.54,3ZM9.64,16a1.06,1.06,0,0,0,0-2.11,1.06,1.06,0,0,0,0,2.11Z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    <div class="tooltip-content">
+                                        <h3 class="t-b-2">Give the gift of sleep</h3>
+                                        <p class="t-b-2 cr-subdued">
+                                            One box per order, all items in the order will
+                                            be
+                                            placed inside the gift box. Make it personal — include a gift message to
+                                            be
+                                            placed in your gift box along with a gift receipt.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="slide-toggles">
+                        <li class="slide-toggle">
+                            <strong class="toggle-click">Something</strong>
+                            <ul class="toggle-list">
+                                <li>Something</li>
+                                <li>Something</li>
+                                <li>Something</li>
+                                <li>Something</li>
+                            </ul>
+                        </li>
+                        <li class="slide-toggle">
+                            <strong class="toggle-click">Something</strong>
+                            <ul class="toggle-list">
+                                <li>Something</li>
+                                <li>Something</li>
+                                <li>Something</li>
+                                <li>Something</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<div class="popup-pic-list">
+    <div class="popup-modal">
+
+    </div>
+    <div class="popup-wraper">
+        <ul class="pic-list">
+            <li class="popup-pic">
+                <img src="~/Manage/assets/img/productDetailImages/@photos[0].Image"
+                     alt="">
+            </li>
+            <li class="popup-pic">
+                <img src="~/Manage/assets/img/productDetailImages/@photos[1].Image"
+                     alt="">
+            </li>
+            <li class="popup-pic">
+                <img src="~/Manage/assets/img/productDetailImages/@photos[2].Image"
+                     alt="">
+            </li>
+            <li class="popup-pic">
+                <img src="~/Manage/assets/img/productDetailImages/@photos[3].Image"
+                     alt="">
+            </li>
+            <li class="popup-pic">
+                <img src="~/Manage/assets/img/productDetailImages/@photos[4].Image"
+                     alt="">
+            </li>
+            <li class="popup-pic">
+                <img src="~/Manage/assets/img/productMainImg/@Model.Product.MainImage"
+                     alt="">
+            </li>
+        </ul>
+        <button type="button" id="product-images-popup-close" class="comp-close" aria-label="Close newsletter pane">
+            <svg class="svg-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85">
+                <g>
+                    <path d="M6.72 7.42L0 14.14l.71.71 6.71-6.72 6.72 6.72.71-.71-6.72-6.72L14.85.71 14.14 0 7.42 6.72.71 0 0 .71z"
+                          fill="currentColor" fill-rule="evenodd">
+                    </path>
+                </g>
+            </svg>
+        </button>
+    </div>
+</div>
+

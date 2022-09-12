@@ -18,11 +18,12 @@
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="~/Assets/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="~/Assets/slick/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/custom.css" />
 </head>
 
 <body>
-    @await Html.PartialAsync("_MinicartPartial", homeVM.CartProducts) 
-   
+    @await Html.PartialAsync("_MinicartPartial", homeVM.CartProducts)
+
     @RenderBody()
     <footer>
         <div class="ccontainer footer-wraper row justify-content-between g-0">
@@ -156,6 +157,8 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="~/Assets/slick/slick.min.js"></script>
     <script src="~/Assets/js/script.js"></script>
+    @RenderSection("Script", false)
+
 </body>
 
 </html>

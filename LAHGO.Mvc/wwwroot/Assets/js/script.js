@@ -282,6 +282,7 @@ $(document).ready(function () {
         let bcpic = $(this).children('img').attr('src')
         $('.popup-wraper').css('background-image', 'url(' + bcpic + ')');
         $('.popup-pic-list').toggle();
+        console.log(bcpic)
     })
     $(document).on('click', '#product-images-popup-close, .popup-modal', function () {
         $('.popup-pic-list').toggle();
@@ -372,5 +373,21 @@ $(document).ready(function () {
     $(document).on('click', '.account-option-mobile', function () {
         $(this).parent().toggle();
     })
+
+
+
+
+    $(document).on('click', '.addtobasket', function (e) {
+        e.preventDefault();
+
+        let url = $(this).attr('href');
+        console.log(url)
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                $('.notification').html(data);
+            });
+    })
+    
 })
 

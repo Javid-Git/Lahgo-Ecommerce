@@ -71,6 +71,9 @@ namespace LAHGO.Mvc
             services.AddScoped<ISizeService, SizeService>();
             services.AddScoped<IProductColorSizeService, ProductColorSizeService>();
             services.AddScoped<ILayoutService, LayoutService>();
+            services.AddScoped<IShopService, ShopService>();
+            services.AddScoped<IDetailService, DetailService>();
+            services.AddScoped<IAccountService, AccountService>();
 
         }
 

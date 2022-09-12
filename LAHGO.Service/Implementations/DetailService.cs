@@ -1,9 +1,8 @@
 ﻿using LAHGO.Core;
 using LAHGO.Core.Entities;
-using LAHGO.Core.Repositories;
 using LAHGO.Service.Interfaces;
 using LAHGO.Service.ViewModels.CartProductVMs;
-using LAHGO.Service.ViewModels.HomeVMs;
+using LAHGO.Service.ViewModels.DetailVMs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,21 +15,21 @@ using System.Threading.Tasks;
 
 namespace LAHGO.Service.Implementations
 {
-    public class LayoutService : ILayoutService
+    public class DetailService : IDetailService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly UserManager<AppUser> _userManager;
 
-        public LayoutService(IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
+        public DetailService(IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
         {
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
             _unitOfWork = unitOfWork;
 
         }
-        public async Task<HomeVM> GetBasket()
+        public async Task<DetailVM> GetProduct(int id)
         {
             string basket = _httpContextAccessor.HttpContext.Request.Cookies["basket"];
             List<CartProductCreateVM> basketVMs = null;
@@ -78,21 +77,21 @@ namespace LAHGO.Service.Implementations
                 basketVM.Image = dbproduct.MainImage;
             };
 
-            List<Product> products = await _unitOfWork.ProductRepository.GetAllAsync(x => !x.IsDeleted);
-            List<Category> categories = await _unitOfWork.CategoryRepository.GetAllAsync(x => !x.IsDeleted);
-            List<Setting> settings = await _unitOfWork.SettingRepository.GetAllAsync(x => !x.IsDeleted);
-            List<ProductColorSize> productColorSizes= await _unitOfWork.ProductColorSizeRepository.GetAllAsync(x => !x.IsDeleted);
+            Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id, "ProductColorSizes", "Category", "Photos");
+            List<Size> sizes = await _unitOfWork.SizeRepository.GetAllAsync(x => !x.IsDeleted);
+            List<Color> colors = await _unitOfWork.ColorRepository.GetAllAsync(x => !x.IsDeleted);
 
-            HomeVM homeVM = new HomeVM
+            DetailVM detailVM = new DetailVM
             {
-                Favorites = products.Where(p=>p.IsFavorite).ToList(),
-                Products = products,
+                Product = product,
                 CartProducts = basketVMs,
-                Settings = settings,
-                Categories = categories,
-                ProductColorSizes = productColorSizes
+                Sizes = sizes,
+                Colors = colors,
             };
-            return homeVM;
+            return detailVM;
+
+
         }
+        
     }
 }

@@ -1,0 +1,33 @@
+﻿.navbar-account-list {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    width: 140px;
+    background-color: white;
+    padding: 1rem;
+    transition: .5s;
+}
+.navbar-login:hover .navbar-account-list {
+    visibility: visible;
+    opacity: 1;
+    transition: .5s;
+}
+
+    .navbar-account-list li a {
+        font-family: 'Regulars';
+        font-size: 14px;
+        font-style: normal;
+        color: #323232;
+    }
+
+.navbar-login {
+    position: relative;
+}
+
+.active-sss {
+    visibility: visible;
+    opacity: 1;
+    transition: .5s;
+}

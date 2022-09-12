@@ -7,6 +7,7 @@ namespace LAHGO.Core.Entities
     public class Size : BaseEntity  
     {
         public string Name { get; set; }
+        public string Definition { get; set; }
         public IEnumerable<Product> Products { get; set; }
 
 

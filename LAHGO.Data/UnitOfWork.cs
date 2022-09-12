@@ -17,6 +17,7 @@ namespace LAHGO.Data
         private readonly SettingRepository _settingRepository;
         private readonly ProductColorSizeRepository _productColorSizeRepository;
         private readonly PhotoRepository _photoRepository;
+        private readonly BasketRepository _basketRepository;
         private readonly AppDbContext _context;
 
         public UnitOfWork(AppDbContext context)
@@ -31,6 +32,7 @@ namespace LAHGO.Data
         public IColorRepository ColorRepository => _colorRepository != null ? _colorRepository : new ColorRepository(_context);
         public ISettingRepository SettingRepository => _settingRepository != null ? _settingRepository : new SettingRepository(_context);
         public IPhotoRepository PhotoRepository => _photoRepository != null ? _photoRepository : new PhotoRepository(_context);
+        public IBasketRepository BasketRepository => _basketRepository != null ? _basketRepository : new BasketRepository(_context);
 
         public int Commit()
         {

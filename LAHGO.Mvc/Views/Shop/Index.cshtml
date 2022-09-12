@@ -1,4 +1,4 @@
-﻿@model HomeVM
+﻿@model ShopVM
 @{
     ViewData["Title"] = "Index";
 }
@@ -282,257 +282,73 @@
 <section id="section3-shop">
     <div class="ccontainer">
         <div class="products row ">
-            <div class="product col-lg-4 col-6">
-                <a href="">
-                    <div class="product-top">
-                        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/2_WashableSilkButtonUpShortSet_MeditativeGrey_0035_1024x1024.jpg?v=1658950643"
-                             alt="">
-                        <button type="button" class="add-to-favorites" title="Add to Wishlist">
-                            <ion-icon name="star-outline"></ion-icon>
-                        </button>
-                        <div class="new-arrival">
-                            new arrival
-                        </div>
-                    </div>
-                </a>
+            @foreach (var product in Model.Products)
+            {
+                if (product.Photos != null)
+                {
+                    <div class="product col-lg-4 col-6">
+                        <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id">
+                            <div class="product-top">
+                                <img src="~/Manage/assets/img/productMainImg/@product.MainImage"
+                                     alt="">
+                                <button type="button" class="add-to-favorites" title="Add to Wishlist">
+                                    <ion-icon name="star-outline"></ion-icon>
+                                </button>
+                                @if (product.IsNewArrival)
+                                {
+                                    <div class="new-arrival">
+                                    </div>
+                                }
+                                else
+                                {
 
-                <div class="product-bottom">
-                    <div class="mobile-product-name">
-                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
-                    </div>
-                    <div class="product-name">
-                        WASHABLE SILK BUTTON UP SHORT SET
-                    </div>
-                    <div class="product-price">
-                        $248
-                    </div>
-                    <form method="post" action="">
-                        <div class="quick-add d-flex align-items-center justify-content-center">
-                            + quick add
-                            <div class="sizes text-center">
-                                <ul class="d-flex justify-content-center">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                    <li>XXL</li>
-                                </ul>
-                                <div class="size-selection">Select a size</div>
-
+                                }
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="colors">
-                            <ul class=" d-flex ">
-                                <li class="d-flex align-items-center small-colors" style="background-color: black;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: red;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: grey;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: blue;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: wheat;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: green;">
-
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="product col-lg-4 col-6">
-                <div class="product-top">
-                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/2_WashableSilkButtonUpShortSet_MeditativeGrey_0035_1024x1024.jpg?v=1658950643"
-                         alt="">
-                    <button type="button" class="add-to-favorites" title="Add to Wishlist">
-                        <ion-icon name="star-outline"></ion-icon>
-                    </button>
-                    <div class="new-arrival">
-                        new arrival
-                    </div>
-                </div>
-                <div class="product-bottom">
-                    <div class="mobile-product-name">
-                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
-                    </div>
-                    <div class="product-name">
-                        WASHABLE SILK BUTTON UP SHORT SET
-                    </div>
-                    <div class="product-price">
-                        $248
-                    </div>
-                    <form method="post" action="">
-                        <div class="quick-add d-flex align-items-center justify-content-center">
-                            + quick add
-                            <div class="sizes text-center">
-                                <ul class="d-flex justify-content-center">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                    <li>XXL</li>
-                                </ul>
-                                <div class="size-selection">Select a size</div>
-
+                        <div class="product-bottom">
+                            <div class="mobile-product-name">
+                                <a href="">@product.Name</a>
                             </div>
-                        </div>
-
-                        <div class="colors">
-                            <ul class=" d-flex ">
-                                <li class="d-flex align-items-center small-colors" style="background-color: black;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: red;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: grey;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: blue;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: wheat;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: green;">
-
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="product col-lg-4 col-6">
-                <div class="product-top">
-                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/2_WashableSilkButtonUpShortSet_MeditativeGrey_0035_1024x1024.jpg?v=1658950643"
-                         alt="">
-                    <button type="button" class="add-to-favorites" title="Add to Wishlist">
-                        <ion-icon name="star-outline"></ion-icon>
-                    </button>
-                    <div class="new-arrival">
-                        new arrival
-                    </div>
-                </div>
-                <div class="product-bottom">
-                    <div class="mobile-product-name">
-                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
-                    </div>
-                    <div class="product-name">
-                        WASHABLE SILK BUTTON UP SHORT SET
-                    </div>
-                    <div class="product-price">
-                        $248
-                    </div>
-                    <form method="post" action="">
-                        <div class="quick-add d-flex align-items-center justify-content-center">
-                            + quick add
-                            <div class="sizes text-center">
-                                <ul class="d-flex justify-content-center">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                    <li>XXL</li>
-                                </ul>
-                                <div class="size-selection">Select a size</div>
-
+                            <div class="product-name">
+                                @product.Name
                             </div>
-                        </div>
-
-                        <div class="colors">
-                            <ul class=" d-flex ">
-                                <li class="d-flex align-items-center small-colors" style="background-color: black;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: red;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: grey;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: blue;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: wheat;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: green;">
-
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="product col-lg-4 col-6">
-                <div class="product-top">
-                    <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/2_WashableSilkButtonUpShortSet_MeditativeGrey_0035_1024x1024.jpg?v=1658950643"
-                         alt="">
-                    <button type="button" class="add-to-favorites" title="Add to Wishlist">
-                        <ion-icon name="star-outline"></ion-icon>
-                    </button>
-                    <div class="new-arrival">
-                        new arrival
-                    </div>
-                </div>
-                <div class="product-bottom">
-                    <div class="mobile-product-name">
-                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
-                    </div>
-                    <div class="product-name">
-                        WASHABLE SILK BUTTON UP SHORT SET
-                    </div>
-                    <div class="product-price">
-                        $248
-                    </div>
-                    <form method="post" action="">
-                        <div class="quick-add d-flex align-items-center justify-content-center">
-                            + quick add
-                            <div class="sizes text-center">
-                                <ul class="d-flex justify-content-center">
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                    <li>XXL</li>
-                                </ul>
-                                <div class="size-selection">Select a size</div>
-
+                            <div class="product-price">
+                                $@(product.DiscountedPrice < product.Price? product.DiscountedPrice : product.Price)
                             </div>
+                            <form method="post" action="">
+                                <div class="quick-add d-flex align-items-center justify-content-center">
+                                    + quick add
+                                    <div class="sizes text-center">
+                                        <ul class="d-flex justify-content-center">
+                                            @foreach (var pcs in Model.ProductColorSizes.Where(x => x.ProductId == product.Id))
+                                            {
+                                                <li>@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Name</li>
+                                            }
+                                        </ul>
+                                        <div class="size-selection">Select a size</div>
+
+                                    </div>
+                                </div>
+
+                                <div class="colors">
+                                    <ul class=" d-flex ">
+                                        @foreach (var pcs in Model.ProductColorSizes.Where(x => x.ProductId == product.Id))
+                                        {
+                                            <li class="d-flex align-items-center small-colors" style="background-color: @Model.Colors.FirstOrDefault(s=>s.Id == pcs.ColorId).Name;">
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </form>
                         </div>
+                    </div>
 
-                        <div class="colors">
-                            <ul class=" d-flex ">
-                                <li class="d-flex align-items-center small-colors" style="background-color: black;">
+                }
 
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: red;">
+            }
 
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: grey;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: blue;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: wheat;">
-
-                                </li>
-                                <li class="d-flex align-items-center small-colors" style="background-color: green;">
-
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
         <button class="load-more">
             + Load More

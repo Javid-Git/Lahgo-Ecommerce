@@ -1,9 +1,10 @@
 ﻿@model HeaderVM
+
 <header>
-    <div id="center-header" class="  m-auto center-header">
+    <div id="center-header" class="  m-auto center-header center-header-optional">
         <div class="top-header ">
         </div>
-        <div class="ccontainer header-content row align-items-center justify-content-center">
+        <div class="ccontainer header-content row align-items-center justify-content-center ">
             <div class=" custom-navbar col-lg-5">
                 <ul class="d-flex">
                     <li id="shop-navbar" class="navbar-item-hover">
@@ -50,7 +51,8 @@
                             <li>
                                 <ul class="bestsellers-list-s">
                                     <li>
-                                        <a href="~/Assets/html/bestsellers.html" class="category-list-items">
+                                        <a href="/Assets/html/bestsellers.html"
+                                           class="category-list-items">
                                             best
                                             sellers
                                         </a>
@@ -71,7 +73,7 @@
                         </ul>
                     </li>
                     <li id="about-navbar" class="navbar-item-hover">
-                        <a class="navbar-font" href="~/Assets/html/about.html">about</a>
+                        <a class="navbar-font" href="/Assets/html/about.html">about</a>
                         <ul class="about-list navbar-lists d-flex">
                             <li>
                                 <ul class="about-list-s">
@@ -95,20 +97,34 @@
                         </ul>
                     </li>
                     <li class="navbar-item-hover">
-                        <a class=" navbar-font" href="~/Assets/html/contactus.html">Contact Us</a>
+                        <a class=" navbar-font" href="/Assets/html/contactus.html">Contact Us</a>
                     </li>
                 </ul>
             </div>
             <div class="navbar-mobile col-5  align-items-center">
-                <button type="button" id="mobile-menu-trigger" aria-label="Open menu"><hr></button>
+                <button type="button" id="mobile-menu-trigger" aria-label="Open menu">
+                    <hr>
+                </button>
                 <button type="button" class="header-search-pane-trigger t-link" aria-label="Search">
-                    <svg class="svg-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.58 19.76"><g><path fill-rule="evenodd" fill="currentColor" d="M14,7.53A6.38,6.38,0,1,1,7.57,1.16h0A6.37,6.37,0,0,1,14,7.52Zm-2.22,6.1a7.48,7.48,0,1,1,.79-.63l6,6.05-.7.71Z"></path></g></svg>
-                    <svg class="svg-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85"><g><path d="M6.72 7.42L0 14.14l.71.71 6.71-6.72 6.72 6.72.71-.71-6.72-6.72L14.85.71 14.14 0 7.42 6.72.71 0 0 .71z" fill="currentColor" fill-rule="evenodd"></path></g></svg>
+                    <svg class="svg-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.58 19.76">
+                        <g>
+                            <path fill-rule="evenodd" fill="currentColor"
+                                  d="M14,7.53A6.38,6.38,0,1,1,7.57,1.16h0A6.37,6.37,0,0,1,14,7.52Zm-2.22,6.1a7.48,7.48,0,1,1,.79-.63l6,6.05-.7.71Z">
+                            </path>
+                        </g>
+                    </svg>
+                    <svg class="svg-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85">
+                        <g>
+                            <path d="M6.72 7.42L0 14.14l.71.71 6.71-6.72 6.72 6.72.71-.71-6.72-6.72L14.85.71 14.14 0 7.42 6.72.71 0 0 .71z"
+                                  fill="currentColor" fill-rule="evenodd"></path>
+                        </g>
+                    </svg>
                 </button>
             </div>
             <div class="custom-logo col-lg-2 col-2 d-flex justify-content-center">
                 <a class="logo-font" asp-controller="home" asp-action="index">
-                    <svg class="svg-logo" viewBox="0 0 121 70" xmlns="http://www.w3.org/2000/svg" style="height: 70px;">
+                    <svg class="svg-logo" viewBox="0 0 121 70" xmlns="http://www.w3.org/2000/svg"
+                         style="height: 70px;">
                         <path d="M60.2018 0.731934H69.6118V69.0634H60.2608V38.0121H55.7514V69.0334H46.3856V0.776827H55.6923V30.0249H60.2018V0.731934Z"
                               fill="currentColor"></path>
                         <path d="M97.3623 35.0679C97.3623 27.5258 97.3254 19.9837 97.3881 12.4379C97.415 10.6915 97.6128 8.95204 97.9786 7.24521C98.6502 4.01289 100.82 2.00765 103.78 0.971366C107.623 -0.453397 111.866 -0.285383 115.588 1.43901C118.463 2.72595 119.991 5.03047 120.463 8.08696C120.676 9.44814 120.784 10.824 120.788 12.2022C120.81 27.3138 120.81 42.4266 120.788 57.5407C120.764 59.1335 120.601 60.721 120.301 62.2845C119.706 65.5804 117.669 67.7577 114.636 68.8651C110.651 70.3166 106.614 70.3241 102.676 68.5957C99.6982 67.2863 98.1335 64.8546 97.676 61.6634C97.4755 60.2183 97.3744 58.7607 97.3734 57.3013C97.3438 49.8902 97.3623 42.479 97.3623 35.0679ZM111.263 34.7424C111.263 27.2789 111.263 19.8154 111.263 12.3481C111.263 11.3424 111.16 10.3395 110.957 9.3552C110.884 8.91482 110.65 8.51871 110.301 8.24661C109.951 7.9745 109.513 7.84661 109.075 7.88868C108.64 7.86586 108.212 8.0056 107.872 8.28141C107.532 8.55723 107.303 8.94995 107.23 9.38513C107.06 10.0805 106.972 10.7938 106.968 11.5101C106.953 26.9434 106.953 42.3768 106.968 57.8101C106.975 58.5521 107.027 59.2929 107.123 60.0286C107.27 61.2183 107.938 61.8692 108.99 61.8991C109.482 61.9461 109.972 61.7939 110.354 61.4757C110.736 61.1575 110.978 60.6991 111.027 60.2007C111.192 59.1803 111.276 58.1482 111.278 57.1143C111.274 49.6732 111.263 42.2059 111.263 34.7424Z"
@@ -179,15 +195,18 @@
                 </ul>
             </div>
         </div>
-        <div class="sidebar flex-column justify-content-between">
+        <div class="sidebar flex-column justify-content-between sidebar-optional">
             <ul class="sidebar-options text-start">
-                <li class="sidebar-option"><a href="~/Assets/html/shop.html">shop</a></li>
+                <li class="sidebar-option"><a href="/Assets/html/shop.html">shop</a></li>
                 <li class="sidebar-option"><a href="">best sellers</a></li>
-                <li class="sidebar-option"><a href="~/Assets/html/about.html">about</a></li>
-                <li class="sidebar-option"><a href="~/Assets/html/contactus.html">Contact Us</a></li>
+                <li class="sidebar-option"><a href="/Assets/html/about.html">about</a></li>
+                <li class="sidebar-option"><a href="/Assets/html/contactus.html">Contact Us</a></li>
             </ul>
             <div class="sales row justify-content-around g-0">
-                <span class="col-4 sidebar-add">shop for her</span><span class="col-4 sidebar-add">get $20 off</span>
+                <span class="col-4 sidebar-add">shop for her</span><span class="col-4 sidebar-add">
+                    get $20
+                    off
+                </span>
             </div>
             <div class="login-button d-flex justify-content-center">
                 <a href="" class="text-center">Login</a>
@@ -197,31 +216,4 @@
 
         </div>
     </div>
-    <div class="introduction">
-        <img class="intro-img"
-             src="@Model.Settings.FirstOrDefault(s=>s.Key == "IndexHero").Value"
-             alt="">
-        <img class="mobile-intro-img" src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/LAHGO_HPBanner_Mobile_June2022_1024x1024.jpg?v=1655225233" alt="">
-        <div class="ccontainer">
-            <div class="intro-text">
-                <h2 class="intro-title">Considered Restwear</h2>
-                <p class="intro-desc col-lg-5">
-                    Our sleepwear is designed to perform, in bed and in life. Innovative
-                    fabrics and functional
-                    silhouettes keep you cool, comfortable and confident as you move about your day — and back into
-                    bed.
-                </p>
-            </div>
-        </div>
-        <div class="button-container">
-            <a class="intro-button" href="">shop sleepwear</a>
-        </div>
-        <div class="mobile-button-container d-flex justify-content-center align-items-center">
-            <a class="mobile-button" href="">shop sleepwear</a>
-        </div>
-
-    </div>
-
-
 </header>
-

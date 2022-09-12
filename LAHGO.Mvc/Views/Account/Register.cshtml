@@ -1,0 +1,66 @@
+﻿@model RegisterVM
+@{
+    ViewData["Title"] = "Register";
+
+}
+
+
+@await Component.InvokeAsync("DetailHeader")
+<section id="section1-account">
+    <div class="ccontainer d-flex g-0 justify-content-center">
+        
+        <div class="register col-lg-6 col-12">
+            <div class="section-title">
+                Create an Account
+            </div>
+            <div class="account-describtion">
+                Create an account to access your profile info, order history and more.
+            </div>
+            <div class="text text-danger" asp-validation-summary="ModelOnly"></div>
+            <form method="post" class="row" id="register-form">
+                <div class="email-inputs inputs col-lg-12">
+                    <label class="input-labels" for="name">Full Name</label>
+                    <input type="text" asp-for="FullName" id="name" placeholder="Name and Surname">
+                    <span class="text text-danger" asp-validation-for="FullName"></span>
+
+                </div>
+                <div class="email-inputs inputs col-lg-12">
+                    <label class="input-labels" for="name">Full Name</label>
+                    <input type="text" asp-for="UserName" id="name" placeholder="Username">
+                    <span class="text text-danger" asp-validation-for="UserName"></span>
+                </div>
+                <div class="password-inputs inputs col-lg-12">
+                    <label class="input-labels" for="email">your email</label>
+                    <input type="text" asp-for="Email" id="" placeholder="Your Email">
+                    <span class="text text-danger" asp-validation-for="Email"></span>
+
+                </div>
+                <div class="password-inputs inputs col-lg-12">
+                    <label class="input-labels" for="password">Password</label>
+                    <input type="password" asp-for="Password" id="" placeholder="Password">
+                    <span class="text text-danger" asp-validation-for="Password"></span>
+                </div>
+                <div class="password-inputs inputs col-lg-12">
+                    <label class="input-labels" for="password">Password</label>
+                    <input type="password" asp-for="ConfirmPasword" id="" placeholder="Confirm Password">
+                    <span class="text text-danger" asp-validation-for="ConfirmPasword"></span>
+                </div>
+                <div class="subscribtion-input d-flex align-items-center">
+                    <input id="subscribtion" type="checkbox" asp-for="Subscribe">
+                    <label for="subscribtion">Subscribe to our newsletter</label>
+                </div>
+                <button form="register-form" class="login-button register-button" type="submit">
+                    create an account
+                </button>
+                <div class="forgot-psswrd-container">
+                    By completing this form you are agreeing with the below policies and are signing up to receive
+                    our marketing messages and can unsubscribe at any time.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Script{
+    <partial name="_ValidationPartial" />
+}

@@ -15,6 +15,7 @@ namespace LAHGO.Core
         IColorRepository ColorRepository { get; }
         ISettingRepository SettingRepository { get; }
         IPhotoRepository PhotoRepository { get; }
+        IBasketRepository BasketRepository { get; }
         Task<int> CommitAsync();
         int Commit();
        

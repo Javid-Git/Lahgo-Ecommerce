@@ -8,7 +8,7 @@
                 <div class=" custom-navbar col-lg-5">
                     <ul class="d-flex">
                         <li id="shop-navbar" class="navbar-item-hover">
-                            <a id="shop-navbar" class=" navbar-font" href="~/Assets/html/shop.html">shop</a>
+                            <a id="shop-navbar" class=" navbar-font" asp-controller="shop" asp-action="index">shop</a>
                             <ul class="shop-list navbar-lists d-flex">
                                 <li>
                                     <ul class="featured-list">
@@ -122,7 +122,7 @@
                     </button>
                 </div>
                 <div class="custom-logo col-lg-2 col-2 d-flex justify-content-center">
-                    <a class="logo-font" href="/index.html">
+                    <a class="logo-font" asp-controller="home" asp-action="index">
                         <svg class="svg-logo" viewBox="0 0 121 70" xmlns="http://www.w3.org/2000/svg"
                              style="height: 70px;">
                             <path d="M60.2018 0.731934H69.6118V69.0634H60.2608V38.0121H55.7514V69.0334H46.3856V0.776827H55.6923V30.0249H60.2018V0.731934Z"
@@ -154,7 +154,7 @@
                             </a>
                         </li>
                         <li class="navbar-login">
-                            <a class=" navbar-font" href="~/Assets/html/login.html">login</a>
+                            <a class=" navbar-font" asp-controller="account" asp-action="login">login</a>
                         </li>
                         <li>
                             <a class=" navbar-font" href="">

@@ -1,141 +1,76 @@
-﻿@model List<CartProductCreateVM>
+﻿@model MinicartProductVM
 
-<div class="minicart-wraper">
+
+<div class="minicart-intro section-title d-flex justify-content-between">
+    <h2>
+        Your bag <span class="minicart-number section-describtion">(0)</span>
+    </h2>
+    <button type="button" id="minicart-close" class="comp-close" aria-label="Close minicart">
+        <svg class="svg-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85"><g><path d="M6.72 7.42L0 14.14l.71.71 6.71-6.72 6.72 6.72.71-.71-6.72-6.72L14.85.71 14.14 0 7.42 6.72.71 0 0 .71z" fill="currentColor" fill-rule="evenodd"></path></g></svg>
+    </button>
 </div>
-<div id="minicart" class="minicart">
-    <div class="minicart-intro section-title d-flex justify-content-between">
-        <h2>
-            Your bag <span class="minicart-number section-describtion">(0)</span>
-        </h2>
-        <button type="button" id="minicart-close" class="comp-close" aria-label="Close minicart">
-            <svg class="svg-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85"><g><path d="M6.72 7.42L0 14.14l.71.71 6.71-6.72 6.72 6.72.71-.71-6.72-6.72L14.85.71 14.14 0 7.42 6.72.71 0 0 .71z" fill="currentColor" fill-rule="evenodd"></path></g></svg>
-        </button>
-    </div>
-    <div class="minicart-describtion text-center col-lg-12">CONGRATULATIONS! YOUR ORDER QUALIFIES FOR FREE SHIPPING</div>
-    <div class="minicart-products col-lg-12">
-        <div class="minicart-product row">
-            <div class="minicart-product-pic col-lg-3 col-3">
-                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/WSSetinDeepBlue_compact.png?v=1659543085"
-                     alt="">
+<div class="minicart-describtion text-center col-lg-12">CONGRATULATIONS! YOUR ORDER QUALIFIES FOR FREE SHIPPING</div>
+<div class="minicart-products col-lg-12">
+    @foreach (var product in Model.CartProductGets)
+    {
+    <div class="minicart-product row">
+        <div class="minicart-product-pic col-lg-5 col-5">
+            <img class="img-fluid" src="~/Manage/assets/img/productMainImg/@product.Image"
+                 alt="">
+        </div>
+        <div class="minicart-product-details col-lg-5 col-5 d-flex flex-column align-items-center text-start">
+            <div class="minicart-product-name">
+                @product.Name
             </div>
-            <div class="minicart-product-details col-lg-7 col-7 d-flex flex-column align-items-center text-start">
-                <div class="minicart-product-name">
-                    WASHABLE SILK SET
-                </div>
-                <div class="minicart-product-colorandsize">
-                    <div class="minicart-product-color text-start">
-                        DEEP BLUE | <span class="minicart-product-size">M</span>
-                    </div>
-                </div>
-                <div class="minicart-product-count d-flex justify-content-around align-items-center">
-                    <button id="qty-minus" type="button" class="item-quantity-decrease">
-                        <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
-                        </svg>
-                    </button>
-                    <input class="item-quantity-current" type="text" value="0">
-                    <button id="qty-plus" type="button" class="item-quantity-increase">
-                        <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.98828 2.17038e-06L5.98828 10" stroke="currentColor"></path>
-                            <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
-                        </svg>
-                    </button>
+            <div class="minicart-product-colorandsize">
+                <div class="minicart-product-color text-start">
+                    @Model.Colors.FirstOrDefault(c => c.Id == product.ColorId).Name | <span class="minicart-product-size">@Model.Sizes.FirstOrDefault(c => c.Id == product.SizeId).Name</span>
                 </div>
             </div>
-            <div class="minicart-product-price text-end col-lg-2 col-2">
-                $278
+            <div class="minicart-product-count d-flex justify-content-around align-items-center">
+                <a id="qty-minus" asp-controller="basket" asp-action="UpdateCount" asp-route-id="@product.ProductId" class="item-quantity-decrease">
+                    <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                    </svg>
+                </a>
+                <input class="item-quantity-current" type="text" value="@product.SelectCount">
+                <a id="qty-plus" asp-controller="basket" asp-action="UpdateCount" asp-route-id="@product.ProductId" class="item-quantity-increase">
+                    <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.98828 2.17038e-06L5.98828 10" stroke="currentColor"></path>
+                        <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
+                    </svg>
+                </a>
             </div>
         </div>
-        <div class="minicart-product row">
-            <div class="minicart-product-pic col-lg-3 col-3">
-                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/WSSetinDeepBlue_compact.png?v=1659543085"
-                     alt="">
-            </div>
-            <div class="minicart-product-details col-lg-7 col-7 d-flex flex-column align-items-center text-start">
-                <div class="minicart-product-name">
-                    WASHABLE SILK SET
-                </div>
-                <div class="minicart-product-colorandsize">
-                    <div class="minicart-product-color text-start">
-                        DEEP BLUE | <span class="minicart-product-size">M</span>
-                    </div>
-                </div>
-                <div class="minicart-product-count d-flex justify-content-around align-items-center">
-                    <button id="qty-minus" type="button" class="item-quantity-decrease">
-                        <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
-                        </svg>
-                    </button>
-                    <input class="item-quantity-current" type="text" value="0">
-                    <button id="qty-plus" type="button" class="item-quantity-increase">
-                        <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.98828 2.17038e-06L5.98828 10" stroke="currentColor"></path>
-                            <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="minicart-product-price text-end col-lg-2 col-2">
-                $278
-            </div>
+        <div class="minicart-product-price text-end col-lg-1 col-1">
+            $@product.Price
         </div>
-        <div class="minicart-product row">
-            <div class="minicart-product-pic col-lg-3 col-3">
-                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/WSSetinDeepBlue_compact.png?v=1659543085"
-                     alt="">
-            </div>
-            <div class="minicart-product-details col-lg-7 col-7 d-flex flex-column align-items-center text-start">
-                <div class="minicart-product-name">
-                    WASHABLE SILK SET
-                </div>
-                <div class="minicart-product-colorandsize">
-                    <div class="minicart-product-color text-start">
-                        DEEP BLUE | <span class="minicart-product-size">M</span>
-                    </div>
-                </div>
-                <div class="minicart-product-count d-flex justify-content-around align-items-center">
-                    <button id="qty-minus" type="button" class="item-quantity-decrease">
-                        <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
-                        </svg>
-                    </button>
-                    <input class="item-quantity-current" type="text" value="0">
-                    <button id="qty-plus" type="button" class="item-quantity-increase">
-                        <svg class="svg-plus" viewBox="0 0 11 10" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5.98828 2.17038e-06L5.98828 10" stroke="currentColor"></path>
-                            <path d="M10.9883 5L0.988281 5" stroke="currentColor"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="minicart-product-price text-end col-lg-2 col-2">
-                $278
-            </div>
+        <div class="minicart-product-price text-end col-lg-1 col-1 d-flex align-items-end">
+            <a class="delete-from-cart" asp-controller="basket" asp-action="DeleteFromBasket" asp-route-id="@product.ProductId"><i class="fa-regular fa-rectangle-xmark"></i></a>  
         </div>
     </div>
-    <div class="minicart-bottom">
-        <div class="minicart-subtotal d-flex justify-content-between">
-            <div class="section-describtion">
-                Subtotal
-            </div><span class="section-describtion">$862</span>
-        </div>
-        <div class="minicart-bottom-info">
-            SHIPPING & TAXES CALCULATED AT CHECKOUT
-        </div>
-        <div class="minicart-bottom-info">
-            OR 4 INTEREST-FREE PAYMENTS OF $159 WITH KLARNA <span><a href="" class="fw-bold minicart-product-colorandsize">learn more</a></span>
-        </div>
-        <button class="login-button register-button">
-            checkout
-        </button>
-        <div class="text-center ">
-            <a class="view-cart" href="~/Assets/html/cart.html">view cart</a>
-        </div>
+
+    }
+   
+</div>
+<div class="minicart-bottom">
+    <div class="minicart-subtotal d-flex justify-content-between">
+        <div class="section-describtion">
+            Subtotal
+        </div><span class="section-describtion">$@(Model.CartProductGets.Sum(b=>b.SelectCount * b.Price))</span>
+    </div>
+    <div class="minicart-bottom-info">
+        SHIPPING & TAXES CALCULATED AT CHECKOUT
+    </div>
+    <div class="minicart-bottom-info">
+        OR 4 INTEREST-FREE PAYMENTS OF $159 WITH KLARNA <span><a href="" class="fw-bold minicart-product-colorandsize">learn more</a></span>
+    </div>
+    <button class="login-button register-button">
+        checkout
+    </button>
+    <div class="text-center ">
+        <a class="view-cart" asp-controller="cart" asp-action="index">view cart</a>
     </div>
 </div>

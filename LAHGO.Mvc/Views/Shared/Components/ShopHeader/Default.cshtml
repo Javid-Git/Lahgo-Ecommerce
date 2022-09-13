@@ -168,7 +168,7 @@
 
                         </li>
                         <li class="">
-                            <a class="navbar-font minicart-button" href="">
+                            <a class="navbar-font minicart-button" asp-controller="basket" asp-action="openbasket">
                                 <svg class="svg-bag svg-search" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 20.08 20.69">
                                     <g>
@@ -178,7 +178,8 @@
                                         <path stroke="currentColor" fill="none"
                                               d="M6.65,10.08V3.89a3.4,3.4,0,0,1,6.79,0v6.19"></path>
                                     </g>
-                                </svg>
+                                </svg> 
+                                <div class="notification">@Model.CartProducts.Count()</div>
                             </a>
                         </li>
                     </ul>

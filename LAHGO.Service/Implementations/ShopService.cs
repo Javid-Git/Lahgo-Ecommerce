@@ -84,6 +84,9 @@ namespace LAHGO.Service.Implementations
             List<Size> sizes = await _unitOfWork.SizeRepository.GetAllAsync(x => !x.IsDeleted);
             List<Color> colors = await _unitOfWork.ColorRepository.GetAllAsync(x => !x.IsDeleted);
             List<ProductColorSize> productColorSizes = await _unitOfWork.ProductColorSizeRepository.GetAllAsync(x => !x.IsDeleted);
+            
+
+            
 
             ShopVM shopVM = new ShopVM
             {

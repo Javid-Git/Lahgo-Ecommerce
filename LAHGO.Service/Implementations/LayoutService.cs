@@ -33,15 +33,15 @@ namespace LAHGO.Service.Implementations
         public async Task<HomeVM> GetBasket()
         {
             string basket = _httpContextAccessor.HttpContext.Request.Cookies["basket"];
-            List<CartProductCreateVM> basketVMs = null;
+            List<CartProductGetVM> basketVMs = null;
 
             if (!string.IsNullOrWhiteSpace(basket))
             {
-                basketVMs = JsonConvert.DeserializeObject<List<CartProductCreateVM>>(basket);
+                basketVMs = JsonConvert.DeserializeObject<List<CartProductGetVM>>(basket);
             }
             else
             {
-                basketVMs = new List<CartProductCreateVM>();
+                basketVMs = new List<CartProductGetVM>();
             }
 
             if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
@@ -54,7 +54,7 @@ namespace LAHGO.Service.Implementations
                     {
                         if (!basketVMs.Any(b => b.ProductId == item.ProductId))
                         {
-                            CartProductCreateVM basketVM = new CartProductCreateVM
+                            CartProductGetVM basketVM = new CartProductGetVM
                             {
                                 ProductId = item.ProductId,
                                 SelectCount = item.Counts
@@ -69,7 +69,7 @@ namespace LAHGO.Service.Implementations
                     _httpContextAccessor.HttpContext.Response.Cookies.Append("basket", basket);
                 }
             }
-            foreach (CartProductCreateVM basketVM in basketVMs)
+            foreach (CartProductGetVM basketVM in basketVMs)
             {
                 Product dbproduct = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == basketVM.ProductId);
 
@@ -82,7 +82,15 @@ namespace LAHGO.Service.Implementations
             List<Category> categories = await _unitOfWork.CategoryRepository.GetAllAsync(x => !x.IsDeleted);
             List<Setting> settings = await _unitOfWork.SettingRepository.GetAllAsync(x => !x.IsDeleted);
             List<ProductColorSize> productColorSizes= await _unitOfWork.ProductColorSizeRepository.GetAllAsync(x => !x.IsDeleted);
+            List<Size> sizes = await _unitOfWork.SizeRepository.GetAllAsync(s => !s.IsDeleted);
+            List<Color> colors = await _unitOfWork.ColorRepository.GetAllAsync(s => !s.IsDeleted);
 
+            MinicartProductVM minicartProductVM = new MinicartProductVM
+            {
+                Sizes = sizes,
+                Colors = colors,
+                CartProductGets = basketVMs
+            };
             HomeVM homeVM = new HomeVM
             {
                 Favorites = products.Where(p=>p.IsFavorite).ToList(),
@@ -90,7 +98,8 @@ namespace LAHGO.Service.Implementations
                 CartProducts = basketVMs,
                 Settings = settings,
                 Categories = categories,
-                ProductColorSizes = productColorSizes
+                ProductColorSizes = productColorSizes,
+                MinicartProductVM = minicartProductVM
             };
             return homeVM;
         }

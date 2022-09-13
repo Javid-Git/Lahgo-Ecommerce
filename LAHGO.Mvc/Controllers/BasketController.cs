@@ -2,6 +2,8 @@
 using LAHGO.Core.Entities;
 using LAHGO.Service.Interfaces;
 using LAHGO.Service.ViewModels.CartProductVMs;
+using LAHGO.Service.ViewModels.ShopVMs;
+using LAHGO.Service.ViewModels.SizeVMs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,22 +29,14 @@ namespace LAHGO.Mvc.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            string basket = HttpContext.Request.Cookies["basket"];
-            List<CartProductCreateVM> basketVMs = null;
-            if (!string.IsNullOrWhiteSpace(basket))
-            {
-                basketVMs = JsonConvert.DeserializeObject<List<CartProductCreateVM>>(basket);
-            }
-            else
-            {
-                basketVMs = new List<CartProductCreateVM>();
-            }
+            List<CartProductGetVM> basketVMs = await _basketService.Index();
+
             return View(await _basketProduct(basketVMs));
         }
-        private async Task<List<CartProductCreateVM>> _basketProduct(List<CartProductCreateVM> basketVMs)
+        private async Task<List<CartProductGetVM>> _basketProduct(List<CartProductGetVM> basketVMs)
         {
 
-            foreach (CartProductCreateVM item in basketVMs)
+            foreach (CartProductGetVM item in basketVMs)
             {
                 Product dbproduct = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == item.ProductId);
 
@@ -52,149 +46,82 @@ namespace LAHGO.Mvc.Controllers
             };
             return basketVMs;
         }
-        public async Task<IActionResult> AddToBasket(int? id, int? count)
-        {
-            List<CartProductCreateVM> basketVMs = await _basketService.AddToCart(id, count);
-            
-
-
-            return Json(basketVMs.Count);
-        }
         public async Task<IActionResult> OpenBasket()
         {
+            MinicartProductVM basketVMs = await _basketService.OpenBasket();
 
+            foreach (CartProductGetVM item in basketVMs.CartProductGets)
+            {
+                Product dbproduct = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == item.ProductId);
 
-            string basket = HttpContext.Request.Cookies["basket"];
-            List<CartProductCreateVM> basketVMs = JsonConvert.DeserializeObject<List<CartProductCreateVM>>(basket); ;
+                item.Name = dbproduct.Name;
+                item.Price = dbproduct.DiscountedPrice > 0 ? dbproduct.DiscountedPrice : dbproduct.Price;
+                item.Image = dbproduct.MainImage;
+            };
 
-
-
-            basket = JsonConvert.SerializeObject(basketVMs);
-            HttpContext.Response.Cookies.Append("basket", basket);
-
-
-            //return Json(basketVMs.Count);
-            return PartialView("_AddToCartPartial", await _basketProduct(basketVMs));
+            return PartialView("_MinicartPartial", basketVMs);
         }
         public async Task<IActionResult> DeleteFromBasket(int? id)
         {
-            if (id == null)
+            MinicartProductVM basketVMs = await _basketService.DeleteFromBasket(id);
+
+            foreach (CartProductGetVM item in basketVMs.CartProductGets)
             {
-                return BadRequest();
-            }
-            Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            string basket = HttpContext.Request.Cookies["basket"];
-            List<CartProductCreateVM> basketVMs = JsonConvert.DeserializeObject<List<CartProductCreateVM>>(basket);
+                Product dbproduct = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == item.ProductId);
 
-            if (string.IsNullOrWhiteSpace(basket)) return BadRequest();
+                item.Name = dbproduct.Name;
+                item.Price = dbproduct.DiscountedPrice > 0 ? dbproduct.DiscountedPrice : dbproduct.Price;
+                item.Image = dbproduct.MainImage;
+            };
 
-            CartProductCreateVM basketVM = basketVMs.Find(b => b.ProductId == id);
-            if (basket == null) return NotFound();
-
-            if (User.Identity.IsAuthenticated)
-            {
-                AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
-
-                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
-                {
-                    Basket dbBasketproduct = appUser.Baskets.FirstOrDefault(p => p.ProductId == id);
-                    if (dbBasketproduct != null)
-                    {
-                        appUser.Baskets.Remove(dbBasketproduct);
-                        _unitOfWork.BasketRepository.Remove(dbBasketproduct);
-                        await _unitOfWork.CommitAsync();
-                    }
-                    else
-                    {
-                        return NotFound();
-
-                    }
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-            basketVMs.Remove(basketVM);
-            await _unitOfWork.CommitAsync();
-            basket = JsonConvert.SerializeObject(basketVMs);
-            HttpContext.Response.Cookies.Append("basket", basket);
-
-            return PartialView("_AddToCartPartial", await _basketProduct(basketVMs));
+            return PartialView("_MinicartPartial", basketVMs);
 
         }
         public async Task<IActionResult> DeleteFromCart(int? id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
-            Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            string basket = HttpContext.Request.Cookies["basket"];
-            List<CartProductCreateVM> basketVMs = JsonConvert.DeserializeObject<List<CartProductCreateVM>>(basket);
-
-            if (string.IsNullOrWhiteSpace(basket)) return BadRequest();
-
-            CartProductCreateVM basketVM = basketVMs.Find(b => b.ProductId == id);
-            if (basket == null) return NotFound();
-            if (User.Identity.IsAuthenticated)
-            {
-                AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
-
-                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
-                {
-                    Basket dbBasketproduct = appUser.Baskets.FirstOrDefault(p => p.ProductId == id);
-                    if (dbBasketproduct != null)
-                    {
-                        appUser.Baskets.Remove(dbBasketproduct);
-                        _unitOfWork.BasketRepository.Remove(dbBasketproduct);
-                        await _unitOfWork.CommitAsync();
-                        //_context.Baskets.Remove(dbBasketproduct);
-                    }
-                    else
-                    {
-                        return NotFound();
-
-                    }
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-            basketVMs.Remove(basketVM);
-
-            basket = JsonConvert.SerializeObject(basketVMs);
-            HttpContext.Response.Cookies.Append("basket", basket);
+            List<CartProductGetVM> basketVMs = await _basketService.DeleteFromCart(id);
 
             return PartialView("_BasketIndexPartial", await _basketProduct(basketVMs));
         }
         public async Task<IActionResult> DeleteUpdate()
         {
-            string basket = Request.Cookies["basket"];
-            List<CartProductCreateVM> basketVMs = null;
-
-            if (!string.IsNullOrWhiteSpace(basket))
-            {
-                basketVMs = JsonConvert.DeserializeObject<List<CartProductCreateVM>>(basket);
-            }
-            else
-            {
-                basketVMs = new List<CartProductCreateVM>();
-            }
+            List<CartProductCreateVM> basketVMs = await _basketService.DeleteUpdate();
 
             return Json(basketVMs.Count);
+        }
+        public async Task<IActionResult> GetSizes(int ColorId, int ProductId)
+        {
+            SizePCSVM sizePCSVM = await _basketService.GetSizes(ColorId, ProductId);
+
+            
+            return PartialView("_SizeContainerPartial", sizePCSVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddToBasket(int? ProductId, int SizeId, int ColorId)
+        {
+            List<CartProductCreateVM> basketVMs = await _basketService.AddToCart(ProductId, SizeId, ColorId);
+
+            //return Json(basketVMs.Count);
+            return RedirectToAction("Index", "Shop");
 
         }
+        public async Task<IActionResult> UpdateCount(int? id, int count)
+        {
 
+            MinicartProductVM basketVMs = await _basketService.UpdateCount(id, count);
+
+
+            foreach (CartProductGetVM item in basketVMs.CartProductGets)
+            {
+                Product dbproduct = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == item.ProductId);
+
+                item.Name = dbproduct.Name;
+                item.Price = dbproduct.DiscountedPrice > 0 ? dbproduct.DiscountedPrice : dbproduct.Price;
+                item.Image = dbproduct.MainImage;
+            };
+
+            return PartialView("_MinicartPartial", basketVMs);
+        }
 
     }
 }

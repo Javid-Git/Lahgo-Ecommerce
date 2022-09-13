@@ -12,8 +12,8 @@ namespace LAHGO.Service.ViewModels.HomeVMs
         public List<Product> Favorites { get; set; }
         public List<Setting> Settings { get; set; }
         public List<Category> Categories { get; set; }
-
-        public List<CartProductCreateVM> CartProducts { get; set; }
+        public MinicartProductVM MinicartProductVM { get; set; }
+        public List<CartProductGetVM> CartProducts { get; set; }
         public List<ProductColorSize> ProductColorSizes { get; set; }
     }
 }

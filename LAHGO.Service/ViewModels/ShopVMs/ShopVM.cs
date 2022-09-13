@@ -16,5 +16,7 @@ namespace LAHGO.Service.ViewModels.ShopVMs
         public List<Color> Colors { get; set; }
         public List<CartProductCreateVM> CartProducts { get; set; }
         public List<ProductColorSize> ProductColorSizes { get; set; }
+        public CartProductPostVM BasketProduct { get; set; }
+
     }
 }

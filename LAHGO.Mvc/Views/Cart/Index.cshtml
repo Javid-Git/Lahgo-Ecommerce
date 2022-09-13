@@ -1,0 +1,25 @@
+﻿@model MinicartProductVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+@await Component.InvokeAsync("DetailHeader")
+<section id="section1-cart">
+    <div class="ccontainer row">
+        <div class="cart-left col-lg-8 col-12">
+            <div class="minicart-intro section-title">
+                <h2>
+                    Your bag <span class="minicart-number section-describtion">(0)</span>
+                </h2>
+            </div>
+            <div class="cart-describtion minicart-describtion  text-center col-lg-12">FREE SHIPPING ON U.S. ORDERS STARTS AT $150</div>
+            <div class="cart-products">
+                @await Html.PartialAsync("_BasketIndexPartial", Model)
+
+            </div>
+        </div>
+        <div class="cart-right col-lg-4 col-12">
+            @await Html.PartialAsync("_OrderSummaryPartial", Model) 
+        </div>
+    </div>
+</section>

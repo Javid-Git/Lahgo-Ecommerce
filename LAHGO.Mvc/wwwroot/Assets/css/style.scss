@@ -99,25 +99,27 @@ ul {
 }
 
 #qty-minus {
-    height: 13px;
-    width: 13px;
+    height: 18px;
+    width: 18px;
     border: none;
     background-color: transparent;
     position: relative;
+    cursor: pointer;
 }
 
 #qty-plus {
-    height: 13px;
-    width: 13px;
+    height: 18px;
+    width: 18px;
     border: none;
     background-color: transparent;
     position: relative;
-
+    cursor: pointer;
 }
+
 
 .minicart-product-count {
     border: 1px solid #acacac;
-    width: 52%;
+    width: 70%;
     padding: 10px 8px;
 }
 
@@ -136,7 +138,7 @@ ul {
 .svg-plus {
     color: #757575;
     position: absolute;
-    width: 100%;
+    width: 78%;
     top: 0;
     left: 0;
 }
@@ -165,7 +167,7 @@ ul {
 }
 
 .minicart-product-details {
-    padding: 0 0 0 4.5rem;
+    padding: 0 0 0 0;
 }
 
 .minicart-product-price {

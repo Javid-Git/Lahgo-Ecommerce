@@ -142,12 +142,7 @@ $(document).ready(function () {
     $(document).on('click', '.dropdowns', function (e) {
         console.log($(this).children('.lists').toggleClass('dropdowns-visible'))
     })
-    $(document).on('click', '.minicart-button', function (e) {
-        e.preventDefault();
-        $('#minicart').toggleClass('minicart-visible')
-        $('.minicart-wraper').toggleClass('minicart-visible')
-
-    })
+    
     $(document).on('click', ('#minicart-close', '.minicart-wraper'), function () {
         $('#minicart').toggleClass('minicart-visible')
         $('.minicart-wraper').toggleClass('minicart-visible')
@@ -164,27 +159,7 @@ $(document).ready(function () {
         $('.sidebar').toggleClass('show-sidebar')
         $('.sidebar-wraper').toggleClass('show-sidebar')
     })
-    $(document).on('click', '.item-quantity-decrease', function (e) {
-        e.preventDefault();
-        let inputCount = $(this).next().val();
 
-        if (inputCount >= 2) {
-            inputCount--;
-            $(this).next().val(inputCount);
-        }
-    })
-
-    $(document).on('click', '.item-quantity-increase', function (e) {
-        e.preventDefault();
-        let inputCount = $(this).prev().val();
-
-        if (inputCount > 0) {
-            inputCount++;
-        } else {
-            inputCount = 1;
-        }
-        $(this).prev().val(inputCount);
-    })
     $(document).on('click', '#mobile-sort', function () {
         $('.mobile-sort-list').toggleClass('show-mobile-sort')
     })
@@ -376,16 +351,134 @@ $(document).ready(function () {
 
 
 
+    $(document).on('click', '.item-quantity-decrease', function (e) {
+        e.preventDefault();
+        let inputCount = $(this).next().val();
 
-    $(document).on('click', '.addtobasket', function (e) {
+        if (inputCount >= 2) {
+            inputCount--;
+            $(this).next().val(inputCount);
+            let url = $(this).attr('href') + '/?count=' + inputCount;
+            console.log('sub');
+            fetch(url)
+                .then(res => res.text())
+                .then(data => {
+                    $('').html(data);
+                    fetch('/basket/openbasket')
+                        .then(res => res.text())
+                        .then(data => {
+                            $('.minicart').html(data);
+                            fetch('/cart/updatesummary')
+                                .then(res => res.text())
+                                .then(data => {
+                                    $('.cart-right').html(data);
+                                });
+                        });
+                });
+        }
+             
+    })
+
+    $(document).on('click', '.item-quantity-increase', function (e) {
+        e.preventDefault();
+        let inputCount = $(this).prev().val();
+
+        if (inputCount > 0) {
+            inputCount++;
+        } else {
+            inputCount = 1;
+        }
+        $(this).prev().val(inputCount);
+        let url = $(this).attr('href') + '/?count=' + inputCount;
+
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                $('').html(data);
+                fetch('/basket/openbasket')
+                    .then(res => res.text())
+                    .then(data => {
+                        $('.minicart').html(data);
+                        fetch('/cart/updatesummary')
+                            .then(res => res.text())
+                            .then(data => {
+                                $('.cart-right').html(data);
+                            });
+                    });
+            });
+
+
+    })
+    $(document).on('click', '.minicart-button', function (e) {
+        e.preventDefault();
+        $('#minicart').toggleClass('minicart-visible')
+        $('.minicart-wraper').toggleClass('minicart-visible')
+        let url = $(this).attr('href');
+
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                $('.minicart').html(data);
+            });
+
+    })
+
+    $(document).on('click', '.smcolor-container', function (e) {
+        e.preventDefault();
+
+        let all_rad_input = $('.smcolor-container').prev();
+        $('.radio-select').removeClass('radio-select')
+        let url = $(this).attr('href');
+        let rad_input = $(this).prev();
+        console.log(url)
+
+        if (rad_input.prop('checked', true)) {
+            $(this).addClass('radio-select')
+        }
+        $('.size-selection-container').empty();
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                $('.size-selection-container').append(data)
+
+            })
+    })
+    
+    $(document).on('click', '.delete-from-basket', function (e) {
         e.preventDefault();
 
         let url = $(this).attr('href');
-        console.log(url)
+
         fetch(url)
-            .then(res => res.json())
+            .then(res => res.text())
             .then(data => {
-                $('.notification').html(data);
+                $('.cart-products').html(data);
+                fetch('/basket/DeleteUpdate')
+                    .then(res => res.json())
+                    .then(data => {
+                        $('.notification').html(data);
+                    });
+            })
+    })
+    
+    $(document).on('click', '.deletefrombasket', function (e) {
+        e.preventDefault();
+
+        let url = $(this).attr('href');
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                $('.cart-products').html(data);
+                fetch('/basket/DeleteUpdate')
+                    .then(res => res.json())
+                    .then(data => {
+                        $('.notification').html(data);
+                        fetch('/cart/updatesummary')
+                            .then(res => res.text())
+                            .then(data => {
+                                $('.cart-right').html(data);
+                            });
+                    });
             });
     })
     

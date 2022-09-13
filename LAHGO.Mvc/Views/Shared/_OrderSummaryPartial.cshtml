@@ -1,0 +1,30 @@
+﻿@model MinicartProductVM
+
+<div class="minicart-intro section-title">
+    <h2>
+        Order Summary
+    </h2>
+</div>
+<div class="additional-expenses">
+    <div class="expense d-flex justify-content-between">
+        <p>Shipping</p><span class="shipping">--</span>
+    </div>
+    <div class="expense d-flex justify-content-between">
+        <p>Taxes</p><span class="taxes">--</span>
+    </div>
+</div>
+<div class="cart-checkout">
+    <div class="cart-subtotal d-flex justify-content-between">
+        <p>Subtotal</p><span>$@(Model.CartProductGets.Sum(b=>b.SelectCount * b.Price))</span>
+    </div>
+    <div class="cart-subtotal d-flex justify-content-between">
+        <p>Total</p><span>$@(Model.CartProductGets.Sum(b=>b.SelectCount * b.Price))</span>
+    </div>
+    <div class="cart-checkout-info minicart-bottom-info">
+        <span>SHIPPING & TAXES CALCULATED AT CHECKOUT</span>
+        <span>OR 4 INTEREST-FREE PAYMENTS OF $235 WITH KLARNA <span><a class="minicart-product-colorandsize fw-bold" href="">LEARN MORE</a></span></span>
+    </div>
+    <button class="login-button register-button">
+        checkout
+    </button>
+</div>

@@ -22,8 +22,13 @@
 </head>
 
 <body>
-    @await Html.PartialAsync("_MinicartPartial", homeVM.CartProducts)
+    
+    <div class="minicart-wraper">
+    </div>
+    <div id="minicart" class="minicart">
+        @await Html.PartialAsync("_MinicartPartial", homeVM.MinicartProductVM)
 
+    </div>
     @RenderBody()
     <footer>
         <div class="ccontainer footer-wraper row justify-content-between g-0">

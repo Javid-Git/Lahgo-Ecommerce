@@ -1,6 +1,7 @@
 ﻿@model ShopVM
 @{
     ViewData["Title"] = "Index";
+
 }
 
 @await Component.InvokeAsync("ShopHeader")
@@ -316,30 +317,33 @@
                             <div class="product-price">
                                 $@(product.DiscountedPrice < product.Price? product.DiscountedPrice : product.Price)
                             </div>
-                            <form method="post" action="">
+                            <form method="post" asp-controller="basket" asp-action="AddToBasket">
                                 <div class="quick-add d-flex align-items-center justify-content-center">
                                     + quick add
-                                    <div class="sizes text-center">
-                                        <ul class="d-flex justify-content-center">
-                                            @foreach (var pcs in Model.ProductColorSizes.Where(x => x.ProductId == product.Id))
-                                            {
-                                                <li>@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Name</li>
-                                            }
-                                        </ul>
-                                        <div class="size-selection">Select a size</div>
+                                    <input name="ProductId" type="hidden" value="@product.Id" />
+
+                                    <div class="size-selection-container">
 
                                     </div>
+
                                 </div>
-
-                                <div class="colors">
-                                    <ul class=" d-flex ">
-                                        @foreach (var pcs in Model.ProductColorSizes.Where(x => x.ProductId == product.Id))
+                                <div class="colors d-flex">
+                                    @{ 
+                                        List<ProductColorSize> pp = new List<ProductColorSize>();
+                                        foreach (var item in Model.ProductColorSizes.Where(x => x.ProductId == product.Id))
                                         {
-                                            <li class="d-flex align-items-center small-colors" style="background-color: @Model.Colors.FirstOrDefault(s=>s.Id == pcs.ColorId).Name;">
-
-                                            </li>
+                                            if (!pp.Exists(p=>p.ColorId == item.ColorId))
+                                            {
+                                                pp.Add(item);
+                                            }
                                         }
-                                    </ul>
+                                    }
+
+                                    @foreach (var pcs in pp)
+                                    {
+                                        <input id="@(product.Name + pcs.Color.Name)" type="radio" name="ColorId" value="@pcs.ColorId" />
+                                        <a asp-controller="basket" asp-action="GetSizes" asp-route-ColorId="@pcs.ColorId" asp-route-ProductId="@product.Id" style="background-color:@pcs.Color.Name" class="smcolor-container " for="@(product.Name + pcs.Color.Name)"></a>
+                                    }
                                 </div>
                             </form>
                         </div>

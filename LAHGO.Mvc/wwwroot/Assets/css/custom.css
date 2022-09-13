@@ -31,3 +31,45 @@
     opacity: 1;
     transition: .5s;
 }
+
+.colors input[type="radio"] {
+    display: none;
+}
+.smcolor-container {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    border-radius: 50%;
+    border: 1px solid white;
+    outline: 1px solid black;
+}
+
+.radio-select {
+    border: 3px solid white;
+}
+
+.notification {
+    top: -10px;
+    right: 5px;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    font-size: 10px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: black;
+}
+
+.minicart-button{
+    position: relative;
+}
+
+
+.fa-rectangle-xmark{
+    background-color: indianred;
+    border-radius: 3px;
+    color: white;
+    padding: 1px;
+}

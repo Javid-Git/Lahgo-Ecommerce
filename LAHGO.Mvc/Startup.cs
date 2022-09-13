@@ -74,6 +74,7 @@ namespace LAHGO.Mvc
             services.AddScoped<IShopService, ShopService>();
             services.AddScoped<IDetailService, DetailService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IBasketService, BasketService>();
 
         }
 
@@ -88,7 +89,7 @@ namespace LAHGO.Mvc
             {
                 //app.UseExceptionHandler("/Error");
             }
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseStaticFiles();
 
             app.UseRouting();

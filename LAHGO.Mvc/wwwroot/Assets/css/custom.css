@@ -182,7 +182,27 @@
 .search-results {
     overflow-y: scroll;
     position: absolute;
-    width: 300px;
+    width: 487px;
+    transition:.5s;
     height: 500px;
     background-color: white;
 }
+
+
+.list-group-items {
+    position: relative;
+    font-family: 'Regulars';
+    padding: 0.5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+
+    .list-group-items .minicart-products-name {
+        color: #212529;
+    }
+    .list-group-items .minicart-products-name:hover {
+        color: #212529;
+    }

@@ -1,4 +1,7 @@
-﻿using LAHGO.Service.Interfaces;
+﻿using LAHGO.Core;
+using LAHGO.Core.Entities;
+using LAHGO.Service.Interfaces;
+using LAHGO.Service.ViewModels.CartProductVMs;
 using LAHGO.Service.ViewModels.DetailVMs;
 using LAHGO.Service.ViewModels.ShopVMs;
 using LAHGO.Service.ViewModels.SizeVMs;
@@ -14,16 +17,26 @@ namespace LAHGO.Mvc.Controllers
     {
         private readonly IDetailService _detailService;
         private readonly IBasketService _basketService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProductController(IDetailService detailService, IBasketService basketService)
+
+        public ProductController(IUnitOfWork unitOfWork, IDetailService detailService, IBasketService basketService)
         {
             _detailService = detailService;
             _basketService = basketService;
+            _unitOfWork = unitOfWork;
 
         }
         public IActionResult Index()
         {
             return View();
+        }
+        public async Task<IActionResult> Search(string search)
+        {
+            List<Product> products = await _unitOfWork.ProductRepository.GetAllAsync(p => p.Name.ToLower().Contains(search.ToLower()));
+
+            return PartialView("_SearchPartial", products);
+
         }
         public async Task<IActionResult> Detail(int id)
         {

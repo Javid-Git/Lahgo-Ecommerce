@@ -1,0 +1,34 @@
+﻿@model List<Product>
+@if (Model.Count == 0)
+{
+    <div class="search-results">
+        <div class="d-flex justify-content-center align-items-center">
+            <h3 class="minicart-product-name">Nothing found</h3>
+        </div>
+    </div>
+    
+}
+else
+{
+    <div class="search-results">
+        <ul class="search-list">
+            @foreach (Product product in Model)
+            {
+                <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id">
+                    <li class="list-group-items row g-0">
+                        <div class="col-lg-3">
+                            <img class="img-fluid" src="~/Manage/assets/img/productMainImg/@product.MainImage" style="width:100px" alt="Alternate Text" />
+                        </div>
+                        <div class="col-lg-5 minicart-products-name">@product.Name</div>
+                        <div class="col-lg-2 minicart-product-price">$@product.DiscountedPrice</div>
+                    </li>
+                </a>
+
+
+            }
+
+        </ul>
+    </div>
+}
+
+

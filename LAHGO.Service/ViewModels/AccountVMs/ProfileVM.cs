@@ -12,8 +12,6 @@ namespace LAHGO.Service.ViewModels.AccountVMs
        
         public string FullName { get; set; }
         public string Email { get; set; }
-        public string UserName { get; set; }
-
         [DataType(DataType.Password)]
         public string CurrentPassword { get; set; }
         [DataType(DataType.Password)]
@@ -32,17 +30,11 @@ namespace LAHGO.Service.ViewModels.AccountVMs
             RuleFor(r => r.FullName)
                 .NotNull().WithMessage("Full Name is required!").NotEmpty().WithMessage("Full Name is required!")
                 .MaximumLength(255).WithMessage("Maximum length is 255");
-            RuleFor(r => r.UserName)
-               .NotNull().WithMessage("Username is required!").NotEmpty().WithMessage("Username is required!")
-               .MaximumLength(255).WithMessage("Maximum length is 255");
             RuleFor(r => r.CurrentPassword)
-               .NotNull().WithMessage("Password is required!").NotEmpty().WithMessage("Password is required!")
                .MaximumLength(255).WithMessage("Maximum length is 255");
             RuleFor(r => r.NewPassword)
-              .NotNull().WithMessage("Password is required!").NotEmpty().WithMessage("Password is required!")
               .MaximumLength(255).WithMessage("Maximum length is 255");
             RuleFor(r => r.ConfirmPasword)
-               .NotNull().WithMessage("Password is required!").NotEmpty().WithMessage("Password is required!")
                .MaximumLength(255).WithMessage("Maximum length is 255");
         }
     }

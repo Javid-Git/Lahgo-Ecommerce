@@ -2,6 +2,7 @@
 using LAHGO.Core.Entities;
 using LAHGO.Service.Interfaces;
 using LAHGO.Service.ViewModels.CartProductVMs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;

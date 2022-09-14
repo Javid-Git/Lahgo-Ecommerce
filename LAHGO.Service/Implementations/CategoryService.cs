@@ -35,7 +35,7 @@ namespace LAHGO.Service.Implementations
             Category category = await _unitOfWork.CategoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
             if (category == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Item not found");
 
             category.IsDeleted = true;
             category.DeletedAt = DateTime.UtcNow.AddHours(4);
@@ -47,7 +47,7 @@ namespace LAHGO.Service.Implementations
             Category category = await _unitOfWork.CategoryRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
             if (category == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Item not found");
 
             category.IsDeleted = false;
             category.DeletedAt = null;
@@ -80,7 +80,7 @@ namespace LAHGO.Service.Implementations
             Category category = await _unitOfWork.CategoryRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
 
             if (category == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Item not found");
 
             CategoryGetVM categoryGetVM = _mapper.Map<CategoryGetVM>(category);
 
@@ -91,7 +91,10 @@ namespace LAHGO.Service.Implementations
         {
             
             Category category = _mapper.Map<Category>(categoryCreateVM);
-
+            if (await _unitOfWork.CategoryRepository.IsExistAsync(c => c.Name.ToLower() == categoryCreateVM.Name.Trim().ToLower()))
+            {
+                throw new AlreadeExistException($"Category {categoryCreateVM.Name} already Exists");
+            }
             category.Name = categoryCreateVM.Name;
             category.Image = await categoryCreateVM.FormImage.CreateAsync(_env, "Manage", "assets", "img", "categories");
 
@@ -104,7 +107,7 @@ namespace LAHGO.Service.Implementations
             Category category = await _unitOfWork.CategoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id || c.IsDeleted);
 
             if (category == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Item not found");
 
             
             if (await _unitOfWork.CategoryRepository.IsExistAsync(c => c.Name.ToLower() == categoryUpdateVM.Name.Trim().ToLower()))

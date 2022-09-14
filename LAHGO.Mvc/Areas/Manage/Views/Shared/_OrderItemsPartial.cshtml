@@ -1,0 +1,43 @@
+﻿@model List<OrderItem>
+@{
+    int itemNo = 0;
+}
+
+@if (Model.Any(s => s.IsDeleted == false) == false)
+{
+
+
+}
+else
+{
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr class="info">
+                <th class="col-lg-1"></th>
+                <th class="col-lg-3">Image</th>
+                <th class="col-lg-3">Product Name</th>
+                <th class="col-lg-2">Product Price</th>
+                <th class="col-lg-1">Count</th>
+                <th class="col-lg-2">Subtotal</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (OrderItem orderitem in Model.Where(o => !o.IsDeleted))
+            {
+                itemNo++;
+                <tr data-toggle="collapse" class="accordion-toggle">
+                    <td class="col-lg-1">@itemNo</td>
+                    <td class="col-lg-3">
+                        <img class="img-fluid" src="~/Manage/assets/img/productMainImg/@orderitem.Image" alt="Alternate Text" />
+                    </td>
+                    <td class="col-lg-3">@orderitem.Product.Name</td>
+                    <td class="col-lg-2">$@orderitem.Price</td>
+                    <td class="col-lg-1">@orderitem.Count</td>
+                    <td class="col-lg-2">$@orderitem.TotalPrice</td>
+                    <td><a asp-area="manage" asp-controller="order" asp-action="DeleteOrderItem" asp-route-id="@orderitem.Id" asp-route-orderId="@orderitem.OrderId"><i style="color:white" class="fa-solid fa-xmark det-order-close"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

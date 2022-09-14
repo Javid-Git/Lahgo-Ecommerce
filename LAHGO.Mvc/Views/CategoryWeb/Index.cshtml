@@ -1,0 +1,302 @@
+﻿@model ShopVM
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+@*<div class="loader-div">
+        <span class="loader-body">
+            <span></span>
+            <span></span>
+        </span>
+    </div>*@
+
+@await Component.InvokeAsync("ShopHeader")
+<section id="section1-shop">
+    <div class="ccontainer">
+        <div class="site-navigation">
+            <ul class="text-start d-flex">
+                <li class="navigation-options"><a href="/index.html">Home</a></li>
+                <li class="separator">/</li>
+                <li class="navigation-options navigation-options-active"> @(Model.Category.Name)</li>
+            </ul>
+        </div>
+        <div class="shop-introduction text-center">
+            <div class="shop-title section-title">
+                @(Model.Category.Name)
+            </div>
+            <div class="shop-describtion section-describtion">
+                Reinvent your R&R with Lahgo. Meet the key pieces responsible for looking and feeling your best,
+                even when no one’s watching.
+            </div>
+        </div>
+    </div>
+</section>
+<section id="section2-shop">
+    <div class="ccontainer sp-container">
+        <div class="shop-sorting">
+            <div class="mobile-sorting ">
+                <div class="mobile-sorting-wraper ">
+                    <form class=" row g-0" id="filtermobile" asp-controller="shop" asp-action="filter" method="post">
+                        <div class="mobile-filter col-6 ">
+                            <div id="mobile-filter" class="product-size d-flex align-items-center justify-content-center">
+                                filter <svg class="svg-caret-down"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                              stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mobile-sort col-6">
+                            <div id="mobile-sort" class="product-size d-flex align-items-center justify-content-center">
+                                sort <svg class="svg-caret-down"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                              stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <ul class="mobile-sort-list">
+                                <li class="mobile-product-name">Sort by featured</li>
+                                <li class="mobile-product-name">Sort by most popular</li>
+                                <li class="mobile-product-name">Sort by newest</li>
+                            </ul>
+                        </div>
+                        <div class="mobile-filter-big">
+                            <div class="mobile-settings">
+                                <div class="mobile-sizes mobile-filtes">
+                                    <label class="input-labels filter-labels" for="SizeId">Size</label>
+                                    <select class="size-filter filter-selections" name="SizeId">
+                                        <option value="" selected>All</option>
+                                        @foreach (var size in Model.Sizes)
+                                        {
+                                            <option value="@size.Id">@size.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="mobile-colors mobile-filtes">
+                                    <label class="input-labels filter-labels" for="ColorId">Color</label>
+                                    <select class="color-filter filter-selections" name="ColorId">
+                                        <option value="" style="background-color:White" data-color="White">All</option>
+                                        @foreach (var color in Model.Colors)
+                                        {
+                                            <option class="color-filter-option" style="background-color:@color.Code" data-color="@color.Code" value="@color.Id"></option>
+
+                                        }
+                                    </select>
+                                </div>
+                                <div class="mobile-types mobile-filtes">
+                                    <label class="input-labels filter-labels" for="TypeId">Type</label>
+                                    <select class="size-filter filter-selections" name="TypeId">
+                                        <option value="" selected>All</option>
+                                        @foreach (var type in Model.Typings)
+                                        {
+                                            <option value="@type.Id">@type.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <button id="apply-filtering" form="filtermobile" class="login-button register-button">
+                                Apply
+                            </button>
+                            <div id="cancel-filtering" class="login-button text-center">
+                                Cancel
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+
+            </div>
+            <div class="product-settings ">
+                <form class="row justify-content-between w-100 g-0" id="filter" asp-controller="shop" asp-action="filter" method="post">
+                    <ul class="d-flex col-lg-5">
+                        <li class="size-dropdown dropdowns">
+                            <label class="input-labels filter-labels" for="SizeId">Size</label>
+                            <select class="size-filter filter-selections" name="SizeId">
+                                <option value="" selected>All</option>
+                                @foreach (var size in Model.Sizes)
+                                {
+                                    <option value="@size.Id">@size.Name</option>
+                                }
+                            </select>
+                        </li>
+                        <li class="size-dropdown dropdowns">
+                            <label class="input-labels filter-labels" for="ColorId">Color</label>
+                            <select class="color-filter filter-selections" name="ColorId">
+                                <option value="" style="background-color:White" data-color="White">All</option>
+                                @foreach (var color in Model.Colors)
+                                {
+                                    <option class="color-filter-option" style="background-color:@color.Code" data-color="@color.Code" value="@color.Id"></option>
+
+                                }
+                            </select>
+                        </li>
+                        <li class="size-dropdown dropdowns">
+                            <label class="input-labels filter-labels" for="TypeId">Type</label>
+                            <select class="size-filter filter-selections" name="TypeId">
+                                <option value="" selected>All</option>
+                                @foreach (var type in Model.Typings)
+                                {
+                                    <option value="@type.Id">@type.Name</option>
+                                }
+                            </select>
+                        </li>
+                    </ul>
+                    <button form="filter" type="submit" class="btn btn-dark col-lg-2 filter-button ">Filter</button>
+
+                    @*<a asp-controller="shop" asp-action="filter" class="btn btn-dark col-lg-2 filter-button">Filter</a>*@
+                    <ul class="col-lg-5 d-flex justify-content-end">
+                        <li class="size-dropdown dropdowns">
+                            <div class="product-size d-flex align-items-center ">
+                                sort <svg class="svg-caret-down"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                              stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <ul class="adds-list lists">
+                                <li>Featured</li>
+                                <li>Most popular</li>
+                                <li>Newest</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="section3-shop">
+    <div class="ccontainer">
+        <div class="products row ">
+            @await Html.PartialAsync("_ProductsIndexPartial", Model)
+        </div>
+    </div>
+</section>
+<section id="section4-shop">
+    <div class="ccontainer">
+        <div class="section-title text-center">
+            OUR BEST SELLERS
+        </div>
+        <div class="bestsellers row">
+            <div class="bestseller col-lg-3 col-6">
+                <a href="">
+                    <div class="bestseller-top">
+                        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/DSC08571-min.jpg?v=1634004364"
+                             alt="">
+                    </div>
+                </a>
+                <div class="bestseller-bottom">
+                    <div class="mobile-product-name bestseller-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="bestseller-name product-name">
+                        Washable Silk Short Set
+                    </div>
+                    <div class="bestseller-price product-price">
+                        $248
+                    </div>
+                </div>
+            </div>
+            <div class="bestseller col-lg-3 col-6">
+                <a href="">
+                    <div class="bestseller-top">
+                        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/DSC08571-min.jpg?v=1634004364"
+                             alt="">
+                    </div>
+                </a>
+                <div class="bestseller-bottom">
+                    <div class="mobile-product-name bestseller-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="bestseller-name product-name">
+                        Washable Silk Short Set
+                    </div>
+                    <div class="bestseller-price product-price">
+                        $248
+                    </div>
+                </div>
+            </div>
+            <div class="bestseller col-lg-3 col-6">
+                <a href="">
+                    <div class="bestseller-top">
+                        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/DSC08571-min.jpg?v=1634004364"
+                             alt="">
+                    </div>
+                </a>
+                <div class="bestseller-bottom">
+                    <div class="mobile-product-name bestseller-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="bestseller-name product-name">
+                        Washable Silk Short Set
+                    </div>
+                    <div class="bestseller-price product-price">
+                        $248
+                    </div>
+                </div>
+            </div>
+            <div class="bestseller col-lg-3 col-6">
+                <a href="">
+                    <div class="bestseller-top">
+                        <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/DSC08571-min.jpg?v=1634004364"
+                             alt="">
+                    </div>
+                </a>
+                <div class="bestseller-bottom">
+                    <div class="mobile-product-name bestseller-name">
+                        <a href="">WASHABLE SILK BUTTON UP SHORT SET</a>
+                    </div>
+                    <div class="bestseller-name product-name">
+                        Washable Silk Short Set
+                    </div>
+                    <div class="bestseller-price product-price">
+                        $248
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="section5-shop">
+    <div class="ccontainer">
+        <div class="section-title text-center">
+            WHY LAHGO?
+        </div>
+        <div class="section5-shop-content row">
+            <div class="section5-shop-text text-center col-lg-3 col-7">
+                <div class="s5-shop-title">
+                    Free Ground Shipping on U.S. Orders 150 USD or more
+                </div>
+                <div class="s5-shop-describtion">
+                    We take the hassle out of shopping with free Ground Shipping on U.S. orders of $150 or more.
+                </div>
+            </div>
+            <div class="section5-shop-text text-center col-lg-3 col-7">
+                <div class="s5-shop-title">
+                    Free Ground Shipping on U.S. Orders 150 USD or more
+                </div>
+                <div class="s5-shop-describtion">
+                    We take the hassle out of shopping with free Ground Shipping on U.S. orders of $150 or more.
+                </div>
+            </div>
+            <div class="section5-shop-text text-center col-lg-3 col-7">
+                <div class="s5-shop-title">
+                    Free Ground Shipping on U.S. Orders 150 USD or more
+                </div>
+                <div class="s5-shop-describtion">
+                    We take the hassle out of shopping with free Ground Shipping on U.S. orders of $150 or more.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -19,8 +19,9 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IColorService _colorService;
         private readonly ISizeService _sizeService;
+        private readonly ITypingService _typingService;
         private readonly IMapper _mapper;
-        public ProductController(IProductColorSizeService productColorSizeService, ISizeService sizeService, IProductService productService, IMapper mapper, ICategoryService categoryService, IColorService colorService)
+        public ProductController(ITypingService typingService, IProductColorSizeService productColorSizeService, ISizeService sizeService, IProductService productService, IMapper mapper, ICategoryService categoryService, IColorService colorService)
         {
             _productService = productService;
             _colorService = colorService;
@@ -28,6 +29,7 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             _mapper = mapper;
             _sizeService = sizeService;
             _productColorSizeService = productColorSizeService;
+            _typingService = typingService;
         }
         public IActionResult Index(int? status, int page = 1)
         {
@@ -42,6 +44,7 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             ViewBag.Categories = _categoryService.GetAllAysnc(status);
             ViewBag.Colors = _colorService.GetAllAysnc(status);
             ViewBag.Sizes = _sizeService.GetAllAysnc(status);
+            ViewBag.Types = _typingService.GetAllAysnc(status);
 
             return View();
         }
@@ -50,6 +53,7 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
         {
             ViewBag.Categories = _categoryService.GetAllAysnc(status);
             ViewBag.Colors = _colorService.GetAllAysnc(status);
+            ViewBag.Types = _typingService.GetAllAysnc(status);
             ViewBag.Sizes = _sizeService.GetAllAysnc(status);
             if (!ModelState.IsValid)
             {
@@ -74,6 +78,7 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             ViewBag.Categories = _categoryService.GetAllAysnc(status);
             ViewBag.Colors = _colorService.GetAllAysnc(status);
             ViewBag.Sizes = _sizeService.GetAllAysnc(status);
+            ViewBag.Types = _typingService.GetAllAysnc(status);
 
             ProductGetVM productUpdateVM = await _productService.GetById(id);
 
@@ -85,6 +90,7 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             ViewBag.Categories = _categoryService.GetAllAysnc(status);
             ViewBag.Colors = _colorService.GetAllAysnc(status);
             ViewBag.Sizes = _sizeService.GetAllAysnc(status);
+            ViewBag.Types = _typingService.GetAllAysnc(status);
 
             await _productService.UpdateAsync(id, productGetVM);
 
@@ -122,6 +128,7 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             ViewBag.Categories = _categoryService.GetAllAysnc(status);
             ViewBag.Colors = _colorService.GetAllAysnc(status);
             ViewBag.Sizes = _sizeService.GetAllAysnc(status);
+            ViewBag.Types = _typingService.GetAllAysnc(status);
 
             ProductGetVM productGetVM = await _productService.GetById(id);
             await _productService.DeleteImgAsync(id);

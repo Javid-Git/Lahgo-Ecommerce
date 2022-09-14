@@ -115,6 +115,12 @@
                                                 <label asp-for="IsWashableSilk">WashableSilk</label>
                                                 <input type="checkbox" asp-for="IsWashableSilk" />
                                             </div>
+                                            <div class="form-group">
+                                                <label asp-for="TypeIds"></label>
+                                                <select asp-for="TypeIds" class="form-control" asp-items="new SelectList(ViewBag.Types, nameof(Typing.Id),nameof(Typing.Name))">
+                                                </select>
+                                                <span class="text text-danger" asp-validation-for="TypeIds"></span>
+                                            </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>

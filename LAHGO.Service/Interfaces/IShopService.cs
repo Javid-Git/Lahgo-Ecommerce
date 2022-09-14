@@ -8,6 +8,6 @@ namespace LAHGO.Service.Interfaces
 {
     public interface IShopService
     {
-        Task<ShopVM> GetBasket();
+        Task<ShopVM> GetBasket(int SizeId, int ColorId, int TypeId, int CategoryId, int count, int page = 1);
     }
 }

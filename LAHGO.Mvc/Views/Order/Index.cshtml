@@ -27,7 +27,7 @@
                         </svg>
                     </div>
                     <div class="mobile-product-list-total product-checkout-price">
-                        $452
+                        $@(Model.Baskets.Sum(b=>b.Counts * b.Product.DiscountedPrice))
                     </div>
                 </div>
                 <div class=" checkout1-right-mobile col-lg-5 col-12">
@@ -48,68 +48,23 @@
                                     </div>
                                     <div class="minicart-product-colorandsize">
                                         <div class="minicart-product-color text-start">
-                                            SINCERE WHITE / <span class="minicart-product-size">L</span>
+                                            @Model.Colors.FirstOrDefault(c => c.Id == item.ColorId).Name / <span class="minicart-product-size">@Model.Sizes.FirstOrDefault(c => c.Id == item.SizeId).Name</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="product-checkout-price col-lg-1 col-1">
-                                    $178.00
+                                    $@item.Product.DiscountedPrice
                                 </div>
                             </div>
 
                         }
-                        <div class="product-checkout row g-0 align-items-center">
-                            <div class="product-checkout-pic col-lg-2 col-2">
-                                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/01_LUNYA-LAHGO-RUSH-2022-05-1911480-min_small.jpg?v=1654708333"
-                                     alt="">
-                            </div>
-                            <div class="product-checkout-count minicart-product-color d-flex align-items-center justify-content-center">
-                                0
-                            </div>
-                            <div class="product-checkout-describtion col-lg-6 col-6">
-                                <div class="product-checkout-name minicart-product-name">
-                                    WOVEN LINEN PANT
-                                </div>
-                                <div class="minicart-product-colorandsize">
-                                    <div class="minicart-product-color text-start">
-                                        SINCERE WHITE / <span class="minicart-product-size">L</span>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="product-checkout-price col-lg-1 col-1">
-                                $178.00
-                            </div>
-                        </div>
-                        <div class="product-checkout row g-0 align-items-center">
-                            <div class="product-checkout-pic col-lg-2 col-2">
-                                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/01_LUNYA-LAHGO-RUSH-2022-05-1911480-min_small.jpg?v=1654708333"
-                                     alt="">
-                            </div>
-                            <div class="product-checkout-count minicart-product-color d-flex align-items-center justify-content-center">
-                                0
-                            </div>
-                            <div class="product-checkout-describtion col-lg-6 col-6">
-                                <div class="product-checkout-name minicart-product-name">
-                                    WOVEN LINEN PANT
-                                </div>
-                                <div class="minicart-product-colorandsize">
-                                    <div class="minicart-product-color text-start">
-                                        SINCERE WHITE / <span class="minicart-product-size">L</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="product-checkout-price col-lg-1 col-1">
-                                $178.00
-                            </div>
-                        </div>
                     </div>
                     <div class="checkout-calculation">
                         <div class="additional-expenses">
                             <div class="expense d-flex justify-content-between">
-                                <p>Subtotal</p><span class="taxes product-checkout-price">$452.00</span>
+                                <p>Subtotal</p><span class="taxes product-checkout-price">$@(Model.Baskets.Sum(b=>b.Counts * b.Product.DiscountedPrice))</span>
                             </div>
                             <div class="expense d-flex justify-content-between">
                                 <p>Shipping</p><span class="shipping">--</span>
@@ -119,7 +74,7 @@
                         <div class="checkout-total">
                             <div class="additional-expenses expense-optional">
                                 <div class="expense  d-flex justify-content-between">
-                                    <p>Total</p><span class="taxes product-checkout-price">$452.00</span>
+                                    <p>Total</p><span class="taxes product-checkout-price">$@(Model.Baskets.Sum(b=>b.Counts * b.Product.DiscountedPrice))</span>
                                 </div>
 
 
@@ -129,7 +84,7 @@
                 </div>
                 <div class="site-navigation site-navigation-checkout col-lg-12">
                     <ul class="text-start align-items-center">
-                        <li class="navigation-options"><a href="/Assets/html/cart.html">Cart </a></li>
+                        <li class="navigation-options"><a asp-controller="basket" asp-action="index">Cart </a></li>
                         <li class="separator">></li>
                         <li class="navigation-options navigation-options-active"> Information</li>
                         <li class="separator">></li>
@@ -173,119 +128,15 @@
             <div class="left-separator navigation-options navigation-options-active d-flex align-items-center">
                 <span class="left-separator-text navigation-options navigation-options-active">or</span>
             </div>
-            <form action="" method="post">
-                <div class="contact-info">
-                    <div class="section-title-small">
-                        Contact information
-                    </div>
-                    <div class="section-describtion-small">
-                        Already have an account?<strong>
-                            <a href="/Assets/html/login.html"
-                               class="section-describtion-small"> Log In</a>
-                        </strong>
-                    </div>
-                    <div class="email-inputs inputs inputs-checkout">
-                        <label class="input-labels" for="email">Email</label>
-                        <input type="text" name="" id="email" placeholder="Email">
-                    </div>
-                    <div class="subscribtion-input d-flex align-items-center">
-                        <input id="subscribtion" type="checkbox" name="subscribtion">
-                        <label for="subscribtion">Email me with news and offers</label>
-
-                    </div>
-
-                </div>
-                <div class="shipping-address row g-3">
-                    <div class="section-title-small col-lg-12">
-                        Shipping Address
-                    </div>
-                    <div class="email-inputs inputs inputs-checkout col-lg-12">
-                        <label class="input-labels" for="country">Country / Region</label>
-                        <input type="text" name="" id="country" placeholder="Country / Region">
-                    </div>
-                    <div class="email-inputs inputs inputs-checkout col-lg-6">
-                        <label class="input-labels" for="name">First Name</label>
-                        <input type="text" name="" id="name" placeholder="First Name">
-                    </div>
-                    <div class="email-inputs inputs inputs-checkout col-lg-6">
-                        <label class="input-labels" for="surname">Last Name</label>
-                        <input type="text" name="" id="surname" placeholder="Last Name">
-                    </div>
-                    <div class="email-inputs inputs inputs-checkout col-lg-12">
-                        <label class="input-labels" for="address">Address</label>
-                        <input type="text" name="" id="address" placeholder="Address">
-                    </div>
-                    <div class="email-inputs inputs inputs-checkout col-lg-12">
-                        <label class="input-labels" for="suite">Apartment, suite, etc. (optional)</label>
-                        <input type="text" name="" id="suite" placeholder="Apartment, suite, etc. (optional)">
-                    </div>
-                    <div class="email-inputs inputs inputs-checkout col-lg-4">
-                        <label class="input-labels" for="city">City</label>
-                        <input type="text" name="" id="city" placeholder="City">
-                    </div>
-                    <div class="email-inputs inputs inputs-checkout col-lg-4">
-                        <label class="input-labels" for="state">State</label>
-                        <input type="text" name="" id="state" placeholder="State">
-                    </div>
-                    <div class="email-inputs inputs inputs-checkout col-lg-4">
-                        <label class="input-labels" for="zipcode">ZIP code</label>
-                        <input type="text" name="" id="zipcode" placeholder="ZIP code">
-                    </div>
-                    <div class="phone-inputs inputs inputs-checkout col-lg-12">
-                        <label class="input-labels" for="phone">Phone (optional)</label>
-                        <input type="text" name="" id="phone" placeholder="Phone (optional)">
-                        <div class="tooltip">
-                            <svg class="svg-tooltip svg-tootlip-checkout" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 20 20">
-                                <g>
-                                    <circle id="circle" fill="none" stroke="currentColor" cx="10" cy="10" r="9.5">
-                                    </circle>
-                                    <path id="question" fill="currentColor"
-                                          d="M9.12,12.59h1.1v-.71a3.58,3.58,0,0,1,1.32-2.4A4,4,0,0,0,13,6.73,2.59,2.59,0,0,0,10.16,4,3.16,3.16,0,0,0,7,7.28H8.16a2.05,2.05,0,0,1,2-2.14,1.47,1.47,0,0,1,1.6,1.64,3.17,3.17,0,0,1-1.09,2,4.25,4.25,0,0,0-1.54,3ZM9.64,16a1.06,1.06,0,0,0,0-2.11,1.06,1.06,0,0,0,0,2.11Z">
-                                    </path>
-                                </g>
-                            </svg>
-                            <div class="tooltip-content tooltip-content-checkout">
-                                <p class="t-b-2 cr-subdued">In case we need to contact you about your order</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="checkout-buttons row g-0 align-items-center">
-                    <div class="return-button col-lg-6">
-                        <a class=" d-flex align-items-center" href="/Assets/html/cart.html">
-                            <svg focusable="false" aria-hidden="true"
-                                 class="icon-svg icon-svg--color-accent icon-svg--size-10 previous-link__icon"
-                                 role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
-                                <path d="M8 1L7 0 3 4 2 5l1 1 4 4 1-1-4-4"></path>
-                            </svg>
-                            <span class="section-describtion section-describtion-optional">Return to cart</span>
-                        </a>
-                    </div>
-                    <div class="shipping-button col-lg-6">
-                        <a asp-controller="order" asp-action="checkout" formmethod="post" style="padding:19px 4rem" class="checkout-button-link">
-                            continue to shipping
-                        </a>
-                    </div>
-                </div>
-                <div class="subscribtion-input subscribtion-input-optional d-flex align-items-start">
-                    <input id="subscribtion" type="checkbox" name="subscribtion">
-                    <label for="subscribtion">
-                        <strong class="subscribtion-text">Get SMS alerts about your order</strong>
-                        <p class="subscribtion-text">
-                            Stay up to date on your purchase with order confirmation and
-                            shipping confirmation messages
-                        </p>
-                    </label>
-
-                </div>
-            </form>
+            <div class="adress-container">
+                @await Html.PartialAsync("_OrderAdressPartial", Model.Order)
+            </div>
             <div class="policies">
                 <ul class="policy-list d-flex">
-                    <li><a href="">Refund policy</a></li>
-                    <li><a href="">Refund policy</a></li>
-                    <li><a href="">Refund policy</a></li>
-                    <li><a href="">Refund policy</a></li>
+                    <li><a asp-controller="about" asp-action="index">Refund policy</a></li>
+                    <li><a asp-controller="about" asp-action="index">Refund policy</a></li>
+                    <li><a asp-controller="about" asp-action="index">Refund policy</a></li>
+                    <li><a asp-controller="about" asp-action="index">Refund policy</a></li>
                 </ul>
             </div>
 
@@ -319,7 +170,7 @@
                     </div>
 
                 }
-               
+
             </div>
             <div class="checkout-calculation">
                 <div class="additional-expenses">
@@ -336,12 +187,9 @@
                         <div class="expense  d-flex justify-content-between">
                             <p>Total</p><span class="taxes product-checkout-price">$@(Model.Baskets.Sum(b=>b.Counts * b.Product.DiscountedPrice))</span>
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-

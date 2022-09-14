@@ -10,6 +10,7 @@ namespace LAHGO.Service.ViewModels.ColorVMs
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Code { get; set; }
     }
 
     public class ColorCreateVMVMValidator : AbstractValidator<ColorCreateVM>
@@ -26,6 +27,14 @@ namespace LAHGO.Service.ViewModels.ColorVMs
                 else
                 {
                     
+                }
+                if (r.Code == null)
+                {
+                    context.AddFailure("", "Code is required!");
+                }
+                else
+                {
+
                 }
             });
         }

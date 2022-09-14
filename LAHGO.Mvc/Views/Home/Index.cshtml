@@ -3,7 +3,12 @@
     ViewData["Title"] = "Index";
 }
 @await Component.InvokeAsync("IndexHeader")
-
+@*<div class="loader">
+    <div class="load-text">
+        <div class="loaded-text">L</div>
+        <div class="loading-text">AHGO</div>
+    </div>
+</div>*@
 <section id="section1">
     <div class="section1-introduction">
         <div class="section-describtion">
@@ -74,7 +79,7 @@
         @foreach (var category in Model.Categories)
         {
             <div>
-                <a href="">
+                <a asp-controller="CategoryWeb" asp-action="index" asp-route-CategoryId="@category.Id">
                     <div class="category-slider-top">
                         <img src="~/Manage/assets/img/categories/@category.Image"
                              alt="">

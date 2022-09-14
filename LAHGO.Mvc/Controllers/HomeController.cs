@@ -1,6 +1,7 @@
 ﻿using LAHGO.Service.Interfaces;
 using LAHGO.Service.ViewModels.CartProductVMs;
 using LAHGO.Service.ViewModels.HomeVMs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace LAHGO.Mvc.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILayoutService _layoutService;

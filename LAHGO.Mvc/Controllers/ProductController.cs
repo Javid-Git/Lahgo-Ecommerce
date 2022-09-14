@@ -2,9 +2,12 @@
 using LAHGO.Core.Entities;
 using LAHGO.Service.Interfaces;
 using LAHGO.Service.ViewModels.CartProductVMs;
+using LAHGO.Service.ViewModels.CommentVMs;
 using LAHGO.Service.ViewModels.DetailVMs;
 using LAHGO.Service.ViewModels.ShopVMs;
 using LAHGO.Service.ViewModels.SizeVMs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,7 +23,7 @@ namespace LAHGO.Mvc.Controllers
         private readonly IUnitOfWork _unitOfWork;
 
 
-        public ProductController(IUnitOfWork unitOfWork, IDetailService detailService, IBasketService basketService)
+        public ProductController( IUnitOfWork unitOfWork, IDetailService detailService, IBasketService basketService)
         {
             _detailService = detailService;
             _basketService = basketService;
@@ -38,6 +41,7 @@ namespace LAHGO.Mvc.Controllers
             return PartialView("_SearchPartial", products);
 
         }
+
         public async Task<IActionResult> Detail(int id)
         {
             DetailVM detailVM = await _detailService.GetProduct(id);
@@ -50,6 +54,30 @@ namespace LAHGO.Mvc.Controllers
 
 
             return PartialView("_DetailSizePartial", sizePCSVM);
+        }
+        [Authorize(Roles = "User")]
+        [HttpPost]
+        public async Task<IActionResult> PostComent(int? productId, string? userId, IFormCollection collection, CommentVM coment)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                await _detailService.PostComent(productId, userId, collection, coment);
+                
+            }
+            else
+            {
+                return RedirectToAction("login", "account", new { area = "" });
+
+            }
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Detail");
+            }
+            else
+            {
+                return RedirectToAction("Detail", new { id = productId});
+
+            }
         }
     }
 }

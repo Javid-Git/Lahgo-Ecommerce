@@ -11,7 +11,7 @@ namespace LAHGO.Service.Interfaces
     public interface IBasketService
     {
         Task<List<CartProductGetVM>> Index();
-        Task<List<CartProductCreateVM>> AddToCart(int? ProductId, int SizeId, int ColorId);
+        Task<List<CartProductCreateVM>> AddToCart(int ProductId, int SizeId, int ColorId);
         Task<MinicartProductVM> OpenBasket();
         Task<MinicartProductVM> DeleteFromBasket(int? id);
         Task<List<CartProductGetVM>> DeleteFromCart(int? id);

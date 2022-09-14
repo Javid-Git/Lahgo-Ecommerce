@@ -21,6 +21,7 @@ using LAHGO.Core.Repositories;
 using LAHGO.Data.Repositories;
 using Newtonsoft.Json;
 using LAHGO.Core;
+using LAHGO.Service.Extensions;
 
 namespace LAHGO.Mvc
 {
@@ -76,6 +77,7 @@ namespace LAHGO.Mvc
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<ITypingService, TypingService>();
 
             services.AddCors(options =>
             {
@@ -94,10 +96,9 @@ namespace LAHGO.Mvc
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                //app.UseExceptionHandler("/Error");
-            }
+
+            app.ExceptionHadler();
+
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseStaticFiles();
 

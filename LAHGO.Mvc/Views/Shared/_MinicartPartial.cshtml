@@ -67,9 +67,16 @@
     <div class="minicart-bottom-info minicart-bottom-margin">
         OR 4 INTEREST-FREE PAYMENTS OF $159 WITH KLARNA <span><a href="" class="fw-bold minicart-product-colorandsize">learn more</a></span>
     </div>
-    <a asp-controller="order" asp-action="index" class=" login-button-link">
-        checkout
-    </a>
+    @if (Model.CartProductGets.Count != 0)
+    {
+        <a asp-controller="order" asp-action="index" class=" login-button-link">
+            checkout
+        </a>
+    }
+    else
+    {
+
+    }
     <div class="text-center viewcart">
         <a class="view-cart" asp-controller="cart" asp-action="index">view cart</a>
     </div>

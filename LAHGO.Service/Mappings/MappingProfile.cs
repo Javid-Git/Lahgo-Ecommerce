@@ -2,9 +2,12 @@
 using LAHGO.Core.Entities;
 using LAHGO.Service.ViewModels.CategoryVMs;
 using LAHGO.Service.ViewModels.ColorVMs;
+using LAHGO.Service.ViewModels.OrderVMs;
 using LAHGO.Service.ViewModels.PCSVMs;
 using LAHGO.Service.ViewModels.ProductVMs;
 using LAHGO.Service.ViewModels.SizeVMs;
+using LAHGO.Service.ViewModels.TypeProductVMs;
+using LAHGO.Service.ViewModels.TypingVMs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,12 +32,20 @@ namespace LAHGO.Service.Mappings
             CreateMap<Color, ColorGetVM>();
             CreateMap<Color, ColorListVM>();
 
+            CreateMap<TypingCreateVM, Typing>()
+                 .ForMember(des => des.CreatedAt, src => src.MapFrom(s => DateTime.UtcNow.AddHours(4)));
+            CreateMap<Typing, TypingGetVM>();
+            CreateMap<Typing, TypingListVM>();
 
             CreateMap<SizeCreateVM, Size>()
                 .ForMember(des => des.CreatedAt, src => src.MapFrom(s => DateTime.UtcNow.AddHours(4))); ;
             CreateMap<Size, SizeGetVM>();
             CreateMap<Size, SizeListVM>();
 
+            CreateMap<TypeProductCreateVM, ProductTyping>()
+                .ForMember(des => des.CreatedAt, src => src.MapFrom(s => DateTime.UtcNow.AddHours(4))); ;
+            CreateMap<ProductTyping, TypeProductGetVM>();
+            CreateMap<ProductTyping, TypeProductListVM>();
 
             CreateMap<PCSCreateVM, ProductColorSize>();
             CreateMap<ProductColorSize, PCSGetVM>()
@@ -49,6 +60,7 @@ namespace LAHGO.Service.Mappings
             CreateMap<Product, ProductGetVM>()
                 .ForPath(des => des.ProductColorSizes, src => src.MapFrom(s => s.ProductColorSizes))
                 .ForMember(des => des.IsBestSeller, src => src.MapFrom(x => x.IsBestSeller))
+                .ForMember(des => des.Typings, src => src.MapFrom(x => x.Typings))
                 .ForMember(des => des.IsFavorite, src => src.MapFrom(x => x.IsFavorite))
                 .ForMember(des => des.IsLinenShop, src => src.MapFrom(x => x.IsLinenShop))
                 .ForMember(des => des.IsNewArrival, src => src.MapFrom(x => x.IsNewArrival))
@@ -56,6 +68,9 @@ namespace LAHGO.Service.Mappings
 
             CreateMap<Product, ProductListVM>()
                 .ForPath(des => des.ProductColorSizes, src => src.MapFrom(s => s.ProductColorSizes));
+
+            CreateMap<Order, OrderGetVM>();
+                
 
             CreateMap<ProductCreateVM, Product>()
                 .ForMember(des => des.Name, src => src.MapFrom(x => x.Name.Trim()))

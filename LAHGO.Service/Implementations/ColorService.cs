@@ -31,8 +31,12 @@ namespace LAHGO.Service.Implementations
         {
 
             Color color = _mapper.Map<Color>(colorCreateVM);
-
+            if (await _unitOfWork.ColorRepository.IsExistAsync(c => c.Name.ToLower() == colorCreateVM.Name.Trim().ToLower()))
+            {
+                throw new AlreadeExistException($"Color {colorCreateVM.Name} already Exists");
+            }
             color.Name = colorCreateVM.Name;
+            color.Code = colorCreateVM.Code;
 
             await _unitOfWork.ColorRepository.AddAsync(color);
             await _unitOfWork.CommitAsync();
@@ -54,6 +58,8 @@ namespace LAHGO.Service.Implementations
         public IQueryable<ColorListVM> GetAllAysnc(int? status)
         {
             List<ColorListVM> colorListVMs = _mapper.Map<List<ColorListVM>>(_unitOfWork.ColorRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            if (colorListVMs == null)
+                throw new ItemtNoteFoundException($"Items not found");
 
             IQueryable<ColorListVM> query = colorListVMs.AsQueryable();
 
@@ -76,7 +82,7 @@ namespace LAHGO.Service.Implementations
             Color color = await _unitOfWork.ColorRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
 
             if (color == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Items not found");
 
             ColorGetVM colorGetVM = _mapper.Map<ColorGetVM>(color);
 
@@ -88,7 +94,7 @@ namespace LAHGO.Service.Implementations
             Color color = await _unitOfWork.ColorRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
             if (color == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Items not found");
 
             color.IsDeleted = false;
             color.DeletedAt = null;
@@ -101,7 +107,7 @@ namespace LAHGO.Service.Implementations
             Color color = await _unitOfWork.ColorRepository.GetAsync(c => !c.IsDeleted && c.Id == id || c.IsDeleted);
 
             if (color == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Items not found");
 
 
             if (await _unitOfWork.ColorRepository.IsExistAsync(c => c.Name.ToLower() == colorUpdateVM.Name.Trim().ToLower()))
@@ -116,12 +122,27 @@ namespace LAHGO.Service.Implementations
                 }
                 else
                 {
-                    throw new AlreadeExistException($"Category {colorUpdateVM.Name} already Exists");
+                    throw new AlreadeExistException($"Color {colorUpdateVM.Name} already Exists");
                 }
             }
+            if (await _unitOfWork.ColorRepository.IsExistAsync(c => c.Code.ToLower() == colorUpdateVM.Name.Trim().ToLower()))
+            {
+                if (color.Code == colorUpdateVM.Code)
+                {
+                    color.Code = colorUpdateVM.Code;
+
+                    color.UpdatedAt = DateTime.UtcNow.AddHours(4);
+
+                    await _unitOfWork.CommitAsync();
+                }
+                else
+                {
+                    throw new AlreadeExistException($"Color {colorUpdateVM.Code} already Exists");
+                }
+            }
+
             color.Name = colorUpdateVM.Name;
-
-
+            color.Code = colorUpdateVM.Code;
             color.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
             await _unitOfWork.CommitAsync();

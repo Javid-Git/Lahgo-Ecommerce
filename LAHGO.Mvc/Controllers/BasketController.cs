@@ -4,6 +4,8 @@ using LAHGO.Service.Interfaces;
 using LAHGO.Service.ViewModels.CartProductVMs;
 using LAHGO.Service.ViewModels.ShopVMs;
 using LAHGO.Service.ViewModels.SizeVMs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,8 +17,10 @@ using System.Threading.Tasks;
 
 namespace LAHGO.Mvc.Controllers
 {
+    [Authorize(Roles = "User")]
     public class BasketController : Controller
     {
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<AppUser> _userManager;
         private readonly IBasketService _basketService;
@@ -27,6 +31,7 @@ namespace LAHGO.Mvc.Controllers
             _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
+
         public async Task<IActionResult> Index()
         {
             List<CartProductGetVM> basketVMs = await _basketService.Index();
@@ -97,12 +102,13 @@ namespace LAHGO.Mvc.Controllers
             return PartialView("_SizeContainerPartial", sizePCSVM);
         }
         [HttpPost]
-        public async Task<IActionResult> AddToBasket(int? ProductId, int SizeId, int ColorId)
+        public async Task<IActionResult> AddToBasket(int ProductId, int SizeId, int ColorId)
         {
             List<CartProductCreateVM> basketVMs = await _basketService.AddToCart(ProductId, SizeId, ColorId);
 
-            //return Json(basketVMs.Count);
-            return RedirectToAction("Index", "Shop");
+
+            return Json(basketVMs.Count);
+            //return RedirectToAction("Index", "Shop");
 
         }
         public async Task<IActionResult> UpdateCount(int? id, int count)
@@ -122,6 +128,5 @@ namespace LAHGO.Mvc.Controllers
 
             return PartialView("_MinicartPartial", basketVMs);
         }
-
     }
 }

@@ -1,0 +1,71 @@
+﻿@model PageNatedList<Order>
+@{
+    int count = 1;
+}
+<table class="table align-items-center mb-0">
+    <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">FullName</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Count</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comment</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Price</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+        <tr>
+            <td>
+                <p class="text-xs font-weight-bold mb-0">@(count++)</p>
+            </td>
+            <td>
+                <div class="d-flex px-2 py-1">
+                    <div>
+                        <p class="text-xs font-weight-bold mb-0">@order.FullName</p>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm"></h6>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p class="text-xs font-weight-bold mb-0">@order.OrderItems.Sum(oi => oi.Count)</p>
+            </td>
+            <td>
+                <p class="text-xs font-weight-bold mb-0">@order.OrderStatus</p>
+            </td>
+            <td>
+                <p class="text-xs font-weight-bold mb-0 text-center">@order.CreatedAt?.ToString("dd-MM-yyyy")</p>
+            </td>
+            <td>
+                <p class="text-xs font-weight-bold mb-0 text-center">@order.Comment</p>
+            </td>
+            <td>
+                <p class="text-xs font-weight-bold mb-0 text-center">$@order.TotalPrice</p>
+            </td>
+            <td class="align-middle text-center">
+                @*@if (order.Order.IsDeleted)
+            {
+                <a asp-area="manage" asp-controller="product" asp-action="restore" asp-route-id="@order.Order.Id" class="text-white font-weight-bold text-xs btn btn-primary" data-toggle="tooltip" data-original-title="Edit user">
+                    Restore
+                </a>
+            }
+            else
+            {
+                <a asp-area="manage" asp-controller="product" asp-action="delete" asp-route-id="@order.Order.Id" class="text-white font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
+                    Delete
+                </a>
+            }*@
+                <a asp-area="manage" asp-controller="order" asp-action="update" asp-route-id="@order.Id" class="text-white font-weight-bold text-xs btn btn-secondary" data-toggle="tooltip" data-original-title="Edit user">
+                    Edit
+                </a>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>

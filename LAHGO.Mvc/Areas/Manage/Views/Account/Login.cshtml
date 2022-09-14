@@ -1,0 +1,36 @@
+﻿@model LoginVM
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!-- Form-->
+<div class="form">
+    <div class="form-toggle"></div>
+    <div class="form-panel one">
+        <div class="form-header">
+            <h1>Account Login</h1>
+        </div>
+        <div class="form-content">
+            <form asp-area="manage" asp-controller="account" asp-action="login" id="manage-login"> 
+                <div class="form-group">
+                    <label asp-for="Email">Email</label>
+                    <input type="text" asp-for="Email" required="required" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">Password</label>
+                    <input type="password" asp-for="Password" required="required" />
+                </div>
+                <div class="form-group">
+                    <label class="form-remember" asp-for="RememberMe">
+                        <input type="checkbox" asp-for="RememberMe" />Remember Me
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button form="manage-login" type="submit">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

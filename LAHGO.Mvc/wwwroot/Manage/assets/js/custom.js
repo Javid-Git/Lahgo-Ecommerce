@@ -61,7 +61,16 @@
             })
 
     });
+    $(document).on('click', '.det-order-close', function (e) {
+        e.preventDefault();
 
+        fetch($(this).parent().attr('href'))
+            .then(res => res.text())
+            .then(data => {
+                $('.orderitems-container').html(data)
+            })
+
+    });
 
     $(document).on('click', '.unit-update-close', function (e) {
         e.preventDefault();
@@ -70,4 +79,6 @@
        
 
     });
+
+    
 })

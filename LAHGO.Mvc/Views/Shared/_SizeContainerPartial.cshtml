@@ -1,14 +1,12 @@
 ﻿@model SizePCSVM
 <div class="sizes text-center d-flex justify-content-center">
     <div>
-        <select name="SizeId" class="size-select">
-            @foreach (var pcs in Model.ProductColorSizes)
-            {
-                <option value="@pcs.SizeId" class="d-flex align-items-center small-colors">@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Name</option>
-
-            }
-        </select>
+        @foreach (var pcs in Model.ProductColorSizes)
+        {
+            <input class="size-input" id="" type="radio" name="SizeId" value="@pcs.SizeId" />
+            <label class="size-label" for="">@pcs.Size.Name</label>
+        }
         <div class="size-selection">Select a size</div>
     </div>
-    <button class="btn add-to-basket" type="submit">ADD TO CART</button>
+    <button  class="btn add-to-basket btn-mobile" type="submit">ADD TO CART</button>
 </div>

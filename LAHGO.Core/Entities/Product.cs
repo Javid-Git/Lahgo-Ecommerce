@@ -17,8 +17,10 @@ namespace LAHGO.Core.Entities
         public string MainImage { get; set; }
         public List<Photo> Photos { get; set; }
         public IEnumerable<Basket> Baskets { get; set; }
+        public IEnumerable<Typing> Typings { get; set; }
         public IEnumerable<OrderItem> OrderItems { get; set; }
         public List<ProductColorSize> ProductColorSizes { get; set; }
+        public List<ProductTyping> ProductTypings { get; set; }
         public bool IsNewArrival { get; set; }
         public bool IsBestSeller { get; set; }
         public bool IsWashableSilk { get; set; }

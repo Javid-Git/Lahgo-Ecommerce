@@ -4,6 +4,13 @@
 
 }
 
+@*<div class="loader-div">
+        <span class="loader-body">
+            <span></span>
+            <span></span>
+        </span>
+    </div>*@
+
 @await Component.InvokeAsync("ShopHeader")
 <section id="section1-shop">
     <div class="ccontainer">
@@ -29,253 +36,138 @@
     <div class="ccontainer sp-container">
         <div class="shop-sorting">
             <div class="mobile-sorting ">
-                <div class="mobile-sorting-wraper  row g-0">
-                    <div class="mobile-filter col-6 ">
-                        <div id="mobile-filter" class="product-size d-flex align-items-center justify-content-center">
-                            filter <svg class="svg-caret-down"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
-                                <g>
-                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
-                                </g>
-                            </svg>
+                <div class="mobile-sorting-wraper ">
+                    <form class=" row g-0" id="filtermobile" asp-controller="shop" asp-action="filter" method="post">
+                        <div class="mobile-filter col-6 ">
+                            <div id="mobile-filter" class="product-size d-flex align-items-center justify-content-center">
+                                filter <svg class="svg-caret-down"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                              stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mobile-sort col-6">
-                        <div id="mobile-sort" class="product-size d-flex align-items-center justify-content-center">
-                            sort <svg class="svg-caret-down"
-                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
-                                <g>
-                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
-                                </g>
-                            </svg>
+                        <div class="mobile-sort col-6">
+                            <div id="mobile-sort" class="product-size d-flex align-items-center justify-content-center">
+                                sort <svg class="svg-caret-down"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                              stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <ul class="mobile-sort-list">
+                                <li class="mobile-product-name">Sort by featured</li>
+                                <li class="mobile-product-name">Sort by most popular</li>
+                                <li class="mobile-product-name">Sort by newest</li>
+                            </ul>
                         </div>
-                        <ul class="mobile-sort-list">
-                            <li class="mobile-product-name">Sort by featured</li>
-                            <li class="mobile-product-name">Sort by most popular</li>
-                            <li class="mobile-product-name">Sort by newest</li>
-                        </ul>
-                    </div>
-                    <div class="mobile-filter-big">
-                        <div class="mobile-settings">
-                            <div class="mobile-sizes mobile-filtes">
-                                <p>Size</p>
-                                <ul class="row g-0 mobile-sizes-list mobile-filter-list">
-                                    <li class="col-6">OS</li>
-                                    <li class="col-6">S</li>
-                                    <li class="col-6">M</li>
-                                    <li class="col-6">L</li>
-                                    <li class="col-6">XL</li>
-                                    <li class="col-6">XXL</li>
-                                </ul>
+                        <div class="mobile-filter-big">
+                            <div class="mobile-settings">
+                                <div class="mobile-sizes mobile-filtes">
+                                    <label class="input-labels filter-labels" for="SizeId">Size</label>
+                                    <select class="size-filter filter-selections" name="SizeId">
+                                        <option value="" selected>All</option>
+                                        @foreach (var size in Model.Sizes)
+                                        {
+                                            <option value="@size.Id">@size.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="mobile-colors mobile-filtes">
+                                    <label class="input-labels filter-labels" for="ColorId">Color</label>
+                                    <select class="color-filter filter-selections" name="ColorId">
+                                        <option value="" style="background-color:White" data-color="White">All</option>
+                                        @foreach (var color in Model.Colors)
+                                        {
+                                            <option class="color-filter-option" style="background-color:@color.Code" data-color="@color.Code" value="@color.Id"></option>
+
+                                        }
+                                    </select>
+                                </div>
+                                <div class="mobile-types mobile-filtes">
+                                    <label class="input-labels filter-labels" for="TypeId">Type</label>
+                                    <select class="size-filter filter-selections" name="TypeId">
+                                        <option value="" selected>All</option>
+                                        @foreach (var type in Model.Typings)
+                                        {
+                                            <option value="@type.Id">@type.Name</option>
+                                        }
+                                    </select>
+                                </div>
                             </div>
-                            <div class="mobile-colors mobile-filtes">
-                                <p>Color</p>
-                                <ul class="row g-0 mobile-colors-list mobile-filter-list">
-                                    <li class="d-flex align-items-center col-6">
-                                        <div class="small-colors" style="background-color: black;">
-
-                                        </div>
-                                        <span>Black</span>
-                                    </li>
-                                    <li class="d-flex align-items-center col-6">
-                                        <div class="small-colors" style="background-color: red;">
-
-                                        </div>
-                                        <span>Red</span>
-                                    </li>
-                                    <li class="d-flex align-items-center col-6">
-                                        <div class="small-colors" style="background-color: grey;">
-
-                                        </div>
-                                        <span>Grey</span>
-                                    </li>
-                                    <li class="d-flex align-items-center col-6">
-                                        <div class="small-colors" style="background-color: blue;">
-
-                                        </div>
-                                        <span>Blue</span>
-                                    </li>
-                                    <li class="d-flex align-items-center col-6">
-                                        <div class="small-colors" style="background-color: wheat;">
-
-                                        </div>
-                                        <span>Wheat</span>
-                                    </li>
-                                    <li class="d-flex align-items-center col-6">
-                                        <div class="small-colors" style="background-color: green;">
-
-                                        </div>
-                                        <span>Green</span>
-                                    </li>
-
-                                </ul>
+                            <button id="apply-filtering" form="filtermobile" class="login-button register-button">
+                                Apply
+                            </button>
+                            <div id="cancel-filtering" class="login-button text-center">
+                                Cancel
                             </div>
-                            <div class="mobile-types mobile-filtes">
-                                <p>Type</p>
-                                <ul class="row g-0 mobile-types-list mobile-filter-list">
-                                    <li class="col-6">Accessories</li>
-                                    <li class="col-6">Cardigan</li>
-                                    <li class="col-6">Pant</li>
-                                    <li class="col-6">Robe</li>
-                                    <li class="col-6">Sets</li>
-                                    <li class="col-6">Short</li>
-                                    <li class="col-6">Sweater</li>
-                                    <li class="col-6">Sweatshirt</li>
-                                    <li class="col-6">Tank</li>
-                                    <li class="col-6">Tee</li>
-                                    <li class="col-6">Top</li>
-                                    <li class="col-6">Underwear</li>
-                                </ul>
-                            </div>
-                            <div class="mobile-fit mobile-filtes">
-                                <p>Fit</p>
-                                <ul class="row g-0 mobile-fits-list mobile-filter-list">
-                                    <li class="col-6">Easy</li>
-                                </ul>
-                            </div>
-
                         </div>
-                        <button class="login-button register-button">
-                            Apply
-                        </button>
-                        <button id="cancel-filtering" class="login-button">
-                            Cancel
-                        </button>
-                    </div>
+                    </form>
                 </div>
-
             </div>
-            <div class="product-settings  justify-content-between">
-                <ul class="d-flex">
-                    <li class="size-dropdown dropdowns">
-                        <div class="product-size d-flex align-items-center ">
-                            size <svg class="svg-caret-down"
-                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
-                                <g>
-                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
-                                </g>
-                            </svg>
-                        </div>
-                        <ul class="size-list lists">
-                            <li>OS</li>
-                            <li>S</li>
-                            <li>M</li>
-                            <li>L</li>
-                            <li>XL</li>
-                            <li>XXL</li>
-                        </ul>
-                    </li>
-                    <li class="size-dropdown dropdowns">
-                        <div class="product-size d-flex align-items-center ">
-                            color <svg class="svg-caret-down"
-                                       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
-                                <g>
-                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
-                                </g>
-                            </svg>
-                        </div>
-                        <ul class="color-list lists">
-                            <li class="d-flex align-items-center">
-                                <div class="small-colors" style="background-color: black;">
+            <div class="product-settings ">
+                <form class="row justify-content-between w-100 g-0" id="filter" asp-controller="shop" asp-action="filter" method="post">
+                    <ul class="d-flex col-lg-5">
+                        <li class="size-dropdown dropdowns">
+                            <label class="input-labels filter-labels" for="SizeId">Size</label>
+                            <select class="size-filter filter-selections" name="SizeId">
+                                <option value="" selected>All</option>
+                                @foreach (var size in Model.Sizes)
+                                {
+                                    <option value="@size.Id">@size.Name</option>
+                                }
+                            </select>
+                        </li>
+                        <li class="size-dropdown dropdowns">
+                            <label class="input-labels filter-labels" for="ColorId">Color</label>
+                            <select class="color-filter filter-selections" name="ColorId">
+                                <option value="" style="background-color:White" data-color="White">All</option>
+                                @foreach (var color in Model.Colors)
+                                {
+                                    <option class="color-filter-option" style="background-color:@color.Code" data-color="@color.Code" value="@color.Id"></option>
 
-                                </div>
-                                <span>Black</span>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <div class="small-colors" style="background-color: red;">
+                                }
+                            </select>
+                        </li>
+                        <li class="size-dropdown dropdowns">
+                            <label class="input-labels filter-labels" for="TypeId">Type</label>
+                            <select class="size-filter filter-selections" name="TypeId">
+                                <option value="" selected>All</option>
+                                @foreach (var type in Model.Typings)
+                                {
+                                    <option value="@type.Id">@type.Name</option>
+                                }
+                            </select>
+                        </li>
+                    </ul>
+                    <button form="filter" type="submit" class="btn btn-dark col-lg-2 filter-button">Filter</button>
 
-                                </div>
-                                <span>Red</span>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <div class="small-colors" style="background-color: grey;">
+                    @*<a asp-controller="shop" asp-action="filter" class="btn btn-dark col-lg-2 filter-button">Filter</a>*@
+                    @*<ul class="col-lg-5 d-flex justify-content-end">
+                        <li class="size-dropdown dropdowns">
+                            <div class="product-size d-flex align-items-center ">
+                                sort <svg class="svg-caret-down"
+                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                              stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
+                                    </g>
+                                </svg>
+                            </div>
 
-                                </div>
-                                <span>Grey</span>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <div class="small-colors" style="background-color: blue;">
+                            <ul class="adds-list lists">
+                                <li>Featured</li>
+                                <li>Most popular</li>
+                                <li>Newest</li>
+                            </ul>
+                        </li>
+                    </ul>*@
+                </form>
 
-                                </div>
-                                <span>Blue</span>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <div class="small-colors" style="background-color: wheat;">
-
-                                </div>
-                                <span>Wheat</span>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <div class="small-colors" style="background-color: green;">
-
-                                </div>
-                                <span>Green</span>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li class="size-dropdown dropdowns">
-                        <div class="product-size d-flex align-items-center ">
-                            type <svg class="svg-caret-down"
-                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
-                                <g>
-                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
-                                </g>
-                            </svg>
-                        </div>
-                        <ul class="type-list lists">
-                            <li>Accessories</li>
-                            <li>Cardigan</li>
-                            <li>Pant</li>
-                            <li>Robe</li>
-                            <li>Sets</li>
-                            <li>Short</li>
-                            <li>Sweater</li>
-                            <li>Sweatshirt</li>
-                            <li>Tank</li>
-                            <li>Tee</li>
-                            <li>Top</li>
-                            <li>Underwear</li>
-                        </ul>
-                    </li>
-                    <li class="size-dropdown dropdowns">
-                        <div class="product-size d-flex align-items-center ">
-                            fit <svg class="svg-caret-down"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
-                                <g>
-                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
-                                </g>
-                            </svg>
-                        </div>
-                        <ul class="type-list lists">
-                            <li>Easy</li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="size-dropdown dropdowns">
-                        <div class="product-size d-flex align-items-center ">
-                            sort <svg class="svg-caret-down"
-                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5">
-                                <g>
-                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                          stroke-linecap="round" d="M.5.5l4,4,4-4"></path>
-                                </g>
-                            </svg>
-                        </div>
-                        <ul class="adds-list lists">
-                            <li>Featured</li>
-                            <li>Most popular</li>
-                            <li>Newest</li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -283,80 +175,8 @@
 <section id="section3-shop">
     <div class="ccontainer">
         <div class="products row ">
-            @foreach (var product in Model.Products)
-            {
-                if (product.Photos != null)
-                {
-                    <div class="product col-lg-4 col-6">
-                        <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id">
-                            <div class="product-top">
-                                <img src="~/Manage/assets/img/productMainImg/@product.MainImage"
-                                     alt="">
-                                <button type="button" class="add-to-favorites" title="Add to Wishlist">
-                                    <ion-icon name="star-outline"></ion-icon>
-                                </button>
-                                @if (product.IsNewArrival)
-                                {
-                                    <div class="new-arrival">
-                                    </div>
-                                }
-                                else
-                                {
-
-                                }
-                            </div>
-                        </a>
-
-                        <div class="product-bottom">
-                            <div class="mobile-product-name">
-                                <a href="">@product.Name</a>
-                            </div>
-                            <div class="product-name">
-                                @product.Name
-                            </div>
-                            <div class="product-price">
-                                $@(product.DiscountedPrice < product.Price? product.DiscountedPrice : product.Price)
-                            </div>
-                            <form method="post" asp-controller="basket" asp-action="AddToBasket">
-                                <div class="quick-add d-flex align-items-center justify-content-center">
-                                    + quick add
-                                    <input name="ProductId" type="hidden" value="@product.Id" />
-
-                                    <div class="size-selection-container">
-
-                                    </div>
-
-                                </div>
-                                <div class="colors d-flex">
-                                    @{ 
-                                        List<ProductColorSize> pp = new List<ProductColorSize>();
-                                        foreach (var item in Model.ProductColorSizes.Where(x => x.ProductId == product.Id))
-                                        {
-                                            if (!pp.Exists(p=>p.ColorId == item.ColorId))
-                                            {
-                                                pp.Add(item);
-                                            }
-                                        }
-                                    }
-
-                                    @foreach (var pcs in pp)
-                                    {
-                                        <input id="@(product.Name + pcs.Color.Name)" type="radio" name="ColorId" value="@pcs.ColorId" />
-                                        <a asp-controller="basket" asp-action="GetSizes" asp-route-ColorId="@pcs.ColorId" asp-route-ProductId="@product.Id" style="background-color:@pcs.Color.Name" class="smcolor-container " for="@(product.Name + pcs.Color.Name)"></a>
-                                    }
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                }
-
-            }
-
+            @await Html.PartialAsync("_ProductsIndexPartial", Model)
         </div>
-        <button class="load-more">
-            + Load More
-        </button>
     </div>
 </section>
 <section id="section4-shop">

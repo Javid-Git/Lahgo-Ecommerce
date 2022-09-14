@@ -6,6 +6,7 @@ using LAHGO.Service.ViewModels.CartProductVMs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -18,6 +19,7 @@ using System.Threading.Tasks;
 
 namespace LAHGO.Mvc.Controllers
 {
+    [Authorize(Roles = "User")]
     public class AccountController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -96,8 +98,8 @@ namespace LAHGO.Mvc.Controllers
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(email.SenderEmail, email.SenderName);
             mail.To.Add(appUser.Email);
-            mail.Subject = "Reset Password";
-            mail.Body = $"<a href=\"{link}\">Confirm email</a>";
+            mail.Subject = "Account activation";
+            mail.Body = $"<a href=\"{link}\">Confirmation link</a>";
             mail.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient();
             smtp.Host = email.Server;
@@ -216,13 +218,8 @@ namespace LAHGO.Mvc.Controllers
                 return View();
             }
             AppUser appuser = await _userManager.FindByEmailAsync(login.Email);
-            if (!appuser.EmailConfirmed)
-            {
-                ModelState.AddModelError("", "The email confirmation is requested");
 
-                return View(login);
-            }
-            List<Basket> userbasket = await _unitOfWork.BasketRepository.GetAllAsync(b => b.UserId == appuser.Id);
+            
             if (appuser == null)
             {
                 ModelState.AddModelError("", "Email or password is incorrect");
@@ -239,9 +236,16 @@ namespace LAHGO.Mvc.Controllers
                 ModelState.AddModelError("", "Email or password is incorrect");
                 return View(login);
             }
+            if (!appuser.EmailConfirmed)
+            {
+                ModelState.AddModelError("", "The email confirmation is requested");
+
+                return View(login);
+            }
             await _signInManager.SignInAsync(appuser, (bool)login.RememberMe);
             string basketCookie = HttpContext.Request.Cookies["basket"];
             List<CartProductCreateVM> basketVMs = JsonConvert.DeserializeObject<List<CartProductCreateVM>>(basketCookie);
+            List<Basket> userbasket = await _unitOfWork.BasketRepository.GetAllAsync(b => b.UserId == appuser.Id);
 
             if (!string.IsNullOrWhiteSpace(basketCookie) && basketVMs.Count != 0)
             {
@@ -401,22 +405,48 @@ namespace LAHGO.Mvc.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Profile()
+        {
+            AppUser appUser = await _userManager.Users
+                .Include(u => u.Orders).ThenInclude(o => o.OrderItems).ThenInclude(oi => oi.Product)
+                .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
 
+            if (appUser == null) return NotFound();
+
+            ProfileVM profileVM = new ProfileVM
+            {
+                FullName = appUser.FullName,
+                Email = appUser.Email,
+            };
+
+            MemberVM memberVM = new MemberVM
+            {
+                ProfileVM = profileVM,
+                Orders = appUser.Orders
+            };
+
+            return View(memberVM);
+        }
         [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> Update(ProfileVM profileVM)
         {
-            if (!ModelState.IsValid) return View("Profile", profileVM);
 
             AppUser dbAppUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            IEnumerable<Order> orders = await _unitOfWork.OrderRepository.GetAllAsyncInclude(o => o.AppUserId == dbAppUser.Id, "OrderItems", "OrderItems.Product");
 
-            if (dbAppUser.NormalizedUserName != profileVM.UserName.Trim().ToUpperInvariant() ||
-                dbAppUser.FullName.ToUpperInvariant() != profileVM.FullName.Trim().ToUpperInvariant() ||
+            MemberVM memberVM = new MemberVM
+            {
+                Orders = orders,
+                ProfileVM = profileVM
+            };
+            if (!ModelState.IsValid) return View("Profile", memberVM);
+
+            if (dbAppUser.FullName.ToUpperInvariant() != profileVM.FullName.Trim().ToUpperInvariant() ||
                 dbAppUser.NormalizedEmail != profileVM.Email.Trim().ToUpperInvariant())
             {
                 dbAppUser.FullName = profileVM.FullName;
                 dbAppUser.Email = profileVM.Email;
-                dbAppUser.UserName = profileVM.UserName;
 
                 IdentityResult identityResult = await _userManager.UpdateAsync(dbAppUser);
 
@@ -427,7 +457,7 @@ namespace LAHGO.Mvc.Controllers
                         ModelState.AddModelError("", item.Description);
                     }
 
-                    return View("Profile", profileVM);
+                    return View("Profile", memberVM);
                 }
 
                 TempData["success"] = "Pr0fil Ugurla Yenilendi";
@@ -438,7 +468,7 @@ namespace LAHGO.Mvc.Controllers
                 if (await _userManager.CheckPasswordAsync(dbAppUser, profileVM.CurrentPassword) && profileVM.CurrentPassword == profileVM.NewPassword)
                 {
                     ModelState.AddModelError("", "New Password Is The Same Current Password");
-                    return View("Profile", profileVM);
+                    return View("Profile", memberVM);
                 }
 
                 IdentityResult identityResult = await _userManager.ChangePasswordAsync(dbAppUser, profileVM.CurrentPassword, profileVM.NewPassword);
@@ -450,13 +480,14 @@ namespace LAHGO.Mvc.Controllers
                         ModelState.AddModelError("", item.Description);
                     }
 
-                    return View("Profile", profileVM);
+                    return View("Profile", memberVM);
                 }
 
                 TempData["successPassword"] = "Sifre Ugurla Yenilendi";
             }
-
-            return RedirectToAction("Profile");
+            await _unitOfWork.CommitAsync();
+            
+            return RedirectToAction("Profile", memberVM);
         }
     }
 }

@@ -22,8 +22,10 @@ namespace LAHGO.Service.ViewModels.ProductVMs
         public Size Size { get; set; }
         public List<Size> Sizes { get; set; }
         public List<Photo> Photos { get; set; }
+        public List<Typing> Typings { get; set; }
         public List<int> ColorIds { get; set; }
         public List<int> SizeIds { get; set; }
+        public List<int> TypeIds { get; set; }
         public List<int> Counts { get; set; }
         public List<ProductColorSize> ProductColorSizes { get; set; }
         public bool IsNewArrival { get; set; }

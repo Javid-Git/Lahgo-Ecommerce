@@ -49,7 +49,7 @@ namespace LAHGO.Service.Implementations
             ProductColorSize productColorSize = await _unitOfWork.ProductColorSizeRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id, "Product", "Product.Category");
 
             if (productColorSize == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Item not found");
 
             PCSGetVM pCSGetVM = _mapper.Map<PCSGetVM>(productColorSize);
 
@@ -67,7 +67,7 @@ namespace LAHGO.Service.Implementations
             Product product = await _unitOfWork.ProductRepository.GetAsync(c => c.Id == prodId);
 
             if (productColorSize == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {pcsGetVM.Id}");
+                throw new ItemtNoteFoundException($"Item not found");
 
             productColorSize.ColorId = pcsGetVM.ColorId;
             productColorSize.SizeId = pcsGetVM.SizeId;

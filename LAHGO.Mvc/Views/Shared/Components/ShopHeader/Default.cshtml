@@ -73,7 +73,7 @@
                             </ul>
                         </li>
                         <li id="about-navbar" class="navbar-item-hover">
-                            <a class="navbar-font" href="~/Assets/html/about.html">about</a>
+                            <a class="navbar-font" asp-controller="about" asp-action="index">about</a>
                             <ul class="about-list navbar-lists d-flex">
                                 <li>
                                     <ul class="about-list-s">
@@ -97,7 +97,7 @@
                             </ul>
                         </li>
                         <li class="navbar-item-hover">
-                            <a class=" navbar-font" href="~/Assets/html/contactus.html">Contact Us</a>
+                            <a class=" navbar-font" asp-controller="contact" asp-action="index">Contact Us</a>
                         </li>
                     </ul>
                 </div>
@@ -157,7 +157,18 @@
                             </div>
                         </li>
                         <li class="navbar-login">
-                            <a class=" navbar-font" asp-controller="account" asp-action="login">login</a>
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <a class=" navbar-font" asp-controller="account" asp-action="login">login</a>
+                            }
+                            else
+                            {
+                                <a class="navbar-account navbar-font" asp-controller="account" asp-action="profile">@User.Identity.Name</a>
+                                <ul class="cr-subdued bg-cloud navbar-account-list">
+                                    <li><a asp-controller="account" asp-action="profile" data-location="internal">My Account</a></li>
+                                    <li><a asp-controller="account" asp-action="logout" data-location="internal">Log Out</a></li>
+                                </ul>
+                            }
                         </li>
                         <li>
                             <a class=" navbar-font" href="">
@@ -190,10 +201,10 @@
             </div>
             <div class="sidebar flex-column justify-content-between sidebar-optional">
                 <ul class="sidebar-options text-start">
-                    <li class="sidebar-option"><a href="~/Assets/html/shop.html">shop</a></li>
-                    <li class="sidebar-option"><a href="">best sellers</a></li>
-                    <li class="sidebar-option"><a href="~/Assets/html/about.html">about</a></li>
-                    <li class="sidebar-option"><a href="~/Assets/html/contactus.html">Contact Us</a></li>
+                    <li class="sidebar-option"><a asp-controller="shop" asp-action="index">shop</a></li>
+                    <li class="sidebar-option"><a asp-controller="shop" asp-action="index">best sellers</a></li>
+                    <li class="sidebar-option"><a asp-controller="about" asp-action="index">about</a></li>
+                    <li class="sidebar-option"><a asp-controller="contact" asp-action="index">Contact Us</a></li>
                 </ul>
                 <div class="sales row justify-content-around g-0">
                     <span class="col-4 sidebar-add">shop for her</span><span class="col-4 sidebar-add">
@@ -202,7 +213,7 @@
                     </span>
                 </div>
                 <div class="login-button d-flex justify-content-center">
-                    <a href="" class="text-center">Login</a>
+                    <a asp-controller="account" asp-action="login" class="text-center">Login</a>
                 </div>
             </div>
             <div class="sidebar-wraper">

@@ -24,7 +24,14 @@
         <span>SHIPPING & TAXES CALCULATED AT CHECKOUT</span>
         <span>OR 4 INTEREST-FREE PAYMENTS OF $235 WITH KLARNA <span><a class="minicart-product-colorandsize fw-bold" href="">LEARN MORE</a></span></span>
     </div>
-    <button class="login-button register-button">
-        checkout
-    </button>
+    @if (Model.CartProductGets.Count != 0)
+    {
+        <a asp-controller="order" asp-action="index" class=" login-button-link">
+            checkout
+        </a>
+    }
+    else
+    {
+
+    }
 </div>

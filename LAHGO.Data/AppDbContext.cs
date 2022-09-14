@@ -18,7 +18,8 @@ namespace LAHGO.Data
         public DbSet<Product> Products{ get; set; }
         public DbSet<Color> Colors{ get; set; }
         public DbSet<Size> Sizes{ get; set; }
-
+        public DbSet<Typing> Typings{ get; set; }
+        public DbSet<ProductTyping> ProductTypings{ get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Basket> Baskets { get; set; }

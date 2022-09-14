@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "ConfirmEmail";
+}
+
+@await Component.InvokeAsync("DetailHeader")
+
+
+<div>
+    <h1 class="check-email">
+        Your account is now activated! <br /> <a asp-controller="home" asp-action="index"><span class="section-describtion-small">Please click to return to home page</span></a>
+    </h1>
+
+</div>

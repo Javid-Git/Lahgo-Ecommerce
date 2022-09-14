@@ -1,9 +1,13 @@
 ﻿@model SizePCSVM
+@*<select name="SizeId" class="size-select">
+        @foreach (var pcs in Model.ProductColorSizes)
+        {
+            <option value="@pcs.SizeId" class="detail-size-container d-flex align-items-center small-colors">@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Name</option>
 
-<select name="SizeId" class="size-select">
-    @foreach (var pcs in Model.ProductColorSizes)
-    {
-        <option value="@pcs.SizeId" class="detail-size-container d-flex align-items-center small-colors">@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Name</option>
-
-    }
-</select>
+        }
+    </select>*@
+@foreach (var pcs in Model.ProductColorSizes)
+{
+    <input class="size-input" id="" type="radio" name="SizeId" value="@pcs.SizeId" />
+    <label class="size-label" for="">@pcs.Size.Name</label>
+}

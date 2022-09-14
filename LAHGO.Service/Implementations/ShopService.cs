@@ -1,6 +1,7 @@
 ﻿using LAHGO.Core;
 using LAHGO.Core.Entities;
 using LAHGO.Service.Interfaces;
+using LAHGO.Service.ViewModels;
 using LAHGO.Service.ViewModels.CartProductVMs;
 using LAHGO.Service.ViewModels.ShopVMs;
 using Microsoft.AspNetCore.Http;
@@ -29,7 +30,7 @@ namespace LAHGO.Service.Implementations
             _unitOfWork = unitOfWork;
 
         }
-        public async Task<ShopVM> GetBasket()
+        public async Task<ShopVM> GetBasket(int SizeId, int ColorId, int TypeId, int CategoryId, int count, int page = 1)
         {
             string basket = _httpContextAccessor.HttpContext.Request.Cookies["basket"];
             List<CartProductCreateVM> basketVMs = null;
@@ -76,28 +77,50 @@ namespace LAHGO.Service.Implementations
                 basketVM.Price = dbproduct.DiscountedPrice > 0 ? dbproduct.DiscountedPrice : dbproduct.Price;
                 basketVM.Image = dbproduct.MainImage;
             };
-
-            List<Product> products = await _unitOfWork.ProductRepository.GetAllAsync(x => !x.IsDeleted);
+            int itemcount = 5;
+            if (count != 0)
+            {
+                count += itemcount;
+                itemcount = count;
+            }
+           
+            IQueryable<Product> products =  _unitOfWork.ProductRepository.GetAllAsyncQuery(x => !x.IsDeleted);
             List<Photo> photos = await _unitOfWork.PhotoRepository.GetAllAsync(x => !x.IsDeleted);
             List<Category> categories = await _unitOfWork.CategoryRepository.GetAllAsync(x => !x.IsDeleted);
+            Category category = await _unitOfWork.CategoryRepository.GetAsync(x => x.Id == CategoryId);
             List<Setting> settings = await _unitOfWork.SettingRepository.GetAllAsync(x => !x.IsDeleted);
             List<Size> sizes = await _unitOfWork.SizeRepository.GetAllAsync(x => !x.IsDeleted);
             List<Color> colors = await _unitOfWork.ColorRepository.GetAllAsync(x => !x.IsDeleted);
+            List<Typing> typings = await _unitOfWork.TypingRepository.GetAllAsync(x => !x.IsDeleted);
             List<ProductColorSize> productColorSizes = await _unitOfWork.ProductColorSizeRepository.GetAllAsync(x => !x.IsDeleted);
-            
-
-            
-
+            if (CategoryId != 0)
+            {
+                products = products.Where(x => x.CategoryId == CategoryId);
+            }
+            if (ColorId != 0)
+            {
+                products = products.Where(x => x.ProductColorSizes.Any(p => p.ColorId == ColorId));
+            }
+            if (SizeId != 0)
+            {
+                products = products.Where(x => x.ProductColorSizes.Any(p => p.SizeId == SizeId));
+            }
+            if (TypeId != 0)
+            {
+                products = products.Where(x => x.ProductTypings.Any(p => p.TypingId == TypeId));
+            }
             ShopVM shopVM = new ShopVM
             {
-                Products = products,
+                Products = PageNatedList<Product>.Create(page, products, itemcount),
                 CartProducts = basketVMs,
                 Settings = settings,
                 Categories = categories,
                 ProductColorSizes = productColorSizes,
                 Photos = photos,
                 Sizes = sizes,
-                Colors = colors
+                Colors = colors,
+                Typings = typings,
+                Category = category
             };
             return shopVM;
         }

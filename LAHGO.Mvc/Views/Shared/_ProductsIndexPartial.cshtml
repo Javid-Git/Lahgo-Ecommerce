@@ -1,0 +1,86 @@
+﻿@model ShopVM
+
+@foreach (var product in Model.Products)
+{
+    <div class="product col-lg-4 col-6">
+        <a asp-controller="product" asp-action="detail" asp-route-id="@product.Id">
+            <div class="product-top">
+                <img src="~/Manage/assets/img/productMainImg/@product.MainImage"
+                     alt="">
+                <button type="button" class="add-to-favorites" title="Add to Wishlist">
+                    <ion-icon name="star-outline"></ion-icon>
+                </button>
+                @if (product.IsNewArrival)
+                {
+                    <div class="new-arrival">
+                        new arrival
+                    </div>
+                }
+                else
+                {
+
+                }
+            </div>
+        </a>
+
+        <div class="product-bottom">
+            <div class="mobile-product-name">
+                <a href="">@product.Name</a>
+            </div>
+            <div class="product-name">
+                @product.Name
+            </div>
+            <div class="product-price">
+                $@(product.DiscountedPrice < product.Price? product.DiscountedPrice : product.Price)
+            </div>
+            <form class="basket-add-form" method="post" asp-controller="basket" asp-action="AddToBasket">
+                <div class="quick-add align-items-center justify-content-center big-quick-add">
+                    + quick add
+                    <input name="ProductId" type="hidden" value="@product.Id" />
+
+                    <div class="size-selection-container">
+
+                    </div>
+
+                </div>
+                <div class="quick-add align-items-center justify-content-center mobile-quick-add">
+                    + quick add
+                    <input name="ProductId" type="hidden" value="@product.Id" />
+
+                    <div class="size-selection-container">
+
+                    </div>
+
+                </div>
+                <div class="colors d-flex">
+                    @{
+                        List<ProductColorSize> pp = new List<ProductColorSize>();
+                        foreach (var item in Model.ProductColorSizes.Where(x => x.ProductId == product.Id))
+                        {
+                            if (!pp.Exists(p => p.ColorId == item.ColorId))
+                            {
+                                pp.Add(item);
+                            }
+                        }
+                    }
+
+                    @foreach (var pcs in pp)
+                    {
+                        <input id="@(product.Name + pcs.Color.Name)" type="radio" name="ColorId" value="@pcs.ColorId" />
+                        <a asp-controller="basket" asp-action="GetSizes" asp-route-ColorId="@pcs.ColorId" asp-route-ProductId="@product.Id" style="background-color:@pcs.Color.Code" class="smcolor-container " for="@(product.Name + pcs.Color.Name)"></a>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+}
+<form id="loadmore" asp-controller="shop" asp-action="filter" asp-route-ColorId="@ViewBag.ColorId" asp-route-SizeId="@ViewBag.SizeId" asp-route-TypeId="@ViewBag.TypeId" asp-route-CategoryId="@ViewBag.CategoryId" method="post">
+    <input hidden name="count" value="@Model.Products.Count" />
+</form>
+<div class="d-flex justify-content-center">
+    <button form="loadmore" type="submit" class="load-more">
+        + Load More
+    </button>
+</div>

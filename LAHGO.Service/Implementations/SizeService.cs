@@ -29,7 +29,10 @@ namespace LAHGO.Service.Implementations
         public async Task CreateAsync(SizeCreateVM sizeCreateVM)
         {
             Size size = _mapper.Map<Size>(sizeCreateVM);
-
+            if (await _unitOfWork.SizeRepository.IsExistAsync(c => c.Name.ToLower() == sizeCreateVM.Name.Trim().ToLower()))
+            {
+                throw new AlreadeExistException($"Size {sizeCreateVM.Name} already Exists");
+            }
             size.Name = sizeCreateVM.Name;
 
             await _unitOfWork.SizeRepository.AddAsync(size);
@@ -41,7 +44,7 @@ namespace LAHGO.Service.Implementations
             Size size = await _unitOfWork.SizeRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
             if (size == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Item not found");
 
             size.IsDeleted = true;
             size.DeletedAt = DateTime.UtcNow.AddHours(4);
@@ -74,7 +77,7 @@ namespace LAHGO.Service.Implementations
             Size size = await _unitOfWork.SizeRepository.GetAsync(c => (!c.IsDeleted || c.IsDeleted) && c.Id == id);
 
             if (size == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Item not found");
 
             SizeGetVM sizeGetVM = _mapper.Map<SizeGetVM>(size);
 
@@ -86,7 +89,7 @@ namespace LAHGO.Service.Implementations
             Size size = await _unitOfWork.SizeRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
             if (size == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Item not found");
 
             size.IsDeleted = false;
             size.DeletedAt = null;
@@ -99,7 +102,7 @@ namespace LAHGO.Service.Implementations
             Size size = await _unitOfWork.SizeRepository.GetAsync(c => !c.IsDeleted && c.Id == id || c.IsDeleted);
 
             if (size == null)
-                throw new ItemtNoteFoundException($"Item Not Found By Id = {id}");
+                throw new ItemtNoteFoundException($"Item not found");
 
 
             if (await _unitOfWork.SizeRepository.IsExistAsync(c => c.Name.ToLower() == sizeUpdateVM.Name.Trim().ToLower()))
@@ -114,7 +117,7 @@ namespace LAHGO.Service.Implementations
                 }
                 else
                 {
-                    throw new AlreadeExistException($"Category {sizeUpdateVM.Name} already Exists");
+                    throw new AlreadeExistException($"Size {sizeUpdateVM.Name} already Exists");
                 }
             }
             size.Name = sizeUpdateVM.Name;

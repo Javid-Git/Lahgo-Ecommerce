@@ -5,6 +5,9 @@ using LAHGO.Service.ViewModels.CartProductVMs;
 using LAHGO.Service.ViewModels.SizeVMs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -12,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static LAHGO.Service.Exceptions.ItemNotFoundException;
 
 namespace LAHGO.Service.Implementations
 {
@@ -20,6 +24,8 @@ namespace LAHGO.Service.Implementations
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<AppUser> _userManager;
+
+
 
         public BasketService(IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork, UserManager<AppUser> userManager)
         {
@@ -42,17 +48,17 @@ namespace LAHGO.Service.Implementations
 
             return basketVMs;
         }
-        public async Task<List<CartProductCreateVM>> AddToCart(int? ProductId, int SizeId, int ColorId)
+        public async Task<List<CartProductCreateVM>> AddToCart(int ProductId, int SizeId, int ColorId)
         {
-            if (ProductId == null)
-            {
-                throw new Exception("Exception while fetching.");
-            }
+
+            //if (ProductId == null)
+            //{
+            //    throw new Exception("Exception while fetching.");
+            //}
             Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == ProductId);
+
             if (product == null)
-            {
-                throw new Exception("Exception while fetching.");
-            }
+                throw new ItemtNoteFoundException($"Item not found.");
 
 
             string basket = _httpContextAccessor.HttpContext.Request.Cookies["basket"];
@@ -66,7 +72,7 @@ namespace LAHGO.Service.Implementations
             {
                 basketVMs = new List<CartProductCreateVM>();
             }
-            
+
             //foreach (var singlebasket in basketVMs)
             //{
             //    if (singlebasket.ProductId == ProductId && singlebasket.ColorId == ColorId && singlebasket.SizeId == SizeId)
@@ -74,7 +80,14 @@ namespace LAHGO.Service.Implementations
             //        singlebasket.SelectCount++;
             //    }
             //}
-            
+            if (SizeId == 0)
+            {
+                
+                basket = JsonConvert.SerializeObject(basketVMs);
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("basket", basket);
+                return basketVMs;
+
+            }
             if (basketVMs.Exists(b => b.ProductId == ProductId &&  b.ColorId == ColorId && b.SizeId == SizeId))
             {
                 basketVMs.Find(b => b.ProductId == ProductId && b.ColorId == ColorId && b.SizeId == SizeId).SelectCount++;
@@ -115,7 +128,7 @@ namespace LAHGO.Service.Implementations
 
                 if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
                 {
-                    Basket dbBasketproduct = appUser.Baskets.FirstOrDefault(p => p.ProductId == ProductId);
+                    Basket dbBasketproduct = appUser.Baskets.FirstOrDefault(p => p.ProductId == ProductId && p.ColorId == ColorId && p.SizeId == SizeId);
                     if (dbBasketproduct != null)
                     {
                         dbBasketproduct.Counts += 1;
@@ -126,6 +139,8 @@ namespace LAHGO.Service.Implementations
                         {
                             ProductId = (int)ProductId,
                             UserId = appUser.Id,
+                            SizeId = SizeId,
+                            ColorId = ColorId,
                             Counts = 1
                         };
 
@@ -136,7 +151,7 @@ namespace LAHGO.Service.Implementations
                 {
                     List<Basket> baskets = new List<Basket>
                     {
-                        new Basket{ProductId = (int)ProductId, Counts = 1}
+                        new Basket{ProductId = (int)ProductId, Counts = 1, UserId = appUser.Id, SizeId = SizeId, ColorId = ColorId,}
                     };
                     appUser.Baskets = baskets;
                 }
@@ -155,17 +170,16 @@ namespace LAHGO.Service.Implementations
                 throw new Exception("Exception while fetching.");
             }
             Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id);
+
             if (product == null)
-            {
-                throw new Exception("Exception while fetching.");
-            }
+                throw new ItemtNoteFoundException($"Item not found.");
             string basket = _httpContextAccessor.HttpContext.Request.Cookies["basket"];
             List<CartProductGetVM> basketVMs = JsonConvert.DeserializeObject<List<CartProductGetVM>>(basket);
 
-            if (string.IsNullOrWhiteSpace(basket)) throw new Exception("Exception while fetching.");
+            if (string.IsNullOrWhiteSpace(basket)) throw new ItemtNoteFoundException($"Error while processing.");
 
             CartProductGetVM basketVM = basketVMs.Find(b => b.ProductId == id);
-            if (basket == null) throw new Exception("Exception while fetching.");
+            if (basket == null) throw new ItemtNoteFoundException($"Error while processing.");
 
             if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
             {
@@ -183,13 +197,13 @@ namespace LAHGO.Service.Implementations
                     }
                     else
                     {
-                         throw new Exception("Exception while fetching.");
+                         throw new ItemtNoteFoundException($"Error while processing.");
 
                     }
                 }
                 else
                 {
-                     throw new Exception("Exception while fetching.");
+                     throw new ItemtNoteFoundException($"Error while processing.");
                 }
             }
             basketVMs.Remove(basketVM);
@@ -214,20 +228,20 @@ namespace LAHGO.Service.Implementations
         {
             if (id == null)
             {
-                throw new Exception("Exception while fetching.");
+                throw new ItemtNoteFoundException($"Error while processing.");
             }
             Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id);
             if (product == null)
             {
-                throw new Exception("Exception while fetching.");
+                throw new ItemtNoteFoundException($"Item not found by id = {id}.");
             }
             string basket = _httpContextAccessor.HttpContext.Request.Cookies["basket"];
             List<CartProductGetVM> basketVMs = JsonConvert.DeserializeObject<List<CartProductGetVM>>(basket);
 
-            if (string.IsNullOrWhiteSpace(basket)) throw new Exception("Exception while fetching.");
+            if (string.IsNullOrWhiteSpace(basket)) throw new ItemtNoteFoundException($"Error while processing.");
 
             CartProductGetVM basketVM = basketVMs.Find(b => b.ProductId == id);
-            if (basket == null) throw new Exception("Exception while fetching.");
+            if (basket == null) throw new ItemtNoteFoundException($"Products were no found by id = {id}.");
             if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
             {
                 AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.UserName == _httpContextAccessor.HttpContext.User.Identity.Name);
@@ -244,13 +258,13 @@ namespace LAHGO.Service.Implementations
                     }
                     else
                     {
-                        throw new Exception("Exception while fetching.");
+                        throw new ItemtNoteFoundException($"Error while processing.");
 
                     }
                 }
                 else
                 {
-                    throw new Exception("Exception while fetching.");
+                    throw new ItemtNoteFoundException($"Error while processing.");
                 }
             }
             basketVMs.Remove(basketVM);
@@ -300,8 +314,16 @@ namespace LAHGO.Service.Implementations
         public async Task<SizePCSVM> GetSizes(int ColorId, int ProductId)
         {
 
-            List<ProductColorSize> productColorSizes = await _unitOfWork.ProductColorSizeRepository.GetAllAsync(p => p.ColorId == ColorId && p.ProductId == ProductId);
+            List<ProductColorSize> productColorSizes = await _unitOfWork.ProductColorSizeRepository.GetAllAsyncInclude(p => p.ColorId == ColorId && p.ProductId == ProductId, "Product");
             List<Size> sizes = await _unitOfWork.SizeRepository.GetAllAsync(s => !s.IsDeleted);
+            if (productColorSizes == null)
+            {
+                throw new ItemtNoteFoundException($"Couldn't find the product you are looking for.");
+            }
+            if (sizes == null)
+            {
+                throw new ItemtNoteFoundException($"Couldn't find the product you are looking for.");
+            }
             SizePCSVM sizePCSVM = new SizePCSVM
             {
                 ProductColorSizes = productColorSizes,
@@ -312,12 +334,14 @@ namespace LAHGO.Service.Implementations
 
         public async Task<MinicartProductVM> UpdateCount(int? id, int count)
         {
-            if (id == null) throw new Exception("Exception while fetching.");
-
+            if (id == null)
+            {
+                throw new ItemtNoteFoundException($"Couldn't find the product you are looking for.");
+            }
             Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id);
             if (product == null)
             {
-                throw new Exception("Exception while fetching.");
+                throw new Exception($"Item not found by id = {id}.");
             }
 
             string basket = _httpContextAccessor.HttpContext.Request.Cookies["basket"];
@@ -330,7 +354,7 @@ namespace LAHGO.Service.Implementations
 
                 CartProductGetVM basketVM = basketVMs.FirstOrDefault(b => b.ProductId == id);
 
-                if (basketVM == null) throw new Exception("Exception while fetching.");
+                if (basketVM == null) throw new Exception($"Products were not found by id = {id}.");
                 if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                 {
                     AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.UserName == _httpContextAccessor.HttpContext.User.Identity.Name && !u.IsAdmin);
@@ -373,5 +397,6 @@ namespace LAHGO.Service.Implementations
             };
             return minicartProductVM;
         }
+
     }
 }

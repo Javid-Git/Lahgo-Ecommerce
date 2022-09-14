@@ -1,0 +1,52 @@
+﻿@model ProfileVM
+
+
+<div class="text text-danger" asp-validation-summary="ModelOnly"></div>
+<form asp-controller="account" asp-action="Update" method="post">
+    <div class="" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab">
+        <div class="my-account-details account-wrapper">
+            <h4 class="section-title-small">Account Details</h4>
+            <div class="account-details">
+                <div class="row">
+                    <div class="email-inputs inputs col-lg-12">
+                        <label class="input-labels" for="name">Full Name</label>
+                        <input type="text" asp-for="FullName" id="name" placeholder="Full Name">
+                        <span class="text text-danger" asp-validation-for="FullName"></span>
+                    </div>
+                    <div class="password-inputs inputs col-lg-12">
+                        <label class="input-labels" for="email">your email</label>
+                        <input type="text" asp-for="Email" id="email" placeholder="Your Email">
+                        <span class="text text-danger" asp-validation-for="Email"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="single-form">
+                            <h5 class="title section-title-small">Password change</h5>
+                        </div>
+                    </div>
+                    <div class="password-inputs inputs col-lg-12">
+                        <label class="input-labels" for="password">Current Password</label>
+                        <input type="password" asp-for="CurrentPassword" id="password" placeholder="Current Password">
+                        <span class="text text-danger" asp-validation-for="CurrentPassword"></span>
+                    </div>
+                    <div class="password-inputs inputs col-lg-12">
+                        <label class="input-labels" for="password">New Password</label>
+                        <input type="password" asp-for="NewPassword" id="password" placeholder="New Password">
+                        <span class="text text-danger" asp-validation-for="NewPassword"></span>
+                    </div>
+                    <div class="password-inputs inputs col-lg-12">
+                        <label class="input-labels" for="password">Confirm Password</label>
+                        <input type="password" asp-for="ConfirmPasword" id="password" placeholder="Confirm Password">
+                        <span class="text text-danger" asp-validation-for="ConfirmPasword"></span>
+                    </div>
+                    <button class="login-button register-button col-lg-4">
+                        save changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Script{
+    <partial name="_ValidationPartial">
+}

@@ -9,7 +9,7 @@
 
 @await Component.InvokeAsync("DetailHeader") 
 <section id="section1-detail">
-    <div class="ccontainer row g-o">
+    <div class="ccontainer row g-0">
         <div class="detail1-left col-lg-8">
             <div class="all-pics row g-3">
                 <div class="main-pic add-pic col-lg-12">
@@ -59,40 +59,29 @@
             </div>
         </div>
         <div class="detail1-left-mobile">
-            <div class="mobile-pic1 mobile-detail-pic">
-                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/01_LUNYA-LAHGO-RUSH-2022-05-1911480-min_2048x2048.jpg?v=1654708308"
-                     alt="">
-            </div>
             <div class="mobile-pic2 mobile-detail-pic">
-                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/02_32_WOVEN_LINEN_PANTS_SINCEREWHITE_0003_2048x2048.jpg?v=1654708308"
+                <img src="~/Manage/assets/img/productMainImg/@Model.Product.MainImage"
                      alt="">
             </div>
-            <div class="mobile-pic3 mobile-detail-pic">
-                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/05_32_WOVEN_LINEN_PANTS_SINCEREWHITE_0040_2048x2048.jpg?v=1654708308"
-                     alt="">
-            </div>
-            <div class="mobile-pic4 mobile-detail-pic">
-                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/04_32_WOVEN_LINEN_PANTS_SINCEREWHITE_0086_2048x2048.jpg?v=1654708308"
-                     alt="">
-            </div>
-            <div class="mobile-pic5 mobile-detail-pic">
-                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/03_32_WOVEN_LINEN_PANTS_SINCEREWHITE_0054_2048x2048.jpg?v=1654708308"
-                     alt="">
-            </div>
-            <div class="mobile-pic6 mobile-detail-pic">
-                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/06_32_WOVEN_LINEN_PANTS_SINCEREWHITE_0058_2048x2048.jpg?v=1654708308"
-                     alt="">
-            </div>
+            @foreach (Photo item in photos)
+            {
+                <div class="mobile-pic1 mobile-detail-pic">
+                    <img src="~/Manage/assets/img/productDetailImages/@item.Image"
+                         alt="">
+                </div>
+            }
+
         </div>
         <div class="detail1-right col-lg-4">
             <div class="site-navigation">
                 <ul class="text-start align-items-center">
-                    <li class="navigation-options"><a href="/index.html">Home </a></li>
+                    <li class="navigation-options"><a asp-controller="home" asp-action="index">Home </a></li>
                     <li class="separator">/</li>
-                    <li class="navigation-options navigation-options-active"> WOVEN LINEN PANT</li>
+                    <li class="navigation-options navigation-options-active"> @product.Name</li>
                 </ul>
             </div>
-            <form action="" method="post">
+            <form id="addtobasket-detail" asp-controller="basket" asp-action="AddToBasket" method="post">
+                <input name="ProductId" type="hidden" value="@product.Id" />
                 <div class="detail-product-info">
                     <div class="detail-name">
                         @Model.Product.Name
@@ -121,8 +110,8 @@
 
                             @foreach (var pcs in pp)
                             {
-                                <input  id="@(product.Name + pcs.Color.Name)" type="radio" name="ColorId" value="@pcs.ColorId" />
-                                <a asp-controller="product" asp-action="GetSizes" asp-route-ColorId="@pcs.ColorId" asp-route-ProductId="@product.Id" data-name="@pcs.Color.Name" style="background-color:@pcs.Color.Name" class="smcolor-container " for="@(product.Name + pcs.Color.Name)"></a>
+                                <input id="@(product.Name + pcs.Color.Name)" type="radio" name="ColorId" value="@pcs.ColorId" />
+                                <a asp-controller="product" asp-action="GetSizes" asp-route-ColorId="@pcs.ColorId" asp-route-ProductId="@product.Id" data-name="@pcs.Color.Name" style="background-color:@pcs.Color.Code" class="smcolor-container " for="@(product.Name + pcs.Color.Name)"></a>
                             }
                         </div>
                     </div>
@@ -133,7 +122,7 @@
                         <ul class="d-flex detail-sizes-container">
                         </ul>
                     </div>
-                    <button formmethod="post" class="login-button register-button">
+                    <button form="addtobasket-detail" type="submit" class="login-button register-button">
                         add to cart
                     </button>
                     <div class="details-shipping">
@@ -227,6 +216,104 @@
                     </ul>
                 </div>
             </form>
+        </div>
+    </div>
+</section>
+<section class="section2-detail">
+    <div class="ccontainer">
+        <div class="section-title section2-title text-center">
+            Reviews <span class="section-describtion-small">(4 reviews)</span>
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form asp-controller="product" asp-action="postcoment" asp-route-userId="@Model.User.Id" asp-route-productId="@Model.Product.Id" method="post">
+                <div class="reviews">
+                    <div class="form-group row g-0">
+                        <div class="col">
+                            <label class="col-form-label"><span class="text-danger">*</span> Your Name</label>
+                            <input asp-for="@Model.User.FullName" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group row g-0">
+                        <div class="col">
+                            <label class="col-form-label"><span class="text-danger">*</span> Your Email</label>
+                            <input asp-for="@Model.User.Email" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group row g-0">
+                        <div class="col">
+                            <label class="col-form-label"><span class="text-danger">*</span> Your Review</label>
+                            <textarea name="Text" class="form-control" required></textarea>
+                            <div class="help-block pt-10">
+                                <span class="text-danger">
+                            </div>
+                        </div>
+                        <div class="form-group row g-0">
+                            <div class="col">
+                                <label class="col-form-label"><span class="text-danger">*</span> Rating</label>
+                                &nbsp;&nbsp;&nbsp; Bad&nbsp;
+                                <input type="radio" value="1" name="rating">
+                                &nbsp;
+                                <input type="radio" value="2" name="rating">
+                                &nbsp;
+                                <input type="radio" value="3" name="rating">
+                                &nbsp;
+                                <input type="radio" value="4" name="rating">
+                                &nbsp;
+                                <input type="radio" value="5" name="rating" checked>
+                                &nbsp;Good
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="sqr-btn btn btn-dark" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        }
+        else
+        {
+
+        }
+
+        <div class="tab-pane" id="tab_three">
+            @foreach (Comment coment in Model.Comments)
+            {
+                <div class="total-reviews">
+                    <div class="rev-avatar">
+                        <img src="~/assets/img/about/avatar.jpg" alt="">
+                    </div>
+                    <div class="review-box">
+                        <div class="ratings">
+                            @if (coment.Rating == 5)
+                            {
+                                @for (int i = 0; i < coment.Rating; i++)
+                                {
+                                    <span class="good"><i class="fa fa-star"></i></span>
+
+                                }
+                            }
+                            else
+                            {
+                                @for (int i = 0; i < coment.Rating; i++)
+                                {
+                                    <span class="good"><i class="fa fa-star"></i></span>
+
+                                }
+                                @for (int i = 0; i < 5 - coment.Rating; i++)
+                                {
+                                    <span><i class="fa fa-star-o"></i></span>
+
+                                }
+                            }
+                        </div>
+                        <div class="post-author" >
+                            <p  class="section-describtion-small"><span class="section-describtion" style="font-weight:bold">@Model.Users.FirstOrDefault(u => u.Id == coment.UserId).FullName -</span>@coment.Date.ToString("dd-MMMM,yyyy")</p>
+                        </div>
+                        <p class="section-describtion">@coment.Text</p>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </section>

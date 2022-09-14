@@ -2,6 +2,7 @@
 using LAHGO.Service.Interfaces;
 using LAHGO.Service.Mappings;
 using LAHGO.Service.ViewModels.CategoryVMs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

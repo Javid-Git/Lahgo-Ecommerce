@@ -19,6 +19,10 @@ namespace LAHGO.Data
         private readonly PhotoRepository _photoRepository;
         private readonly BasketRepository _basketRepository;
         private readonly OrderRepository _orderRepository;
+        private readonly CommentRepository _commentRepository;
+        private readonly OrderItemRepository _orderItemRepository;
+        private readonly TypingRepository _typingRepository;
+        private readonly ProductTypingRepository _producttypingRepository;
         private readonly AppDbContext _context;
 
         public UnitOfWork(AppDbContext context)
@@ -35,6 +39,10 @@ namespace LAHGO.Data
         public IPhotoRepository PhotoRepository => _photoRepository != null ? _photoRepository : new PhotoRepository(_context);
         public IBasketRepository BasketRepository => _basketRepository != null ? _basketRepository : new BasketRepository(_context);
         public IOrderRepository OrderRepository => _orderRepository != null ? _orderRepository : new OrderRepository(_context);
+        public ICommentRepository CommentRepository => _commentRepository != null ? _commentRepository : new CommentRepository(_context);
+        public IOrderItemRepository OrderItemRepository => _orderItemRepository != null ? _orderItemRepository : new OrderItemRepository(_context);
+        public ITypingRepository TypingRepository => _typingRepository != null ? _typingRepository : new TypingRepository(_context);
+        public IProductTypingRepository ProductTypingRepository => _producttypingRepository != null ? _producttypingRepository : new ProductTypingRepository(_context);
 
         public int Commit()
         {

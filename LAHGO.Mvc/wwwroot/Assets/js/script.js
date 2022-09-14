@@ -1,4 +1,6 @@
+
 $(document).ready(function () {
+   
     $(window).on('scroll', function () {
         if ($(this).scrollTop() > 10) {
             $('#center-header').addClass('center-header-sticky');
@@ -18,118 +20,7 @@ $(document).ready(function () {
             $('.button-container').removeClass('button-container-scroll');
         }
     });
-    $('.categories').slick({
-        dots: false,
-        infinite: false,
-        arrows: true,
-        nextArrow: '<button class="slider-button-next"></button>',
-        prevArrow: '<button class="slider-button-prev"></button>',
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
-        ]
-    });
-    $('.favorites').slick({
-        dots: false,
-        infinite: true,
-        arrows: true,
-        nextArrow: '<button class="favorites-button-next"></button>',
-        prevArrow: '<button class="favorites-button-prev"></button>',
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
-        ]
-    });
-    $('.section4-slider').slick({
-        dots: true,
-        infinite: true,
-        arrows: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
-        ]
-    });
+   
     $(document).on('click', '.slider-button-next', function () {
         $('.slider-button-prev').addClass('show-slider-button');
         $('.slider-button-next').addClass('hide-slider-button');
@@ -139,9 +30,9 @@ $(document).ready(function () {
         $('.slider-button-prev').removeClass('show-slider-button');
 
     })
-    $(document).on('click', '.dropdowns', function (e) {
-        console.log($(this).children('.lists').toggleClass('dropdowns-visible'))
-    })
+    //$(document).on('click', '.dropdowns', function (e) {
+    //    console.log($(this).children('.lists').toggleClass('dropdowns-visible'))
+    //})
     
     $(document).on('click', ('#minicart-close', '.minicart-wraper'), function () {
         $('#minicart').toggleClass('minicart-visible')
@@ -167,47 +58,12 @@ $(document).ready(function () {
         $('.mobile-filter-big').toggleClass('show-mobile-filter')
         $('.mobile-sorting').toggleClass('mobile-sorting-top')
     })
-    $(document).on('click', '#cancel-filtering', function () {
+    $(document).on('click', '#cancel-filtering, #apply-filtering', function () {
         $('.mobile-filter-big').toggleClass('show-mobile-filter')
         $('.mobile-sorting').toggleClass('mobile-sorting-top')
     })
 
-    $('.about4-items').slick({
-        dots: true,
-        infinite: true,
-        arrows: false,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
-        ]
-    });
+    
     $(document).on('click', '.detail-size-container', function (e) {
         let size = $(this).attr('value');
         console.log(size);
@@ -264,42 +120,7 @@ $(document).ready(function () {
         $('.popup-pic-list').toggle();
     })
 
-    $('.detail1-left-mobile').slick({
-        dots: false,
-        infinite: true,
-        arrows: false,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: false
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
-        ]
-    });
+   
 
     $(document).on('click', '.mobile-product-list', function () {
         $('.checkout1-right-mobile').slideToggle();
@@ -350,6 +171,8 @@ $(document).ready(function () {
         $(this).parent().toggle();
     })
 
+
+    ///////////////////////////////////////////////  Basket   ///////////////////////////////////////////////
 
 
     $(document).on('click', '.item-quantity-decrease', function (e) {
@@ -410,52 +233,7 @@ $(document).ready(function () {
 
 
     })
-    $(document).on('click', '.minicart-button', function (e) {
-        e.preventDefault();
-        $('#minicart').toggleClass('minicart-visible')
-        $('.minicart-wraper').toggleClass('minicart-visible')
-        let url = $(this).attr('href');
 
-        fetch(url)
-            .then(res => res.text())
-            .then(data => {
-                $('.minicart').html(data);
-            });
-
-    })
-
-    $(document).on('click', '.smcolor-container', function (e) {
-        e.preventDefault();
-
-        let all_rad_input = $('.smcolor-container').prev();
-        $('.radio-select').removeClass('radio-select')
-        let url = $(this).attr('href');
-        let rad_input = $(this).prev();
-        console.log(url)
-
-        if (rad_input.prop('checked', true)) {
-            $(this).addClass('radio-select')
-        }
-        let color = $(this).attr('data-name');
-        console.log(color);
-        $('.selected-color').empty();
-        $('.selected-color').append(color);
-
-        $('.size-selection-container').empty();
-        $('.detail-sizes-container').empty();
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                $('.size-selection-container').append(data)
-                fetch(url)
-                    .then(response => response.text())
-                    .then(data => {
-                        $('.detail-sizes-container').append(data)
-
-                    })
-            })
-    })
-    
     $(document).on('click', '.deletefromcart', function (e) {
         e.preventDefault();
 
@@ -472,7 +250,23 @@ $(document).ready(function () {
                     });
             });
     })
-    
+
+    ///////////////////////////////////////////////   Minicart   ///////////////////////////////////////////////
+
+    $(document).on('click', '.minicart-button', function (e) {
+        e.preventDefault();
+        $('#minicart').toggleClass('minicart-visible')
+        $('.minicart-wraper').toggleClass('minicart-visible')
+        let url = $(this).attr('href');
+
+        fetch(url)
+            .then(res => res.text())
+            .then(data => {
+                $('.minicart').html(data);
+            });
+
+    })
+
     $(document).on('click', '.deletefrombasket', function (e) {
         e.preventDefault();
 
@@ -493,6 +287,41 @@ $(document).ready(function () {
                     });
             });
     })
+
+    ///////////////////////////////////////////////   Get sizes   ///////////////////////////////////////////////
+
+    $(document).on('click', '.smcolor-container', function (e) {
+        e.preventDefault();
+
+        let all_rad_input = $('.smcolor-container').prev();
+        $('.radio-select').removeClass('radio-select')
+        let url = $(this).attr('href');
+        let rad_input = $(this).prev();
+
+        if (rad_input.prop('checked', true)) {
+            $(this).addClass('radio-select')
+        }
+        let color = $(this).attr('data-name');
+        $('.selected-color').empty();
+        $('.selected-color').append(color);
+
+        $('.size-selection-container').empty();
+        $('.detail-sizes-container').empty();
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                $($(this).parent().siblings('.quick-add').children([2])).append(data)
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        $('.detail-sizes-container').append(data)
+
+                    })
+            })
+    })
+    
+    
+    /////////////////////////////////////////////   Search   /////////////////////////////////////////////
 
     $('.search-input').keyup(function () {
         let value = $(this).val();
@@ -516,6 +345,376 @@ $(document).ready(function () {
         }
 
     })
-    
+
+    $(document).on('click', '.accordion-toggle', function (e) {
+        $(this).next().children([1]).children([1]).slideToggle();
+    })
+
+    ///////////////////////////////////////////////   Loaders   /////////////////////////////////////////////
+
+    $(window).on("load", function () {
+        setTimeout(function () {
+            $(".loader").fadeOut("slow");
+        }, 2000);
+        
+    });
+    $(window).on("load", function () {
+        setTimeout(function () {
+            $(".loader-div").fadeOut("slow");
+        }, 1000);
+
+    });
+   
+
+    ///////////////////////////////////////////////   Filters   /////////////////////////////////////////////
+
+    $(document).on('submit', '#filter', function (e) {
+        e.preventDefault();
+
+        const form = document.getElementById('filter');
+        const payload = new FormData(form);
+
+        fetch('/shop/filter', {
+            method: 'POST',
+            body: payload,
+        })
+            .then(res => res.text())
+            .then(data => {
+                $('.products').html(data);
+            });
+    })
+
+    $(document).on('submit', '#loadmore', function (e) {
+        e.preventDefault();
+
+        const form = document.getElementById('loadmore');
+        const payload = new FormData(form);
+
+        fetch('/shop/filter', {
+            method: 'POST',
+            body: payload,
+        })
+            .then(res => res.text())
+            .then(data => {
+                $('.products').html(data);
+            });
+    })
+
+    $(document).on('submit', '#filtermobile', function (e) {
+        e.preventDefault();
+
+        const form = document.getElementById('filtermobile');
+        const payload = new FormData(form);
+
+        fetch('/shop/filter', {
+            method: 'POST',
+            body: payload,
+        })
+            .then(res => res.text())
+            .then(data => {
+                $('.products').html(data);
+            });
+    })
+
+    $(document).on('click', '.size-option-select', function (e) {
+        $(this).attr('selected', 'selected')
+    })
+
+    $(document).on('change', '.color-filter', function (e) {
+        var color = $('.color-filter option:selected').data('color')
+        console.log(color)
+        $('.color-filter').css('background-color', color)
+    })
+
+    ///////////////////////////////////////////////   Toaster   /////////////////////////////////////////////
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "2000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    /////////////////////////////////////////////   Add to basket   /////////////////////////////////////////////
+
+    $(document).on('submit', '.basket-add-form', function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        console.log(form)
+
+
+        let size_id = $('.sizes').find("input[type='radio']:checked").val();
+        if (size_id == undefined) {
+            $(function () {
+                toastr.error("Size should be selected", "Error")
+            })
+        }
+        console.log(size_id)
+       
+
+        const payload = new FormData(form);
+
+        fetch('/basket/addtobasket', {
+            method: 'POST',
+            body: payload,
+        })
+            .then(res => res.json())
+            .then(data => {
+                $('.notification').html(data);
+
+            })
+            .then(function () {
+                if (size_id != undefined) {
+                    toastr.success("Product was successfully added to basket ", "Done")
+                }
+            });
+    })
+
+    $(document).on('submit', '#addtobasket-detail', function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        console.log(form)
+
+
+        let size_id = $('.detail-sizes-container').find("input[type='radio']:checked").val();
+        if (size_id == undefined) {
+            $(function () {
+                toastr.error("Size should be selected", "Error")
+            })
+        }
+        console.log(size_id)
+
+
+        const payload = new FormData(form);
+
+        fetch('/basket/addtobasket', {
+            method: 'POST',
+            body: payload,
+        })
+            .then(res => res.json())
+            .then(data => {
+                $('.notification').html(data);
+
+            })
+            .then(function () {
+                if (size_id != undefined) {
+                    toastr.success("Product was successfully added to basket ", "Done")
+                }
+            });
+    })
+
+    $(document).on('click', '.size-label', function (e) {
+        $(this).prev().trigger('click')
+        $('.size-label').removeClass('size-label-selected');
+        if ($(this).prev().attr('checked', true)) {
+            $(this).addClass('size-label-selected')
+        }
+    })  
+
+   
+    ///////////////////////////////////////////////   Slick Sliders    ///////////////////////////////////////////////
+
+    $('.detail1-left-mobile').slick({
+        dots: false,
+        infinite: true,
+        arrows: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+
+    $('.about4-items').slick({
+        dots: true,
+        infinite: true,
+        arrows: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+
+    $('.categories').slick({
+        dots: false,
+        infinite: false,
+        arrows: true,
+        nextArrow: '<button class="slider-button-next"></button>',
+        prevArrow: '<button class="slider-button-prev"></button>',
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+
+    $('.favorites').slick({
+        dots: false,
+        infinite: true,
+        arrows: true,
+        nextArrow: '<button class="favorites-button-next"></button>',
+        prevArrow: '<button class="favorites-button-prev"></button>',
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+
+    $('.section4-slider').slick({
+        dots: true,
+        infinite: true,
+        arrows: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
 })
+
 

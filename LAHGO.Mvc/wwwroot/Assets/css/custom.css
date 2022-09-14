@@ -206,3 +206,389 @@
     .list-group-items .minicart-products-name:hover {
         color: #212529;
     }
+
+.reviews {
+    padding: 3rem 0;
+}
+
+.section2-detail {
+    padding: 3rem 15rem;
+}
+
+.section2-title {
+    border-bottom: 1px solid #323232;
+}
+.total-reviews {
+    border-top: .5px solid #323232;
+    border-bottom: .5px solid #323232;
+}
+
+.fa-star {
+    color: #ffac00;
+}
+
+.total-reviews {
+    padding: 0 3rem;
+    background-color: #f4f4f4;
+}
+
+.sqr-btn{
+
+}
+
+.cart-checkout{
+    padding-bottom: 3rem;
+}
+
+.order-table{
+    border-radius: 8px;
+}
+
+
+
+
+
+@font-face {
+    font-family: 'Staatliches';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/staatliches/v11/HI_OiY8KO6hCsQSoAPmtMYebvpA.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+.loader {
+    font-family: 'Staatliches';
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: white;
+    width: 100%;
+    height: 100vh;
+    animation: backgroundChange .5s linear 1s forwards;
+    z-index: 11111111111;
+}
+
+.load-text {
+    left: 67%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    font-size: 10vmax;
+    width: fit-content;
+    display: flex;
+    animation: colorChange .5s linear .8s forwards;
+}
+
+.loaded-text {
+    transform: scale(1.5);
+    animation: scaleText .5s linear .5s forwards;
+}
+
+.loading-text {
+    width: 0;
+    overflow: hidden;
+    animation: expand .5s linear 1s forwards;
+    white-space: nowrap;
+}
+
+main {
+    padding: 1em;
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+    min-height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+}
+
+@keyframes scaleText {
+    from {
+        transform: scale(1.5)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@keyframes expand {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 50vmax;
+    }
+}
+
+@keyframes backgroundChange {
+    from {
+        background-color: white
+    }
+
+    to {
+        background-color: black
+    }
+}
+
+@keyframes colorChange {
+    from {
+        color: black
+    }
+
+    to {
+        color: white
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0;
+        z-index: -111;
+    }
+}
+
+
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.loader-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:111111111;
+}
+
+.loader-body {
+    position: relative;
+    width: 10vw;
+    height: 5vw;
+    padding: 1.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .loader-body span {
+        position: absolute;
+        height: 0.8vw;
+        width: 0.8vw;
+        border-radius: 50%;
+        background-color: white;
+    }
+
+        .loader-body span:nth-child(1) {
+            animation: loading-dotsA 1s infinite linear;
+        }
+
+        .loader-body span:nth-child(2) {
+            animation: loading-dotsB 1s infinite linear;
+        }
+
+@keyframes loading-dotsA {
+    0% {
+        transform: none;
+    }
+
+    25% {
+        transform: translateX(2vw);
+    }
+
+    50% {
+        transform: none;
+    }
+
+    75% {
+        transform: translateY(2vw);
+    }
+
+    100% {
+        transform: none;
+    }
+}
+
+@keyframes loading-dotsB {
+    0% {
+        transform: none;
+    }
+
+    25% {
+        transform: translateX(-2vw);
+    }
+
+    50% {
+        transform: none;
+    }
+
+    75% {
+        transform: translateY(-2vw);
+    }
+
+    100% {
+        transform: none;
+    }
+}
+
+/*
+select.decorated option:hover {
+    box-shadow: 0 0 10px 100px white inset;
+}*/
+
+.filter-selections{
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.filter-selections option:hover{
+    box-shadow: 0 0 10px 100px white inset;
+}
+
+.products{
+    transition: .5s;
+}
+
+.filter-labels {
+    border-radius: 4px;
+    padding: 7px 2px;
+    border: 1px solid black;
+    top: -50%;
+    font-weight: bold;
+    line-height: 0px;
+    color: white;
+    background-color: black;
+}
+
+
+.size-label {
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 3px 8px;
+    margin: 5px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.size-label-selected {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 3px 8px;
+    margin: 5px;
+}
+
+.size-input{
+    display: none;
+}
+
+.mobile-filtes{
+    position: relative;
+    padding-bottom:2rem;
+    margin-top: 2rem;
+}
+
+.mobile-quick-add{
+    display: none;
+}
+
+.big-quick-add{
+}
+
+@media (max-width:576px) {
+    .mobile-quick-add {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+        top: -48px;
+        left: 0%;
+        height: 33.5px;
+    }
+
+    .product:hover .quick-add {
+        opacity: unset;
+        visibility: unset;
+    }
+
+    .big-quick-add {
+        display: none;
+    }
+
+    .sizes {
+        position: absolute;
+        bottom: 39px;
+        left: 0;
+        visibility: unset;
+        opacity: unset;
+        transition: 0.5s;
+    }
+
+    .size-selection {
+        font-size: 11px;
+    }
+
+    .btn-mobile {
+        font-size: 10px;
+        display: inline-block;
+        font-weight: 400;
+        line-height: 1.5;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        cursor: pointer;
+        user-select: none;
+        background-color: black;
+        border: 1px solid transparent;
+        padding: unset;
+        border-radius: 0.25rem;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .size-label {
+        border-radius: 10px;
+        border: 1px solid black;
+        padding: 1px 4px;
+        margin: 5px;
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        font-size: 10px;
+    }
+
+    .favorites-banner {
+        width: 381px !important;
+    }
+
+    .favorites-banner .favorites-banner-left img {
+        width: 388px !important;
+    }
+
+    .section5-input{
+        width: 85%; 
+    }
+    .size-label-selected {
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        border: 1px solid black;
+        margin: 5px;
+    }
+    .section2-detail {
+        padding: 3rem 0rem;
+    }
+}

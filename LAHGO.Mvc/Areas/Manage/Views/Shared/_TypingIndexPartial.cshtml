@@ -1,0 +1,43 @@
+﻿@model PageNatedList<TypingListVM>
+
+<table class="table align-items-center mb-0">
+    <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var typing in Model)
+        {
+            <tr>
+                <td>
+                    <p class="text-xs font-weight-bold mb-0">@typing.Name</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm @(typing.IsDeleted == false ? " bg-gradient-success" : " bg-gradient-secondary")">@(typing.IsDeleted == false ? "Active" : "Deleted")</span>
+                </td>
+                <td class="align-middle text-center">
+                    @if (typing.IsDeleted)
+                    {
+                        <a asp-area="manage" asp-controller="typing" asp-action="restore" asp-route-id="@typing.Id" class="text-white font-weight-bold text-xs btn btn-primary" data-toggle="tooltip" data-original-title="Edit user">
+                            Restore
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="manage" asp-controller="typing" asp-action="delete" asp-route-id="@typing.Id" class="text-white font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
+                            Delete
+                        </a>
+                    }
+                    <a asp-area="manage" asp-controller="typing" asp-action="update" asp-route-id="@typing.Id" class="text-white font-weight-bold text-xs btn btn-secondary" data-toggle="tooltip" data-original-title="Edit user">
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

@@ -64,7 +64,7 @@ namespace LAHGO.Service.Implementations
         public async Task UpdateAsync(int id, PCSGetVM pcsGetVM, int prodId)
         {
             ProductColorSize productColorSize = await _unitOfWork.ProductColorSizeRepository.GetAsync(p => (!p.IsDeleted || p.IsDeleted) && p.Id == pcsGetVM.Id, "Product");
-            Product product = await _unitOfWork.ProductRepository.GetAsync(c => c.Id == prodId);
+            Product product = await _unitOfWork.ProductRepository.GetAsync(c => c.Id == pcsGetVM.ProductId);
 
             if (productColorSize == null)
                 throw new ItemtNoteFoundException($"Item not found");

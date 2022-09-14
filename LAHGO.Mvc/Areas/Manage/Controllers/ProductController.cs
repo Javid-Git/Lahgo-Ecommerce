@@ -108,21 +108,24 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             ViewBag.Sizes = _sizeService.GetAllAysnc(status);
 
             PCSGetVM productUpdateVM = await _productColorSizeService.GetById(id);
+
             return PartialView("_UnitUpdatePartial", productUpdateVM);
 
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateUnit(int id, PCSGetVM productGetVM, int status, int prodId)
+        public async Task<IActionResult> UpdateUnitPost(int id, PCSGetVM productGetVM, int status, int prodId)
         {
             ViewBag.Categories = _categoryService.GetAllAysnc(status);
             ViewBag.Colors = _colorService.GetAllAysnc(status);
             ViewBag.Sizes = _sizeService.GetAllAysnc(status);
 
-            PCSGetVM productUpdateVM = await _productColorSizeService.GetById(prodId);
+            PCSGetVM productUpdateVM = await _productColorSizeService.GetById(productGetVM.Id);
 
             await _productColorSizeService.UpdateAsync(id ,productGetVM, prodId);
 
-            return PartialView("_UnitUpdatePartial", productUpdateVM);
+            ProductGetVM products = await _productService.GetById(productGetVM.ProductId);
+
+            return PartialView("_ProductOptionsList", products);
 
         }
         [HttpGet]

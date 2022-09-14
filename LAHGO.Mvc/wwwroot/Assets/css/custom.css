@@ -647,14 +647,36 @@ select.decorated option:hover {
         background-color: white;
         left: 0;
     }
-    .search-input-mobile{
+
+    .search-input-mobile {
         border: 1px solid #323232;
         border-radius: 6px;
         width: 100%;
         padding: 1rem;
     }
+
     .account-options-mobile ul {
         z-index: 1;
         top: 44px;
+    }
+
+    .product-counter-mobile {
+        width: 73%;
+    }
+
+    .login-button-link {
+        padding: 19px 9rem !important;
+    }
+
+    .left-separator::after {
+        padding: 0 5.2rem;
+        content: "";
+        border-top: 1px solid #aaaaaa;
+    }
+
+    .left-separator::before {
+        padding: 0 5.2rem;
+        content: "";
+        border-top: 1px solid #aaaaaa;
     }
 }

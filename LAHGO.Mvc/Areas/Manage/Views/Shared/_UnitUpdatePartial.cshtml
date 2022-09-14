@@ -2,7 +2,9 @@
 @{ 
     var unitUpdate = Model;
 }
-<form asp-area="manage" asp-controller="product" asp-action="UpdateUnit" method="post">
+<form id="update-sub" asp-area="manage" asp-controller="product" asp-action="UpdateUnitPost" method="post">
+    <input type="hidden" asp-for="Id" value="@unitUpdate.Id" />
+    <input type="hidden" asp-for="ProductId" value="@unitUpdate.ProductId" />
     <div class="row justify-content-center mb-2 new-input-container">
         <div class="row col-lg-12">
             <div class="row col-lg-12 g-0">
@@ -33,14 +35,14 @@
                     <input asp-for="Count" type="number" class="form-control" placeholder="Count">
                 </div>
                 <div class="col-lg-1" style="position: relative">
-                    <button asp-route-id="@unitUpdate.Id" asp-route-prodId="@unitUpdate.ProductId" class="btn btn-success font-weight-bold mb-0 unit-submit" type="submit">Submit</button>
+                    <button form="update-sub" class="btn btn-success font-weight-bold mb-0 unit-submit" type="submit">Submit</button>
                 </div>
                 <div class="" style="position: absolute">
                     <a href="#" class=""><i class="fa-solid fa-xmark unit-update-close"></i></a>
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 </form>
 
 

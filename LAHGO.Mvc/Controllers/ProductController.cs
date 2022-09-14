@@ -55,7 +55,6 @@ namespace LAHGO.Mvc.Controllers
 
             return PartialView("_DetailSizePartial", sizePCSVM);
         }
-        [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> PostComent(int? productId, string? userId, IFormCollection collection, CommentVM coment)
         {

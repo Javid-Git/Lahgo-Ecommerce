@@ -193,7 +193,7 @@ namespace LAHGO.Service.Implementations
 
         public async Task UpdateAsync(int id, ProductGetVM productGetVM)
         {
-            Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id);
+            Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == productGetVM.Id);
 
             if (product == null)
                 throw new ItemtNoteFoundException($"Items not found");

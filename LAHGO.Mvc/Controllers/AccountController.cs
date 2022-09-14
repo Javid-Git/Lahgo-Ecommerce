@@ -400,7 +400,6 @@ namespace LAHGO.Mvc.Controllers
 
             return View(memberVM);
         }
-        [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> Update(ProfileVM profileVM)
         {

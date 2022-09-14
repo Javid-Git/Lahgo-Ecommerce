@@ -37,19 +37,36 @@
         }
         
     });
-
-    $(document).on('click', '.unit-submit', function (e) {
+    $(document).on('submit', '#update-sub', function (e) {
         e.preventDefault();
 
-        $('.product-options-container').empty();
+        const form = document.getElementById('update-sub');
+        const payload = new FormData(form);
 
-        fetch('/Manage/Product/UpdateUnit')
+        fetch('/Manage/Product/UpdateUnitPost', {
+            method: 'POST',
+            body: payload,
+        })
             .then(res => res.text())
             .then(data => {
-                $('.product-options-container').append(data)
-            })
+                $('.product-options-container').html(data);
+            });
+    })
 
-    });
+    //$(document).on('click', '.unit-submit', function (e) {
+    //    e.preventDefault();
+
+    //    $('.product-options-container').empty();
+
+    //    fetch('/Manage/Product/UpdateUnitPost', {
+    //        method: 'POST'
+    //    })
+    //        .then(res => res.text())
+    //        .then(data => {
+    //            $('.product-options-container').append(data)
+    //        })
+
+    //});
     $(document).on('click', '.det-img-close', function (e) {
         e.preventDefault();
 

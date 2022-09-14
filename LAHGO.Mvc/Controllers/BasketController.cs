@@ -65,7 +65,7 @@ namespace LAHGO.Mvc.Controllers
 
             return PartialView("_MinicartPartial", basketVMs);
         }
-        [Authorize(Roles = "User")]
+        
         public async Task<IActionResult> DeleteFromBasket(int? id)
         {
             MinicartProductVM basketVMs = await _basketService.DeleteFromBasket(id);
@@ -103,7 +103,7 @@ namespace LAHGO.Mvc.Controllers
             
             return PartialView("_SizeContainerPartial", sizePCSVM);
         }
-        [Authorize(Roles = "User")]
+        
         [HttpPost]
         public async Task<IActionResult> AddToBasket(int ProductId, int SizeId, int ColorId)
         {
@@ -114,7 +114,7 @@ namespace LAHGO.Mvc.Controllers
             //return RedirectToAction("Index", "Shop");
 
         }
-        [Authorize(Roles = "User")]
+        
         public async Task<IActionResult> UpdateCount(int? id, int count)
         {
 

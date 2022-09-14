@@ -23,7 +23,6 @@ namespace LAHGO.Mvc.Controllers
 
             return View(shopVM);
         }
-        [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> Filter(int SizeId, int ColorId, int TypeId, int CategoryId, int count)
         {

@@ -16,42 +16,46 @@
                     <img src="~/Manage/assets/img/productMainImg/@Model.Product.MainImage"
                          alt="">
                 </div>
-                @if (photos[0] != null)
+                @if (photos.Count != 0)
                 {
-                    <div class="pic1 add-pic col-lg-6">
-                        <img src="~/Manage/assets/img/productDetailImages/@photos[0].Image"
-                             alt="">
-                    </div>
+                    @if (photos[0] != null)
+                    {
+                        <div class="pic1 add-pic col-lg-6">
+                            <img src="~/Manage/assets/img/productDetailImages/@photos[0].Image"
+                                 alt="">
+                        </div>
+                    }
+                    @if (photos[1] != null)
+                    {
+                        <div class="pic1 add-pic col-lg-6">
+                            <img src="~/Manage/assets/img/productDetailImages/@photos[1].Image"
+                                 alt="">
+                        </div>
+                    }
+                    @if (photos[2] != null)
+                    {
+                        <div class="pic1 add-pic col-lg-12">
+                            <img src="~/Manage/assets/img/productDetailImages/@photos[3].Image"
+                                 alt="">
+                        </div>
+                    }
+                    @if (photos[3] != null)
+                    {
+                        <div class="pic1 add-pic col-lg-6">
+                            <img src="~/Manage/assets/img/productDetailImages/@photos[3].Image"
+                                 alt="">
+                        </div>
+                    }
+                    @if (photos[4] != null)
+                    {
+                        <div class="pic1 add-pic col-lg-6">
+                            <img src="~/Manage/assets/img/productDetailImages/@photos[4].Image"
+                                 alt="">
+                        </div>
+                    }
                 }
-                @if (photos[1] != null)
-                {
-                    <div class="pic1 add-pic col-lg-6">
-                        <img src="~/Manage/assets/img/productDetailImages/@photos[1].Image"
-                             alt="">
-                    </div>
-                }
-                @if (photos[2] != null)
-                {
-                    <div class="pic1 add-pic col-lg-12">
-                        <img src="~/Manage/assets/img/productDetailImages/@photos[3].Image"
-                             alt="">
-                    </div>
-                }
-                @if (photos[3] != null)
-                {
-                    <div class="pic1 add-pic col-lg-6">
-                        <img src="~/Manage/assets/img/productDetailImages/@photos[3].Image"
-                             alt="">
-                    </div>
-                }
-                @if (photos[4] != null)
-                {
-                    <div class="pic1 add-pic col-lg-6">
-                        <img src="~/Manage/assets/img/productDetailImages/@photos[4].Image"
-                             alt="">
-                    </div>
-                }
-               
+
+
             </div>
         </div>
         <div class="detail1-left-mobile">
@@ -101,27 +105,32 @@
                     </div>
                     <div class="detail-colors">
                         <div class="detail-color-title navigation-options navigation-options-active">
-                            colors: <span class="selected-color"></span>
+                            color: <span class="selected-color"></span>
                         </div>
-                        <ul class="d-flex">
-                            @foreach (var pcs in product.ProductColorSizes.Where(x => x.ProductId == product.Id))
-                            {
-                                <li class="d-flex align-items-center small-colors-optional small-colors"
-                                    style="background-color: @Model.Colors.FirstOrDefault(s => s.Id == pcs.ColorId).Name;" value="@Model.Colors.FirstOrDefault(s => s.Id == pcs.ColorId).Name">
-
-                                </li>
+                        <div class="colors d-flex">
+                            @{
+                                List<ProductColorSize> pp = new List<ProductColorSize>();
+                                foreach (var item in Model.ProductColorSizes.Where(x => x.ProductId == product.Id))
+                                {
+                                    if (!pp.Exists(p => p.ColorId == item.ColorId))
+                                    {
+                                        pp.Add(item);
+                                    }
+                                }
                             }
-                        </ul>
+
+                            @foreach (var pcs in pp)
+                            {
+                                <input  id="@(product.Name + pcs.Color.Name)" type="radio" name="ColorId" value="@pcs.ColorId" />
+                                <a asp-controller="product" asp-action="GetSizes" asp-route-ColorId="@pcs.ColorId" asp-route-ProductId="@product.Id" data-name="@pcs.Color.Name" style="background-color:@pcs.Color.Name" class="smcolor-container " for="@(product.Name + pcs.Color.Name)"></a>
+                            }
+                        </div>
                     </div>
                     <div class="detail-sizes">
                         <div class="selected-size detail-color-title navigation-options navigation-options-active">
-
+                            Size:
                         </div>
-                        <ul class="d-flex">
-                            @foreach (var pcs in product.ProductColorSizes.Where(x => x.ProductId == product.Id))
-                            {
-                                <li class="detail-size-container" value="@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Definition">@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Name</li>
-                            }
+                        <ul class="d-flex detail-size-container">
                         </ul>
                     </div>
                     <button formmethod="post" class="login-button register-button">
@@ -227,30 +236,49 @@
     </div>
     <div class="popup-wraper">
         <ul class="pic-list">
-            <li class="popup-pic">
-                <img src="~/Manage/assets/img/productDetailImages/@photos[0].Image"
-                     alt="">
-            </li>
-            <li class="popup-pic">
-                <img src="~/Manage/assets/img/productDetailImages/@photos[1].Image"
-                     alt="">
-            </li>
-            <li class="popup-pic">
-                <img src="~/Manage/assets/img/productDetailImages/@photos[2].Image"
-                     alt="">
-            </li>
-            <li class="popup-pic">
-                <img src="~/Manage/assets/img/productDetailImages/@photos[3].Image"
-                     alt="">
-            </li>
-            <li class="popup-pic">
-                <img src="~/Manage/assets/img/productDetailImages/@photos[4].Image"
-                     alt="">
-            </li>
-            <li class="popup-pic">
-                <img src="~/Manage/assets/img/productMainImg/@Model.Product.MainImage"
-                     alt="">
-            </li>
+            @if (photos.Count != 0)
+            {
+                if (photos[0] != null)
+                {
+                    <li class="popup-pic">
+                        <img src="~/Manage/assets/img/productDetailImages/@photos[0].Image"
+                             alt="">
+                    </li>
+                }
+                if (photos[1] != null)
+                {
+                    <li class="popup-pic">
+                        <img src="~/Manage/assets/img/productDetailImages/@photos[1].Image"
+                             alt="">
+                    </li>
+                }
+                if (photos[2] != null)
+                {
+                    <li class="popup-pic">
+                        <img src="~/Manage/assets/img/productDetailImages/@photos[2].Image"
+                             alt="">
+                    </li>
+                }
+                if (photos[3] != null)
+                {
+                    <li class="popup-pic">
+                        <img src="~/Manage/assets/img/productDetailImages/@photos[3].Image"
+                             alt="">
+                    </li>
+                }
+                if (photos[4] != null)
+                {
+                    <li class="popup-pic">
+                        <img src="~/Manage/assets/img/productDetailImages/@photos[4].Image"
+                             alt="">
+                    </li>
+                }
+                <li class="popup-pic">
+                    <img src="~/Manage/assets/img/productMainImg/@Model.Product.MainImage"
+                         alt="">
+                </li>
+            }
+
         </ul>
         <button type="button" id="product-images-popup-close" class="comp-close" aria-label="Close newsletter pane">
             <svg class="svg-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85">

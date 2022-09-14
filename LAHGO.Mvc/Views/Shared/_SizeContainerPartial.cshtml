@@ -1,7 +1,7 @@
 ﻿@model SizePCSVM
 <div class="sizes text-center d-flex justify-content-center">
     <div>
-        <select name="SizeId">
+        <select name="SizeId" class="size-select">
             @foreach (var pcs in Model.ProductColorSizes)
             {
                 <option value="@pcs.SizeId" class="d-flex align-items-center small-colors">@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Name</option>
@@ -10,5 +10,5 @@
         </select>
         <div class="size-selection">Select a size</div>
     </div>
-    <button class="btn add-to-basket" type="submit">Submit</button>
+    <button class="btn add-to-basket" type="submit">ADD TO CART</button>
 </div>

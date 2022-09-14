@@ -42,7 +42,7 @@
         @foreach (var favorites in Model.Products)
         {
             <div>
-                <a href="">
+                <a asp-controller="product" asp-action="detail" asp-route-id="@favorites.Id">
                     <div class="favorites-slider-top">
                         <img src="~/Manage/assets/img/productMainImg/@favorites.MainImage"
                              alt="">

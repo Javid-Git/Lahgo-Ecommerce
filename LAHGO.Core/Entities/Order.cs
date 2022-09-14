@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LAHGO.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,6 +20,7 @@ namespace LAHGO.Core.Entities
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string Comment { get; set; }
+        public OrderStatus OrderStatus { get; set; }
         public AppUser AppUser { get; set; }
         public IEnumerable<OrderItem> OrderItems { get; set; }
     }

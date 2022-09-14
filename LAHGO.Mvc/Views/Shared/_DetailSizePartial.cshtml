@@ -1,0 +1,9 @@
+﻿@model SizePCSVM
+
+<select name="SizeId">
+    @foreach (var pcs in Model.ProductColorSizes)
+    {
+        <option value="@pcs.SizeId" class="detail-size-container d-flex align-items-center small-colors">@Model.Sizes.FirstOrDefault(s => s.Id == pcs.SizeId).Name</option>
+
+    }
+</select>

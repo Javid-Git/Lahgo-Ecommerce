@@ -10,12 +10,13 @@ namespace LAHGO.Core
     {
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
-         IProductColorSizeRepository ProductColorSizeRepository { get; }
+        IProductColorSizeRepository ProductColorSizeRepository { get; }
         ISizeRepository SizeRepository { get; }
         IColorRepository ColorRepository { get; }
         ISettingRepository SettingRepository { get; }
         IPhotoRepository PhotoRepository { get; }
         IBasketRepository BasketRepository { get; }
+        IOrderRepository OrderRepository { get; }
         Task<int> CommitAsync();
         int Commit();
        

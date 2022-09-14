@@ -9,18 +9,19 @@
     padding: 1rem;
     transition: .5s;
 }
+
 .navbar-login:hover .navbar-account-list {
     visibility: visible;
     opacity: 1;
     transition: .5s;
 }
 
-    .navbar-account-list li a {
-        font-family: 'Regulars';
-        font-size: 14px;
-        font-style: normal;
-        color: #323232;
-    }
+.navbar-account-list li a {
+    font-family: 'Regulars';
+    font-size: 14px;
+    font-style: normal;
+    color: #323232;
+}
 
 .navbar-login {
     position: relative;
@@ -35,6 +36,7 @@
 .colors input[type="radio"] {
     display: none;
 }
+
 .smcolor-container {
     width: 30px;
     height: 30px;
@@ -62,14 +64,125 @@
     background-color: black;
 }
 
-.minicart-button{
+.minicart-button {
     position: relative;
 }
 
 
-.fa-rectangle-xmark{
+.fa-rectangle-xmark {
     background-color: indianred;
     border-radius: 3px;
     color: white;
     padding: 1px;
+}
+
+
+.size-select {
+    height: 30px;
+    width: 100px;
+    background-color: #ededed;
+    cursor: pointer;
+    border: none;
+}
+
+.add-to-basket {
+    font-family: 'Regulars';
+    border-radius: 6px;
+    background-color: black;
+    color: white;
+    margin-left: 1rem;
+}
+
+    .add-to-basket:hover {
+        border-radius: 6px;
+        background-color: beige;
+        color: black;
+    }
+
+
+.login-button-link {
+    padding: 19px 11rem !important;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+    font-family: "Regulars";
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #323232;
+    border: 1px solid #323232;
+    transition: 0.5s;
+    width: 100%;
+}
+.checkout-button-link {
+    padding: 19px 4rem !important;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+    font-family: "Regulars";
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #323232;
+    border: 1px solid #323232;
+    transition: 0.5s;
+    width: 100%;
+}
+.login-button-link:hover {
+    color: #323232;
+    background-color: white;
+}
+.checkout-button-link:hover {
+    color: #323232;
+    background-color: white;
+}
+.minicart-bottom-margin{
+    padding-bottom:2rem;
+}
+
+.viewcart{
+    padding-top: 1rem;
+}
+
+.search-input{
+    background-color: transparent;
+    outline:none;
+    border:none;
+}
+
+    .search-input::placeholder {
+        font-family: 'Regulars';
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 100px;
+        font-style: normal;
+        text-transform: uppercase;
+        color: white;
+        padding: 0 1rem;
+    }
+
+
+.center-header:hover .search-input::placeholder {
+    color: #323232;
+}
+
+
+
+.check-email {
+    text-align: center;
+    font-family: 'Regulars';
+    letter-spacing: 12px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 100px;
+    font-style: normal;
+    text-transform: uppercase;
+    color: black;
+    padding: 20rem 1rem;
+}
+
+.search-results {
+    overflow-y: scroll;
+    position: absolute;
+    width: 300px;
+    height: 500px;
+    background-color: white;
 }

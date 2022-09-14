@@ -80,6 +80,7 @@ namespace LAHGO.Service.Implementations
             Product product = await _unitOfWork.ProductRepository.GetAsync(p => p.Id == id, "ProductColorSizes", "Category", "Photos");
             List<Size> sizes = await _unitOfWork.SizeRepository.GetAllAsync(x => !x.IsDeleted);
             List<Color> colors = await _unitOfWork.ColorRepository.GetAllAsync(x => !x.IsDeleted);
+            List<ProductColorSize> productColorSizes = await _unitOfWork.ProductColorSizeRepository.GetAllAsync(x => !x.IsDeleted);
 
             DetailVM detailVM = new DetailVM
             {
@@ -87,6 +88,7 @@ namespace LAHGO.Service.Implementations
                 CartProducts = basketVMs,
                 Sizes = sizes,
                 Colors = colors,
+                ProductColorSizes = productColorSizes
             };
             return detailVM;
 

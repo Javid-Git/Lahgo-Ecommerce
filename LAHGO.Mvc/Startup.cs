@@ -42,7 +42,7 @@ namespace LAHGO.Mvc
                 options.AddProfile(new MappingProfile());
             });
             services.AddControllers()
-                .AddNewtonsoftJson(options => {options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;})
+                .AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; })
                 .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<CategoryCreateVMVMValidator>());
             services.AddRazorPages();
             services.AddControllersWithViews();
@@ -75,7 +75,16 @@ namespace LAHGO.Mvc
             services.AddScoped<IDetailService, DetailService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<IOrderService, OrderService>();
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins()
+                        .AllowCredentials();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

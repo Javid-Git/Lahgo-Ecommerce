@@ -170,13 +170,14 @@ namespace LAHGO.Service.Implementations
             if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
             {
                 AppUser appUser = await _userManager.Users.Include(u => u.Baskets).FirstOrDefaultAsync(u => u.UserName == _httpContextAccessor.HttpContext.User.Identity.Name);
+                List<Basket> userbasket = await _unitOfWork.BasketRepository.GetAllAsync(b => b.UserId == appUser.Id);
 
-                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                if (userbasket != null && userbasket.Count() > 0)
                 {
-                    Basket dbBasketproduct = appUser.Baskets.FirstOrDefault(p => p.ProductId == id);
+                    Basket dbBasketproduct = userbasket.FirstOrDefault(p => p.ProductId == id);
                     if (dbBasketproduct != null)
                     {
-                        appUser.Baskets.Remove(dbBasketproduct);
+                        userbasket.Remove(dbBasketproduct);
                         _unitOfWork.BasketRepository.Remove(dbBasketproduct);
                         await _unitOfWork.CommitAsync();
                     }

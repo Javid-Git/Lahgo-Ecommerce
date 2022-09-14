@@ -10,6 +10,8 @@ namespace LAHGO.Core.Entities
         public string FullName { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsDeleted { get; set; }
+        public string ConfirmationToken { get; set; }
+        public string ResetToken { get; set; }
         public Nullable<DateTime> CreatedAt { get; set; }
         public Nullable<DateTime> DeletedAt { get; set; }
         public Nullable<DateTime> UpdatedAt { get; set; }

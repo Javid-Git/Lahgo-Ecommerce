@@ -1,0 +1,347 @@
+﻿@model OrderCreateVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="section1-checkout">
+    <div class="row g-0">
+        <div class="checkout1-left col-lg-7 col-12">
+            <div class="checkout1-header row g-0">
+                <div class="checkout1-logo col-lg-2 col-2">
+                    <img class="img-fluid"
+                         src="//cdn.shopify.com/s/files/1/0258/7751/2297/files/Lahgo_Logo_new_footer.png?55781"
+                         alt="">
+                </div>
+                <div class="mobile-product-list align-items-center justify-content-between">
+                    <div class="mobile-product-list-intro d-flex align-items-center">
+                        <svg width="20" height="19" xmlns="http://www.w3.org/2000/svg"
+                             class="order-summary-toggle__icon">
+                            <path d="M17.178 13.088H5.453c-.454 0-.91-.364-.91-.818L3.727 1.818H0V0h4.544c.455 0 .91.364.91.818l.09 1.272h13.45c.274 0 .547.09.73.364.18.182.27.454.18.727l-1.817 9.18c-.09.455-.455.728-.91.728zM6.27 11.27h10.09l1.454-7.362H5.634l.637 7.362zm.092 7.715c1.004 0 1.818-.813 1.818-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817zm9.18 0c1.004 0 1.817-.813 1.817-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817z">
+                            </path>
+                        </svg>
+                        <span>Show order summary</span>
+                        <svg width="11" height="6" xmlns="http://www.w3.org/2000/svg"
+                             class="order-summary-toggle__dropdown" fill="#000">
+                            <path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="mobile-product-list-total product-checkout-price">
+                        $452
+                    </div>
+                </div>
+                <div class=" checkout1-right-mobile col-lg-5 col-12">
+                    <div class="product-checkout-list">
+                        @foreach (var item in Model.Baskets)
+                        {
+                            <div class="product-checkout row g-0 align-items-center">
+                                <div class="product-checkout-pic col-lg-2 col-2">
+                                    <img class="img-fluid" src="~/Manage/assets/img/productMainImg/@item.Product.MainImage"
+                                         alt="">
+                                </div>
+                                <div class="product-checkout-count minicart-product-color d-flex align-items-center justify-content-center">
+                                    @item.Counts
+                                </div>
+                                <div class="product-checkout-describtion col-lg-6 col-6">
+                                    <div class="product-checkout-name minicart-product-name">
+                                        @item.Product.Name
+                                    </div>
+                                    <div class="minicart-product-colorandsize">
+                                        <div class="minicart-product-color text-start">
+                                            SINCERE WHITE / <span class="minicart-product-size">L</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="product-checkout-price col-lg-1 col-1">
+                                    $178.00
+                                </div>
+                            </div>
+
+                        }
+                        <div class="product-checkout row g-0 align-items-center">
+                            <div class="product-checkout-pic col-lg-2 col-2">
+                                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/01_LUNYA-LAHGO-RUSH-2022-05-1911480-min_small.jpg?v=1654708333"
+                                     alt="">
+                            </div>
+                            <div class="product-checkout-count minicart-product-color d-flex align-items-center justify-content-center">
+                                0
+                            </div>
+                            <div class="product-checkout-describtion col-lg-6 col-6">
+                                <div class="product-checkout-name minicart-product-name">
+                                    WOVEN LINEN PANT
+                                </div>
+                                <div class="minicart-product-colorandsize">
+                                    <div class="minicart-product-color text-start">
+                                        SINCERE WHITE / <span class="minicart-product-size">L</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="product-checkout-price col-lg-1 col-1">
+                                $178.00
+                            </div>
+                        </div>
+                        <div class="product-checkout row g-0 align-items-center">
+                            <div class="product-checkout-pic col-lg-2 col-2">
+                                <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/products/01_LUNYA-LAHGO-RUSH-2022-05-1911480-min_small.jpg?v=1654708333"
+                                     alt="">
+                            </div>
+                            <div class="product-checkout-count minicart-product-color d-flex align-items-center justify-content-center">
+                                0
+                            </div>
+                            <div class="product-checkout-describtion col-lg-6 col-6">
+                                <div class="product-checkout-name minicart-product-name">
+                                    WOVEN LINEN PANT
+                                </div>
+                                <div class="minicart-product-colorandsize">
+                                    <div class="minicart-product-color text-start">
+                                        SINCERE WHITE / <span class="minicart-product-size">L</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="product-checkout-price col-lg-1 col-1">
+                                $178.00
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkout-calculation">
+                        <div class="additional-expenses">
+                            <div class="expense d-flex justify-content-between">
+                                <p>Subtotal</p><span class="taxes product-checkout-price">$452.00</span>
+                            </div>
+                            <div class="expense d-flex justify-content-between">
+                                <p>Shipping</p><span class="shipping">--</span>
+                            </div>
+
+                        </div>
+                        <div class="checkout-total">
+                            <div class="additional-expenses expense-optional">
+                                <div class="expense  d-flex justify-content-between">
+                                    <p>Total</p><span class="taxes product-checkout-price">$452.00</span>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="site-navigation site-navigation-checkout col-lg-12">
+                    <ul class="text-start align-items-center">
+                        <li class="navigation-options"><a href="/Assets/html/cart.html">Cart </a></li>
+                        <li class="separator">></li>
+                        <li class="navigation-options navigation-options-active"> Information</li>
+                        <li class="separator">></li>
+                        <li class="navigation-options navigation-options-active"> Shipping</li>
+                        <li class="separator">></li>
+                        <li class="navigation-options navigation-options-active"> Payment</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="express-checkout-container">
+                <p class="express-checkout text-center navigation-options navigation-options-active">
+                    express
+                    checkout
+                </p>
+                <ul class="payment-buttons row g-0 justify-content-center">
+                    <li class="express-button1 express-button " data-testid="grid-cell">
+                        <div role="button" tabindex="0" class="button-text">
+                            amazon
+                        </div>
+                    </li>
+                    <li class="express-button1 express-button" data-testid="grid-cell">
+                        <div role="button" tabindex="0" class="button-text">
+                            amazon
+                        </div>
+                    </li>
+                    <li class="express-button1 express-button" data-testid="grid-cell">
+                        <a href="">
+                            <div role="button" tabindex="0" class="button-text">
+                                amazon
+                            </div>
+                        </a>
+
+                    </li>
+                    <li class="express-button1 express-button" data-testid="grid-cell">
+                        <div role="button" tabindex="0" class="button-text">
+                            amazon
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="left-separator navigation-options navigation-options-active d-flex align-items-center">
+                <span class="left-separator-text navigation-options navigation-options-active">or</span>
+            </div>
+            <form action="" method="post">
+                <div class="contact-info">
+                    <div class="section-title-small">
+                        Contact information
+                    </div>
+                    <div class="section-describtion-small">
+                        Already have an account?<strong>
+                            <a href="/Assets/html/login.html"
+                               class="section-describtion-small"> Log In</a>
+                        </strong>
+                    </div>
+                    <div class="email-inputs inputs inputs-checkout">
+                        <label class="input-labels" for="email">Email</label>
+                        <input type="text" name="" id="email" placeholder="Email">
+                    </div>
+                    <div class="subscribtion-input d-flex align-items-center">
+                        <input id="subscribtion" type="checkbox" name="subscribtion">
+                        <label for="subscribtion">Email me with news and offers</label>
+
+                    </div>
+
+                </div>
+                <div class="shipping-address row g-3">
+                    <div class="section-title-small col-lg-12">
+                        Shipping Address
+                    </div>
+                    <div class="email-inputs inputs inputs-checkout col-lg-12">
+                        <label class="input-labels" for="country">Country / Region</label>
+                        <input type="text" name="" id="country" placeholder="Country / Region">
+                    </div>
+                    <div class="email-inputs inputs inputs-checkout col-lg-6">
+                        <label class="input-labels" for="name">First Name</label>
+                        <input type="text" name="" id="name" placeholder="First Name">
+                    </div>
+                    <div class="email-inputs inputs inputs-checkout col-lg-6">
+                        <label class="input-labels" for="surname">Last Name</label>
+                        <input type="text" name="" id="surname" placeholder="Last Name">
+                    </div>
+                    <div class="email-inputs inputs inputs-checkout col-lg-12">
+                        <label class="input-labels" for="address">Address</label>
+                        <input type="text" name="" id="address" placeholder="Address">
+                    </div>
+                    <div class="email-inputs inputs inputs-checkout col-lg-12">
+                        <label class="input-labels" for="suite">Apartment, suite, etc. (optional)</label>
+                        <input type="text" name="" id="suite" placeholder="Apartment, suite, etc. (optional)">
+                    </div>
+                    <div class="email-inputs inputs inputs-checkout col-lg-4">
+                        <label class="input-labels" for="city">City</label>
+                        <input type="text" name="" id="city" placeholder="City">
+                    </div>
+                    <div class="email-inputs inputs inputs-checkout col-lg-4">
+                        <label class="input-labels" for="state">State</label>
+                        <input type="text" name="" id="state" placeholder="State">
+                    </div>
+                    <div class="email-inputs inputs inputs-checkout col-lg-4">
+                        <label class="input-labels" for="zipcode">ZIP code</label>
+                        <input type="text" name="" id="zipcode" placeholder="ZIP code">
+                    </div>
+                    <div class="phone-inputs inputs inputs-checkout col-lg-12">
+                        <label class="input-labels" for="phone">Phone (optional)</label>
+                        <input type="text" name="" id="phone" placeholder="Phone (optional)">
+                        <div class="tooltip">
+                            <svg class="svg-tooltip svg-tootlip-checkout" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20">
+                                <g>
+                                    <circle id="circle" fill="none" stroke="currentColor" cx="10" cy="10" r="9.5">
+                                    </circle>
+                                    <path id="question" fill="currentColor"
+                                          d="M9.12,12.59h1.1v-.71a3.58,3.58,0,0,1,1.32-2.4A4,4,0,0,0,13,6.73,2.59,2.59,0,0,0,10.16,4,3.16,3.16,0,0,0,7,7.28H8.16a2.05,2.05,0,0,1,2-2.14,1.47,1.47,0,0,1,1.6,1.64,3.17,3.17,0,0,1-1.09,2,4.25,4.25,0,0,0-1.54,3ZM9.64,16a1.06,1.06,0,0,0,0-2.11,1.06,1.06,0,0,0,0,2.11Z">
+                                    </path>
+                                </g>
+                            </svg>
+                            <div class="tooltip-content tooltip-content-checkout">
+                                <p class="t-b-2 cr-subdued">In case we need to contact you about your order</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkout-buttons row g-0 align-items-center">
+                    <div class="return-button col-lg-6">
+                        <a class=" d-flex align-items-center" href="/Assets/html/cart.html">
+                            <svg focusable="false" aria-hidden="true"
+                                 class="icon-svg icon-svg--color-accent icon-svg--size-10 previous-link__icon"
+                                 role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+                                <path d="M8 1L7 0 3 4 2 5l1 1 4 4 1-1-4-4"></path>
+                            </svg>
+                            <span class="section-describtion section-describtion-optional">Return to cart</span>
+                        </a>
+                    </div>
+                    <div class="shipping-button col-lg-6">
+                        <a asp-controller="order" asp-action="checkout" formmethod="post" style="padding:19px 4rem" class="checkout-button-link">
+                            continue to shipping
+                        </a>
+                    </div>
+                </div>
+                <div class="subscribtion-input subscribtion-input-optional d-flex align-items-start">
+                    <input id="subscribtion" type="checkbox" name="subscribtion">
+                    <label for="subscribtion">
+                        <strong class="subscribtion-text">Get SMS alerts about your order</strong>
+                        <p class="subscribtion-text">
+                            Stay up to date on your purchase with order confirmation and
+                            shipping confirmation messages
+                        </p>
+                    </label>
+
+                </div>
+            </form>
+            <div class="policies">
+                <ul class="policy-list d-flex">
+                    <li><a href="">Refund policy</a></li>
+                    <li><a href="">Refund policy</a></li>
+                    <li><a href="">Refund policy</a></li>
+                    <li><a href="">Refund policy</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="checkout1-right col-lg-5 col-12">
+            <div class="product-checkout-list">
+                @foreach (var basket in Model.Baskets)
+                {
+                    <div class="product-checkout row g-0 align-items-center">
+                        <div class="product-checkout-pic col-lg-2 col-2">
+                            <img class="img-fluid" src="~/Manage/assets/img/productMainImg/@basket.Product.MainImage"
+                                 alt="">
+                        </div>
+                        <div class="product-checkout-count minicart-product-color d-flex align-items-center justify-content-center">
+                            @basket.Counts
+                        </div>
+                        <div class="product-checkout-describtion col-lg-6 col-6">
+                            <div class="product-checkout-name minicart-product-name">
+                                @basket.Product.Name
+                            </div>
+                            <div class="minicart-product-colorandsize">
+                                <div class="minicart-product-color text-start">
+                                    @Model.Colors.FirstOrDefault(c => c.Id == basket.ColorId).Name / <span class="minicart-product-size">@Model.Sizes.FirstOrDefault(c => c.Id == basket.SizeId).Name</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-checkout-price col-lg-1 col-1">
+                            $@basket.Product.DiscountedPrice
+                        </div>
+                    </div>
+
+                }
+               
+            </div>
+            <div class="checkout-calculation">
+                <div class="additional-expenses">
+                    <div class="expense d-flex justify-content-between">
+                        <p>Subtotal</p><span class="taxes product-checkout-price">$@(Model.Baskets.Sum(b=>b.Counts * b.Product.DiscountedPrice))</span>
+                    </div>
+                    <div class="expense d-flex justify-content-between">
+                        <p>Shipping</p><span class="shipping">--</span>
+                    </div>
+
+                </div>
+                <div class="checkout-total">
+                    <div class="additional-expenses expense-optional">
+                        <div class="expense  d-flex justify-content-between">
+                            <p>Total</p><span class="taxes product-checkout-price">$@(Model.Baskets.Sum(b=>b.Counts * b.Product.DiscountedPrice))</span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -57,7 +57,9 @@ namespace LAHGO.Service.Implementations
                             CartProductGetVM basketVM = new CartProductGetVM
                             {
                                 ProductId = item.ProductId,
-                                SelectCount = item.Counts
+                                SelectCount = item.Counts,
+                                SizeId = item.SizeId,
+                                ColorId = item.ColorId
                             };
 
                             basketVMs.Add(basketVM);

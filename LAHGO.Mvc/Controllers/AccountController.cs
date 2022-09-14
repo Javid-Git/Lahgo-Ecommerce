@@ -6,11 +6,14 @@ using LAHGO.Service.ViewModels.CartProductVMs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace LAHGO.Mvc.Controllers
@@ -23,7 +26,8 @@ namespace LAHGO.Mvc.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<AccountController> _logger;
         private readonly IAccountService _accountService;
-        public AccountController(IAccountService accountService, IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILogger<AccountController> logger)
+        private readonly IConfiguration _configuration;
+        public AccountController(IConfiguration configuration, IAccountService accountService, IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILogger<AccountController> logger)
         {
             _unitOfWork = unitOfWork;
             _roleManager = roleManager;
@@ -31,6 +35,7 @@ namespace LAHGO.Mvc.Controllers
             _signInManager = signInManager;
             _logger = logger;
             _accountService = accountService;
+            _configuration = configuration;
         }
         #region Roles
         //public async Task<IActionResult> CreateRole()
@@ -80,7 +85,27 @@ namespace LAHGO.Mvc.Controllers
                 UserName = registerVM.UserName,
                 Email = registerVM.Email
             };
+            string token = Guid.NewGuid().ToString();
+            appUser.ConfirmationToken = token;
+
             IdentityResult result = await _userManager.CreateAsync(appUser, registerVM.Password);
+
+
+            var link = Url.Action(nameof(ConfirmEmail), "Account", new { id = appUser.Id, token = appUser.ConfirmationToken }, Request.Scheme, Request.Host.ToString());
+            EmailVM email = _configuration.GetSection("Email").Get<EmailVM>();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(email.SenderEmail, email.SenderName);
+            mail.To.Add(appUser.Email);
+            mail.Subject = "Reset Password";
+            mail.Body = $"<a href=\"{link}\">Confirm email</a>";
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = email.Server;
+            smtp.EnableSsl = true;
+            smtp.Port = email.Port;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential(email.SenderEmail, email.SenderPassword);
+            smtp.Send(mail);
 
             if (!result.Succeeded)
             {
@@ -91,8 +116,87 @@ namespace LAHGO.Mvc.Controllers
                 return View();
             }
             result = await _userManager.AddToRoleAsync(appUser, "User");
-            return RedirectToAction("index", "home", new { area = "" });
+            return RedirectToAction("ConfirmPage");
 
+        }
+
+        //public IActionResult NewPassword(ResetPasswordViewModel reset)
+        //{
+        //    return View(reset);
+        //}
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[ActionName("NewPassword")]
+        //public async Task<IActionResult> NewPasswordPost(ResetPasswordViewModel reset)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(reset);
+        //    }
+        //    if (reset.Id == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    AppUser user = await _userManager.FindByIdAsync(reset.Id);
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    if (user.PasswordResetToken != reset.Token)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+        //    IdentityResult result = await _userManager.ResetPasswordAsync(user, resetToken, reset.Password);
+
+
+
+        //    if (result.Succeeded)
+        //    {
+        //        string passwordResetToken = Guid.NewGuid().ToString();
+        //        user.PasswordResetToken = passwordResetToken;
+        //        await _userManager.UpdateAsync(user);
+        //        return RedirectToAction("Login");
+        //    }
+        //    return BadRequest();
+        //}
+        public async Task<IActionResult> ConfirmPage()
+        {
+            return View();
+        }
+        public async Task<IActionResult> ConfirmEmail(string id, string token)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new Exception("Not Found");
+            }
+            AppUser appUser = await _userManager.FindByIdAsync(id);
+            if (appUser == null)
+            {
+                throw new Exception("Not Found");
+
+            }
+            if (appUser.ConfirmationToken !=token)
+            {
+                throw new Exception("Bad Request");
+
+            }
+
+            var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+            IdentityResult result = await _userManager.ConfirmEmailAsync(appUser, confirmationToken);
+
+            if (result.Succeeded)
+            {
+                string newToken = Guid.NewGuid().ToString();
+                appUser.ConfirmationToken = newToken;
+                await _userManager.UpdateAsync(appUser);
+                appUser.EmailConfirmed = true;
+                return View();
+            }
+            return View();
         }
         [HttpGet]
         public IActionResult Login()
@@ -112,6 +216,13 @@ namespace LAHGO.Mvc.Controllers
                 return View();
             }
             AppUser appuser = await _userManager.FindByEmailAsync(login.Email);
+            if (!appuser.EmailConfirmed)
+            {
+                ModelState.AddModelError("", "The email confirmation is requested");
+
+                return View(login);
+            }
+            List<Basket> userbasket = await _unitOfWork.BasketRepository.GetAllAsync(b => b.UserId == appuser.Id);
             if (appuser == null)
             {
                 ModelState.AddModelError("", "Email or password is incorrect");
@@ -129,79 +240,98 @@ namespace LAHGO.Mvc.Controllers
                 return View(login);
             }
             await _signInManager.SignInAsync(appuser, (bool)login.RememberMe);
-            //string basketCookie = HttpContext.Request.Cookies["basket"];
-            //if (!string.IsNullOrWhiteSpace(basketCookie))
-            //{
-            //    List<CartProductCreateVM> basketVMs = JsonConvert.DeserializeObject<List<CartProductCreateVM>>(basketCookie);
-            //    List<Basket> baskets = new List<Basket>();
-            //    foreach (CartProductCreateVM basketVM in basketVMs)
-            //    {
-            //        if (appuser.Baskets != null && appuser.Baskets.Count() > 0)
-            //        {
-            //            Basket dbBasketproduct = appuser.Baskets.FirstOrDefault(b => b.ProductId != basketVM.ProductId);
+            string basketCookie = HttpContext.Request.Cookies["basket"];
+            List<CartProductCreateVM> basketVMs = JsonConvert.DeserializeObject<List<CartProductCreateVM>>(basketCookie);
 
-            //            if (dbBasketproduct == null)
-            //            {
-            //                Basket basket = new Basket
-            //                {
-            //                    UserId = appuser.Id,
-            //                    ProductId = basketVM.ProductId,
-            //                    Counts = basketVM.SelectCount
-            //                };
+            if (!string.IsNullOrWhiteSpace(basketCookie) && basketVMs.Count != 0)
+            {
+                List<Basket> baskets = new List<Basket>();
+                foreach (CartProductCreateVM basketVM in basketVMs)
+                {
+                    if (userbasket != null && userbasket.Count() > 0)
+                    {
+                        Basket dbBasketproduct = userbasket.FirstOrDefault(b => b.ProductId != basketVM.ProductId);
 
-            //                baskets.Add(basket);
-            //            }
-            //            else
-            //            {
-            //                //exsitedBasket.Count = basketVM.Count;
-            //                dbBasketproduct.Counts += basketVM.SelectCount;
-            //                basketVM.SelectCount = dbBasketproduct.Counts;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            Basket basket = new Basket
-            //            {
-            //                UserId = appuser.Id,
-            //                ProductId = basketVM.ProductId,
-            //                Counts = basketVM.SelectCount
-            //            };
+                        if (dbBasketproduct == null)
+                        {
+                            Basket basket = new Basket
+                            {
+                                UserId = appuser.Id,
+                                ProductId = basketVM.ProductId,
+                                Counts = basketVM.SelectCount,
+                                SizeId = basketVM.SizeId,
+                                ColorId = basketVM.ColorId
+                            };
 
-            //            baskets.Add(basket);
-            //        }
-            //    }
-            //    basketCookie = JsonConvert.SerializeObject(basketVMs);
+                            baskets.Add(basket);
+                        }
+                        else
+                        {
+                            //exsitedBasket.Count = basketVM.Count;
+                            dbBasketproduct.Counts += basketVM.SelectCount;
+                            basketVM.SelectCount = dbBasketproduct.Counts;
+                        }
+                    }
+                    else
+                    {
+                        Basket basket = new Basket
+                        {
+                            UserId = appuser.Id,
+                            ProductId = basketVM.ProductId,
+                            Counts = basketVM.SelectCount,
+                            SizeId = basketVM.SizeId,
+                            ColorId = basketVM.ColorId
+                        };
 
-            //    HttpContext.Response.Cookies.Append("basket", basketCookie);
-            //    //await _context.Baskets.AddRangeAsync(baskets);
-            //    //await _context.SaveChangesAsync();
-            //}
-            //else
-            //{
-            //    if (appuser.Baskets != null && appuser.Baskets.Count() > 0)
-            //    {
-            //        List<CartProductCreateVM> basketVMs = new List<CartProductCreateVM>();
+                        baskets.Add(basket);
+                    }
+                }
+                basketCookie = JsonConvert.SerializeObject(basketVMs);
 
-            //        foreach (Basket basket in appuser.Baskets)
-            //        {
-            //            CartProductCreateVM basketVM = new CartProductCreateVM
-            //            {
-            //                ProductId = basket.ProductId,
-            //                SelectCount = basket.Counts
-            //            };
+                HttpContext.Response.Cookies.Append("basket", basketCookie);
+                await _unitOfWork.BasketRepository.AddAllAsync(baskets);
+                await _unitOfWork.CommitAsync();
+            }
+            else
+            {
 
-            //            basketVMs.Add(basketVM);
-            //        }
+                if (userbasket != null && userbasket.Count() > 0)
+                {
+                    List<CartProductCreateVM> basketVMss = new List<CartProductCreateVM>();
 
-            //        basketCookie = JsonConvert.SerializeObject(basketVMs);
+                    foreach (Basket basket in userbasket)
+                    {
+                        CartProductCreateVM basketVM = new CartProductCreateVM
+                        {
+                            ProductId = basket.ProductId,
+                            SelectCount = basket.Counts,
+                            SizeId = basket.SizeId,
+                            ColorId = basket.ColorId
+                        };
 
-            //        HttpContext.Response.Cookies.Append("basket", basketCookie);
-            //    }
-            //}
+                        basketVMss.Add(basketVM);
+                    }
+
+                    basketCookie = JsonConvert.SerializeObject(basketVMss);
+
+                    HttpContext.Response.Cookies.Append("basket", basketCookie);
+                }
+            }
             return RedirectToAction("index", "home");
         }
         public async Task<IActionResult> Logout()
         {
+            string basketcookie = HttpContext.Request.Cookies["basket"];
+            List<CartProductGetVM> basketVMs = JsonConvert.DeserializeObject<List<CartProductGetVM>>(basketcookie);
+
+            AppUser appuser = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            foreach (var basket in basketVMs.ToList())
+            {
+                basketVMs.Remove(basket);
+
+                basketcookie = JsonConvert.SerializeObject(basketVMs);
+                HttpContext.Response.Cookies.Append("basket", basketcookie);
+            }
             await _accountService.Logout();
             return RedirectToAction("index", "home");
         }

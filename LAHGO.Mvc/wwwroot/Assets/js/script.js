@@ -214,7 +214,8 @@ $(document).ready(function () {
         $('.selected-size').empty();
         $('.selected-size').append(size);
     })
-
+    
+    
     $(document).on('click', '.small-colors-optional', function (e) {
         let size = $(this).attr('value');
         console.log(size);
@@ -435,16 +436,27 @@ $(document).ready(function () {
         if (rad_input.prop('checked', true)) {
             $(this).addClass('radio-select')
         }
+        let color = $(this).attr('data-name');
+        console.log(color);
+        $('.selected-color').empty();
+        $('.selected-color').append(color);
+
         $('.size-selection-container').empty();
+        $('.detail-size-container').empty();
         fetch(url)
             .then(response => response.text())
             .then(data => {
                 $('.size-selection-container').append(data)
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        $('.detail-size-container').append(data)
 
+                    })
             })
     })
     
-    $(document).on('click', '.delete-from-basket', function (e) {
+    $(document).on('click', '.deletefromcart', function (e) {
         e.preventDefault();
 
         let url = $(this).attr('href');
@@ -452,13 +464,13 @@ $(document).ready(function () {
         fetch(url)
             .then(res => res.text())
             .then(data => {
-                $('.cart-products').html(data);
+                $('.minicart').html(data);
                 fetch('/basket/DeleteUpdate')
                     .then(res => res.json())
                     .then(data => {
                         $('.notification').html(data);
                     });
-            })
+            });
     })
     
     $(document).on('click', '.deletefrombasket', function (e) {

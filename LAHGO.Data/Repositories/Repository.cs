@@ -26,6 +26,19 @@ namespace LAHGO.Data.Repositories
         {
             return await _context.Set<TEntity>().Where(expression).ToListAsync();
         }
+        public async Task<List<TEntity>> GetAllAsyncInclude(Expression<Func<TEntity, bool>> expression, params string[] includes)
+        {
+            var queryable =  _context.Set<TEntity>().Where(expression);
+
+            if (includes != null && includes.Length > 0)
+            {
+                foreach (string include in includes)
+                {
+                    queryable = queryable.Include(include);
+                }
+            }
+            return await queryable.ToListAsync();
+        }
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression, params string[] includes)
         {
@@ -50,6 +63,16 @@ namespace LAHGO.Data.Repositories
         public void Remove(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
+        }
+
+        public async Task AddAllAsync(List<TEntity> entity)
+        {
+            await _context.Set<TEntity>().AddRangeAsync(entity);
+        }
+
+        public void RemoveAllAsync(List<TEntity> entity)
+        {
+            _context.Set<TEntity>().RemoveRange(entity);
         }
     }
 }

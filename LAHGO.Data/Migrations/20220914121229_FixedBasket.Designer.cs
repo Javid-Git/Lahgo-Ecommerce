@@ -4,14 +4,16 @@ using LAHGO.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LAHGO.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220914121229_FixedBasket")]
+    partial class FixedBasket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,6 @@ namespace LAHGO.Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConfirmationToken")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -78,9 +77,6 @@ namespace LAHGO.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ResetToken")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -188,9 +184,6 @@ namespace LAHGO.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BasketId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -207,8 +200,6 @@ namespace LAHGO.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BasketId");
 
                     b.ToTable("Colors");
                 });
@@ -343,9 +334,6 @@ namespace LAHGO.Data.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<int>("OrderStatus")
-                        .HasColumnType("int");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
@@ -598,9 +586,6 @@ namespace LAHGO.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BasketId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -620,8 +605,6 @@ namespace LAHGO.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BasketId");
 
                     b.ToTable("Sizes");
                 });
@@ -770,13 +753,6 @@ namespace LAHGO.Data.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("LAHGO.Core.Entities.Color", b =>
-                {
-                    b.HasOne("LAHGO.Core.Entities.Basket", null)
-                        .WithMany("Colors")
-                        .HasForeignKey("BasketId");
-                });
-
             modelBuilder.Entity("LAHGO.Core.Entities.Comment", b =>
                 {
                     b.HasOne("LAHGO.Core.Entities.Product", "Product")
@@ -870,13 +846,6 @@ namespace LAHGO.Data.Migrations
                         .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("LAHGO.Core.Entities.Size", b =>
-                {
-                    b.HasOne("LAHGO.Core.Entities.Basket", null)
-                        .WithMany("Sizes")
-                        .HasForeignKey("BasketId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

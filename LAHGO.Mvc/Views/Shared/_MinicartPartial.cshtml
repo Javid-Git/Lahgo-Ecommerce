@@ -48,7 +48,7 @@
             $@product.Price
         </div>
         <div class="minicart-product-price text-end col-lg-1 col-1 d-flex align-items-end">
-            <a class="delete-from-cart" asp-controller="basket" asp-action="DeleteFromBasket" asp-route-id="@product.ProductId"><i class="fa-regular fa-rectangle-xmark"></i></a>  
+            <a class="deletefromcart" asp-controller="basket" asp-action="DeleteFromBasket" asp-route-id="@product.ProductId"><i class="fa-regular fa-rectangle-xmark"></i></a>  
         </div>
     </div>
 
@@ -64,13 +64,13 @@
     <div class="minicart-bottom-info">
         SHIPPING & TAXES CALCULATED AT CHECKOUT
     </div>
-    <div class="minicart-bottom-info">
+    <div class="minicart-bottom-info minicart-bottom-margin">
         OR 4 INTEREST-FREE PAYMENTS OF $159 WITH KLARNA <span><a href="" class="fw-bold minicart-product-colorandsize">learn more</a></span>
     </div>
-    <button class="login-button register-button">
+    <a asp-controller="order" asp-action="index" class=" login-button-link">
         checkout
-    </button>
-    <div class="text-center ">
+    </a>
+    <div class="text-center viewcart">
         <a class="view-cart" asp-controller="cart" asp-action="index">view cart</a>
     </div>
 </div>

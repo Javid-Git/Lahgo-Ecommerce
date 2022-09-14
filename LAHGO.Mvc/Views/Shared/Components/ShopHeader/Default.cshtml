@@ -106,20 +106,21 @@
                         <hr>
                     </button>
                     <button type="button" class="header-search-pane-trigger t-link" aria-label="Search">
-                        <svg class="svg-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.58 19.76">
+                        <svg class="svg-search svg-search-mobile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.58 19.76">
                             <g>
                                 <path fill-rule="evenodd" fill="currentColor"
                                       d="M14,7.53A6.38,6.38,0,1,1,7.57,1.16h0A6.37,6.37,0,0,1,14,7.52Zm-2.22,6.1a7.48,7.48,0,1,1,.79-.63l6,6.05-.7.71Z">
                                 </path>
                             </g>
                         </svg>
-                        <svg class="svg-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85">
+                        <svg class="svg-close svg-close-mobile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.85 14.85">
                             <g>
                                 <path d="M6.72 7.42L0 14.14l.71.71 6.71-6.72 6.72 6.72.71-.71-6.72-6.72L14.85.71 14.14 0 7.42 6.72.71 0 0 .71z"
                                       fill="currentColor" fill-rule="evenodd"></path>
                             </g>
                         </svg>
                     </button>
+                    
                 </div>
                 <div class="custom-logo col-lg-2 col-2 d-flex justify-content-center">
                     <a class="logo-font" asp-controller="home" asp-action="index">
@@ -170,17 +171,7 @@
                                 </ul>
                             }
                         </li>
-                        <li>
-                            <a class=" navbar-font" href="">
-                                <svg class="svg-heart svg-search" width="20" viewBox="0 0 20 17.74"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill="none" stroke="currentColor"
-                                          d="M11 1.68908L12.9661 7.73999L13.0783 8.08548L13.4416 8.08549H19.8039L14.6567 11.8252L14.3628 12.0387L14.475 12.3842L16.4411 18.4351L11.2939 14.6954L11 14.4819L10.7061 14.6954L5.55889 18.4351L7.52495 12.3842L7.63721 12.0387L7.34332 11.8252L2.1961 8.08549H8.55841L8.92168 8.08548L9.03394 7.73999L11 1.68908Z">
-                                    </path>
-                                </svg>
-                            </a>
-
-                        </li>
+                        
                         <li class="">
                             <a class="navbar-font minicart-button" asp-controller="basket" asp-action="openbasket">
                                 <svg class="svg-bag svg-search" xmlns="http://www.w3.org/2000/svg"
@@ -212,12 +203,26 @@
                         off
                     </span>
                 </div>
-                <div class="login-button d-flex justify-content-center">
-                    <a asp-controller="account" asp-action="login" class="text-center">Login</a>
-                </div>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <div class="login-button d-flex justify-content-center">
+                        <a asp-controller="account" asp-action="login" class="text-center">Login</a>
+                    </div>
+                }
+                else
+                {
+                    <a class="navbar-account navbar-font" asp-controller="account" asp-action="profile">@User.Identity.Name</a>
+
+                }
             </div>
             <div class="sidebar-wraper">
 
             </div>
         </div>
     </header>
+    <div class="search-mobile-container">
+        <input class="search-input search-input-mobile" type="text" name="" value="" placeholder="Search" />
+        <div class="search-body">
+
+        </div>
+    </div>

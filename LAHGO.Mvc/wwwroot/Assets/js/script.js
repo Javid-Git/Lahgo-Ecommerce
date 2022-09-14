@@ -170,7 +170,11 @@ $(document).ready(function () {
     $(document).on('click', '.account-option-mobile', function () {
         $(this).parent().toggle();
     })
-
+    $(document).on('click', '.header-search-pane-trigger', function () {
+        $('.search-mobile-container').toggleClass('search-mobile-container-visible')
+        $('svg-search-mobile').toggle();
+        $('svg-close-mobile').toggle();
+    })
 
     ///////////////////////////////////////////////  Basket   ///////////////////////////////////////////////
 
@@ -421,9 +425,9 @@ $(document).ready(function () {
     })
 
     $(document).on('change', '.color-filter', function (e) {
-        var color = $('.color-filter option:selected').data('color')
+        var color = $(this).find('option:selected').data('color')
         console.log(color)
-        $('.color-filter').css('background-color', color)
+        $(this).css('background-color', color)
     })
 
     ///////////////////////////////////////////////   Toaster   /////////////////////////////////////////////

@@ -5,7 +5,12 @@
 
 
 @await Component.InvokeAsync("DetailHeader")
-
+<div class="loader-div">
+    <span class="loader-body">
+        <span></span>
+        <span></span>
+    </span>
+</div>
 <div class="contact-hero">
     <img src="https://cdn.shopify.com/s/files/1/0258/7751/2297/files/customer-service_2048x2048.png?v=1631645466"
          alt="">
@@ -61,7 +66,7 @@
                     <input type="text" name="" id="email" placeholder="Email">
                 </div>
                 <div class="email-inputs inputs col-lg-12">
-                    <textarea name="" id="" cols="70" rows="5" placeholder="Enter your message here..."></textarea>
+                    <textarea name="" id="" cols="55" rows="5" placeholder="Enter your message here..."></textarea>
                 </div>
                 <button class="login-button register-button contact-button">
                     submit

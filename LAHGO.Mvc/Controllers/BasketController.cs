@@ -30,7 +30,6 @@ namespace LAHGO.Mvc.Controllers
             _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
-        [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
             List<CartProductGetVM> basketVMs = await _basketService.Index();

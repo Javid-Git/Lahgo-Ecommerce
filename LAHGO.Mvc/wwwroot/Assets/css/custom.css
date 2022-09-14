@@ -521,8 +521,10 @@ select.decorated option:hover {
 .mobile-quick-add{
     display: none;
 }
-
-.big-quick-add{
+.search-mobile-container{
+    display: none;
+}
+.big-quick-add {
 }
 
 @media (max-width:576px) {
@@ -590,13 +592,14 @@ select.decorated option:hover {
         width: 381px !important;
     }
 
-    .favorites-banner .favorites-banner-left img {
-        width: 388px !important;
+        .favorites-banner .favorites-banner-left img {
+            width: 388px !important;
+        }
+
+    .section5-input {
+        width: 85%;
     }
 
-    .section5-input{
-        width: 85%; 
-    }
     .size-label-selected {
         background-color: black;
         color: white;
@@ -604,7 +607,54 @@ select.decorated option:hover {
         border: 1px solid black;
         margin: 5px;
     }
+
     .section2-detail {
         padding: 3rem 0rem;
+    }
+
+    .search-mobile-container {
+        z-index: 111111;
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        top: -768px;
+        left: 0;
+        background-color: white;
+        padding: 3rem;
+        transition: .5s;
+    }
+
+    .search-mobile-container-visible {
+        z-index: 111111;
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        top: 80px;
+        left: 0;
+        background-color: white;
+        transition: .5s;
+        padding: 3rem;
+    }
+
+    .search-results-mobile {
+        overflow-y: scroll;
+        position: absolute;
+        width: 100%;
+        transition: .5s;
+        height: 81vh;
+        background-color: white;
+        left: 0;
+    }
+    .search-input-mobile{
+        border: 1px solid #323232;
+        border-radius: 6px;
+        width: 100%;
+        padding: 1rem;
+    }
+    .account-options-mobile ul {
+        z-index: 1;
+        top: 44px;
     }
 }

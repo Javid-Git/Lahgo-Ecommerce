@@ -16,7 +16,6 @@ using Newtonsoft.Json;
 
 namespace LAHGO.Mvc.Controllers
 {
-    [Authorize(Roles = "User")]
     public class OrderController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

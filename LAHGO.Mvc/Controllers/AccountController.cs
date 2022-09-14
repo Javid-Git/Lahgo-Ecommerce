@@ -19,7 +19,6 @@ using System.Threading.Tasks;
 
 namespace LAHGO.Mvc.Controllers
 {
-    [Authorize(Roles = "User")]
     public class AccountController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -39,32 +38,7 @@ namespace LAHGO.Mvc.Controllers
             _accountService = accountService;
             _configuration = configuration;
         }
-        #region Roles
-        //public async Task<IActionResult> CreateRole()
-        //{
-        //    await _roleManager.CreateAsync(new IdentityRole { Name = "SuperAdmin" });
-        //    await _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
-        //    await _roleManager.CreateAsync(new IdentityRole { Name = "User" });
-
-        //    return Content("Success!");
-        //}
-        #endregion
-        #region SuperAdmin
-        //public async Task<IActionResult> CreateSuperAdmin()
-        //{
-        //    AppUser appuser = new AppUser
-        //    {
-        //        FullName = "Super Admin",
-        //        UserName = "SuperAdmin",
-        //        Email = "SuperAdmin@gmail.com",
-        //        IsAdmin = true
-
-        //    };
-        //    await _userManager.CreateAsync(appuser, "JJadmin-2000");
-        //    await _userManager.AddToRoleAsync(appuser, "SuperAdmin");
-        //    return Content("Super Admin: Success!");
-        //}
-        #endregion
+        
         [HttpGet]
         public IActionResult Register()
         {
@@ -78,7 +52,7 @@ namespace LAHGO.Mvc.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", $"{registerVM.FullName}{registerVM.Email}{registerVM.Password}{registerVM.ConfirmPasword}");
+                ModelState.AddModelError("", $"{registerVM.FullName}");
                 return View();
             }
             AppUser appUser = new AppUser
@@ -122,53 +96,111 @@ namespace LAHGO.Mvc.Controllers
 
         }
 
-        //public IActionResult NewPassword(ResetPasswordViewModel reset)
-        //{
-        //    return View(reset);
-        //}
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[ActionName("NewPassword")]
-        //public async Task<IActionResult> NewPasswordPost(ResetPasswordViewModel reset)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(reset);
-        //    }
-        //    if (reset.Id == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    AppUser user = await _userManager.FindByIdAsync(reset.Id);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    if (user.PasswordResetToken != reset.Token)
-        //    {
-        //        return BadRequest();
-        //    }
+        #region Reset Password
+        [HttpGet]
+        public async Task<IActionResult> ResetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordVM reset)
+        {
+            if (string.IsNullOrWhiteSpace(reset.Email))
+            {
+                ModelState.AddModelError(string.Empty, "Please enter valid e-mail adress");
+                return View();
+            }
+            AppUser user = await _userManager.FindByEmailAsync(reset.Email);
 
-        //    var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
-        //    IdentityResult result = await _userManager.ResetPasswordAsync(user, resetToken, reset.Password);
+            
+
+            user.PasswordResetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            await _unitOfWork.CommitAsync();
+
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Account wasn't found");
+                return View();
+            }
+            var link = Url.Action(nameof(NewPassword), "Account", new { id = user.Id, token = user.PasswordResetToken }, Request.Scheme, Request.Host.ToString());
+            EmailVM email = _configuration.GetSection("Email").Get<EmailVM>();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(email.SenderEmail, email.SenderName);
+            mail.To.Add(reset.Email);
+            mail.Subject = "Reset Password";
+            mail.Body = $"<a href=\"{link}\">Reset Password</a>";
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = email.Server;
+            smtp.EnableSsl = true;
+            smtp.Port = email.Port;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential(email.SenderEmail, email.SenderPassword);
+            smtp.Send(mail);
+
+            return RedirectToAction(nameof(ResetPage));
+        }
+        public async Task<IActionResult> ResetPage()
+        {
+            return View();
+        }
 
 
+        [HttpGet]
+        public IActionResult NewPassword(ResetPasswordVM reset)
+        {
+            return View(reset);
+        }
 
-        //    if (result.Succeeded)
-        //    {
-        //        string passwordResetToken = Guid.NewGuid().ToString();
-        //        user.PasswordResetToken = passwordResetToken;
-        //        await _userManager.UpdateAsync(user);
-        //        return RedirectToAction("Login");
-        //    }
-        //    return BadRequest();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> NewPassword(ResetPasswordVM reset, int page = 1)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(reset);
+            }
+            if (reset.Id == null)
+            {
+                return NotFound();
+            }
+            AppUser user = await _userManager.FindByIdAsync(reset.Id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            if (user.PasswordResetToken != reset.Token)
+            {
+                return BadRequest();
+            }
+
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            IdentityResult result = await _userManager.ResetPasswordAsync(user, resetToken, reset.Password);
+
+
+            if (result.Succeeded)
+            {
+                string passwordResetToken = Guid.NewGuid().ToString();
+                user.PasswordResetToken = passwordResetToken;
+                await _userManager.UpdateAsync(user);
+                return RedirectToAction("Login");
+            }
+            return BadRequest();
+        }
+
+        #endregion
+
+
+        #region Email Confirmation
         public async Task<IActionResult> ConfirmPage()
         {
             return View();
         }
+
         public async Task<IActionResult> ConfirmEmail(string id, string token)
         {
             if (string.IsNullOrEmpty(id))
@@ -181,7 +213,7 @@ namespace LAHGO.Mvc.Controllers
                 throw new Exception("Not Found");
 
             }
-            if (appUser.ConfirmationToken !=token)
+            if (appUser.ConfirmationToken != token)
             {
                 throw new Exception("Bad Request");
 
@@ -200,6 +232,10 @@ namespace LAHGO.Mvc.Controllers
             }
             return View();
         }
+        #endregion
+
+
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -339,71 +375,8 @@ namespace LAHGO.Mvc.Controllers
             await _accountService.Logout();
             return RedirectToAction("index", "home");
         }
-        [HttpGet]
-        public IActionResult ForgotPassword()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM forgotPasswordVM)
-        {
 
-            if (ModelState.IsValid)
-            {
-                AppUser user = await _userManager.FindByEmailAsync(forgotPasswordVM.Email);
-                if (user != null)
-                {
-                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var passwordResetLink = Url.Action("ResetPassword", "Account",
-                    new { email = forgotPasswordVM.Email, token = token }, Request.Scheme);
-                    _logger.Log(LogLevel.Warning, passwordResetLink);
-                    return Redirect(passwordResetLink);
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Email is incorrect");
-                    return View();
-                }
-            }
 
-            return View(forgotPasswordVM);
-            
-        }
-        [HttpGet]
-        public IActionResult ResetPassword(string token, string email)
-        {
-            if (token == null || email == null)
-            {
-                ModelState.AddModelError("", "Invalid reset password token");
-            }
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> ResetPassword(ResetPasswordVM resetPasswordVM)
-        {
-            if (ModelState.IsValid)
-            {
-                AppUser appUser = await _userManager.FindByEmailAsync(resetPasswordVM.Email);
-                if (appUser != null)
-                {
-                    IdentityResult result = await _userManager.ResetPasswordAsync(appUser, resetPasswordVM.Token, resetPasswordVM.Password);
-                    if (result.Succeeded)
-                    {
-                        return View("ResetPasswordSuccessfully");
-                    }
-                    else
-                    {
-                        foreach (IdentityError error in result.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
-                        return View();
-                    }
-
-                }
-            }
-            return View();
-        }
 
         public async Task<IActionResult> Profile()
         {
@@ -489,5 +462,75 @@ namespace LAHGO.Mvc.Controllers
             
             return RedirectToAction("Profile", memberVM);
         }
+
+
+
+        //[HttpGet]
+        //public IActionResult ForgotPassword()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> ForgotPassword(ForgotPasswordVM forgotPasswordVM)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        AppUser user = await _userManager.FindByEmailAsync(forgotPasswordVM.Email);
+        //        if (user != null)
+        //        {
+        //            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+        //            var passwordResetLink = Url.Action("ResetPassword", "Account",
+        //            new { email = forgotPasswordVM.Email, token = token }, Request.Scheme);
+        //            _logger.Log(LogLevel.Warning, passwordResetLink);
+        //            return Redirect(passwordResetLink);
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "Email is incorrect");
+        //            return View();
+        //        }
+        //    }
+
+        //    return View(forgotPasswordVM);
+
+        //}
+
+        //[HttpGet]
+        //public IActionResult ResetPassword(string token, string email)
+        //{
+        //    if (token == null || email == null)
+        //    {
+        //        ModelState.AddModelError("", "Invalid reset password token");
+        //    }
+        //    return View();
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> ResetPassword(ResetPasswordVM resetPasswordVM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        AppUser appUser = await _userManager.FindByEmailAsync(resetPasswordVM.Email);
+        //        if (appUser != null)
+        //        {
+        //            IdentityResult result = await _userManager.ResetPasswordAsync(appUser, resetPasswordVM.Token, resetPasswordVM.Password);
+        //            if (result.Succeeded)
+        //            {
+        //                return View("ResetPasswordSuccessfully");
+        //            }
+        //            else
+        //            {
+        //                foreach (IdentityError error in result.Errors)
+        //                {
+        //                    ModelState.AddModelError("", error.Description);
+        //                }
+        //                return View();
+        //            }
+
+        //        }
+        //    }
+        //    return View();
+        //}
+
     }
 }

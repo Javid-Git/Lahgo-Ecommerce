@@ -178,12 +178,28 @@
     color: black;
     padding: 20rem 1rem;
 }
+.check-email-optional {
+    text-align: center;
+    font-family: 'Regulars';
+    letter-spacing: 12px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 100px;
+    font-style: normal;
+    text-transform: uppercase;
+    color: black;
+    padding: 20rem 1rem 3rem 1rem;
+}
+.reset-email{
+    padding-bottom: 9rem;
+}
+
 
 .search-results {
     overflow-y: scroll;
     position: absolute;
     width: 487px;
-    transition:.5s;
+    transition: .5s;
     height: 500px;
     background-color: white;
 }

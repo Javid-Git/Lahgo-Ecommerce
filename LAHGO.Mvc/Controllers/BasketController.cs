@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 
 namespace LAHGO.Mvc.Controllers
 {
-    [Authorize(Roles = "User")]
     public class BasketController : Controller
     {
 
@@ -31,7 +30,7 @@ namespace LAHGO.Mvc.Controllers
             _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
-
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
             List<CartProductGetVM> basketVMs = await _basketService.Index();
@@ -66,6 +65,7 @@ namespace LAHGO.Mvc.Controllers
 
             return PartialView("_MinicartPartial", basketVMs);
         }
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> DeleteFromBasket(int? id)
         {
             MinicartProductVM basketVMs = await _basketService.DeleteFromBasket(id);
@@ -82,12 +82,14 @@ namespace LAHGO.Mvc.Controllers
             return PartialView("_MinicartPartial", basketVMs);
 
         }
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> DeleteFromCart(int? id)
         {
             List<CartProductGetVM> basketVMs = await _basketService.DeleteFromCart(id);
 
             return PartialView("_BasketIndexPartial", await _basketProduct(basketVMs));
         }
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> DeleteUpdate()
         {
             List<CartProductCreateVM> basketVMs = await _basketService.DeleteUpdate();
@@ -101,6 +103,7 @@ namespace LAHGO.Mvc.Controllers
             
             return PartialView("_SizeContainerPartial", sizePCSVM);
         }
+        [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> AddToBasket(int ProductId, int SizeId, int ColorId)
         {
@@ -111,6 +114,7 @@ namespace LAHGO.Mvc.Controllers
             //return RedirectToAction("Index", "Shop");
 
         }
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> UpdateCount(int? id, int count)
         {
 

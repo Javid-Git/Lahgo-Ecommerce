@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 namespace LAHGO.Mvc.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "SuperAdmin, Admin")]
+
     public class OrderController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

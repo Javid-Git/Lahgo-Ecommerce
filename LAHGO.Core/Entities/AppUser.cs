@@ -18,5 +18,7 @@ namespace LAHGO.Core.Entities
         public List<Basket> Baskets { get; set; }
         public List<Comment> Coments { get; set; }
         public IEnumerable<Order> Orders { get; set; }
+        public string PasswordResetToken { get; set; }
+
     }
 }

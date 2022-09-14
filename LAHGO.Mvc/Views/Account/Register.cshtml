@@ -25,6 +25,12 @@
 
                 </div>
                 <div class="password-inputs inputs col-lg-12">
+                    <label class="input-labels" for="email">Username</label>
+                    <input type="text" asp-for="UserName" id="" placeholder="Your Email">
+                    <span class="text text-danger" asp-validation-for="UserName"></span>
+
+                </div>
+                <div class="password-inputs inputs col-lg-12">
                     <label class="input-labels" for="email">your email</label>
                     <input type="text" asp-for="Email" id="" placeholder="Your Email">
                     <span class="text text-danger" asp-validation-for="Email"></span>
@@ -55,7 +61,3 @@
         </div>
     </div>
 </section>
-
-@section Script{
-    <partial name="_ValidationPartial" />
-}

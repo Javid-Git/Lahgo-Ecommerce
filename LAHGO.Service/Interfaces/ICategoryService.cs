@@ -13,7 +13,7 @@ namespace LAHGO.Service.Interfaces
         IQueryable<CategoryListVM> GetAllAysnc(int? status);
         Task<CategoryGetVM> GetById(int id);
         Task UpdateAsync(int id, CategoryUpdateVM categoryPutVM);
-        Task DeleteAsync(int id);
-        Task RestoreAsync(int id);
+        Task<IQueryable<CategoryListVM>> DeleteAsync(int id);
+        Task<IQueryable<CategoryListVM>> RestoreAsync(int id);
     }
 }

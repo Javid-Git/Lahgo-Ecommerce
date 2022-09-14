@@ -5,6 +5,7 @@ using LAHGO.Service.ViewModels.ColorVMs;
 using LAHGO.Service.ViewModels.OrderVMs;
 using LAHGO.Service.ViewModels.PCSVMs;
 using LAHGO.Service.ViewModels.ProductVMs;
+using LAHGO.Service.ViewModels.SettingVMs;
 using LAHGO.Service.ViewModels.SizeVMs;
 using LAHGO.Service.ViewModels.TypeProductVMs;
 using LAHGO.Service.ViewModels.TypingVMs;
@@ -36,6 +37,11 @@ namespace LAHGO.Service.Mappings
                  .ForMember(des => des.CreatedAt, src => src.MapFrom(s => DateTime.UtcNow.AddHours(4)));
             CreateMap<Typing, TypingGetVM>();
             CreateMap<Typing, TypingListVM>();
+
+            CreateMap<SettingCreateVM, Setting>()
+                 .ForMember(des => des.CreatedAt, src => src.MapFrom(s => DateTime.UtcNow.AddHours(4)));
+            CreateMap<Setting, SettingGetVM>();
+            CreateMap<Setting, SettingListVM>();
 
             CreateMap<SizeCreateVM, Size>()
                 .ForMember(des => des.CreatedAt, src => src.MapFrom(s => DateTime.UtcNow.AddHours(4))); ;

@@ -1,6 +1,6 @@
 ﻿@model PageNatedList<Order>
 @{
-    int count = 1;
+    int count = Model.ItemCount * (Model.Page - 1) + 1;
 }
 <table class="table align-items-center mb-0">
     <thead>

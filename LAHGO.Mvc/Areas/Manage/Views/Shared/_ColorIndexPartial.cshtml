@@ -21,13 +21,13 @@
                 <td class="align-middle text-center">
                     @if (color.IsDeleted)
                     {
-                        <a asp-area="manage" asp-controller="color" asp-action="restore" asp-route-id="@color.Id" class="text-white font-weight-bold text-xs btn btn-primary" data-toggle="tooltip" data-original-title="Edit user">
+                        <a asp-area="manage" asp-controller="color" asp-action="restore" asp-route-id="@color.Id" class="text-white font-weight-bold text-xs btn btn-primary restoreBtn" data-toggle="tooltip" data-original-title="Edit user">
                             Restore
                         </a>
                     }
                     else
                     {
-                        <a asp-area="manage" asp-controller="color" asp-action="delete" asp-route-id="@color.Id" class="text-white font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
+                        <a asp-area="manage" asp-controller="color" asp-action="delete" asp-route-id="@color.Id" class="text-white font-weight-bold text-xs btn btn-danger deleteBtn" data-toggle="tooltip" data-original-title="Edit user">
                             Delete
                         </a>
                     }

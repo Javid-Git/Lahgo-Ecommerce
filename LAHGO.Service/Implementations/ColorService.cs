@@ -42,7 +42,7 @@ namespace LAHGO.Service.Implementations
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<IQueryable<ColorListVM>> DeleteAsync(int id)
         {
             Color color = await _unitOfWork.ColorRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
@@ -53,6 +53,10 @@ namespace LAHGO.Service.Implementations
             color.DeletedAt = DateTime.UtcNow.AddHours(4);
 
             await _unitOfWork.CommitAsync();
+            List<ColorListVM> colorListVMs = _mapper.Map<List<ColorListVM>>(_unitOfWork.ColorRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            IQueryable<ColorListVM> query = colorListVMs.AsQueryable();
+
+            return query;
         }
 
         public IQueryable<ColorListVM> GetAllAysnc(int? status)
@@ -89,7 +93,7 @@ namespace LAHGO.Service.Implementations
             return colorGetVM;
         }
 
-        public async Task RestoreAsync(int id)
+        public async Task<IQueryable<ColorListVM>> RestoreAsync(int id)
         {
             Color color = await _unitOfWork.ColorRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
@@ -100,6 +104,10 @@ namespace LAHGO.Service.Implementations
             color.DeletedAt = null;
 
             await _unitOfWork.CommitAsync();
+            List<ColorListVM> colorListVMs = _mapper.Map<List<ColorListVM>>(_unitOfWork.ColorRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            IQueryable<ColorListVM> query = colorListVMs.AsQueryable();
+
+            return query;
         }
 
         public async Task UpdateAsync(int id, ColorUpdateVM colorUpdateVM)

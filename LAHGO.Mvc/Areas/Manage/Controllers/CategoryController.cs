@@ -75,15 +75,16 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             CategoryGetVM categoryGetVM = await _categoryService.GetById(id);
             return View(categoryGetVM);
         }
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int page = 1)
         {
-            await _categoryService.DeleteAsync(id);
-            return RedirectToAction("Index");
+            IQueryable<CategoryListVM> categoryListVMs =  await _categoryService.DeleteAsync(id);
+            return PartialView("_CategoryIndexPartial", PageNatedList<CategoryListVM>.Create(page, categoryListVMs, 5));
         }
-        public async Task<IActionResult> Restore(int id)
+        public async Task<IActionResult> Restore(int id, int page = 1)
         {
-            await _categoryService.RestoreAsync(id);
-            return RedirectToAction("Index");
+            IQueryable<CategoryListVM> categoryListVMs = await _categoryService.RestoreAsync(id);
+            return PartialView("_CategoryIndexPartial", PageNatedList<CategoryListVM>.Create(page, categoryListVMs, 5));
+
         }
 
     }

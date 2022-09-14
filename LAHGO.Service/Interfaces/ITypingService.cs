@@ -14,7 +14,7 @@ namespace LAHGO.Service.Interfaces
         IQueryable<TypingListVM> GetAllAysnc(int? status);
         Task<TypingGetVM> GetById(int id);
         Task UpdateAsync(int id, TypingUpdateVM colorPutVM);
-        Task DeleteAsync(int id);
-        Task RestoreAsync(int id);
+        Task<IQueryable<TypingListVM>> DeleteAsync(int id);
+        Task<IQueryable<TypingListVM>> RestoreAsync(int id);
     }
 }

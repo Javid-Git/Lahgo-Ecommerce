@@ -75,15 +75,16 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             TypingGetVM typingGetVM = await _typingService.GetById(id);
             return View(typingGetVM);
         }
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int page = 1)
         {
-            await _typingService.DeleteAsync(id);
-            return RedirectToAction("Index");
+            IQueryable<TypingListVM> categoryListVMs = await _typingService.DeleteAsync(id);
+            return PartialView("_TypingIndexPartial", PageNatedList<TypingListVM>.Create(page, categoryListVMs, 5));
         }
-        public async Task<IActionResult> Restore(int id)
+        public async Task<IActionResult> Restore(int id, int page = 1)
         {
-            await _typingService.RestoreAsync(id);
-            return RedirectToAction("Index");
+            IQueryable<TypingListVM> categoryListVMs = await _typingService.RestoreAsync(id);
+            return PartialView("_TypingIndexPartial", PageNatedList<TypingListVM>.Create(page, categoryListVMs, 5));
+
         }
 
     }

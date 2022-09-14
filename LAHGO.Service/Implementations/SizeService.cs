@@ -39,7 +39,7 @@ namespace LAHGO.Service.Implementations
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<IQueryable<SizeListVM>> DeleteAsync(int id)
         {
             Size size = await _unitOfWork.SizeRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
@@ -50,6 +50,10 @@ namespace LAHGO.Service.Implementations
             size.DeletedAt = DateTime.UtcNow.AddHours(4);
 
             await _unitOfWork.CommitAsync();
+            List<SizeListVM> colorListVMs = _mapper.Map<List<SizeListVM>>(_unitOfWork.SizeRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            IQueryable<SizeListVM> query = colorListVMs.AsQueryable();
+
+            return query;
         }
 
         public IQueryable<SizeListVM> GetAllAysnc(int? status)
@@ -84,7 +88,7 @@ namespace LAHGO.Service.Implementations
             return sizeGetVM;
         }
 
-        public async Task RestoreAsync(int id)
+        public async Task<IQueryable<SizeListVM>> RestoreAsync(int id)
         {
             Size size = await _unitOfWork.SizeRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
@@ -95,6 +99,10 @@ namespace LAHGO.Service.Implementations
             size.DeletedAt = null;
 
             await _unitOfWork.CommitAsync();
+            List<SizeListVM> colorListVMs = _mapper.Map<List<SizeListVM>>(_unitOfWork.SizeRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            IQueryable<SizeListVM> query = colorListVMs.AsQueryable();
+
+            return query;
         }
 
         public async Task UpdateAsync(int id, SizeUpdateVM sizeUpdateVM)

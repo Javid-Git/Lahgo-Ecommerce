@@ -16,7 +16,7 @@ namespace LAHGO.Service.Interfaces
         Task<ProductGetVM> GetById(int id);
         Task UpdateAsync(int id, ProductGetVM productGetVM);
         Task DeleteImgAsync(int id);
-        Task DeleteAsync(int id);
-        Task RestoreAsync(int id);
+        Task<IQueryable<ProductListVM>> DeleteAsync(int id);
+        Task<IQueryable<ProductListVM>> RestoreAsync(int id);
     }
 }

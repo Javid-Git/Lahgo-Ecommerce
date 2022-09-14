@@ -13,7 +13,7 @@ namespace LAHGO.Service.Interfaces
         IQueryable<SizeListVM> GetAllAysnc(int? status);
         Task<SizeGetVM> GetById(int id);
         Task UpdateAsync(int id, SizeUpdateVM sizeUpdateVM);
-        Task DeleteAsync(int id);
-        Task RestoreAsync(int id);
+        Task<IQueryable<SizeListVM>> DeleteAsync(int id);
+        Task<IQueryable<SizeListVM>> RestoreAsync(int id);
     }
 }

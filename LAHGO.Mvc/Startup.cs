@@ -78,6 +78,7 @@ namespace LAHGO.Mvc
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ITypingService, TypingService>();
+            services.AddScoped<ISettingService, SettingService>();
 
             services.AddCors(options =>
             {

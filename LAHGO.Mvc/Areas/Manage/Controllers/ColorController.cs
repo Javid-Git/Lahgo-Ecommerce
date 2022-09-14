@@ -75,15 +75,16 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             ColorGetVM colorGetVM = await _colorService.GetById(id);
             return View(colorGetVM);
         }
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int page = 1)
         {
-            await _colorService.DeleteAsync(id);
-            return RedirectToAction("Index");
+            IQueryable<ColorListVM> categoryListVMs = await _colorService.DeleteAsync(id);
+            return PartialView("_ColorIndexPartial", PageNatedList<ColorListVM>.Create(page, categoryListVMs, 5));
         }
-        public async Task<IActionResult> Restore(int id)
+        public async Task<IActionResult> Restore(int id, int page = 1)
         {
-            await _colorService.RestoreAsync(id);
-            return RedirectToAction("Index");
+            IQueryable<ColorListVM> categoryListVMs = await _colorService.RestoreAsync(id);
+            return PartialView("_ColorIndexPartial", PageNatedList<ColorListVM>.Create(page, categoryListVMs, 5));
+
         }
 
     }

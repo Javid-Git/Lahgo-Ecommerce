@@ -111,7 +111,7 @@ namespace LAHGO.Service.Implementations
             
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<IQueryable<ProductListVM>> DeleteAsync(int id)
         {
             Product product = await _unitOfWork.ProductRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
@@ -122,6 +122,10 @@ namespace LAHGO.Service.Implementations
             product.DeletedAt = DateTime.UtcNow.AddHours(4);
 
             await _unitOfWork.CommitAsync();
+            List<ProductListVM> colorListVMs = _mapper.Map<List<ProductListVM>>(_unitOfWork.ProductRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            IQueryable<ProductListVM> query = colorListVMs.AsQueryable();
+
+            return query;
         }
 
         public IQueryable<ProductListVM> GetAllAysnc(int? status)
@@ -170,7 +174,7 @@ namespace LAHGO.Service.Implementations
             return productGetVM;
         }
 
-        public async Task RestoreAsync(int id)
+        public async Task<IQueryable<ProductListVM>> RestoreAsync(int id)
         {
             Product product = await _unitOfWork.ProductRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
@@ -181,6 +185,10 @@ namespace LAHGO.Service.Implementations
             product.DeletedAt = null;
 
             await _unitOfWork.CommitAsync();
+            List<ProductListVM> colorListVMs = _mapper.Map<List<ProductListVM>>(_unitOfWork.ProductRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            IQueryable<ProductListVM> query = colorListVMs.AsQueryable();
+
+            return query;
         }
 
         public async Task UpdateAsync(int id, ProductGetVM productGetVM)

@@ -135,15 +135,16 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
 
             return PartialView("_DetailImgList", productGetVM);
         }
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int page = 1)
         {
-            await _productService.DeleteAsync(id);
-            return RedirectToAction("Index");
+            IQueryable<ProductListVM> categoryListVMs = await _productService.DeleteAsync(id);
+            return PartialView("_ProductIndexPartial", PageNatedList<ProductListVM>.Create(page, categoryListVMs, 5));
         }
-        public async Task<IActionResult> Restore(int id)
+        public async Task<IActionResult> Restore(int id, int page = 1)
         {
-            await _productService.RestoreAsync(id);
-            return RedirectToAction("Index");
+            IQueryable<ProductListVM> categoryListVMs = await _productService.RestoreAsync(id);
+            return PartialView("_ProductIndexPartial", PageNatedList<ProductListVM>.Create(page, categoryListVMs, 5));
+
         }
 
 

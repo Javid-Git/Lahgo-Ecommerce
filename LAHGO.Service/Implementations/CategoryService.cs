@@ -30,7 +30,7 @@ namespace LAHGO.Service.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<IQueryable<CategoryListVM>> DeleteAsync(int id)
         {
             Category category = await _unitOfWork.CategoryRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
@@ -41,8 +41,13 @@ namespace LAHGO.Service.Implementations
             category.DeletedAt = DateTime.UtcNow.AddHours(4);
 
             await _unitOfWork.CommitAsync();
+
+            List<CategoryListVM> categoryListVMs = _mapper.Map<List<CategoryListVM>>(_unitOfWork.CategoryRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            IQueryable<CategoryListVM> query = categoryListVMs.AsQueryable();
+
+            return query;
         }
-        public async Task RestoreAsync(int id)
+        public async Task<IQueryable<CategoryListVM>> RestoreAsync(int id)
         {
             Category category = await _unitOfWork.CategoryRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
@@ -53,6 +58,11 @@ namespace LAHGO.Service.Implementations
             category.DeletedAt = null;
 
             await _unitOfWork.CommitAsync();
+
+            List<CategoryListVM> categoryListVMs = _mapper.Map<List<CategoryListVM>>(_unitOfWork.CategoryRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            IQueryable<CategoryListVM> query = categoryListVMs.AsQueryable();
+
+            return query;
         }
 
         public IQueryable<CategoryListVM> GetAllAysnc(int? status)

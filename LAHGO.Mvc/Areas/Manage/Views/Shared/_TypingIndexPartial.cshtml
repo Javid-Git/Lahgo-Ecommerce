@@ -21,13 +21,13 @@
                 <td class="align-middle text-center">
                     @if (typing.IsDeleted)
                     {
-                        <a asp-area="manage" asp-controller="typing" asp-action="restore" asp-route-id="@typing.Id" class="text-white font-weight-bold text-xs btn btn-primary" data-toggle="tooltip" data-original-title="Edit user">
+                        <a asp-area="manage" asp-controller="typing" asp-action="restore" asp-route-id="@typing.Id" class="text-white font-weight-bold text-xs btn btn-primary restoreBtn" data-toggle="tooltip" data-original-title="Edit user">
                             Restore
                         </a>
                     }
                     else
                     {
-                        <a asp-area="manage" asp-controller="typing" asp-action="delete" asp-route-id="@typing.Id" class="text-white font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
+                        <a asp-area="manage" asp-controller="typing" asp-action="delete" asp-route-id="@typing.Id" class="text-white font-weight-bold text-xs btn btn-danger deleteBtn" data-toggle="tooltip" data-original-title="Edit user">
                             Delete
                         </a>
                     }

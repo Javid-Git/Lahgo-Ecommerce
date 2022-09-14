@@ -1,4 +1,4 @@
-﻿@model PageNatedList<ProductListVM>
+﻿@model PageNatedList<SettingListVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,15 +9,15 @@
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
-                <h6 class="font-weight-bolder mb-0">Product</h6>
+                <h6 class="font-weight-bolder mb-0">Color</h6>
             </nav>
-            <a asp-area="manage" asp-controller="product" asp-action="create" class="btn btn-info">Create</a>
+            <a asp-area="manage" asp-controller="setting" asp-action="create" class="btn btn-info">Create</a>
         </div>
         <div class="col-lg-6">
             <form>
                 <div class="row align-items-start">
                     <div class="col">
-                        <label class="form-label">Product Status</label>
+                        <label class="form-label">Brand Status</label>
                         <select name="status" class="form-select" aria-label="Default select example">
                             @if (ViewBag.Status == 0)
                             {
@@ -67,7 +67,7 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive tblContent p-0">
-                            @await Html.PartialAsync("_ProductIndexPartial", Model)
+                            @await Html.PartialAsync("_SettingIndexPartial", Model)
                         </div>
                     </div>
                 </div>
@@ -77,20 +77,20 @@
             <ul class="pagination ">
                 @if (Model.HasPrev)
                 {
-                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="product" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="1">@("<<")</a></li>
-                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="product" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page-1)">@("<")</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="setting" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="1">@("<<")</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="setting" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page-1)">@("<")</a></li>
 
                 }
 
                 @for (int i = 1; i <= Model.PageCount; i++)
                 {
-                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="product" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@i">@i</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="setting" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@i">@i</a></li>
 
                 }
                 @if (Model.HasNext)
                 {
-                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="product" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page+1)">@(">")</a></li>
-                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="product" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@Model.PageCount">@(">>")</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="setting" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(Model.Page+1)">@(">")</a></li>
+                    <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="setting" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@Model.PageCount">@(">>")</a></li>
                 }
 
             </ul>
@@ -130,4 +130,3 @@
         </footer>
     </div>
 </main>
-

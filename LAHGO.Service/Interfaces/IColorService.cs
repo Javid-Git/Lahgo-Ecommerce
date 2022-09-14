@@ -13,7 +13,7 @@ namespace LAHGO.Service.Interfaces
         IQueryable<ColorListVM> GetAllAysnc(int? status);
         Task<ColorGetVM> GetById(int id);
         Task UpdateAsync(int id, ColorUpdateVM colorPutVM);
-        Task DeleteAsync(int id);
-        Task RestoreAsync(int id);
+        Task<IQueryable<ColorListVM>> DeleteAsync(int id);
+        Task<IQueryable<ColorListVM>> RestoreAsync(int id);
     }
 }

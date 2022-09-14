@@ -39,7 +39,7 @@ namespace LAHGO.Service.Implementations
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<IQueryable<TypingListVM>> DeleteAsync(int id)
         {
             Typing typing = await _unitOfWork.TypingRepository.GetAsync(c => !c.IsDeleted && c.Id == id);
 
@@ -50,6 +50,10 @@ namespace LAHGO.Service.Implementations
             typing.DeletedAt = DateTime.UtcNow.AddHours(4);
 
             await _unitOfWork.CommitAsync();
+            List<TypingListVM> colorListVMs = _mapper.Map<List<TypingListVM>>(_unitOfWork.TypingRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            IQueryable<TypingListVM> query = colorListVMs.AsQueryable();
+
+            return query;
         }
 
         public IQueryable<TypingListVM> GetAllAysnc(int? status)
@@ -84,7 +88,7 @@ namespace LAHGO.Service.Implementations
             return typingGetVM;
         }
 
-        public async Task RestoreAsync(int id)
+        public async Task<IQueryable<TypingListVM>> RestoreAsync(int id)
         {
             Typing typing = await _unitOfWork.TypingRepository.GetAsync(c => c.IsDeleted && c.Id == id);
 
@@ -95,6 +99,11 @@ namespace LAHGO.Service.Implementations
             typing.DeletedAt = null;
 
             await _unitOfWork.CommitAsync();
+
+            List<TypingListVM> colorListVMs = _mapper.Map<List<TypingListVM>>(_unitOfWork.TypingRepository.GetAllAsync(r => r.IsDeleted || !r.IsDeleted).Result);
+            IQueryable<TypingListVM> query = colorListVMs.AsQueryable();
+
+            return query;
         }
 
         public async Task UpdateAsync(int id, TypingUpdateVM typingUpdateVM)

@@ -75,15 +75,16 @@ namespace LAHGO.Mvc.Areas.Manage.Controllers
             SizeGetVM sizeGetVM = await _sizeService.GetById(id);
             return View(sizeGetVM);
         }
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int page = 1)
         {
-            await _sizeService.DeleteAsync(id);
-            return RedirectToAction("Index");
+            IQueryable<SizeListVM> categoryListVMs = await _sizeService.DeleteAsync(id);
+            return PartialView("_SizeIndexPartial", PageNatedList<SizeListVM>.Create(page, categoryListVMs, 5));
         }
-        public async Task<IActionResult> Restore(int id)
+        public async Task<IActionResult> Restore(int id, int page = 1)
         {
-            await _sizeService.RestoreAsync(id);
-            return RedirectToAction("Index");
+            IQueryable<SizeListVM> categoryListVMs = await _sizeService.RestoreAsync(id);
+            return PartialView("_SizeIndexPartial", PageNatedList<SizeListVM>.Create(page, categoryListVMs, 5));
+
         }
 
     }
